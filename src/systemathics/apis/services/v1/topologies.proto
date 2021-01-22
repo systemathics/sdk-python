@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/type/date.proto";
+import "systemathics/apis/type/v1/memo.proto";
+
+package systemathics.apis.services.v1;
+
+service TopologiesService
+{
+  rpc Topologies(TopologiesRequest) returns (TopologiesResponse);
+}
+
+enum TopologyGranularity
+{
+    TOPOLOGY_GRANULARITY_UNSPECIFIED = 0;
+    TOPOLOGY_GRANULARITY_DAILY = 1;
+    TOPOLOGY_GRANULARITY_WEEKLY = 2;
+    TOPOLOGY_GRANULARITY_MONTHLY = 3;
+    TOPOLOGY_GRANULARITY_QUATERLY = 4;
+    TOPOLOGY_GRANULARITY_YEARLY = 5;
+}
+
+message TopologiesRequest
+{
+    systemathics.apis.type.v1.Memo memo = 1;
+    TopologyGranularity granularity = 2;
+    google.protobuf.Int32Value start = 3; // Nullable<int>
+    google.protobuf.Int32Value count = 4; // Nullable<int>
+}
+
+message TopologyEntry
+{
+    google.type.Date begin = 1;
+    google.type.Date end = 2;
+    uint64 frames_count = 3;
+}
+
+message TopologiesResponse
+{
+    google.protobuf.StringValue error = 1; // Nullable<string> (if null => Success)
+    bool has_more = 2;
+    repeated TopologyEntry entries = 3;
+}

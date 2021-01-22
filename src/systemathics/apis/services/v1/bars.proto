@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/type/date.proto";
+import "google/type/timeofday.proto";
+import "systemathics/apis/type/v1/constraints.proto";
+import "systemathics/apis/type/v1/memo.proto";
+
+package systemathics.apis.services.v1;
+
+service BarsService 
+{
+    rpc Bars(BarsRequest) returns (BarsResponse);
+}
+
+message BarsRequest 
+{
+    systemathics.apis.type.v1.Memo memo = 1;
+    google.protobuf.Duration sampling = 2;
+    google.type.TimeOfDay begin_time = 3;
+    systemathics.apis.type.v1.Constraints constraints = 4; // Transports the IConstraints semantics
+    google.protobuf.Int32Value start = 5; // Nullable<int>
+    google.protobuf.Int32Value count = 6; // Nullable<int>
+}
+
+message BarsResponse 
+{
+    google.protobuf.StringValue error = 1; // Nullable<string> (if null => Success)
+    bool has_more = 2;
+    repeated Bar bars = 3;
+}
+
+message Bar
+{
+    google.protobuf.Timestamp begin_time = 1;
+    google.protobuf.Duration duration = 2;
+    double open = 3;
+    double high = 4;
+    double low = 5;
+    double close = 6;
+    int64 volume = 7;
+    int32 ticks = 8;
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systemathics.apis.type.v1;
+
+message Memo
+{
+    string provider = 1;
+    string group = 2;
+    string stream = 3;
+    string ticker = 4;
+}

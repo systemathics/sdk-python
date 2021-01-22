@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+
+import "google/type/date.proto";
+import "google/type/timeofday.proto";
+import "google/type/dayofweek.proto";
+
+package systemathics.apis.type.v1;
+
+message Constraints 
+{
+    repeated DateInterval date_intervals = 1;
+    repeated TimeInterval time_intervals = 2;
+    repeated google.type.Date excluded_dates = 3;
+    repeated google.type.DayOfWeek excluded_days = 4;
+}
+
+message TimeInterval 
+{
+    google.type.TimeOfDay start_time = 1;
+    google.type.TimeOfDay end_time = 2;
+}
+
+message DateInterval 
+{
+    google.type.Date start_date = 1;
+    google.type.Date end_date = 2;
+}

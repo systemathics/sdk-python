@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+
+import "google/protobuf/wrappers.proto";
+import "systemathics/apis/type/v1/memo.proto";
+
+package systemathics.apis.services.v1;
+
+service MemosService 
+{
+    rpc Memos(MemosRequest) returns (MemosResponse);
+}
+
+message MemosRequest 
+{
+    string search_string = 1;
+    MemosSearchType search_type = 2;
+    google.protobuf.Int32Value start = 3; // Nullable<int>
+    google.protobuf.Int32Value count = 4; // Nullable<int>
+}
+
+enum MemosSearchType 
+{
+    MEMOS_SEARCH_TYPE_UNSPECIFIED = 0;
+    MEMOS_SEARCH_TYPE_SUB_STRING = 1;
+    MEMOS_SEARCH_TYPE_REGULAR_EXPRESSION = 2;
+}
+
+message MemosResponse
+{
+    google.protobuf.StringValue error = 1; // Nullable<string> (if null => Success)
+    bool has_more = 2;
+    repeated systemathics.apis.type.v1.Memo memos = 3;
+}
