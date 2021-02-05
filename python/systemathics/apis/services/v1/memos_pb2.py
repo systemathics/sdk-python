@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n)systemathics/apis/services/v1/memos.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a$systemathics/apis/type/v1/memo.proto\"\xc2\x01\n\x0cMemosRequest\x12\x15\n\rsearch_string\x18\x01 \x01(\t\x12\x43\n\x0bsearch_type\x18\x02 \x01(\x0e\x32..systemathics.apis.services.v1.MemosSearchType\x12*\n\x05start\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x05\x63ount\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"~\n\rMemosResponse\x12+\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x10\n\x08has_more\x18\x02 \x01(\x08\x12.\n\x05memos\x18\x03 \x03(\x0b\x32\x1f.systemathics.apis.type.v1.Memo*\x80\x01\n\x0fMemosSearchType\x12!\n\x1dMEMOS_SEARCH_TYPE_UNSPECIFIED\x10\x00\x12 \n\x1cMEMOS_SEARCH_TYPE_SUB_STRING\x10\x01\x12(\n$MEMOS_SEARCH_TYPE_REGULAR_EXPRESSION\x10\x02\x32r\n\x0cMemosService\x12\x62\n\x05Memos\x12+.systemathics.apis.services.v1.MemosRequest\x1a,.systemathics.apis.services.v1.MemosResponseb\x06proto3'
+  serialized_pb=b'\n)systemathics/apis/services/v1/memos.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a$systemathics/apis/type/v1/memo.proto\"\xc2\x01\n\x0cMemosRequest\x12\x15\n\rsearch_string\x18\x01 \x01(\t\x12\x43\n\x0bsearch_type\x18\x02 \x01(\x0e\x32..systemathics.apis.services.v1.MemosSearchType\x12*\n\x05start\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x05\x63ount\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"Q\n\rMemosResponse\x12.\n\x05memos\x18\x01 \x03(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12\x10\n\x08has_more\x18\x02 \x01(\x08*\x80\x01\n\x0fMemosSearchType\x12!\n\x1dMEMOS_SEARCH_TYPE_UNSPECIFIED\x10\x00\x12 \n\x1cMEMOS_SEARCH_TYPE_SUB_STRING\x10\x01\x12(\n$MEMOS_SEARCH_TYPE_REGULAR_EXPRESSION\x10\x02\x32r\n\x0cMemosService\x12\x62\n\x05Memos\x12+.systemathics.apis.services.v1.MemosRequest\x1a,.systemathics.apis.services.v1.MemosResponseb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2.DESCRIPTOR,])
 
@@ -51,8 +51,8 @@ _MEMOSSEARCHTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=472,
-  serialized_end=600,
+  serialized_start=427,
+  serialized_end=555,
 )
 _sym_db.RegisterEnumDescriptor(_MEMOSSEARCHTYPE)
 
@@ -125,9 +125,9 @@ _MEMOSRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='error', full_name='systemathics.apis.services.v1.MemosResponse.error', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='memos', full_name='systemathics.apis.services.v1.MemosResponse.memos', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -135,13 +135,6 @@ _MEMOSRESPONSE = _descriptor.Descriptor(
       name='has_more', full_name='systemathics.apis.services.v1.MemosResponse.has_more', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='memos', full_name='systemathics.apis.services.v1.MemosResponse.memos', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -158,13 +151,12 @@ _MEMOSRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=343,
-  serialized_end=469,
+  serialized_end=424,
 )
 
 _MEMOSREQUEST.fields_by_name['search_type'].enum_type = _MEMOSSEARCHTYPE
 _MEMOSREQUEST.fields_by_name['start'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _MEMOSREQUEST.fields_by_name['count'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
-_MEMOSRESPONSE.fields_by_name['error'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _MEMOSRESPONSE.fields_by_name['memos'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
 DESCRIPTOR.message_types_by_name['MemosRequest'] = _MEMOSREQUEST
 DESCRIPTOR.message_types_by_name['MemosResponse'] = _MEMOSRESPONSE
@@ -194,8 +186,8 @@ _MEMOSSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=602,
-  serialized_end=716,
+  serialized_start=557,
+  serialized_end=671,
   methods=[
   _descriptor.MethodDescriptor(
     name='Memos',

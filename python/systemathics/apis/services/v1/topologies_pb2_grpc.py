@@ -6,7 +6,8 @@ from systemathics.apis.services.v1 import topologies_pb2 as systemathics_dot_api
 
 
 class TopologiesServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """The topology service definition
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -22,10 +23,12 @@ class TopologiesServiceStub(object):
 
 
 class TopologiesServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """The topology service definition
+    """
 
     def Topologies(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Get Topologies
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -46,7 +49,8 @@ def add_TopologiesServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class TopologiesService(object):
-    """Missing associated documentation comment in .proto file."""
+    """The topology service definition
+    """
 
     @staticmethod
     def Topologies(request,

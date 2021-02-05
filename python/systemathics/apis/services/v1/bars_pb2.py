@@ -26,7 +26,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n(systemathics/apis/services/v1/bars.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x16google/type/date.proto\x1a\x1bgoogle/type/timeofday.proto\x1a+systemathics/apis/type/v1/constraints.proto\x1a$systemathics/apis/type/v1/memo.proto\"\xaa\x02\n\x0b\x42\x61rsRequest\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12+\n\x08sampling\x18\x02 \x01(\x0b\x32\x19.google.protobuf.Duration\x12*\n\nbegin_time\x18\x03 \x01(\x0b\x32\x16.google.type.TimeOfDay\x12;\n\x0b\x63onstraints\x18\x04 \x01(\x0b\x32&.systemathics.apis.type.v1.Constraints\x12*\n\x05start\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x05\x63ount\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"\x7f\n\x0c\x42\x61rsResponse\x12+\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x10\n\x08has_more\x18\x02 \x01(\x08\x12\x30\n\x04\x62\x61rs\x18\x03 \x03(\x0b\x32\".systemathics.apis.services.v1.Bar\"\xb9\x01\n\x03\x42\x61r\x12.\n\nbegin_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x08\x64uration\x18\x02 \x01(\x0b\x32\x19.google.protobuf.Duration\x12\x0c\n\x04open\x18\x03 \x01(\x01\x12\x0c\n\x04high\x18\x04 \x01(\x01\x12\x0b\n\x03low\x18\x05 \x01(\x01\x12\r\n\x05\x63lose\x18\x06 \x01(\x01\x12\x0e\n\x06volume\x18\x07 \x01(\x03\x12\r\n\x05ticks\x18\x08 \x01(\x05\x32n\n\x0b\x42\x61rsService\x12_\n\x04\x42\x61rs\x12*.systemathics.apis.services.v1.BarsRequest\x1a+.systemathics.apis.services.v1.BarsResponseb\x06proto3'
+  serialized_pb=b'\n(systemathics/apis/services/v1/bars.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x16google/type/date.proto\x1a\x1bgoogle/type/timeofday.proto\x1a+systemathics/apis/type/v1/constraints.proto\x1a$systemathics/apis/type/v1/memo.proto\"\xaa\x02\n\x0b\x42\x61rsRequest\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12+\n\x08sampling\x18\x02 \x01(\x0b\x32\x19.google.protobuf.Duration\x12*\n\nbegin_time\x18\x03 \x01(\x0b\x32\x16.google.type.TimeOfDay\x12;\n\x0b\x63onstraints\x18\x04 \x01(\x0b\x32&.systemathics.apis.type.v1.Constraints\x12*\n\x05start\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x05\x63ount\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"R\n\x0c\x42\x61rsResponse\x12\x30\n\x04\x62\x61rs\x18\x01 \x03(\x0b\x32\".systemathics.apis.services.v1.Bar\x12\x10\n\x08has_more\x18\x02 \x01(\x08\"\xb9\x01\n\x03\x42\x61r\x12.\n\nbegin_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x08\x64uration\x18\x02 \x01(\x0b\x32\x19.google.protobuf.Duration\x12\x0c\n\x04open\x18\x03 \x01(\x01\x12\x0c\n\x04high\x18\x04 \x01(\x01\x12\x0b\n\x03low\x18\x05 \x01(\x01\x12\r\n\x05\x63lose\x18\x06 \x01(\x01\x12\x0e\n\x06volume\x18\x07 \x01(\x03\x12\r\n\x05ticks\x18\x08 \x01(\x05\x32n\n\x0b\x42\x61rsService\x12_\n\x04\x42\x61rs\x12*.systemathics.apis.services.v1.BarsRequest\x1a+.systemathics.apis.services.v1.BarsResponseb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_duration__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_type_dot_date__pb2.DESCRIPTOR,google_dot_type_dot_timeofday__pb2.DESCRIPTOR,systemathics_dot_apis_dot_type_dot_v1_dot_constraints__pb2.DESCRIPTOR,systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2.DESCRIPTOR,])
 
@@ -109,9 +109,9 @@ _BARSRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='error', full_name='systemathics.apis.services.v1.BarsResponse.error', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='bars', full_name='systemathics.apis.services.v1.BarsResponse.bars', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -119,13 +119,6 @@ _BARSRESPONSE = _descriptor.Descriptor(
       name='has_more', full_name='systemathics.apis.services.v1.BarsResponse.has_more', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='bars', full_name='systemathics.apis.services.v1.BarsResponse.bars', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -142,7 +135,7 @@ _BARSRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=609,
-  serialized_end=736,
+  serialized_end=691,
 )
 
 
@@ -222,8 +215,8 @@ _BAR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=739,
-  serialized_end=924,
+  serialized_start=694,
+  serialized_end=879,
 )
 
 _BARSREQUEST.fields_by_name['memo'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
@@ -232,7 +225,6 @@ _BARSREQUEST.fields_by_name['begin_time'].message_type = google_dot_type_dot_tim
 _BARSREQUEST.fields_by_name['constraints'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_constraints__pb2._CONSTRAINTS
 _BARSREQUEST.fields_by_name['start'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _BARSREQUEST.fields_by_name['count'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
-_BARSRESPONSE.fields_by_name['error'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _BARSRESPONSE.fields_by_name['bars'].message_type = _BAR
 _BAR.fields_by_name['begin_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _BAR.fields_by_name['duration'].message_type = google_dot_protobuf_dot_duration__pb2._DURATION
@@ -271,8 +263,8 @@ _BARSSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=926,
-  serialized_end=1036,
+  serialized_start=881,
+  serialized_end=991,
   methods=[
   _descriptor.MethodDescriptor(
     name='Bars',

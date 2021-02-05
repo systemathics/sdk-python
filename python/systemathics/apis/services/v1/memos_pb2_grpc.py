@@ -6,7 +6,8 @@ from systemathics.apis.services.v1 import memos_pb2 as systemathics_dot_apis_dot
 
 
 class MemosServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """The memos service definition
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -22,10 +23,12 @@ class MemosServiceStub(object):
 
 
 class MemosServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """The memos service definition
+    """
 
     def Memos(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Get Memos
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -46,7 +49,8 @@ def add_MemosServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class MemosService(object):
-    """Missing associated documentation comment in .proto file."""
+    """The memos service definition
+    """
 
     @staticmethod
     def Memos(request,

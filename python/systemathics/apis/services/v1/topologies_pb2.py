@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n.systemathics/apis/services/v1/topologies.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x16google/type/date.proto\x1a$systemathics/apis/type/v1/memo.proto\"\xe3\x01\n\x11TopologiesRequest\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12G\n\x0bgranularity\x18\x02 \x01(\x0e\x32\x32.systemathics.apis.services.v1.TopologyGranularity\x12*\n\x05start\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x05\x63ount\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"g\n\rTopologyEntry\x12 \n\x05\x62\x65gin\x18\x01 \x01(\x0b\x32\x11.google.type.Date\x12\x1e\n\x03\x65nd\x18\x02 \x01(\x0b\x32\x11.google.type.Date\x12\x14\n\x0c\x66rames_count\x18\x03 \x01(\x04\"\x92\x01\n\x12TopologiesResponse\x12+\n\x05\x65rror\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x10\n\x08has_more\x18\x02 \x01(\x08\x12=\n\x07\x65ntries\x18\x03 \x03(\x0b\x32,.systemathics.apis.services.v1.TopologyEntry*\xe2\x01\n\x13TopologyGranularity\x12$\n TOPOLOGY_GRANULARITY_UNSPECIFIED\x10\x00\x12\x1e\n\x1aTOPOLOGY_GRANULARITY_DAILY\x10\x01\x12\x1f\n\x1bTOPOLOGY_GRANULARITY_WEEKLY\x10\x02\x12 \n\x1cTOPOLOGY_GRANULARITY_MONTHLY\x10\x03\x12!\n\x1dTOPOLOGY_GRANULARITY_QUATERLY\x10\x04\x12\x1f\n\x1bTOPOLOGY_GRANULARITY_YEARLY\x10\x05\x32\x86\x01\n\x11TopologiesService\x12q\n\nTopologies\x12\x30.systemathics.apis.services.v1.TopologiesRequest\x1a\x31.systemathics.apis.services.v1.TopologiesResponseb\x06proto3'
+  serialized_pb=b'\n.systemathics/apis/services/v1/topologies.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x16google/type/date.proto\x1a$systemathics/apis/type/v1/memo.proto\"\xe3\x01\n\x11TopologiesRequest\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12G\n\x0bgranularity\x18\x02 \x01(\x0e\x32\x32.systemathics.apis.services.v1.TopologyGranularity\x12*\n\x05start\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x05\x63ount\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"f\n\rTopologyEntry\x12 \n\x05\x62\x65gin\x18\x01 \x01(\x0b\x32\x11.google.type.Date\x12\x1e\n\x03\x65nd\x18\x02 \x01(\x0b\x32\x11.google.type.Date\x12\x13\n\x0bticks_count\x18\x03 \x01(\x04\"e\n\x12TopologiesResponse\x12=\n\x07\x65ntries\x18\x01 \x03(\x0b\x32,.systemathics.apis.services.v1.TopologyEntry\x12\x10\n\x08has_more\x18\x02 \x01(\x08*\xe2\x01\n\x13TopologyGranularity\x12$\n TOPOLOGY_GRANULARITY_UNSPECIFIED\x10\x00\x12\x1e\n\x1aTOPOLOGY_GRANULARITY_DAILY\x10\x01\x12\x1f\n\x1bTOPOLOGY_GRANULARITY_WEEKLY\x10\x02\x12 \n\x1cTOPOLOGY_GRANULARITY_MONTHLY\x10\x03\x12!\n\x1dTOPOLOGY_GRANULARITY_QUATERLY\x10\x04\x12\x1f\n\x1bTOPOLOGY_GRANULARITY_YEARLY\x10\x05\x32\x86\x01\n\x11TopologiesService\x12q\n\nTopologies\x12\x30.systemathics.apis.services.v1.TopologiesRequest\x1a\x31.systemathics.apis.services.v1.TopologiesResponseb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_type_dot_date__pb2.DESCRIPTOR,systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2.DESCRIPTOR,])
 
@@ -67,8 +67,8 @@ _TOPOLOGYGRANULARITY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=660,
-  serialized_end=886,
+  serialized_start=613,
+  serialized_end=839,
 )
 _sym_db.RegisterEnumDescriptor(_TOPOLOGYGRANULARITY)
 
@@ -158,7 +158,7 @@ _TOPOLOGYENTRY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='frames_count', full_name='systemathics.apis.services.v1.TopologyEntry.frames_count', index=2,
+      name='ticks_count', full_name='systemathics.apis.services.v1.TopologyEntry.ticks_count', index=2,
       number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -177,7 +177,7 @@ _TOPOLOGYENTRY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=405,
-  serialized_end=508,
+  serialized_end=507,
 )
 
 
@@ -190,9 +190,9 @@ _TOPOLOGIESRESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='error', full_name='systemathics.apis.services.v1.TopologiesResponse.error', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='entries', full_name='systemathics.apis.services.v1.TopologiesResponse.entries', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -200,13 +200,6 @@ _TOPOLOGIESRESPONSE = _descriptor.Descriptor(
       name='has_more', full_name='systemathics.apis.services.v1.TopologiesResponse.has_more', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='entries', full_name='systemathics.apis.services.v1.TopologiesResponse.entries', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -222,8 +215,8 @@ _TOPOLOGIESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=511,
-  serialized_end=657,
+  serialized_start=509,
+  serialized_end=610,
 )
 
 _TOPOLOGIESREQUEST.fields_by_name['memo'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
@@ -232,7 +225,6 @@ _TOPOLOGIESREQUEST.fields_by_name['start'].message_type = google_dot_protobuf_do
 _TOPOLOGIESREQUEST.fields_by_name['count'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _TOPOLOGYENTRY.fields_by_name['begin'].message_type = google_dot_type_dot_date__pb2._DATE
 _TOPOLOGYENTRY.fields_by_name['end'].message_type = google_dot_type_dot_date__pb2._DATE
-_TOPOLOGIESRESPONSE.fields_by_name['error'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _TOPOLOGIESRESPONSE.fields_by_name['entries'].message_type = _TOPOLOGYENTRY
 DESCRIPTOR.message_types_by_name['TopologiesRequest'] = _TOPOLOGIESREQUEST
 DESCRIPTOR.message_types_by_name['TopologyEntry'] = _TOPOLOGYENTRY
@@ -270,8 +262,8 @@ _TOPOLOGIESSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=889,
-  serialized_end=1023,
+  serialized_start=842,
+  serialized_end=976,
   methods=[
   _descriptor.MethodDescriptor(
     name='Topologies',

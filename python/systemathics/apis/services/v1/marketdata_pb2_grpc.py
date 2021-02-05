@@ -6,7 +6,9 @@ from systemathics.apis.services.v1 import marketdata_pb2 as systemathics_dot_api
 
 
 class MarketDataServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """The market data service definition
+    It allows to replay tick by tick data
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -14,29 +16,21 @@ class MarketDataServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.MarketData1 = channel.unary_stream(
-                '/systemathics.apis.services.v1.MarketDataService/MarketData1',
-                request_serializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketData1Request.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketData1Response.FromString,
-                )
-        self.MarketDataN = channel.unary_stream(
-                '/systemathics.apis.services.v1.MarketDataService/MarketDataN',
-                request_serializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataNRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataNResponse.FromString,
+        self.MarketData = channel.unary_stream(
+                '/systemathics.apis.services.v1.MarketDataService/MarketData',
+                request_serializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataResponse.FromString,
                 )
 
 
 class MarketDataServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """The market data service definition
+    It allows to replay tick by tick data
+    """
 
-    def MarketData1(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MarketDataN(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def MarketData(self, request, context):
+        """Get Market Data 
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -44,15 +38,10 @@ class MarketDataServiceServicer(object):
 
 def add_MarketDataServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'MarketData1': grpc.unary_stream_rpc_method_handler(
-                    servicer.MarketData1,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketData1Request.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketData1Response.SerializeToString,
-            ),
-            'MarketDataN': grpc.unary_stream_rpc_method_handler(
-                    servicer.MarketDataN,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataNRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataNResponse.SerializeToString,
+            'MarketData': grpc.unary_stream_rpc_method_handler(
+                    servicer.MarketData,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,10 +51,12 @@ def add_MarketDataServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class MarketDataService(object):
-    """Missing associated documentation comment in .proto file."""
+    """The market data service definition
+    It allows to replay tick by tick data
+    """
 
     @staticmethod
-    def MarketData1(request,
+    def MarketData(request,
             target,
             options=(),
             channel_credentials=None,
@@ -75,25 +66,8 @@ class MarketDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.v1.MarketDataService/MarketData1',
-            systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketData1Request.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketData1Response.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MarketDataN(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.v1.MarketDataService/MarketDataN',
-            systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataNRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataNResponse.FromString,
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.v1.MarketDataService/MarketData',
+            systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_v1_dot_marketdata__pb2.MarketDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

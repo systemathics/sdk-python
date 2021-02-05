@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n.systemathics/apis/services/v1/marketdata.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a+systemathics/apis/type/v1/constraints.proto\x1a$systemathics/apis/type/v1/memo.proto\"\x80\x01\n\x12MarketData1Request\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12;\n\x0b\x63onstraints\x18\x02 \x01(\x0b\x32&.systemathics.apis.type.v1.Constraints\"\x81\x01\n\x12MarketDataNRequest\x12.\n\x05memos\x18\x01 \x03(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12;\n\x0b\x63onstraints\x18\x02 \x01(\x0b\x32&.systemathics.apis.type.v1.Constraints\"\xf4\x02\n\x13MarketData1Response\x12\x14\n\x0c\x65vent_source\x18\x01 \x01(\r\x12.\n\ntime_stamp\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12L\n\x0e\x66ields_updates\x18\x03 \x01(\x0b\x32\x32.systemathics.apis.services.v1.MarketFieldsUpdatesH\x00\x12H\n\x0c\x62ook_updates\x18\x04 \x01(\x0b\x32\x30.systemathics.apis.services.v1.MarketBookUpdatesH\x00\x12\x37\n\x06\x63odecs\x18\x05 \x01(\x0b\x32%.systemathics.apis.services.v1.CodecsH\x00\x12;\n\x08mappings\x18\x06 \x01(\x0b\x32\'.systemathics.apis.services.v1.MappingsH\x00\x42\t\n\x07payload\"\xf4\x02\n\x13MarketDataNResponse\x12\x14\n\x0c\x65vent_source\x18\x01 \x01(\r\x12.\n\ntime_stamp\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12L\n\x0e\x66ields_updates\x18\x03 \x01(\x0b\x32\x32.systemathics.apis.services.v1.MarketFieldsUpdatesH\x00\x12H\n\x0c\x62ook_updates\x18\x04 \x01(\x0b\x32\x30.systemathics.apis.services.v1.MarketBookUpdatesH\x00\x12\x37\n\x06\x63odecs\x18\x05 \x01(\x0b\x32%.systemathics.apis.services.v1.CodecsH\x00\x12;\n\x08mappings\x18\x06 \x01(\x0b\x32\'.systemathics.apis.services.v1.MappingsH\x00\x42\t\n\x07payload\"=\n\x06\x43odecs\x12\x33\n\x05table\x18\x01 \x03(\x0b\x32$.systemathics.apis.services.v1.Codec\"c\n\x05\x43odec\x12\x14\n\x0cpayload_type\x18\x01 \x01(\r\x12\"\n\x1apayload_type_specification\x18\x02 \x01(\t\x12 \n\x18\x63odec_type_specification\x18\x03 \x01(\t\"Z\n\x07Mapping\x12\x14\n\x0c\x65vent_source\x18\x01 \x01(\r\x12\n\n\x02id\x18\x02 \x01(\t\x12-\n\x04memo\x18\x03 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\"A\n\x08Mappings\x12\x35\n\x05table\x18\x01 \x03(\x0b\x32&.systemathics.apis.services.v1.Mapping\"m\n\x13MarketFieldsUpdates\x12\x13\n\x0bis_snapshot\x18\x01 \x01(\x08\x12\x41\n\x07updates\x18\x02 \x03(\x0b\x32\x30.systemathics.apis.services.v1.MarketFieldUpdate\"\xce\x01\n\x11MarketFieldUpdate\x12\x35\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32%.systemathics.apis.services.v1.Action\x12\x33\n\x05\x66ield\x18\x02 \x01(\x0e\x32$.systemathics.apis.services.v1.Field\x12\x14\n\nlong_value\x18\x03 \x01(\x03H\x00\x12\x16\n\x0c\x64ouble_value\x18\x04 \x01(\x01H\x00\x12\x16\n\x0cstring_value\x18\x05 \x01(\tH\x00\x42\x07\n\x05value\"j\n\x11MarketBookUpdates\x12\x13\n\x0bis_snapshot\x18\x01 \x01(\x08\x12@\n\x07updates\x18\x02 \x03(\x0b\x32/.systemathics.apis.services.v1.MarketBookUpdate\"\xe3\x01\n\x10MarketBookUpdate\x12\x35\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32%.systemathics.apis.services.v1.Action\x12\x31\n\x04side\x18\x02 \x01(\x0e\x32#.systemathics.apis.services.v1.Side\x12\r\n\x05\x64\x65pth\x18\x03 \x01(\r\x12)\n\x04size\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12+\n\x05price\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue*8\n\x04Side\x12\x14\n\x10SIDE_UNSPECIFIED\x10\x00\x12\x0c\n\x08SIDE_BID\x10\x01\x12\x0c\n\x08SIDE_ASK\x10\x02*B\n\x06\x41\x63tion\x12\x16\n\x12\x41\x43TION_UNSPECIFIED\x10\x00\x12\x0e\n\nACTION_SET\x10\x01\x12\x10\n\x0c\x41\x43TION_CLEAR\x10\x02*\xdd\x04\n\x05\x46ield\x12\x15\n\x11\x46IELD_UNSPECIFIED\x10\x00\x12\x14\n\x10\x46IELD_OPEN_PRICE\x10\x01\x12\x13\n\x0f\x46IELD_OPEN_SIZE\x10\x02\x12\x15\n\x11\x46IELD_CLOSE_PRICE\x10\x03\x12\x14\n\x10\x46IELD_CLOSE_SIZE\x10\x04\x12\x13\n\x0f\x46IELD_LOW_PRICE\x10\x05\x12\x12\n\x0e\x46IELD_LOW_SIZE\x10\x06\x12\x14\n\x10\x46IELD_HIGH_PRICE\x10\x07\x12\x13\n\x0f\x46IELD_HIGH_SIZE\x10\x08\x12\x15\n\x11\x46IELD_TRADE_PRICE\x10\t\x12\x14\n\x10\x46IELD_TRADE_SIZE\x10\n\x12\x1b\n\x17\x46IELD_TRADING_CONDITION\x10\x0b\x12\x15\n\x11\x46IELD_TRADE_COUNT\x10\x0c\x12\x19\n\x15\x46IELD_TRADE_OTC_PRICE\x10\r\x12\x18\n\x14\x46IELD_TRADE_OTC_SIZE\x10\x0e\x12\x19\n\x15\x46IELD_TRADE_OTC_COUNT\x10\x0f\x12\x10\n\x0c\x46IELD_VOLUME\x10\x10\x12\x17\n\x13\x46IELD_VWAP_OFFICIAL\x10\x11\x12\x19\n\x15\x46IELD_VWAP_ELECTRONIC\x10\x12\x12\x1b\n\x17\x46IELD_THEORETICAL_PRICE\x10\x13\x12\x1a\n\x16\x46IELD_THEORETICAL_SIZE\x10\x14\x12\x15\n\x11\x46IELD_UPPER_PRICE\x10\x15\x12\x15\n\x11\x46IELD_LOWER_PRICE\x10\x16\x12\x13\n\x0f\x46IELD_VARIATION\x10\x17\x12\x1e\n\x1a\x46IELD_VARIATION_PERCENTAGE\x10\x18\x32\x83\x02\n\x11MarketDataService\x12v\n\x0bMarketData1\x12\x31.systemathics.apis.services.v1.MarketData1Request\x1a\x32.systemathics.apis.services.v1.MarketData1Response0\x01\x12v\n\x0bMarketDataN\x12\x31.systemathics.apis.services.v1.MarketDataNRequest\x1a\x32.systemathics.apis.services.v1.MarketDataNResponse0\x01\x62\x06proto3'
+  serialized_pb=b'\n.systemathics/apis/services/v1/marketdata.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a+systemathics/apis/type/v1/constraints.proto\x1a$systemathics/apis/type/v1/memo.proto\"\x80\x01\n\x11MarketDataRequest\x12.\n\x05memos\x18\x01 \x03(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12;\n\x0b\x63onstraints\x18\x02 \x01(\x0b\x32&.systemathics.apis.type.v1.Constraints\"\xba\x02\n\x12MarketDataResponse\x12\x14\n\x0c\x65vent_source\x18\x01 \x01(\r\x12.\n\ntime_stamp\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12L\n\x0e\x66ields_updates\x18\x03 \x01(\x0b\x32\x32.systemathics.apis.services.v1.MarketFieldsUpdatesH\x00\x12H\n\x0c\x62ook_updates\x18\x04 \x01(\x0b\x32\x30.systemathics.apis.services.v1.MarketBookUpdatesH\x00\x12;\n\x08mappings\x18\x05 \x01(\x0b\x32\'.systemathics.apis.services.v1.MappingsH\x00\x42\t\n\x07payload\"N\n\x07Mapping\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12\x14\n\x0c\x65vent_source\x18\x02 \x01(\r\"A\n\x08Mappings\x12\x35\n\x05table\x18\x01 \x03(\x0b\x32&.systemathics.apis.services.v1.Mapping\"m\n\x13MarketFieldsUpdates\x12\x13\n\x0bis_snapshot\x18\x01 \x01(\x08\x12\x41\n\x07updates\x18\x02 \x03(\x0b\x32\x30.systemathics.apis.services.v1.MarketFieldUpdate\"\xce\x01\n\x11MarketFieldUpdate\x12\x35\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32%.systemathics.apis.services.v1.Action\x12\x33\n\x05\x66ield\x18\x02 \x01(\x0e\x32$.systemathics.apis.services.v1.Field\x12\x14\n\nlong_value\x18\x03 \x01(\x03H\x00\x12\x16\n\x0c\x64ouble_value\x18\x04 \x01(\x01H\x00\x12\x16\n\x0cstring_value\x18\x05 \x01(\tH\x00\x42\x07\n\x05value\"j\n\x11MarketBookUpdates\x12\x13\n\x0bis_snapshot\x18\x01 \x01(\x08\x12@\n\x07updates\x18\x02 \x03(\x0b\x32/.systemathics.apis.services.v1.MarketBookUpdate\"\xe3\x01\n\x10MarketBookUpdate\x12\x35\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32%.systemathics.apis.services.v1.Action\x12\x31\n\x04side\x18\x02 \x01(\x0e\x32#.systemathics.apis.services.v1.Side\x12\r\n\x05\x64\x65pth\x18\x03 \x01(\r\x12)\n\x04size\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12+\n\x05price\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue*8\n\x04Side\x12\x14\n\x10SIDE_UNSPECIFIED\x10\x00\x12\x0c\n\x08SIDE_BID\x10\x01\x12\x0c\n\x08SIDE_ASK\x10\x02*B\n\x06\x41\x63tion\x12\x16\n\x12\x41\x43TION_UNSPECIFIED\x10\x00\x12\x0e\n\nACTION_SET\x10\x01\x12\x10\n\x0c\x41\x43TION_CLEAR\x10\x02*\xdd\x04\n\x05\x46ield\x12\x15\n\x11\x46IELD_UNSPECIFIED\x10\x00\x12\x14\n\x10\x46IELD_OPEN_PRICE\x10\x01\x12\x13\n\x0f\x46IELD_OPEN_SIZE\x10\x02\x12\x15\n\x11\x46IELD_CLOSE_PRICE\x10\x03\x12\x14\n\x10\x46IELD_CLOSE_SIZE\x10\x04\x12\x13\n\x0f\x46IELD_LOW_PRICE\x10\x05\x12\x12\n\x0e\x46IELD_LOW_SIZE\x10\x06\x12\x14\n\x10\x46IELD_HIGH_PRICE\x10\x07\x12\x13\n\x0f\x46IELD_HIGH_SIZE\x10\x08\x12\x15\n\x11\x46IELD_TRADE_PRICE\x10\t\x12\x14\n\x10\x46IELD_TRADE_SIZE\x10\n\x12\x1b\n\x17\x46IELD_TRADING_CONDITION\x10\x0b\x12\x15\n\x11\x46IELD_TRADE_COUNT\x10\x0c\x12\x19\n\x15\x46IELD_TRADE_OTC_PRICE\x10\r\x12\x18\n\x14\x46IELD_TRADE_OTC_SIZE\x10\x0e\x12\x19\n\x15\x46IELD_TRADE_OTC_COUNT\x10\x0f\x12\x10\n\x0c\x46IELD_VOLUME\x10\x10\x12\x17\n\x13\x46IELD_VWAP_OFFICIAL\x10\x11\x12\x19\n\x15\x46IELD_VWAP_ELECTRONIC\x10\x12\x12\x1b\n\x17\x46IELD_THEORETICAL_PRICE\x10\x13\x12\x1a\n\x16\x46IELD_THEORETICAL_SIZE\x10\x14\x12\x15\n\x11\x46IELD_UPPER_PRICE\x10\x15\x12\x15\n\x11\x46IELD_LOWER_PRICE\x10\x16\x12\x13\n\x0f\x46IELD_VARIATION\x10\x17\x12\x1e\n\x1a\x46IELD_VARIATION_PERCENTAGE\x10\x18\x32\x88\x01\n\x11MarketDataService\x12s\n\nMarketData\x12\x30.systemathics.apis.services.v1.MarketDataRequest\x1a\x31.systemathics.apis.services.v1.MarketDataResponse0\x01\x62\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,systemathics_dot_apis_dot_type_dot_v1_dot_constraints__pb2.DESCRIPTOR,systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2.DESCRIPTOR,])
 
@@ -53,8 +53,8 @@ _SIDE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2223,
-  serialized_end=2279,
+  serialized_start=1482,
+  serialized_end=1538,
 )
 _sym_db.RegisterEnumDescriptor(_SIDE)
 
@@ -84,8 +84,8 @@ _ACTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2281,
-  serialized_end=2347,
+  serialized_start=1540,
+  serialized_end=1606,
 )
 _sym_db.RegisterEnumDescriptor(_ACTION)
 
@@ -225,8 +225,8 @@ _FIELD = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2350,
-  serialized_end=2955,
+  serialized_start=1609,
+  serialized_end=2214,
 )
 _sym_db.RegisterEnumDescriptor(_FIELD)
 
@@ -265,23 +265,23 @@ FIELD_VARIATION_PERCENTAGE = 24
 
 
 
-_MARKETDATA1REQUEST = _descriptor.Descriptor(
-  name='MarketData1Request',
-  full_name='systemathics.apis.services.v1.MarketData1Request',
+_MARKETDATAREQUEST = _descriptor.Descriptor(
+  name='MarketDataRequest',
+  full_name='systemathics.apis.services.v1.MarketDataRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='memo', full_name='systemathics.apis.services.v1.MarketData1Request.memo', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='memos', full_name='systemathics.apis.services.v1.MarketDataRequest.memos', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='constraints', full_name='systemathics.apis.services.v1.MarketData1Request.constraints', index=1,
+      name='constraints', full_name='systemathics.apis.services.v1.MarketDataRequest.constraints', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -304,24 +304,45 @@ _MARKETDATA1REQUEST = _descriptor.Descriptor(
 )
 
 
-_MARKETDATANREQUEST = _descriptor.Descriptor(
-  name='MarketDataNRequest',
-  full_name='systemathics.apis.services.v1.MarketDataNRequest',
+_MARKETDATARESPONSE = _descriptor.Descriptor(
+  name='MarketDataResponse',
+  full_name='systemathics.apis.services.v1.MarketDataResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='memos', full_name='systemathics.apis.services.v1.MarketDataNRequest.memos', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='event_source', full_name='systemathics.apis.services.v1.MarketDataResponse.event_source', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='constraints', full_name='systemathics.apis.services.v1.MarketDataNRequest.constraints', index=1,
+      name='time_stamp', full_name='systemathics.apis.services.v1.MarketDataResponse.time_stamp', index=1,
       number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='fields_updates', full_name='systemathics.apis.services.v1.MarketDataResponse.fields_updates', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='book_updates', full_name='systemathics.apis.services.v1.MarketDataResponse.book_updates', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mappings', full_name='systemathics.apis.services.v1.MarketDataResponse.mappings', index=4,
+      number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -337,231 +358,14 @@ _MARKETDATANREQUEST = _descriptor.Descriptor(
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='payload', full_name='systemathics.apis.services.v1.MarketDataResponse.payload',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
   ],
   serialized_start=361,
-  serialized_end=490,
-)
-
-
-_MARKETDATA1RESPONSE = _descriptor.Descriptor(
-  name='MarketData1Response',
-  full_name='systemathics.apis.services.v1.MarketData1Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='event_source', full_name='systemathics.apis.services.v1.MarketData1Response.event_source', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='time_stamp', full_name='systemathics.apis.services.v1.MarketData1Response.time_stamp', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='fields_updates', full_name='systemathics.apis.services.v1.MarketData1Response.fields_updates', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='book_updates', full_name='systemathics.apis.services.v1.MarketData1Response.book_updates', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='codecs', full_name='systemathics.apis.services.v1.MarketData1Response.codecs', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='mappings', full_name='systemathics.apis.services.v1.MarketData1Response.mappings', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='payload', full_name='systemathics.apis.services.v1.MarketData1Response.payload',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=493,
-  serialized_end=865,
-)
-
-
-_MARKETDATANRESPONSE = _descriptor.Descriptor(
-  name='MarketDataNResponse',
-  full_name='systemathics.apis.services.v1.MarketDataNResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='event_source', full_name='systemathics.apis.services.v1.MarketDataNResponse.event_source', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='time_stamp', full_name='systemathics.apis.services.v1.MarketDataNResponse.time_stamp', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='fields_updates', full_name='systemathics.apis.services.v1.MarketDataNResponse.fields_updates', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='book_updates', full_name='systemathics.apis.services.v1.MarketDataNResponse.book_updates', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='codecs', full_name='systemathics.apis.services.v1.MarketDataNResponse.codecs', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='mappings', full_name='systemathics.apis.services.v1.MarketDataNResponse.mappings', index=5,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='payload', full_name='systemathics.apis.services.v1.MarketDataNResponse.payload',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=868,
-  serialized_end=1240,
-)
-
-
-_CODECS = _descriptor.Descriptor(
-  name='Codecs',
-  full_name='systemathics.apis.services.v1.Codecs',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='table', full_name='systemathics.apis.services.v1.Codecs.table', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1242,
-  serialized_end=1303,
-)
-
-
-_CODEC = _descriptor.Descriptor(
-  name='Codec',
-  full_name='systemathics.apis.services.v1.Codec',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='payload_type', full_name='systemathics.apis.services.v1.Codec.payload_type', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='payload_type_specification', full_name='systemathics.apis.services.v1.Codec.payload_type_specification', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='codec_type_specification', full_name='systemathics.apis.services.v1.Codec.codec_type_specification', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1305,
-  serialized_end=1404,
+  serialized_end=675,
 )
 
 
@@ -574,23 +378,16 @@ _MAPPING = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='event_source', full_name='systemathics.apis.services.v1.Mapping.event_source', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='id', full_name='systemathics.apis.services.v1.Mapping.id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='memo', full_name='systemathics.apis.services.v1.Mapping.memo', index=2,
-      number=3, type=11, cpp_type=10, label=1,
+      name='memo', full_name='systemathics.apis.services.v1.Mapping.memo', index=0,
+      number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='event_source', full_name='systemathics.apis.services.v1.Mapping.event_source', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -606,8 +403,8 @@ _MAPPING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1406,
-  serialized_end=1496,
+  serialized_start=677,
+  serialized_end=755,
 )
 
 
@@ -638,8 +435,8 @@ _MAPPINGS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1498,
-  serialized_end=1563,
+  serialized_start=757,
+  serialized_end=822,
 )
 
 
@@ -677,8 +474,8 @@ _MARKETFIELDSUPDATES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1565,
-  serialized_end=1674,
+  serialized_start=824,
+  serialized_end=933,
 )
 
 
@@ -742,8 +539,8 @@ _MARKETFIELDUPDATE = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1677,
-  serialized_end=1883,
+  serialized_start=936,
+  serialized_end=1142,
 )
 
 
@@ -781,8 +578,8 @@ _MARKETBOOKUPDATES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1885,
-  serialized_end=1991,
+  serialized_start=1144,
+  serialized_end=1250,
 )
 
 
@@ -841,49 +638,25 @@ _MARKETBOOKUPDATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1994,
-  serialized_end=2221,
+  serialized_start=1253,
+  serialized_end=1480,
 )
 
-_MARKETDATA1REQUEST.fields_by_name['memo'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
-_MARKETDATA1REQUEST.fields_by_name['constraints'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_constraints__pb2._CONSTRAINTS
-_MARKETDATANREQUEST.fields_by_name['memos'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
-_MARKETDATANREQUEST.fields_by_name['constraints'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_constraints__pb2._CONSTRAINTS
-_MARKETDATA1RESPONSE.fields_by_name['time_stamp'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_MARKETDATA1RESPONSE.fields_by_name['fields_updates'].message_type = _MARKETFIELDSUPDATES
-_MARKETDATA1RESPONSE.fields_by_name['book_updates'].message_type = _MARKETBOOKUPDATES
-_MARKETDATA1RESPONSE.fields_by_name['codecs'].message_type = _CODECS
-_MARKETDATA1RESPONSE.fields_by_name['mappings'].message_type = _MAPPINGS
-_MARKETDATA1RESPONSE.oneofs_by_name['payload'].fields.append(
-  _MARKETDATA1RESPONSE.fields_by_name['fields_updates'])
-_MARKETDATA1RESPONSE.fields_by_name['fields_updates'].containing_oneof = _MARKETDATA1RESPONSE.oneofs_by_name['payload']
-_MARKETDATA1RESPONSE.oneofs_by_name['payload'].fields.append(
-  _MARKETDATA1RESPONSE.fields_by_name['book_updates'])
-_MARKETDATA1RESPONSE.fields_by_name['book_updates'].containing_oneof = _MARKETDATA1RESPONSE.oneofs_by_name['payload']
-_MARKETDATA1RESPONSE.oneofs_by_name['payload'].fields.append(
-  _MARKETDATA1RESPONSE.fields_by_name['codecs'])
-_MARKETDATA1RESPONSE.fields_by_name['codecs'].containing_oneof = _MARKETDATA1RESPONSE.oneofs_by_name['payload']
-_MARKETDATA1RESPONSE.oneofs_by_name['payload'].fields.append(
-  _MARKETDATA1RESPONSE.fields_by_name['mappings'])
-_MARKETDATA1RESPONSE.fields_by_name['mappings'].containing_oneof = _MARKETDATA1RESPONSE.oneofs_by_name['payload']
-_MARKETDATANRESPONSE.fields_by_name['time_stamp'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_MARKETDATANRESPONSE.fields_by_name['fields_updates'].message_type = _MARKETFIELDSUPDATES
-_MARKETDATANRESPONSE.fields_by_name['book_updates'].message_type = _MARKETBOOKUPDATES
-_MARKETDATANRESPONSE.fields_by_name['codecs'].message_type = _CODECS
-_MARKETDATANRESPONSE.fields_by_name['mappings'].message_type = _MAPPINGS
-_MARKETDATANRESPONSE.oneofs_by_name['payload'].fields.append(
-  _MARKETDATANRESPONSE.fields_by_name['fields_updates'])
-_MARKETDATANRESPONSE.fields_by_name['fields_updates'].containing_oneof = _MARKETDATANRESPONSE.oneofs_by_name['payload']
-_MARKETDATANRESPONSE.oneofs_by_name['payload'].fields.append(
-  _MARKETDATANRESPONSE.fields_by_name['book_updates'])
-_MARKETDATANRESPONSE.fields_by_name['book_updates'].containing_oneof = _MARKETDATANRESPONSE.oneofs_by_name['payload']
-_MARKETDATANRESPONSE.oneofs_by_name['payload'].fields.append(
-  _MARKETDATANRESPONSE.fields_by_name['codecs'])
-_MARKETDATANRESPONSE.fields_by_name['codecs'].containing_oneof = _MARKETDATANRESPONSE.oneofs_by_name['payload']
-_MARKETDATANRESPONSE.oneofs_by_name['payload'].fields.append(
-  _MARKETDATANRESPONSE.fields_by_name['mappings'])
-_MARKETDATANRESPONSE.fields_by_name['mappings'].containing_oneof = _MARKETDATANRESPONSE.oneofs_by_name['payload']
-_CODECS.fields_by_name['table'].message_type = _CODEC
+_MARKETDATAREQUEST.fields_by_name['memos'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
+_MARKETDATAREQUEST.fields_by_name['constraints'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_constraints__pb2._CONSTRAINTS
+_MARKETDATARESPONSE.fields_by_name['time_stamp'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_MARKETDATARESPONSE.fields_by_name['fields_updates'].message_type = _MARKETFIELDSUPDATES
+_MARKETDATARESPONSE.fields_by_name['book_updates'].message_type = _MARKETBOOKUPDATES
+_MARKETDATARESPONSE.fields_by_name['mappings'].message_type = _MAPPINGS
+_MARKETDATARESPONSE.oneofs_by_name['payload'].fields.append(
+  _MARKETDATARESPONSE.fields_by_name['fields_updates'])
+_MARKETDATARESPONSE.fields_by_name['fields_updates'].containing_oneof = _MARKETDATARESPONSE.oneofs_by_name['payload']
+_MARKETDATARESPONSE.oneofs_by_name['payload'].fields.append(
+  _MARKETDATARESPONSE.fields_by_name['book_updates'])
+_MARKETDATARESPONSE.fields_by_name['book_updates'].containing_oneof = _MARKETDATARESPONSE.oneofs_by_name['payload']
+_MARKETDATARESPONSE.oneofs_by_name['payload'].fields.append(
+  _MARKETDATARESPONSE.fields_by_name['mappings'])
+_MARKETDATARESPONSE.fields_by_name['mappings'].containing_oneof = _MARKETDATARESPONSE.oneofs_by_name['payload']
 _MAPPING.fields_by_name['memo'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
 _MAPPINGS.fields_by_name['table'].message_type = _MAPPING
 _MARKETFIELDSUPDATES.fields_by_name['updates'].message_type = _MARKETFIELDUPDATE
@@ -903,12 +676,8 @@ _MARKETBOOKUPDATE.fields_by_name['action'].enum_type = _ACTION
 _MARKETBOOKUPDATE.fields_by_name['side'].enum_type = _SIDE
 _MARKETBOOKUPDATE.fields_by_name['size'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _MARKETBOOKUPDATE.fields_by_name['price'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
-DESCRIPTOR.message_types_by_name['MarketData1Request'] = _MARKETDATA1REQUEST
-DESCRIPTOR.message_types_by_name['MarketDataNRequest'] = _MARKETDATANREQUEST
-DESCRIPTOR.message_types_by_name['MarketData1Response'] = _MARKETDATA1RESPONSE
-DESCRIPTOR.message_types_by_name['MarketDataNResponse'] = _MARKETDATANRESPONSE
-DESCRIPTOR.message_types_by_name['Codecs'] = _CODECS
-DESCRIPTOR.message_types_by_name['Codec'] = _CODEC
+DESCRIPTOR.message_types_by_name['MarketDataRequest'] = _MARKETDATAREQUEST
+DESCRIPTOR.message_types_by_name['MarketDataResponse'] = _MARKETDATARESPONSE
 DESCRIPTOR.message_types_by_name['Mapping'] = _MAPPING
 DESCRIPTOR.message_types_by_name['Mappings'] = _MAPPINGS
 DESCRIPTOR.message_types_by_name['MarketFieldsUpdates'] = _MARKETFIELDSUPDATES
@@ -920,47 +689,19 @@ DESCRIPTOR.enum_types_by_name['Action'] = _ACTION
 DESCRIPTOR.enum_types_by_name['Field'] = _FIELD
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-MarketData1Request = _reflection.GeneratedProtocolMessageType('MarketData1Request', (_message.Message,), {
-  'DESCRIPTOR' : _MARKETDATA1REQUEST,
+MarketDataRequest = _reflection.GeneratedProtocolMessageType('MarketDataRequest', (_message.Message,), {
+  'DESCRIPTOR' : _MARKETDATAREQUEST,
   '__module__' : 'systemathics.apis.services.v1.marketdata_pb2'
-  # @@protoc_insertion_point(class_scope:systemathics.apis.services.v1.MarketData1Request)
+  # @@protoc_insertion_point(class_scope:systemathics.apis.services.v1.MarketDataRequest)
   })
-_sym_db.RegisterMessage(MarketData1Request)
+_sym_db.RegisterMessage(MarketDataRequest)
 
-MarketDataNRequest = _reflection.GeneratedProtocolMessageType('MarketDataNRequest', (_message.Message,), {
-  'DESCRIPTOR' : _MARKETDATANREQUEST,
+MarketDataResponse = _reflection.GeneratedProtocolMessageType('MarketDataResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MARKETDATARESPONSE,
   '__module__' : 'systemathics.apis.services.v1.marketdata_pb2'
-  # @@protoc_insertion_point(class_scope:systemathics.apis.services.v1.MarketDataNRequest)
+  # @@protoc_insertion_point(class_scope:systemathics.apis.services.v1.MarketDataResponse)
   })
-_sym_db.RegisterMessage(MarketDataNRequest)
-
-MarketData1Response = _reflection.GeneratedProtocolMessageType('MarketData1Response', (_message.Message,), {
-  'DESCRIPTOR' : _MARKETDATA1RESPONSE,
-  '__module__' : 'systemathics.apis.services.v1.marketdata_pb2'
-  # @@protoc_insertion_point(class_scope:systemathics.apis.services.v1.MarketData1Response)
-  })
-_sym_db.RegisterMessage(MarketData1Response)
-
-MarketDataNResponse = _reflection.GeneratedProtocolMessageType('MarketDataNResponse', (_message.Message,), {
-  'DESCRIPTOR' : _MARKETDATANRESPONSE,
-  '__module__' : 'systemathics.apis.services.v1.marketdata_pb2'
-  # @@protoc_insertion_point(class_scope:systemathics.apis.services.v1.MarketDataNResponse)
-  })
-_sym_db.RegisterMessage(MarketDataNResponse)
-
-Codecs = _reflection.GeneratedProtocolMessageType('Codecs', (_message.Message,), {
-  'DESCRIPTOR' : _CODECS,
-  '__module__' : 'systemathics.apis.services.v1.marketdata_pb2'
-  # @@protoc_insertion_point(class_scope:systemathics.apis.services.v1.Codecs)
-  })
-_sym_db.RegisterMessage(Codecs)
-
-Codec = _reflection.GeneratedProtocolMessageType('Codec', (_message.Message,), {
-  'DESCRIPTOR' : _CODEC,
-  '__module__' : 'systemathics.apis.services.v1.marketdata_pb2'
-  # @@protoc_insertion_point(class_scope:systemathics.apis.services.v1.Codec)
-  })
-_sym_db.RegisterMessage(Codec)
+_sym_db.RegisterMessage(MarketDataResponse)
 
 Mapping = _reflection.GeneratedProtocolMessageType('Mapping', (_message.Message,), {
   'DESCRIPTOR' : _MAPPING,
@@ -1013,26 +754,16 @@ _MARKETDATASERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=2958,
-  serialized_end=3217,
+  serialized_start=2217,
+  serialized_end=2353,
   methods=[
   _descriptor.MethodDescriptor(
-    name='MarketData1',
-    full_name='systemathics.apis.services.v1.MarketDataService.MarketData1',
+    name='MarketData',
+    full_name='systemathics.apis.services.v1.MarketDataService.MarketData',
     index=0,
     containing_service=None,
-    input_type=_MARKETDATA1REQUEST,
-    output_type=_MARKETDATA1RESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='MarketDataN',
-    full_name='systemathics.apis.services.v1.MarketDataService.MarketDataN',
-    index=1,
-    containing_service=None,
-    input_type=_MARKETDATANREQUEST,
-    output_type=_MARKETDATANRESPONSE,
+    input_type=_MARKETDATAREQUEST,
+    output_type=_MARKETDATARESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
