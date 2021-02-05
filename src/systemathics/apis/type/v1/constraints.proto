@@ -1,3 +1,23 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
 syntax = "proto3";
 
 
@@ -7,22 +27,48 @@ import "google/type/dayofweek.proto";
 
 package systemathics.apis.type.v1;
 
+
+// Represents a date and time constraint.
+// Time zone is alway implied to be Universal Time Coordinated (UTC)
+// Dates are relative to the Proleptic Gregorian Calendar. 
+//
+// It allows to specify :
+// - Zero, one or many [Date intervals](#DateInterval). The union of each date interval is used.
+// - Zero, one or many [Time intervals](#TimeInterval). The union of each time interval is used.
+// - Zero, one or many [Excluded dates](#google.type.Date). The union of each excluded dates is used.
+// - Zero, one or many [Excluded days](#google.type.DayOfWeek). The union of each excluded days is used.
+//
+// Related type is [systemathics.apis.type.v1.Memo](#systemathics.apis.type.v1.Memo).
 message Constraints 
 {
+    // Restrics request to an union of date_intervals.
+    // Providing no date_intervals will return everything in store.
     repeated DateInterval date_intervals = 1;
+    // Restrics request to an union of time_intervals. (ie: Market hours, trading hours, ...)
+    // Note: Time intervals including midnight needs to be described as an union of time intervals (ie : [22:00-23:59] U [00:00-04:00])
     repeated TimeInterval time_intervals = 2;
+    // Restrics request to an union of excluded_dates (ie: Closed Days, Holidays, ...).
     repeated google.type.Date excluded_dates = 3;
+    // Restrics request to an union of excluded_days (ie: weekd end can be represented with Saturday, Sunday).
     repeated google.type.DayOfWeek excluded_days = 4;
 }
 
+// Represent a time interval with start_time (included) and end_time (excluded)
+// Time is Universal Time Coordinated (UTC)
 message TimeInterval 
 {
+    // Start time of the time interval. It must always be smaller than end_time.
     google.type.TimeOfDay start_time = 1;
+    // End time of the time interval. It must always be greater than start_time.
     google.type.TimeOfDay end_time = 2;
 }
 
+// Represent a date interval with start_date (included) and end_date (excluded)
+// Dates are relative to the Proleptic Gregorian Calendar
 message DateInterval 
 {
+	// Start date of the date interval. It must always be smaller than end_date.
     google.type.Date start_date = 1;
+    // End date of the date interval. It must always be greater than start_date.
     google.type.Date end_date = 2;
 }

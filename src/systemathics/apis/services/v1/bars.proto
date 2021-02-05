@@ -27,9 +27,8 @@ message BarsRequest
 
 message BarsResponse 
 {
-    google.protobuf.StringValue error = 1; // Nullable<string> (if null => Success)
+    repeated Bar bars = 1;
     bool has_more = 2;
-    repeated Bar bars = 3;
 }
 
 message Bar

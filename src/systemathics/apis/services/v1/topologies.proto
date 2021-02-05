@@ -6,39 +6,63 @@ import "systemathics/apis/type/v1/memo.proto";
 
 package systemathics.apis.services.v1;
 
+// The topology service definition
 service TopologiesService
 {
+  // Get Topologies
   rpc Topologies(TopologiesRequest) returns (TopologiesResponse);
 }
 
+// Represents granularity of topology.
 enum TopologyGranularity
 {
+	// The unspecified granularity.
     TOPOLOGY_GRANULARITY_UNSPECIFIED = 0;
+    // The daily granularity.
     TOPOLOGY_GRANULARITY_DAILY = 1;
+    // The weekly granularity.
     TOPOLOGY_GRANULARITY_WEEKLY = 2;
+    // The monthly granularity.
     TOPOLOGY_GRANULARITY_MONTHLY = 3;
+    // The quaterly granularity.
     TOPOLOGY_GRANULARITY_QUATERLY = 4;
+    // The yearly granularity.
     TOPOLOGY_GRANULARITY_YEARLY = 5;
 }
 
+// Represents a request for topology using :
+// - a memo defining an asset
+// - a granularity for the topology
+// - a start value if using pagination, null otherwise.
+// - a count value if using pagination, null otherwise.
 message TopologiesRequest
 {
+    // Memo representing an asset
     systemathics.apis.type.v1.Memo memo = 1;
+    // Granularity of the request (daily, weekly, ...)
     TopologyGranularity granularity = 2;
-    google.protobuf.Int32Value start = 3; // Nullable<int>
-    google.protobuf.Int32Value count = 4; // Nullable<int>
+    // Start at 0 when using pagination or null
+    google.protobuf.Int32Value start = 3; 
+    // Define your count of element received when using pagination or null 
+    google.protobuf.Int32Value count = 4;
 }
 
+// Represents the number of ticks between 2 dates
 message TopologyEntry
 {
+    // begin date (included)
     google.type.Date begin = 1;
+    // end date (included)
     google.type.Date end = 2;
-    uint64 frames_count = 3;
+    // tick count
+    uint64 ticks_count = 3;
 }
 
+// Represents a response to a topology request
 message TopologiesResponse
 {
-    google.protobuf.StringValue error = 1; // Nullable<string> (if null => Success)
+    // Represents an array of TopologyEntry
+	repeated TopologyEntry entries = 1;
+    // If using paginated version will return true until everything is returned,it's false otherwise
     bool has_more = 2;
-    repeated TopologyEntry entries = 3;
 }
