@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+
+import "google/protobuf/wrappers.proto";
+import "google/type/date.proto";
+import "systemathics/apis/type/v1/memo.proto";
+
+package systemathics.apis.services.v1;
+
+// The topology service definition
+service StaticDataService
+{
+  // Get Topologies
+  rpc StaticData(StaticDataRequest) returns (StaticDataResponse);
+}
+
+enum AssetType
+{
+    ASSET_TYPE_UNSPECIFIED = 0;
+    ASSET_TYPE_ALL = 1;
+    ASSET_TYPE_EQUITY = 2;
+    ASSET_TYPE_FUTURE = 3;   
+}
+
+// Represents a static data request
+message StaticDataRequest
+{
+    AssetType asset_type = 1;
+
+    google.protobuf.StringValue name = 2;
+
+    google.protobuf.StringValue market_identifier_code = 3;
+
+    google.protobuf.StringValue market_ticker = 4;
+    
+    google.protobuf.StringValue future_contract = 5;
+    
+    google.protobuf.StringValue isin = 6;
+
+    google.protobuf.StringValue cusip = 7;
+}
+
+// Represents a future
+message FutureEntry
+{
+    // Memo code for this future. Used by other apis
+    systemathics.apis.type.v1.Memo memo = 1;
+    // Future identifier
+    Identifier identifier = 2;
+    // Future name 
+    google.protobuf.StringValue name = 3;
+    // Contract (symbol root)
+    google.protobuf.StringValue contract = 4;
+    // Maturity Date
+    google.type.Date maturity = 5;
+    // other mapping identifiers
+    map<string, string> mapping = 6;
+}
+
+// Represents an equity
+message EquityEntry
+{
+	// Memo code for this future. Used by other apis
+	systemathics.apis.type.v1.Memo memo = 1;
+	// Future identifier
+	Identifier identifier = 2;
+	// Future name 
+	google.protobuf.StringValue name = 3;
+	// Isin
+	google.protobuf.StringValue isin = 4;
+    // Cusip
+	google.protobuf.StringValue cusip = 5;
+	// other mapping identifiers
+	map<string, string> mapping = 6;
+}
+
+message Identifier 
+{
+    google.protobuf.StringValue primary_market_identifier_code = 1;
+
+    google.protobuf.StringValue market_identifier_code = 2;
+
+    google.protobuf.StringValue ticker = 3;
+}
+
+// Represents a response to a topology request
+message StaticDataResponse
+{
+    repeated FutureEntry futures  = 1;
+    repeated EquityEntry equities  = 2;
+}
+ 
