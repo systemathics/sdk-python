@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n.systemathics/apis/services/v1/staticdata.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x16google/type/date.proto\x1a$systemathics/apis/type/v1/memo.proto\"\x80\x03\n\x11StaticDataRequest\x12<\n\nasset_type\x18\x01 \x01(\x0e\x32(.systemathics.apis.services.v1.AssetType\x12*\n\x04name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16market_identifier_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rmarket_ticker\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x66uture_contract\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04isin\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05\x63usip\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf6\x02\n\x0b\x46utureEntry\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12=\n\nidentifier\x18\x02 \x01(\x0b\x32).systemathics.apis.services.v1.Identifier\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x63ontract\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12#\n\x08maturity\x18\x05 \x01(\x0b\x32\x11.google.type.Date\x12H\n\x07mapping\x18\x06 \x03(\x0b\x32\x37.systemathics.apis.services.v1.FutureEntry.MappingEntry\x1a.\n\x0cMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xfa\x02\n\x0b\x45quityEntry\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12=\n\nidentifier\x18\x02 \x01(\x0b\x32).systemathics.apis.services.v1.Identifier\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04isin\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05\x63usip\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12H\n\x07mapping\x18\x06 \x03(\x0b\x32\x37.systemathics.apis.services.v1.EquityEntry.MappingEntry\x1a.\n\x0cMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xbe\x01\n\nIdentifier\x12\x44\n\x1eprimary_market_identifier_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16market_identifier_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12,\n\x06ticker\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x8f\x01\n\x12StaticDataResponse\x12;\n\x07\x66utures\x18\x01 \x03(\x0b\x32*.systemathics.apis.services.v1.FutureEntry\x12<\n\x08\x65quities\x18\x02 \x03(\x0b\x32*.systemathics.apis.services.v1.EquityEntry*i\n\tAssetType\x12\x1a\n\x16\x41SSET_TYPE_UNSPECIFIED\x10\x00\x12\x12\n\x0e\x41SSET_TYPE_ALL\x10\x01\x12\x15\n\x11\x41SSET_TYPE_EQUITY\x10\x02\x12\x15\n\x11\x41SSET_TYPE_FUTURE\x10\x03\x32\x86\x01\n\x11StaticDataService\x12q\n\nStaticData\x12\x30.systemathics.apis.services.v1.StaticDataRequest\x1a\x31.systemathics.apis.services.v1.StaticDataResponseb\x06proto3'
+  serialized_pb=b'\n.systemathics/apis/services/v1/staticdata.proto\x12\x1dsystemathics.apis.services.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x16google/type/date.proto\x1a$systemathics/apis/type/v1/memo.proto\"\xa4\x03\n\x11StaticDataRequest\x12<\n\nasset_type\x18\x01 \x01(\x0e\x32(.systemathics.apis.services.v1.AssetType\x12*\n\x04name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16market_identifier_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12,\n\x06ticker\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x66uture_contract\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04\x63ode\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x05start\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12*\n\x05\x63ount\x18\x08 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"\x8e\x04\n\x0b\x46utureEntry\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12=\n\nidentifier\x18\x02 \x01(\x0b\x32).systemathics.apis.services.v1.Identifier\x12\x0c\n\x04name\x18\x03 \x01(\t\x12H\n\x07mapping\x18\x04 \x03(\x0b\x32\x37.systemathics.apis.services.v1.FutureEntry.MappingEntry\x12\x10\n\x08\x63ontract\x18\x05 \x01(\t\x12\x12\n\nunderlying\x18\x06 \x01(\t\x12?\n\x08\x63\x61tegory\x18\x07 \x01(\x0e\x32-.systemathics.apis.services.v1.FutureCategoty\x12\x0f\n\x07\x63ountry\x18\x08 \x01(\t\x12\x10\n\x08\x63urrency\x18\t \x01(\t\x12#\n\x08maturity\x18\n \x01(\x0b\x32\x11.google.type.Date\x12\r\n\x05month\x18\x0b \x01(\t\x12\x0c\n\x04year\x18\x0c \x01(\x05\x12\x10\n\x08lot_size\x18\r \x01(\x05\x12\x13\n\x0bpoint_value\x18\x0e \x01(\x05\x12\x16\n\x0etick_size_rule\x18\x0f \x01(\t\x1a.\n\x0cMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xd3\x02\n\x0b\x45quityEntry\x12-\n\x04memo\x18\x01 \x01(\x0b\x32\x1f.systemathics.apis.type.v1.Memo\x12=\n\nidentifier\x18\x02 \x01(\x0b\x32).systemathics.apis.services.v1.Identifier\x12\x0c\n\x04name\x18\x03 \x01(\t\x12H\n\x07mapping\x18\x05 \x03(\x0b\x32\x37.systemathics.apis.services.v1.EquityEntry.MappingEntry\x12\x0f\n\x07\x63ountry\x18\x06 \x01(\t\x12\x10\n\x08\x63urrency\x18\x07 \x01(\t\x12\x13\n\x0bpoint_value\x18\x08 \x01(\x05\x12\x16\n\x0etick_size_rule\x18\t \x01(\t\x1a.\n\x0cMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"d\n\nIdentifier\x12&\n\x1eprimary_market_identifier_code\x18\x01 \x01(\t\x12\x1e\n\x16market_identifier_code\x18\x02 \x01(\t\x12\x0e\n\x06ticker\x18\x03 \x01(\t\"\x8f\x01\n\x12StaticDataResponse\x12;\n\x07\x66utures\x18\x01 \x03(\x0b\x32*.systemathics.apis.services.v1.FutureEntry\x12<\n\x08\x65quities\x18\x02 \x03(\x0b\x32*.systemathics.apis.services.v1.EquityEntry*i\n\tAssetType\x12\x1a\n\x16\x41SSET_TYPE_UNSPECIFIED\x10\x00\x12\x12\n\x0e\x41SSET_TYPE_ALL\x10\x01\x12\x15\n\x11\x41SSET_TYPE_EQUITY\x10\x02\x12\x15\n\x11\x41SSET_TYPE_FUTURE\x10\x03*\x87\x01\n\x0e\x46utureCategoty\x12\x1f\n\x1b\x46UTURE_CATEGORY_UNSPECIFIED\x10\x00\x12\x19\n\x15\x46UTURE_CATEGORY_INDEX\x10\x01\x12\x1a\n\x16\x46UTURE_CATEGORY_EQUITY\x10\x02\x12\x1d\n\x19\x46UTURE_CATEGORY_COMMODITY\x10\x03\x32\x86\x01\n\x11StaticDataService\x12q\n\nStaticData\x12\x30.systemathics.apis.services.v1.StaticDataRequest\x1a\x31.systemathics.apis.services.v1.StaticDataResponseb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_type_dot_date__pb2.DESCRIPTOR,systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2.DESCRIPTOR,])
 
@@ -57,16 +57,56 @@ _ASSETTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1659,
-  serialized_end=1764,
+  serialized_start=1717,
+  serialized_end=1822,
 )
 _sym_db.RegisterEnumDescriptor(_ASSETTYPE)
 
 AssetType = enum_type_wrapper.EnumTypeWrapper(_ASSETTYPE)
+_FUTURECATEGOTY = _descriptor.EnumDescriptor(
+  name='FutureCategoty',
+  full_name='systemathics.apis.services.v1.FutureCategoty',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='FUTURE_CATEGORY_UNSPECIFIED', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='FUTURE_CATEGORY_INDEX', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='FUTURE_CATEGORY_EQUITY', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='FUTURE_CATEGORY_COMMODITY', index=3, number=3,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=1825,
+  serialized_end=1960,
+)
+_sym_db.RegisterEnumDescriptor(_FUTURECATEGOTY)
+
+FutureCategoty = enum_type_wrapper.EnumTypeWrapper(_FUTURECATEGOTY)
 ASSET_TYPE_UNSPECIFIED = 0
 ASSET_TYPE_ALL = 1
 ASSET_TYPE_EQUITY = 2
 ASSET_TYPE_FUTURE = 3
+FUTURE_CATEGORY_UNSPECIFIED = 0
+FUTURE_CATEGORY_INDEX = 1
+FUTURE_CATEGORY_EQUITY = 2
+FUTURE_CATEGORY_COMMODITY = 3
 
 
 
@@ -100,7 +140,7 @@ _STATICDATAREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='market_ticker', full_name='systemathics.apis.services.v1.StaticDataRequest.market_ticker', index=3,
+      name='ticker', full_name='systemathics.apis.services.v1.StaticDataRequest.ticker', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -114,15 +154,22 @@ _STATICDATAREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='isin', full_name='systemathics.apis.services.v1.StaticDataRequest.isin', index=5,
+      name='code', full_name='systemathics.apis.services.v1.StaticDataRequest.code', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='cusip', full_name='systemathics.apis.services.v1.StaticDataRequest.cusip', index=6,
+      name='start', full_name='systemathics.apis.services.v1.StaticDataRequest.start', index=6,
       number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='count', full_name='systemathics.apis.services.v1.StaticDataRequest.count', index=7,
+      number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -140,7 +187,7 @@ _STATICDATAREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=176,
-  serialized_end=560,
+  serialized_end=596,
 )
 
 
@@ -178,8 +225,8 @@ _FUTUREENTRY_MAPPINGENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=891,
-  serialized_end=937,
+  serialized_start=1079,
+  serialized_end=1125,
 )
 
 _FUTUREENTRY = _descriptor.Descriptor(
@@ -206,29 +253,92 @@ _FUTUREENTRY = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='name', full_name='systemathics.apis.services.v1.FutureEntry.name', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='contract', full_name='systemathics.apis.services.v1.FutureEntry.contract', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='maturity', full_name='systemathics.apis.services.v1.FutureEntry.maturity', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='mapping', full_name='systemathics.apis.services.v1.FutureEntry.mapping', index=5,
-      number=6, type=11, cpp_type=10, label=3,
+      name='mapping', full_name='systemathics.apis.services.v1.FutureEntry.mapping', index=3,
+      number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='contract', full_name='systemathics.apis.services.v1.FutureEntry.contract', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='underlying', full_name='systemathics.apis.services.v1.FutureEntry.underlying', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='category', full_name='systemathics.apis.services.v1.FutureEntry.category', index=6,
+      number=7, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='country', full_name='systemathics.apis.services.v1.FutureEntry.country', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='currency', full_name='systemathics.apis.services.v1.FutureEntry.currency', index=8,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='maturity', full_name='systemathics.apis.services.v1.FutureEntry.maturity', index=9,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='month', full_name='systemathics.apis.services.v1.FutureEntry.month', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='year', full_name='systemathics.apis.services.v1.FutureEntry.year', index=11,
+      number=12, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='lot_size', full_name='systemathics.apis.services.v1.FutureEntry.lot_size', index=12,
+      number=13, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='point_value', full_name='systemathics.apis.services.v1.FutureEntry.point_value', index=13,
+      number=14, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='tick_size_rule', full_name='systemathics.apis.services.v1.FutureEntry.tick_size_rule', index=14,
+      number=15, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -244,8 +354,8 @@ _FUTUREENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=563,
-  serialized_end=937,
+  serialized_start=599,
+  serialized_end=1125,
 )
 
 
@@ -283,8 +393,8 @@ _EQUITYENTRY_MAPPINGENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=891,
-  serialized_end=937,
+  serialized_start=1079,
+  serialized_end=1125,
 )
 
 _EQUITYENTRY = _descriptor.Descriptor(
@@ -311,29 +421,43 @@ _EQUITYENTRY = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='name', full_name='systemathics.apis.services.v1.EquityEntry.name', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='isin', full_name='systemathics.apis.services.v1.EquityEntry.isin', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='cusip', full_name='systemathics.apis.services.v1.EquityEntry.cusip', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='mapping', full_name='systemathics.apis.services.v1.EquityEntry.mapping', index=5,
-      number=6, type=11, cpp_type=10, label=3,
+      name='mapping', full_name='systemathics.apis.services.v1.EquityEntry.mapping', index=3,
+      number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='country', full_name='systemathics.apis.services.v1.EquityEntry.country', index=4,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='currency', full_name='systemathics.apis.services.v1.EquityEntry.currency', index=5,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='point_value', full_name='systemathics.apis.services.v1.EquityEntry.point_value', index=6,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='tick_size_rule', full_name='systemathics.apis.services.v1.EquityEntry.tick_size_rule', index=7,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -349,8 +473,8 @@ _EQUITYENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=940,
-  serialized_end=1318,
+  serialized_start=1128,
+  serialized_end=1467,
 )
 
 
@@ -364,22 +488,22 @@ _IDENTIFIER = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='primary_market_identifier_code', full_name='systemathics.apis.services.v1.Identifier.primary_market_identifier_code', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='market_identifier_code', full_name='systemathics.apis.services.v1.Identifier.market_identifier_code', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='ticker', full_name='systemathics.apis.services.v1.Identifier.ticker', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -395,8 +519,8 @@ _IDENTIFIER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1321,
-  serialized_end=1511,
+  serialized_start=1469,
+  serialized_end=1569,
 )
 
 
@@ -434,34 +558,28 @@ _STATICDATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1514,
-  serialized_end=1657,
+  serialized_start=1572,
+  serialized_end=1715,
 )
 
 _STATICDATAREQUEST.fields_by_name['asset_type'].enum_type = _ASSETTYPE
 _STATICDATAREQUEST.fields_by_name['name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _STATICDATAREQUEST.fields_by_name['market_identifier_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_STATICDATAREQUEST.fields_by_name['market_ticker'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_STATICDATAREQUEST.fields_by_name['ticker'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _STATICDATAREQUEST.fields_by_name['future_contract'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_STATICDATAREQUEST.fields_by_name['isin'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_STATICDATAREQUEST.fields_by_name['cusip'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_STATICDATAREQUEST.fields_by_name['code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_STATICDATAREQUEST.fields_by_name['start'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
+_STATICDATAREQUEST.fields_by_name['count'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _FUTUREENTRY_MAPPINGENTRY.containing_type = _FUTUREENTRY
 _FUTUREENTRY.fields_by_name['memo'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
 _FUTUREENTRY.fields_by_name['identifier'].message_type = _IDENTIFIER
-_FUTUREENTRY.fields_by_name['name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_FUTUREENTRY.fields_by_name['contract'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_FUTUREENTRY.fields_by_name['maturity'].message_type = google_dot_type_dot_date__pb2._DATE
 _FUTUREENTRY.fields_by_name['mapping'].message_type = _FUTUREENTRY_MAPPINGENTRY
+_FUTUREENTRY.fields_by_name['category'].enum_type = _FUTURECATEGOTY
+_FUTUREENTRY.fields_by_name['maturity'].message_type = google_dot_type_dot_date__pb2._DATE
 _EQUITYENTRY_MAPPINGENTRY.containing_type = _EQUITYENTRY
 _EQUITYENTRY.fields_by_name['memo'].message_type = systemathics_dot_apis_dot_type_dot_v1_dot_memo__pb2._MEMO
 _EQUITYENTRY.fields_by_name['identifier'].message_type = _IDENTIFIER
-_EQUITYENTRY.fields_by_name['name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_EQUITYENTRY.fields_by_name['isin'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_EQUITYENTRY.fields_by_name['cusip'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _EQUITYENTRY.fields_by_name['mapping'].message_type = _EQUITYENTRY_MAPPINGENTRY
-_IDENTIFIER.fields_by_name['primary_market_identifier_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_IDENTIFIER.fields_by_name['market_identifier_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_IDENTIFIER.fields_by_name['ticker'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _STATICDATARESPONSE.fields_by_name['futures'].message_type = _FUTUREENTRY
 _STATICDATARESPONSE.fields_by_name['equities'].message_type = _EQUITYENTRY
 DESCRIPTOR.message_types_by_name['StaticDataRequest'] = _STATICDATAREQUEST
@@ -470,6 +588,7 @@ DESCRIPTOR.message_types_by_name['EquityEntry'] = _EQUITYENTRY
 DESCRIPTOR.message_types_by_name['Identifier'] = _IDENTIFIER
 DESCRIPTOR.message_types_by_name['StaticDataResponse'] = _STATICDATARESPONSE
 DESCRIPTOR.enum_types_by_name['AssetType'] = _ASSETTYPE
+DESCRIPTOR.enum_types_by_name['FutureCategoty'] = _FUTURECATEGOTY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 StaticDataRequest = _reflection.GeneratedProtocolMessageType('StaticDataRequest', (_message.Message,), {
@@ -534,8 +653,8 @@ _STATICDATASERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1767,
-  serialized_end=1901,
+  serialized_start=1963,
+  serialized_end=2097,
   methods=[
   _descriptor.MethodDescriptor(
     name='StaticData',

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="systemathics.apis",
-    version="0.0.41",
+    version="0.0.42",
     author="Systemathics",
     author_email="contact@systemathics.com",
     description="Python grpc stub for Systemathics APIs.",
