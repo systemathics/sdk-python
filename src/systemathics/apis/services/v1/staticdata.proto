@@ -22,6 +22,14 @@ enum AssetType
     ASSET_TYPE_FUTURE = 3;   
 }
 
+enum FutureCategoty
+{
+	FUTURE_CATEGORY_UNSPECIFIED = 0;
+	FUTURE_CATEGORY_INDEX = 1;
+	FUTURE_CATEGORY_EQUITY = 2;
+	FUTURE_CATEGORY_COMMODITY = 3;   
+}
+
 // Represents a static data request
 message StaticDataRequest
 {
@@ -31,13 +39,15 @@ message StaticDataRequest
 
     google.protobuf.StringValue market_identifier_code = 3;
 
-    google.protobuf.StringValue market_ticker = 4;
+    google.protobuf.StringValue ticker = 4;
     
     google.protobuf.StringValue future_contract = 5;
     
-    google.protobuf.StringValue isin = 6;
+    google.protobuf.StringValue code = 6;
+        
+    google.protobuf.Int32Value start = 7;
 
-    google.protobuf.StringValue cusip = 7;
+    google.protobuf.Int32Value count = 8;
 }
 
 // Represents a future
@@ -48,13 +58,31 @@ message FutureEntry
     // Future identifier
     Identifier identifier = 2;
     // Future name 
-    google.protobuf.StringValue name = 3;
+    string name = 3;
+    // Mapping identifiers
+    map<string, string> mapping = 4;
     // Contract (symbol root)
-    google.protobuf.StringValue contract = 4;
+    string contract = 5;
+    // Underlying of the future
+    string underlying = 6;
+    // Category of the future
+    FutureCategoty category = 7;
+    // Country code
+    string country = 8;
+    // Currency
+    string currency = 9;
     // Maturity Date
-    google.type.Date maturity = 5;
-    // other mapping identifiers
-    map<string, string> mapping = 6;
+    google.type.Date maturity = 10;
+    // Month letter
+    string month = 11;
+    // Year
+    int32 year = 12;
+    // Lot size
+    int32 lot_size = 13;
+    // Point Value
+    int32 point_value = 14;
+    // Tick size rule in array format
+    string tick_size_rule = 15;   
 }
 
 // Represents an equity
@@ -65,22 +93,26 @@ message EquityEntry
 	// Future identifier
 	Identifier identifier = 2;
 	// Future name 
-	google.protobuf.StringValue name = 3;
-	// Isin
-	google.protobuf.StringValue isin = 4;
-    // Cusip
-	google.protobuf.StringValue cusip = 5;
+	string name = 3;
 	// other mapping identifiers
-	map<string, string> mapping = 6;
+	map<string, string> mapping = 5;
+	// Country code
+	string country = 6;
+	// Currency
+	string currency = 7;
+	// Point Value
+	int32 point_value = 8;
+	// Tick size rule in array format
+	string tick_size_rule = 9;   
 }
 
 message Identifier 
 {
-    google.protobuf.StringValue primary_market_identifier_code = 1;
+    string primary_market_identifier_code = 1;
 
-    google.protobuf.StringValue market_identifier_code = 2;
+    string market_identifier_code = 2;
 
-    google.protobuf.StringValue ticker = 3;
+    string ticker = 3;
 }
 
 // Represents a response to a topology request
