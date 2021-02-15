@@ -72,63 +72,55 @@ def add_namespace_import_to_init_py(dir):
         with open(path, 'w') as f:
             f.write("__import__('pkg_resources').declare_namespace(__name__)")
 
-def increment_ver(version):
-    version = version.split('.')
-    version[2] = str(int(version[2]) + 1)
-    result = '.'.join(version)
-    return result
-
-def extract_version(data):
-    version_pattern ='version="'
-    l = len(version_pattern)
-    start = data.find('version="')
-    end = data.find('"', start + l + 1)
-    return data[start + l : end]
-
-def replace_version_in_setup(dir):
-    # Read in the file
-    path = os.path.join(dir,'setup.py')
-    with open(path, 'r') as file :
-        filedata = file.read()
-
-    old_version = extract_version(filedata)
-    version_from_env = os.getenv('VERSION', "")
-
-    if(version_from_env == ""):
-        new_version= increment_ver(old_version)
-    else:
-        new_version = version_from_env
-
-    # Replace the target string
-    filedata = filedata.replace(old_version, new_version)
-
-    # Write the file out again
-    with open(path, 'w') as file:
-        file.write(filedata)
-
 def generate_package(root_dir):
     cmd = "python3 setup.py sdist"
     subprocess.call(cmd, cwd=root_dir, shell=True)
+
+def check_environement():
+    # used by setup.py
+    version = os.getenv('VERSION','')
+    if(version == ''):
+        raise Exception("missing env var VERSION")
+
+    # used by publish_package function
+    key = os.getenv('PYPI_PUBLISH_INDIRECT_KEY','')
+    if(key == ''):
+        raise Exception("missing env var PYPI_PUBLISH_INDIRECT_KEY")
+
+    # used by publish_package function
+    user = os.getenv('PYPI_USERNAME','')
+    if(user == ''):
+        raise Exception("missing env var PYPI_USERNAME")
+
+    # used by publish_package function
+    repository = os.getenv('PYPI_REPOSITORY','')
+    if(repository == ''):
+        raise Exception("missing env var PYPI_REPOSITORY")
 
 def publish_package(root_dir):
     # pass_out generated with
     # > echo -n ${{PASSWORD}} > ./pass
     # > openssl aes-256-cbc -pbkdf2 -e -k "${{PYPI_PUBLISH_INDIRECT_KEY}}" < ./pass > ./pass_out
-    key = os.getenv('PYPI_PUBLISH_INDIRECT_KEY','')
-    if(key == ''):
-        raise Exception("missing env var PYPI_PUBLISH_INDIRECT_KEY")
+
+    # convert password, as strange chars are not always accepted in env var...
     path = os.path.join(root_dir, "pass")
     path_out = os.path.join(root_dir, "..", "pass_out")
     openssl_cmd = f'openssl aes-256-cbc -pbkdf2 -d -k "{key}" < {path_out} > {path}'
     subprocess.call(openssl_cmd, cwd=root_dir, shell=True)
+
     with open(path, 'r') as f:
         password = f.read()
-    cmd = f"python3 -m twine upload --repository testpypi dist/* -u jenkins-stx -p '{password}'"
-    print(cmd)
+
+    cmd = f"python3 -m twine upload --repository {repository} dist/* -u {user} -p '{password}'"
+
     os.remove(path)
     subprocess.call(cmd, cwd=root_dir, shell=True)
 
 def main():
+    # check env before doing anything
+    check_environement()
+
+    # define vars
     root = os.path.dirname(os.path.realpath(__file__))
     src_dir = os.path.join(root, "src")
     out_dir = os.path.join(root, "python")
@@ -150,9 +142,8 @@ def main():
     # add proto import to __init__.py files
     print("Add namespace import to __init__.py files")
     add_namespace_import_to_init_py(stx_dir)
-    
-    print("Replace version in setup")
-    replace_version_in_setup(out_dir)
+
+    # geenrate and publish package
     print("Generate package")
     generate_package(out_dir)
     print("Publish package")

@@ -1,10 +1,11 @@
+import os
 import setuptools
 
 from setuptools import setup, find_packages
 
 setup(
     name="systemathics.apis",
-    version="0.0.42",
+    version=os.environ.get('VERSION'),
     author="Systemathics",
     author_email="contact@systemathics.com",
     description="Python grpc stub for Systemathics APIs.",
@@ -20,5 +21,3 @@ setup(
     python_requires='>=3.6',
     install_requires=['googleapis-common-protos', 'protobuf', 'grpcio'],
 )
-
-## pip install --no-binary=protobuf protobuf
