@@ -2,7 +2,11 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
 import "systemathics/apis/type/v1/constraints.proto";
+import "systemathics/apis/type/v1/mappings.proto";
+import "systemathics/apis/type/v1/marketbookupdates.proto";
+import "systemathics/apis/type/v1/marketfieldsupdates.proto";
 import "systemathics/apis/type/v1/memo.proto";
 
 package systemathics.apis.services.v1;
@@ -40,156 +44,10 @@ message MarketDataResponse
     oneof payload 
     {
         // Some fields update
-        MarketFieldsUpdates fields_updates = 3;
+        systemathics.apis.type.v1.MarketFieldsUpdates fields_updates = 3;
         // Some books update
-        MarketBookUpdates book_updates = 4;
+        systemathics.apis.type.v1.MarketBookUpdates book_updates = 4;
         // Event source <=> Memo mapping. It's sent once when streaming begins.
-        Mappings mappings = 5;
+        systemathics.apis.type.v1.Mappings mappings = 5;
     }
-}
-
-
-// Represents a mapping between an eventSource and a memo
-message Mapping
-{
-	// A Memo from the market data request
-	systemathics.apis.type.v1.Memo memo = 1;
-    // Short name for a memo
-    uint32 event_source = 2;
-}
-
-// Represents several Mapping
-message Mappings
-{
-    // An array of Mapping
-    repeated Mapping table = 1;
-}
-
-// Represents market field updates 
-message MarketFieldsUpdates
-{
-    // If is a snapshot, previous data must be cleared, otherwise it's incremental
-    bool is_snapshot = 1;
-    // Represents an array of MarketFieldUpdate
-    repeated MarketFieldUpdate updates = 2;
-}
-
-// Represents a market field update
-message MarketFieldUpdate
-{
-    // Action on market field update
-    Action action = 1;
-    // Field of market field update
-    Field field = 2;
-    // Value of the market field update
-    oneof value 
-    {
-        // long value (depends of the field)
-        int64 long_value = 3;
-        // double value (depends of the field)
-        double double_value = 4;
-        // string value (depdends of the field)
-        string string_value = 5;
-    }
-}
-
-// Represents market book updates 
-message MarketBookUpdates
-{
-	// If is a snapshot, previous data must be cleared, otherwise it's incremental
-    bool is_snapshot = 1;
-    // Represents an array of MarketBookUpdate
-    repeated MarketBookUpdate updates = 2;
-}
-
-// Represents a market book update
-message MarketBookUpdate
-{
-    // Action of the market book update
-    Action action = 1;
-    // Side of the market book update
-    Side side = 2;
-    // Depth of the market book update
-    uint32 depth = 3;
-    // Size of the market book update
-    google.protobuf.Int64Value size = 4;
-    // Price of the market book update 
-    google.protobuf.DoubleValue price = 5;
-}
-
-// Represents side (bid or ask)
-enum Side
-{
-    // The unspecfied side 
-    SIDE_UNSPECIFIED = 0;
-    // The bid side
-    SIDE_BID = 1;
-    // The ask side
-    SIDE_ASK = 2;
-}
-
-// Represents the action (set or clear)
-enum Action
-{
-    // The unspecfied action
-    ACTION_UNSPECIFIED =0;
-    // The set action
-    ACTION_SET = 1;
-    // The clear action
-    ACTION_CLEAR = 2;
-}
-
-// Represents the field for a MarketFieldUpdate
-enum Field
-{
-    // The unspecfied field
-    FIELD_UNSPECIFIED = 0;
-    // The open price (associated value type is double)
-    FIELD_OPEN_PRICE = 1;
-    // The open size (associated value type is long)
-    FIELD_OPEN_SIZE = 2;
-    // The close price (associated value type is double)
-    FIELD_CLOSE_PRICE = 3;
-    // The close size (associated value type is long)
-    FIELD_CLOSE_SIZE = 4;
-    // The low price (associated value type is double)
-    FIELD_LOW_PRICE = 5;
-    // The low size (associated value type is long)
-    FIELD_LOW_SIZE = 6;
-    // The high price (associated value type is double)
-    FIELD_HIGH_PRICE = 7;
-    // The high size (associated value type is long)
-    FIELD_HIGH_SIZE = 8;
-    // The last trade price (associated value type is double)
-    FIELD_TRADE_PRICE = 9;
-    // The last trade size (associated value type is long)
-    FIELD_TRADE_SIZE = 10;
-    // The trading condition (associated value type is string)
-    FIELD_TRADING_CONDITION = 11;
-    // The trade count (associated value type is long)
-    FIELD_TRADE_COUNT = 12;
-    // The last otc trade price (associated value type is double)
-    FIELD_TRADE_OTC_PRICE = 13;
-    // The last otc trade size (associated value type is long)
-    FIELD_TRADE_OTC_SIZE = 14;
-    // The otc trade count (associated value type is long)
-    FIELD_TRADE_OTC_COUNT = 15;
-    // The daily volume (associated value type is long)
-    FIELD_VOLUME = 16;
-    // The official vwap (associated value type is double)
-    FIELD_VWAP_OFFICIAL = 17;
-    // The electronic vwap (associated value type is double)
-    FIELD_VWAP_ELECTRONIC = 18;
-    // The theoretical price (associated value type is double)
-    FIELD_THEORETICAL_PRICE = 19;
-    // The theoretical size (associated value type is long)
-    FIELD_THEORETICAL_SIZE = 20;
-    // The upper price (associated value type is double)
-    FIELD_UPPER_PRICE = 21;
-    // The lower price (associated value type is double)
-    FIELD_LOWER_PRICE = 22;
-    // The variation (associated value type is double)
-    FIELD_VARIATION = 23;
-    // The percentage variation (associated value type is double)
-    FIELD_VARIATION_PERCENTAGE = 24;
 }

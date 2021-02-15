@@ -25,6 +25,10 @@ import "google/type/date.proto";
 import "google/type/timeofday.proto";
 import "google/type/dayofweek.proto";
 
+import "systemathics/apis/type/v1/dateinterval.proto";
+import "systemathics/apis/type/v1/timeinterval.proto";
+import "systemathics/apis/type/v1/memo.proto";
+
 package systemathics.apis.type.v1;
 
 
@@ -51,24 +55,4 @@ message Constraints
     repeated google.type.Date excluded_dates = 3;
     // Restrics request to an union of excluded_days (ie: weekd end can be represented with Saturday, Sunday).
     repeated google.type.DayOfWeek excluded_days = 4;
-}
-
-// Represent a time interval with start_time (included) and end_time (excluded)
-// Time is Universal Time Coordinated (UTC)
-message TimeInterval 
-{
-    // Start time of the time interval. It must always be smaller than end_time.
-    google.type.TimeOfDay start_time = 1;
-    // End time of the time interval. It must always be greater than start_time.
-    google.type.TimeOfDay end_time = 2;
-}
-
-// Represent a date interval with start_date (included) and end_date (excluded)
-// Dates are relative to the Proleptic Gregorian Calendar
-message DateInterval 
-{
-	// Start date of the date interval. It must always be smaller than end_date.
-    google.type.Date start_date = 1;
-    // End date of the date interval. It must always be greater than start_date.
-    google.type.Date end_date = 2;
 }
