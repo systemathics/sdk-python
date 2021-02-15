@@ -102,6 +102,21 @@ def publish_package(root_dir):
     # > echo -n ${{PASSWORD}} > ./pass
     # > openssl aes-256-cbc -pbkdf2 -e -k "${{PYPI_PUBLISH_INDIRECT_KEY}}" < ./pass > ./pass_out
 
+    # used by publish_package function
+    key = os.getenv('PYPI_PUBLISH_INDIRECT_KEY','')
+    if(key == ''):
+        raise Exception("missing env var PYPI_PUBLISH_INDIRECT_KEY")
+
+    # used by publish_package function
+    user = os.getenv('PYPI_USERNAME','')
+    if(user == ''):
+        raise Exception("missing env var PYPI_USERNAME")
+
+    # used by publish_package function
+    repository = os.getenv('PYPI_REPOSITORY','')
+    if(repository == ''):
+        raise Exception("missing env var PYPI_REPOSITORY")
+
     # convert password, as strange chars are not always accepted in env var...
     path = os.path.join(root_dir, "pass")
     path_out = os.path.join(root_dir, "..", "pass_out")
