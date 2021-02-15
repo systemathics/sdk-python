@@ -22,7 +22,7 @@ enum AssetType
     ASSET_TYPE_FUTURE = 3;   
 }
 
-enum FutureCategoty
+enum FutureCategory
 {
 	FUTURE_CATEGORY_UNSPECIFIED = 0;
 	FUTURE_CATEGORY_INDEX = 1;
@@ -66,7 +66,7 @@ message FutureEntry
     // Underlying of the future
     string underlying = 6;
     // Category of the future
-    FutureCategoty category = 7;
+    FutureCategory category = 7;
     // Country code
     string country = 8;
     // Currency
