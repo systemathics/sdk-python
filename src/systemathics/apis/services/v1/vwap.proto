@@ -3,7 +3,6 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
-import "systemathics/apis/type/v1/field.proto";
 import "systemathics/apis/type/v1/memo.proto";
 
 package systemathics.apis.services.v1;

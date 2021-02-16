@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+import "systemathics/apis/type/v1/constraints.proto";
+import "systemathics/apis/type/v1/field.proto";
+import "systemathics/apis/type/v1/memo.proto";
+
+package systemathics.apis.services.v1;
+
+// The Bollinger bands service definition
+// Stream on the fly calculated Bollinger bands
+service BollingerBandsService 
+{
+    rpc BollingerBands(BollingerBandsRequest) returns (stream BollingerBandsResponse);
+}
+
+// Represents a market data request with:
+//  - Space selection: Memo 
+//  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
+//  - Bollinger bands parameters (field, length and deviations)
+message BollingerBandsRequest 
+{
+    // The memo
+    systemathics.apis.type.v1.Memo memo = 1;
+    // The field
+    systemathics.apis.type.v1.Field field = 2;
+	// The length
+	int32 length = 3;
+	// The deviations
+	double deviations = 4;
+    // The time constraints
+    systemathics.apis.type.v1.Constraints constraints = 5; // Transports the IConstraints semantics
+}
+
+// Represents the Bollinger bands response
+message BollingerBandsResponse
+{
+	// The time stamp
+	google.protobuf.Timestamp time_stamp = 1;
+	// The lower band
+	double lower_band = 2;
+	// The middle band
+	double middle_band = 3;
+	// The upper band
+	double upper_band = 4;
+}
