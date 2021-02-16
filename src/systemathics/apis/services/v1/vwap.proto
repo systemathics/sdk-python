@@ -8,36 +8,36 @@ import "systemathics/apis/type/v1/memo.proto";
 
 package systemathics.apis.services.v1;
 
-// The EMA service definition
-// Stream on the fly calculated average values (using EMA formula)
-service EmaService 
+// The VWAP service definition
+// Stream on the fly calculated VWAP
+service VwapService 
 {
-    rpc Ema(EmaRequest) returns (stream EmaResponse);
+    rpc Vwap(VwapRequest) returns (stream VwapResponse);
 }
 
 // Represents a market data request with:
 //  - Space selection: Memo 
 //  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
-//  - EMA parameters (field, length and daily)
-message EmaRequest 
+//  - VWAP parameters (daily)
+message VwapRequest 
 {
     // The memo
     systemathics.apis.type.v1.Memo memo = 1;
-    // The field we calculate the moving average on
-    systemathics.apis.type.v1.Field field = 2;
-    // The EMA window length (number of points)
-    int32 length = 3;
     // Do we reset daily ?
-    bool daily = 4;
+    bool daily = 2;
     // The time constraints
-    systemathics.apis.type.v1.Constraints constraints = 5; // Transports the IConstraints semantics
+    systemathics.apis.type.v1.Constraints constraints = 3; // Transports the IConstraints semantics
 }
 
-// Represents the EMA response
-message EmaResponse
+// Represents the VWAP response
+message VwapResponse
 {
 	// The time stamp
 	google.protobuf.Timestamp time_stamp = 1;
-	// The average value
-	double value = 2;
+	// The price
+	double price = 2;
+	// The volume
+	int64 volume = 3;
+	// The ticks count
+	int32 ticks = 4;
 }
