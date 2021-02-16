@@ -6,7 +6,6 @@ import "google/protobuf/wrappers.proto";
 import "google/type/date.proto";
 import "google/type/timeofday.proto";
 
-import "systemathics/apis/type/v1/average.proto";
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/field.proto";
 import "systemathics/apis/type/v1/memo.proto";
@@ -14,10 +13,10 @@ import "systemathics/apis/type/v1/memo.proto";
 package systemathics.apis.services.v1;
 
 // The CMA service definition
-// Stream on the fly calculated average values
+// Stream on the fly calculated average values (using CMA formula)
 service CmaService 
 {
-    rpc Cma(CmaRequest) returns (stream systemathics.apis.type.v1.Average);
+    rpc Cma(CmaRequest) returns (stream CmaResponse);
 }
 
 // Represents a market data request with:
@@ -34,4 +33,13 @@ message CmaRequest
     bool daily = 3;
     // The time constraints
     systemathics.apis.type.v1.Constraints constraints = 4; // Transports the IConstraints semantics
+}
+
+// Represents a point in time
+message CmaResponse
+{
+	// The time stamp
+	google.protobuf.Timestamp time_stamp = 1;
+	// The average value
+	double value = 2;
 }
