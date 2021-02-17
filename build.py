@@ -72,6 +72,31 @@ def add_namespace_import_to_init_py(dir):
         with open(path, 'w') as f:
             f.write("__import__('pkg_resources').declare_namespace(__name__)")
 
+def extract_version(data):
+    version_pattern ='version="'
+    l = len(version_pattern)
+    start = data.find('version="')
+    end = data.find('"', start + l + 1)
+    return data[start + l : end]
+
+def replace_version_in_setup(dir):
+    # Read in the file
+    path = os.path.join(dir,'setup.py')
+    with open(path, 'r') as file :
+        filedata = file.read()
+
+    old_version = extract_version(filedata)
+
+    # Check is done before taht this env variable exists
+    new_version = os.getenv('VERSION', "")
+
+    # Replace the target string
+    filedata = filedata.replace(old_version, new_version)
+
+    # Write the file out again
+    with open(path, 'w') as file:
+        file.write(filedata)
+
 def generate_package(root_dir):
     cmd = "python3 setup.py sdist"
     subprocess.call(cmd, cwd=root_dir, shell=True)
@@ -159,6 +184,8 @@ def main():
     add_namespace_import_to_init_py(stx_dir)
 
     # geenrate and publish package
+    print("Setting version in setup.py")
+    replace_version_in_setup(out_dir)
     print("Generate package")
     generate_package(out_dir)
     print("Publish package")
