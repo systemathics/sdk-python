@@ -50,6 +50,25 @@ message StaticDataRequest
     google.protobuf.Int32Value count = 8;
 }
 
+enum EquityDividendType
+{
+	EQUITY_DIVIDEND_TYPE_UNSPECIFIED = 0;
+    EQUITY_DIVIDEND_TYPE_CASH = 1;
+    EQUITY_DIVIDEND_TYPE_STOCK = 2;
+}
+
+message EquityDividend{
+	google.type.Date effective_date = 1;
+	EquityDividendType dividend_type = 2;
+    double amount_or_proportion = 3;
+}
+
+message EquitySplit{
+	google.type.Date effective_date = 1;
+	uint32 new_shares = 2;
+	uint32 old_shares = 3;
+}
+
 // Represents a future
 message FutureEntry
 {
@@ -104,6 +123,10 @@ message EquityEntry
 	int32 point_value = 8;
 	// Tick size rule in array format
 	string tick_size_rule = 9;   
+    // Coprorate actions : Dividends
+	repeated EquityDividend  dividends = 10;
+	// Coprorate actions : Splits
+	repeated EquitySplit  splits = 11;
 }
 
 message Identifier 
