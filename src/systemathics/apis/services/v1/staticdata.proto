@@ -4,6 +4,7 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 import "google/type/date.proto";
 import "systemathics/apis/type/v1/memo.proto";
+import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
@@ -75,7 +76,7 @@ message FutureEntry
     // Memo code for this future. Used by other apis
     systemathics.apis.type.v1.Memo memo = 1;
     // Future identifier
-    Identifier identifier = 2;
+    systemathics.apis.type.v1.Identifier identifier = 2;    
     // Future name 
     string name = 3;
     // Mapping identifiers
@@ -102,6 +103,8 @@ message FutureEntry
     int32 point_value = 14;
     // Tick size rule in array format
     string tick_size_rule = 15;   
+    // Primary market identifer
+    string primary_market_identifier_code = 16;
 }
 
 // Represents an equity
@@ -110,7 +113,7 @@ message EquityEntry
 	// Memo code for this future. Used by other apis
 	systemathics.apis.type.v1.Memo memo = 1;
 	// Future identifier
-	Identifier identifier = 2;
+	systemathics.apis.type.v1.Identifier identifier = 2;
 	// Future name 
 	string name = 3;
 	// other mapping identifiers
@@ -127,15 +130,8 @@ message EquityEntry
 	repeated EquityDividend  dividends = 10;
 	// Coprorate actions : Splits
 	repeated EquitySplit  splits = 11;
-}
-
-message Identifier 
-{
-    string primary_market_identifier_code = 1;
-
-    string market_identifier_code = 2;
-
-    string ticker = 3;
+	// Primary market identifer
+	string primary_market_identifier_code = 12;
 }
 
 // Represents a response to a topology request
