@@ -1,0 +1,67 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+syntax = "proto3";
+
+
+import "google/type/date.proto";
+
+import "systemathics/apis/type/v1/identifier.proto";
+import "systemathics/apis/type/v1/constraints.proto";
+
+package systemathics.apis.services.v1;
+
+// The daily vwap service definition
+service DailyVwapsService
+{
+  // Gets daily historical vwap
+  rpc DailyVwaps(DailyVwapsRequest) returns (DailyVwapsResponse);
+}
+
+// Represents a daily vwap request
+message DailyVwapsRequest
+{
+	// The identifier : ticker + exchange 
+	systemathics.apis.type.v1.Identifier identifier = 1;
+
+	// The time constraints
+	systemathics.apis.type.v1.Constraints constraints = 2;
+}
+
+// Represents a daily vwap response
+message DailyVwapsResponse
+{
+	// The data : array of vwap
+	repeated DailyVwap data = 1;
+}
+
+// Represents a daily vwap : volume weighted average price of the day
+message DailyVwap 
+{
+	// Date
+	google.type.Date date = 1;
+	
+	// Last price of the day
+	double price = 2;
+	
+	// Total traded volume of the day
+	int64 volume = 3;
+}
+ 
