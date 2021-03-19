@@ -1,0 +1,70 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+syntax = "proto3";
+
+
+import "google/type/date.proto";
+
+import "systemathics/apis/type/v1/identifier.proto";
+import "systemathics/apis/type/v1/constraints.proto";
+
+package systemathics.apis.services.v1;
+
+// The daily moving average convergence divergence service definition
+service DailyMacdService
+{
+  // Gets daily moving average convergence divergence
+  rpc DailyMacd(DailyMacdRequest) returns (DailyMacdResponse);
+}
+
+// Represents a daily moving average convergence divergence request
+message DailyMacdRequest
+{
+	// The identifier : ticker + exchange 
+	systemathics.apis.type.v1.Identifier identifier = 1;
+
+	// The time constraints
+	systemathics.apis.type.v1.Constraints constraints = 2;
+
+	// The long window length (period : points number)
+	int32 long = 3;
+
+	// The short window length (period : points number)
+	int32 short = 4;
+}
+
+// Represents a daily moving average convergence divergence response
+message DailyMacdResponse
+{
+	// The data : array of moving average convergence divergence
+	repeated DailyMacdData data = 1;
+}
+
+// Represents a daily moving average convergence divergence
+message DailyMacdData 
+{
+	// Date
+	google.type.Date date = 1;
+	
+	// The moving average convergence divergence value of the day
+	double value = 2;
+}
+ 
