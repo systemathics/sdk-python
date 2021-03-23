@@ -20,16 +20,57 @@
 
 syntax = "proto3";
 
-package systemathics.apis.type.v1;
 
-// Represents a unique identifier for a financial asset
-// It is built from
-// - A exchange code (mic)
-// - A ticker (asset name given by exchange)
-message Identifier
+import "google/type/date.proto";
+
+import "systemathics/apis/type/v1/identifier.proto";
+import "systemathics/apis/type/v1/constraints.proto";
+
+package systemathics.apis.services.v1;
+
+// The corporate action service definition : dividends
+service DividendsService
 {
-	// Exchange market identifier code (MIC defined in ISO-20022)
-	string exchange = 1;
-	// Ticker name, associated with market idenfier code defines a unique asset
-	string ticker = 2;
+  // Gets the dividends historical
+  rpc Dividends(DividendsRequest) returns (DividendsResponse);
 }
+
+// Represents a dividends request
+message DividendsRequest
+{
+	// The identifier : ticker + exchange 
+	systemathics.apis.type.v1.Identifier identifier = 1;
+
+	// The time constraints
+	systemathics.apis.type.v1.Constraints constraints = 2;
+}
+
+// Represents a dividend response
+message DividendsResponse
+{
+	// The data : array of dividends
+	repeated Dividend data = 1;
+}
+
+// Represents a dividend
+message Dividend 
+{
+	// Date
+	google.type.Date date = 1;
+	
+	// The dividend type
+	DividendType type = 2;
+	
+	// The dividend amount
+	double amount = 3;
+}
+
+// The dividend types
+enum DividendType
+{
+	UNSPECIFIED = 0;
+	CASH = 1;
+	STOCK = 2;
+}
+
+ 
