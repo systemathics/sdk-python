@@ -4,7 +4,7 @@ import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/field.proto";
-import "systemathics/apis/type/v1/memo.proto";
+import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
@@ -16,13 +16,13 @@ service CmaService
 }
 
 // Represents a market data request with:
-//  - Space selection: Memo 
+//  - Space selection: Identifier 
 //  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
 //  - CMA parameters (field and daily)
 message CmaRequest 
 {
-    // The memo
-    systemathics.apis.type.v1.Memo memo = 1;
+    // The identifier
+    systemathics.apis.type.v1.Identifier identifier = 1;
     // The field we calculate the moving average on
     systemathics.apis.type.v1.Field field = 2;
     // The CMA window length (number of points)

@@ -4,28 +4,28 @@ import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/field.proto";
-import "systemathics/apis/type/v1/memo.proto";
+import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// The SMA service definition
-// Stream on the fly calculated average values (using SMA formula)
-service SmaService 
+// The EMA service definition
+// Stream on the fly calculated average values (using EMA formula)
+service EmaService 
 {
-    rpc Sma(SmaRequest) returns (stream SmaResponse);
+    rpc Ema(EmaRequest) returns (stream EmaResponse);
 }
 
 // Represents a market data request with:
-//  - Space selection: Memo 
+//  - Space selection: Identifier 
 //  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
-//  - SMA parameters (field, length and daily)
-message SmaRequest 
+//  - EMA parameters (field, length and daily)
+message EmaRequest 
 {
-    // The memo
-    systemathics.apis.type.v1.Memo memo = 1;
+    // The identifier
+    systemathics.apis.type.v1.Identifier identifier = 1;
     // The field we calculate the moving average on
     systemathics.apis.type.v1.Field field = 2;
-    // The SMA window length (number of points)
+    // The EMA window length (number of points)
     int32 length = 3;
     // Do we reset daily ?
     bool daily = 4;
@@ -33,8 +33,8 @@ message SmaRequest
     systemathics.apis.type.v1.Constraints constraints = 5; // Transports the IConstraints semantics
 }
 
-// Represents the SMA response
-message SmaResponse
+// Represents the EMA response
+message EmaResponse
 {
 	// The time stamp
 	google.protobuf.Timestamp time_stamp = 1;

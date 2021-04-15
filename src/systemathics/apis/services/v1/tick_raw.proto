@@ -4,7 +4,8 @@ import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/field.proto";
-import "systemathics/apis/type/v1/memo.proto";
+import "systemathics/apis/type/v1/stream.proto";
+import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
@@ -16,16 +17,18 @@ service RawService
 }
 
 // Represents a market data request with:
-//  - Space selection: Memo 
+//  - Space selection: Identifier 
 //  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
 message RawRequest 
 {
-    // The memo
-    systemathics.apis.type.v1.Memo memo = 1;
+    // The identifier
+    systemathics.apis.type.v1.Identifier identifier = 1;
+	// The stream level (Level 1 or Level 1 and 2)
+    systemathics.apis.type.v1.Stream level = 2;
     // The field we calculate the moving average on
-    systemathics.apis.type.v1.Field field = 2;
+    systemathics.apis.type.v1.Field field = 3;
     // The time constraints
-    systemathics.apis.type.v1.Constraints constraints = 3; // Transports the IConstraints semantics
+    systemathics.apis.type.v1.Constraints constraints = 4;
 }
 
 message RawItem

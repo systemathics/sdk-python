@@ -21,25 +21,17 @@
 syntax = "proto3";
 
 
-import "systemathics/apis/type/v1/identifier.proto";
-import "systemathics/apis/type/v1/memo.proto";
-
 package systemathics.apis.type.v1;
 
-// Represents a mapping between an eventSource and a memo
-message Mapping
+// Represents level
+// - Level 1 : Trades only
+// - Level 1 and Level 2 : Trades + Book
+enum Stream
 {
-	// An Identifier from the market data request
-	systemathics.apis.type.v1.Identifier identifier = 1;
-	// Memo associated with Identifier
-	systemathics.apis.type.v1.Memo memo = 2;
-    // Short name for a memo
-    uint32 event_source = 3;
-}
-
-// Represents several Mapping
-message Mappings
-{
-    // An array of Mapping
-    repeated Mapping table = 1;
+	// The unspecfied side 
+	STREAM_UNSPECIFIED = 0;
+	// The level 1 : Trades only
+	STREAM_LEVEL_1 = 1;
+	// The Level 1 and 2 : Trades + Book
+	STREAM_LEVEL_1_LEVEL_2 = 2;
 }

@@ -2,7 +2,8 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 import "google/type/date.proto";
-import "systemathics/apis/type/v1/memo.proto";
+import "systemathics/apis/type/v1/identifier.proto";
+import "systemathics/apis/type/v1/stream.proto";
 
 package systemathics.apis.services.v1;
 
@@ -31,20 +32,23 @@ enum TopologyGranularity
 }
 
 // Represents a request for topology using :
-// - a memo defining an asset
+// - a identifier defining an asset
+// - a level defining defining Level 1 or Level 1 and 2
 // - a granularity for the topology
 // - a start value if using pagination, null otherwise.
 // - a count value if using pagination, null otherwise.
 message TopologiesRequest
 {
-    // Memo representing an asset
-    systemathics.apis.type.v1.Memo memo = 1;
+    // Identifier representing an asset
+    systemathics.apis.type.v1.Identifier identifier = 1;
+    // Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
+    systemathics.apis.type.v1.Stream level = 2;
     // Granularity of the request (daily, weekly, ...)
-    TopologyGranularity granularity = 2;
+    TopologyGranularity granularity = 3;
     // Start at 0 when using pagination or null
-    google.protobuf.Int32Value start = 3; 
+    google.protobuf.Int32Value start = 4; 
     // Define your count of element received when using pagination or null 
-    google.protobuf.Int32Value count = 4;
+    google.protobuf.Int32Value count = 5;
 }
 
 // Represents the number of ticks between 2 dates

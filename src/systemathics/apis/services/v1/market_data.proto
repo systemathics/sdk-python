@@ -5,9 +5,10 @@ import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/mappings.proto";
-import "systemathics/apis/type/v1/marketbookupdates.proto";
-import "systemathics/apis/type/v1/marketfieldsupdates.proto";
-import "systemathics/apis/type/v1/memo.proto";
+import "systemathics/apis/type/v1/stream.proto";
+import "systemathics/apis/type/v1/market_book_updates.proto";
+import "systemathics/apis/type/v1/market_fields_updates.proto";
+import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
@@ -24,10 +25,12 @@ service MarketDataService
 //  - Some associated constraints (date, time, days, ...) 
 message MarketDataRequest
 {
-    // Represents an array of Memo
-    repeated systemathics.apis.type.v1.Memo memos = 1;
+    // Represents an array of identifier
+    repeated systemathics.apis.type.v1.Identifier identifiers = 1;
+    // Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
+    systemathics.apis.type.v1.Stream level = 2;
     // Represents some additionnal constraints (date, time, days, ...) 
-    systemathics.apis.type.v1.Constraints constraints = 2;
+    systemathics.apis.type.v1.Constraints constraints = 3;
 }
 
 // Represents a market data response, it contains:
