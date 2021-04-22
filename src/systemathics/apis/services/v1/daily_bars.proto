@@ -18,10 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Bollinger bands indicator requires instrument's identifier,date time intervals and number of periods as per inputs and returns data points for the following components:
-// 1. *Middle band* = n-period moving average
-// 2. *Upper band* = Middle band + (k * n-period standard deviation)
-// 3. *Lower band* = Middle band - (k * n-period standard deviation)
+// Overview like Ganymede
+// Description of theo formula ...
+// General in formation
 syntax = "proto3";
 
 
@@ -32,8 +31,9 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// This service is called to request daily bars data. 
-// It takes a DailyBarsRequest as per input and returns a DailyBarsResponse as per output.
+// Called to request daily bars data. 
+// - Input  : DailyBarsRequest
+// - Output : DailyBarsResponse
 service DailyBarsService
 {
   // Gets daily historical data: date, open, high, low, close and volume.
@@ -50,14 +50,14 @@ message DailyBarsRequest
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
-// The output returned when the DailyBarsService is called.
+// The daily bars response contains an array of bars.
 message DailyBarsResponse
 {
 	// The daily bars: an array of DailyBar objects.
 	repeated DailyBar data = 1;
 }
 
-// Handles daily bar data: date, open, high, low, close and volume.
+// Contains the bar's data: date, open, high, low, close and volume.
 message DailyBar 
 {
 	// Date
