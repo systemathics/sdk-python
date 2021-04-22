@@ -21,11 +21,11 @@ service VwapService
 message VwapRequest 
 {
     // The identifier
-    systemathics.apis.type.v1.Identifier identifier = 1;
-    // Do we reset daily ?
-    bool daily = 2;
+    systemathics.apis.type.v1.Identifier identifier = 1;	
     // The time constraints
-    systemathics.apis.type.v1.Constraints constraints = 3; // Transports the IConstraints semantics
+    systemathics.apis.type.v1.Constraints constraints = 2;
+    // Do we reset daily ?
+    bool daily = 3;
 }
 
 // Represents the VWAP response

@@ -23,12 +23,13 @@ message RawRequest
 {
     // The identifier
     systemathics.apis.type.v1.Identifier identifier = 1;
-	// The stream level (Level 1 or Level 1 and 2)
-    systemathics.apis.type.v1.Stream level = 2;
-    // The field we calculate the moving average on
-    systemathics.apis.type.v1.Field field = 3;
     // The time constraints
-    systemathics.apis.type.v1.Constraints constraints = 4;
+    systemathics.apis.type.v1.Constraints constraints = 2;
+	// The stream level (Level 1 or Level 1 and 2)
+    systemathics.apis.type.v1.Stream level = 3;
+    // The field we calculate the moving average on
+    systemathics.apis.type.v1.Field field = 4;
+
 }
 
 message RawItem

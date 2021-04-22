@@ -21,8 +21,6 @@
 syntax = "proto3";
 
 
-import "google/type/date.proto";
-
 import "systemathics/apis/type/v1/identifier.proto";
 import "systemathics/apis/type/v1/constraints.proto";
 

@@ -3,7 +3,6 @@ syntax = "proto3";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "google/type/date.proto";
 import "google/type/timeofday.proto";
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/identifier.proto";

@@ -23,14 +23,14 @@ message BollingerBandsRequest
 {
     // The identifier
     systemathics.apis.type.v1.Identifier identifier = 1;
-    // The field
-    systemathics.apis.type.v1.Field field = 2;
+    // The time constraints    
+    systemathics.apis.type.v1.Constraints constraints = 2;
+	// The field
+    systemathics.apis.type.v1.Field field = 3;
 	// The length
-	int32 length = 3;
+	int32 length = 4;
 	// The deviations
-	double deviations = 4;
-    // The time constraints
-    systemathics.apis.type.v1.Constraints constraints = 5;
+	double deviations = 5;    
 }
 
 // Represents the Bollinger bands response

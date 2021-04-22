@@ -23,14 +23,14 @@ message SmaRequest
 {
     // The identifier
     systemathics.apis.type.v1.Identifier identifier = 1;
-    // The field we calculate the moving average on
-    systemathics.apis.type.v1.Field field = 2;
-    // The SMA window length (number of points)
-    int32 length = 3;
-    // Do we reset daily ?
-    bool daily = 4;
     // The time constraints
-    systemathics.apis.type.v1.Constraints constraints = 5; // Transports the IConstraints semantics
+    systemathics.apis.type.v1.Constraints constraints = 2;
+    // The field we calculate the moving average on
+    systemathics.apis.type.v1.Field field = 3;
+    // The SMA window length (number of points)
+    int32 length = 4;
+    // Do we reset daily ?
+    bool daily = 5;
 }
 
 // Represents the SMA response
