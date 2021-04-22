@@ -18,7 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// This class is dedicated to handle daily bars' data structure. 
+// Bollinger bands indicator requires instrument's identifier,date time intervals and number of periods as per inputs and returns data points for the following components:
+// 1. *Middle band* = n-period moving average
+// 2. *Upper band* = Middle band + (k * n-period standard deviation)
+// 3. *Lower band* = Middle band - (k * n-period standard deviation)
 syntax = "proto3";
 
 
@@ -29,14 +32,15 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// This service is called to request daily bars data. It takes a DailyBarsRequest as per input and returns a DailyBarsResponse as per output.
+// This service is called to request daily bars data. 
+// It takes a DailyBarsRequest as per input and returns a DailyBarsResponse as per output.
 service DailyBarsService
 {
   // Gets daily historical data: date, open, high, low, close and volume.
   rpc DailyBars(DailyBarsRequest) returns (DailyBarsResponse);
 }
 
-// Represents the required input to request the DailyBarsService.
+// The required input to request the DailyBarsService.
 message DailyBarsRequest
 {
 	// The instrument identifier: a pair of ticker and exchange.
@@ -46,7 +50,7 @@ message DailyBarsRequest
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
-// Represents the output returned when the DailyBarsService is called.
+// The output returned when the DailyBarsService is called.
 message DailyBarsResponse
 {
 	// The daily bars: an array of DailyBar objects.
