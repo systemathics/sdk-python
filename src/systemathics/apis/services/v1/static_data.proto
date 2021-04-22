@@ -122,7 +122,7 @@ message EquityEntry
     // --> The sectors definitions
 	map<string, string> sectors = 18;
     // --> The the market capitalization
-    double capitalization = 19;
+    google.protobuf.DoubleValue capitalization = 19;
 }
 
 // Represents a future asset

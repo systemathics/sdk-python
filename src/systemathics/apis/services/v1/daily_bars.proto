@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// This class is dedicated to handle daily bars' data structure. 
 syntax = "proto3";
 
 
@@ -28,49 +29,49 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The daily bars service definition
+// This service is called to request daily bars data. It takes a DailyBarsRequest as per input and returns a DailyBarsResponse as per output.
 service DailyBarsService
 {
-  // Gets daily historical data :Open, High, Low, Close
+  // Gets daily historical data: date, open, high, low, close and volume.
   rpc DailyBars(DailyBarsRequest) returns (DailyBarsResponse);
 }
 
-// Represents a daily bars request
+// Represents the required input to request the DailyBarsService.
 message DailyBarsRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange.
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period.
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
-// Represents a daily bars response
+// Represents the output returned when the DailyBarsService is called.
 message DailyBarsResponse
 {
-	// The data : array of bars
+	// The daily bars: an array of DailyBar objects.
 	repeated DailyBar data = 1;
 }
 
-// Represents a daily bar data : Open, High, Low and Close
+// Handles daily bar data: date, open, high, low, close and volume.
 message DailyBar 
 {
 	// Date
 	google.type.Date date = 1;
 	
-	// Open price of the day
+	// Open price of the day.
 	double open = 2;
 	
-	// Highest price of the day
+	// Highest price of the day.
 	double high = 3;
 	
-	// Lowest price of the day
+	// Lowest price of the day.
 	double low = 4;
 	
-	// Close price of the day
+	// Close price of the day.
 	double close = 5;
 	
-	// Total traded volume of the day
+	// Total traded volume of the day.
 	int64 volume = 6;
 }
  
