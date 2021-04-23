@@ -18,7 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// TODO : add overview of the static data
+// Reference data encompasses a wide range of specification data about:
+// <br>- financial instrument such as asset class, symbol, maturity, etc.
+// <br>- counterparties such as issuer information.
+// <br>- pricing such as open, high low and close prices.
+// <br>The challenge with reference data is that it tends to be sourced from multiple sources: internal, counterparties and providers.
+// <br>Reference data dedicated service is a result of various data sources and fields sourcing, validation, cross-checking and normalization.
 syntax = "proto3";
 
 
@@ -29,61 +34,61 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// The static data service definition
+// Called to request reference data.
 service StaticDataService
 {
-  // Get the static data service
+  // // Gets reference data
   rpc StaticData(StaticDataRequest) returns (StaticDataResponse);
 }
 
-// Represents a static data request
+// The required input to request the StaticDataService
 message StaticDataRequest
 {
-    // The asset type
+    // Asset type
     AssetType asset_type = 1;
 
-    // The asset name
+    // Asset name
     google.protobuf.StringValue name = 2;
 
-    // The asset exchange (mic code)
+    // Asset exchange (mic code)
     google.protobuf.StringValue exchange = 3;
 
-    // The asset ticker (code provided by the exchange)
+    // Asset ticker (code as provided by the exchange)
     google.protobuf.StringValue ticker = 4;
     
-    // The future contract code
+    // Future contract code
     google.protobuf.StringValue future_contract = 5;
 
-    // The future category
+    // Future category
     google.protobuf.StringValue future_category = 6;
 
-    // The equity sector
+    // Equity sector
     google.protobuf.StringValue equity_sector = 7;
 
-    // The index
+    // Index if the asset belongs to an index components
     google.protobuf.StringValue index = 8;
     
-    // The mapping codes (isin, cusip, sedol, ric, figi ...)
+    // Mapping codes: isin, cusip, sedol, ric, figi, etc.
     google.protobuf.StringValue code = 9;
         
-    // The start index
+    // Start index of retrived results
     google.protobuf.Int32Value start = 10;
 
-    // The maximum number of results
+    // Maximum number of retrieved results
     google.protobuf.Int32Value count = 11;
 }
 
-// Represents a response to a static data request grouped by asset types
+// // Represents a reference data response grouped by asset type.
 message StaticDataResponse
 {
-	// The futures array
+	// The reference data for futures: an array of FutureEntry objects
 	repeated FutureEntry futures  = 1;
 
-	// The equities array
+	// The reference data for equities: an array of EquityEntry objects
 	repeated EquityEntry equities  = 2;
 }
 
-// Represents an equity asset
+// Contains the reference data for equities.
 message EquityEntry
 {
     // Identifiers 
@@ -135,7 +140,7 @@ message EquityEntry
     google.protobuf.DoubleValue capitalization = 19;
 }
 
-// Represents a future asset
+// Contains the reference data for futures.
 message FutureEntry
 {
 	// Identifiers 
@@ -191,7 +196,7 @@ message FutureEntry
 	int32 year = 21;
 }
 
-// Defines the asset types for the static data requests
+// // Contains the asset type for the reference data request.
 enum AssetType
 {
 	// Not specified ?
