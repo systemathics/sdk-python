@@ -18,6 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Daily EMA reduces the lag by applying greater weight to recent data points.
+// The weighting applied to the most recent price depends on the number of points in the moving average; The smaller the point count is, the more weight is applied to the most recent price.
+// N-points EMA data point is computed using the previous' EMA value and the weighting multiplier as follows:
+// $$ EMA = (Close-EMAp)*k+EMAp $$ Where:
+// - Price is the close price
+// - EMAp is the previous point' EMA value; SMA is used as the EMAp in the first calculation
+// - N is the count of points
+// - k = 2 / N+1 is the Weighting Multiplier
 syntax = "proto3";
 
 
@@ -28,40 +36,40 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The daily exponential moving average service definition
+// Called to request daily exponential moving average data. 
 service DailyEmaService
 {
-  // Gets daily exponential moving average
+  // Gets daily exponential moving average data
   rpc DailyEma(DailyEmaRequest) returns (DailyEmaResponse);
 }
 
-// Represents a daily exponential moving average request
+// The required input to request the DailyEmaRequest.
 message DailyEmaRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 
 	// The exponential moving average window length (period : points number)
 	int32 length = 3;
 }
 
-// Represents a daily exponential moving average response
+// Represents a daily exponential moving average response.
 message DailyEmaResponse
 {
-	// The data : array of exponential moving average
+	// The daily  exponential moving averages: an array of DailyEmaData objects
 	repeated DailyEmaData data = 1;
 }
 
-// Represents a daily exponential moving average
+// Contains the daily exponential moving average data: date and value.
 message DailyEmaData 
 {
 	// Date
 	google.type.Date date = 1;
 	
-	// The exponential moving average value of the day
+	// Exponential moving average value of the day
 	double value = 2;
 }
  

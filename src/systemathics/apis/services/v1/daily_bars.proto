@@ -33,24 +33,24 @@ package systemathics.apis.services.v1;
 // Called to request daily bars data. 
 service DailyBarsService
 {
-  // Gets daily historical data: date, open, high, low, close and volume.
+  // Gets daily historical data: date, open, high, low, close and volume
   rpc DailyBars(DailyBarsRequest) returns (DailyBarsResponse);
 }
 
 // The required input to request the DailyBarsService.
 message DailyBarsRequest
 {
-	// The instrument identifier: a pair of ticker and exchange.
+	// The instrument identifier: a pair of ticker and exchange
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints used to define the look-back period.
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
 // The daily bars response contains an array of daily bars.
 message DailyBarsResponse
 {
-	// The daily bars: an array of DailyBar objects.
+	// The daily bars: an array of DailyBar objects
 	repeated DailyBar data = 1;
 }
 

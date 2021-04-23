@@ -18,11 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Bollinger bands were created by John Bollinger, they are envelopes and plotted around the moving average. The width of the bands is based on the standard deviaton of the closing prices from a moving average.
-// <br>- Middle band = n-period moving average
-// <br>- Upper band = Middle band + (k * n-period standard deviation)
-// <br>- Lower band = Middle band - (k * n-period standard deviation)
-// <br> Where n is the number of periods and k is factor to apply to the standard deviation value, k=2 as default value.
+// Bollinger bands were created by John Bollinger, they are envelopes and plotted around the moving average. 
+// <br> The width of the bands is based on the standard deviaton of the closing prices from a moving average as follows:
+// <br><i>- Middle band = n-period moving average</i>
+// <br><i>- Upper band = Middle band + (k * n-period standard deviation)</i>
+// <br><i>- Lower band = Middle band - (k * n-period standard deviation)</i>
+// <br><i> Where n is the number of periods and k is factor to apply to the standard deviation value, k=2 as default value.</i>
 syntax = "proto3";
 
 
@@ -36,30 +37,30 @@ package systemathics.apis.services.v1;
 // Called to request daily Bollinger bands data. 
 service DailyBollingerService
 {
-  // Gets daily Bollinger bands data.
+  // Gets daily Bollinger bands data
   rpc DailyBollinger(DailyBollingerRequest) returns (DailyBollingerResponse);
 }
 
 // The required input to request the DailyBollingerService.
 message DailyBollingerRequest
 {
-	// The instrument identifier: a pair of ticker and exchange.
+	// The instrument identifier: a pair of ticker and exchange
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints used to define the look-back period.
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 
-	// The simple moving average window length (period: data points number).
+	// The simple moving average window length (period: data points number)
 	int32 length = 3;
 
-	// The standard deviation window length.
+	// The standard deviation window length
 	double deviation = 4;
 }
 
-// The daily bars response contains an array of Bollinger bands data points.
+// The daily bars response contains an array of Bollinger bands.
 message DailyBollingerResponse
 {
-	// The daily Bollinger bands: an array of DailyBollingerData objects.
+	// The daily Bollinger bands: an array of DailyBollingerData objects
 	repeated DailyBollingerData data = 1;
 }
 
