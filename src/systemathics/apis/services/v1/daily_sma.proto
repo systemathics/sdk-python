@@ -23,7 +23,7 @@
 // <i>N-points SMA data point</i> is computed by adding up the last N period's trade prices and then dividing by N as follows:
 // $$ SMA = \frac{\Sigma Close_n}{N} $$
 // Where:
-// <br>- <i>Close_n</i> is the close price of the <i>period n</i>
+// <br>- <i>Close n</i> is the close price of the <i>period n</i>
 // <br>- <i>N</i> is the count of time periods
 syntax = "proto3";
 

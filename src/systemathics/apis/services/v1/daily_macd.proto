@@ -19,8 +19,8 @@
 // SOFTWARE.
 
 // <i>Moving Average Convergence/Divergence Oscillator</i> was developed by Gerald Appel and represents the difference between two moving averages of different lengths.
-// <br>Commonly used MACD is the 12-day EMA less the 26-day EMA, lengths can be adapted when required. As its name implies, MACD is all about convergence and divergence of the two moving averages
-// <br> MACD oscilaltes around the zero line as follows:
+// <br>Commonly used MACD is the 12-day EMA less the 26-day EMA, lengths can be adapted when required. As its name implies, MACD is all about convergence and divergence of the two moving averages.
+// <br>MACD oscilaltes around the zero line as follows:
 // <br>- positive values increase as the shorter moving average diverges further from the longer one
 // <br>- negative values indicate that the shorter moving average is below the longer one
 //  $$ MACD = 12day,EMA - 26day,EMA $$
