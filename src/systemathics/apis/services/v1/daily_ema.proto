@@ -18,14 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Daily EMA reduces the lag by applying greater weight to recent data points.
-// The weighting applied to the most recent price depends on the number of points in the moving average; The smaller the point count is, the more weight is applied to the most recent price.
-// N-points EMA data point is computed using the previous' EMA value and the weighting multiplier as follows:
-// $$ EMA = (Close-EMAp)*k+EMAp $$ Where:
-// - Price is the close price
-// - EMAp is the previous point' EMA value; SMA is used as the EMAp in the first calculation
-// - N is the count of points
-// - k = 2 / N+1 is the Weighting Multiplier
+// EMA reduces the lag by applying greater weight to recent data points.
+// <br>The weighting applied to the most recent price depends on the number of points in the moving average; The smaller the point count is, the more weight is applied to the most recent price.
+// <br><i>N-points EMA data point</i> is computed using the previous' EMA value and the weighting multiplier as follows:
+// <br>$$ EMA = (Close-EMAp)*k+EMAp $$ 
+// <br> Where:
+// <br>- <i>Close is the close price
+// <br>- <i>EMAp</i> is the previous point' EMA value; SMA is used as the EMAp in the first calculation
+// <br>- <i>N</i> is the count of points
+// <br>- <i>$ k = \frac{2}{N+1} $</i> is the Weighting Multiplier
 syntax = "proto3";
 
 
@@ -43,7 +44,7 @@ service DailyEmaService
   rpc DailyEma(DailyEmaRequest) returns (DailyEmaResponse);
 }
 
-// The required input to request the DailyEmaRequest.
+// The required input to request the DailyEmaService.
 message DailyEmaRequest
 {
 	// The instrument identifier: a pair of ticker and exchange
@@ -59,7 +60,7 @@ message DailyEmaRequest
 // Represents a daily exponential moving average response.
 message DailyEmaResponse
 {
-	// The daily  exponential moving averages: an array of DailyEmaData objects
+	// The daily exponential moving averages: an array of DailyEmaData objects
 	repeated DailyEmaData data = 1;
 }
 
