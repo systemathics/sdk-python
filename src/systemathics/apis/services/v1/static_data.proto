@@ -95,104 +95,95 @@ message EquityEntry
 	// --> The asset identifier
 	systemathics.apis.type.v1.Identifier identifier = 1;
 	
-    // General informations
-    // --> The asset class
+    // General information: asset class
     string type = 2;
-	// --> The asset country code (ISO 3166)
+	// General information: asset country code (ISO 3166)
 	string country = 3;
-	// --> The asset full name 
+	// General information: asset full name 
 	string name = 4;
-	// --> The asset currency code (ISO 4217)
+	// General information: asset currency code (ISO 4217)
 	string currency = 5;
-	// --> The asset primary exchange code (mic)
+	// General information: asset primary exchange code (mic)
 	string primary = 6;
-	// --> The asset tick size rule table
+	// General information: asset tick size rule table
 	string tick_size_rule = 7;
-	// The asset mapping codes
+	// General information: asset mapping codes
 	map<string, string> mapping = 8;
-	// The asset index
+	// General information: asset index if it belongs to an index
 	string index = 9;
 
-	// The trading hours
-	// --> The open time (continuous trading)
+	// Trading hours: open time (continuous trading)
 	string open = 10;
-	// --> The close time (continuous trading)
+	// Trading hours: close time (continuous trading)
 	string close = 11;
-	// --> The time zone
+	// Trading hours: time zone
 	string time_zone = 12;
 
-    // The specifications
-    // --> The lot size (minimum quantity to trade)
+    // Specifications: lot size (minimum quantity to trade)
     int64 lot_size = 13;
-	// --> The point value
+	// Specifications: point value
 	double point_value = 14;
 
-    // Specific values for the equity
-    // --> The isin code : International Securities Identifying Number
+    // Specific values for the equity: isin code (International Securities Identifying Number)
     string isin = 15;
-	// --> The cusip code : Committee on Uniform Security Identification Procedures
+	// Specific values for the equity: cusip code : Committee on Uniform Security Identification Procedures
 	string cusip = 16;
-	// --> The sedol code : Stock Exchange Daily Official List
+	// Specific values for the equity: sedol code : Stock Exchange Daily Official List
 	string sedol = 17;
-    // --> The sectors definitions
+    // Specific values for the equity: sectors definitions
 	map<string, string> sectors = 18;
-    // --> The the market capitalization
+    // Specific values for the equity: market capitalization
     google.protobuf.DoubleValue capitalization = 19;
 }
 
 // Contains the reference data for futures.
 message FutureEntry
 {
-	// Identifiers 
-	// --> The asset identifier
+	// Identifiers: asset identifier
 	systemathics.apis.type.v1.Identifier identifier = 1;
 	
-	// General informations
-	// --> The asset class
+	// General information: asset class
 	string type = 2;
-	// --> The asset country code (ISO 3166)
+	// General information: asset country code (ISO 3166)
 	string country = 3;
-	// --> The asset full name 
+	// General information: asset full name 
 	string name = 4;
-	// --> The asset currency code (ISO 4217)
+	// General information: asset currency code (ISO 4217)
 	string currency = 5;
-	// --> The asset primary exchange code (mic)
+	// General information: asset primary exchange code (mic)
 	string primary = 6;
-	// --> The asset tick size rule table
+	// General information: asset tick size rule table
 	string tick_size_rule = 7;
-	// The asset mapping codes
+	// General information: asset mapping codes
 	map<string, string> mapping = 8;
-	// The asset index
+	// General information: asset index if it belongs to an index
 	string index = 9;
 
-	// The trading hours
-	// --> The open time (continuous trading)
+	// Trading hours: open time (continuous trading)
 	string open = 10;
-	// --> The close time (continuous trading)
+	// Trading hours: close time (continuous trading)
 	string close = 11;
-	// --> The time zone
+	// Trading hours: time zone
 	string time_zone = 12;
 
-	// The specifications
-	// --> The lot size (minimum quantity to trade)
+	// Specifications: lot size (minimum quantity to trade)
 	int64 lot_size = 13;
-	// --> The point value
+	// Specifications: point value
 	double point_value = 14;
 
-	// Specific values for the future
-	// --> The underlying asset code
+	// Specific values for the future: underlying asset code
 	string underlying = 15;
-	// --> The future contract code
+	// Specific values for the future: contract code
 	string contract = 16;
-	// --> The future category
+	// Specific values for the future: category
 	map<string, string> category = 17;
-	// --> The future chain
+	// Specific values for the future: chain
 	string chain = 18;
-	// --> The maturity date
+	// Specific values for the future: maturity date
 	google.type.Date maturity = 19;
-	// --> The future month code
+	// Specific values for the future: month code
 	string month = 20;
-	// --> The future year
+	// Specific values for the future: year
 	int32 year = 21;
 }
 
