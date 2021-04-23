@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// TODO : add overview of the static data
 syntax = "proto3";
 
 
@@ -52,15 +53,24 @@ message StaticDataRequest
     
     // The future contract code
     google.protobuf.StringValue future_contract = 5;
+
+    // The future category
+    google.protobuf.StringValue future_category = 6;
+
+    // The equity sector
+    google.protobuf.StringValue equity_sector = 7;
+
+    // The index
+    google.protobuf.StringValue index = 8;
     
     // The mapping codes (isin, cusip, sedol, ric, figi ...)
-    google.protobuf.StringValue code = 6;
+    google.protobuf.StringValue code = 9;
         
     // The start index
-    google.protobuf.Int32Value start = 7;
+    google.protobuf.Int32Value start = 10;
 
     // The maximum number of results
-    google.protobuf.Int32Value count = 8;
+    google.protobuf.Int32Value count = 11;
 }
 
 // Represents a response to a static data request grouped by asset types
@@ -77,26 +87,26 @@ message StaticDataResponse
 message EquityEntry
 {
     // Identifiers 
-	// --> The asset memo (internal usage)
-	systemathics.apis.type.v1.Memo memo = 1;
-	// --> The asset identifier (public usage)
-	systemathics.apis.type.v1.Identifier identifier = 2;
+	// --> The asset identifier
+	systemathics.apis.type.v1.Identifier identifier = 1;
 	
     // General informations
     // --> The asset class
-    string type = 3;
+    string type = 2;
 	// --> The asset country code (ISO 3166)
-	string country = 4;
+	string country = 3;
 	// --> The asset full name 
-	string name = 5;
+	string name = 4;
 	// --> The asset currency code (ISO 4217)
-	string currency = 6;
+	string currency = 5;
 	// --> The asset primary exchange code (mic)
-	string primary = 7;
+	string primary = 6;
 	// --> The asset tick size rule table
-	string tick_size_rule = 8;
+	string tick_size_rule = 7;
 	// The asset mapping codes
-	map<string, string> mapping = 9;
+	map<string, string> mapping = 8;
+	// The asset index
+	string index = 9;
 
 	// The trading hours
 	// --> The open time (continuous trading)
@@ -129,26 +139,26 @@ message EquityEntry
 message FutureEntry
 {
 	// Identifiers 
-	// --> The asset memo (internal usage)
-	systemathics.apis.type.v1.Memo memo = 1;
-	// --> The asset identifier (public usage)
-	systemathics.apis.type.v1.Identifier identifier = 2;
+	// --> The asset identifier
+	systemathics.apis.type.v1.Identifier identifier = 1;
 	
 	// General informations
 	// --> The asset class
-	string type = 3;
+	string type = 2;
 	// --> The asset country code (ISO 3166)
-	string country = 4;
+	string country = 3;
 	// --> The asset full name 
-	string name = 5;
+	string name = 4;
 	// --> The asset currency code (ISO 4217)
-	string currency = 6;
+	string currency = 5;
 	// --> The asset primary exchange code (mic)
-	string primary = 7;
+	string primary = 6;
 	// --> The asset tick size rule table
-	string tick_size_rule = 8;
+	string tick_size_rule = 7;
 	// The asset mapping codes
-	map<string, string> mapping = 9;
+	map<string, string> mapping = 8;
+	// The asset index
+	string index = 9;
 
 	// The trading hours
 	// --> The open time (continuous trading)
@@ -170,7 +180,7 @@ message FutureEntry
 	// --> The future contract code
 	string contract = 16;
 	// --> The future category
-	string category = 17;
+	map<string, string> category = 17;
 	// --> The future chain
 	string chain = 18;
 	// --> The maturity date
