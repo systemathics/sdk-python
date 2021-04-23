@@ -26,7 +26,7 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The daily volatility service definition
+// Called to request daily volatility data. 
 service DailyVolatilityService
 {
   // Gets daily historical volatility
@@ -36,16 +36,16 @@ service DailyVolatilityService
 // Represents a daily volatility request
 message DailyVolatilityRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange 
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
-// Represents a daily volatility response
+// Represents a daily volatility response.
 message DailyVolatilityResponse
 {
-	// The volatility value
+	// Volatility value
 	double value = 1;
 }

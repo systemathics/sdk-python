@@ -20,14 +20,14 @@
 
 // <i>The Relative Strength Index</i>, developed by J. Welles Wilder measures the speed and change of price movements.
 // <br>RSI oscillates between zero and 100. Traditionally the RSI is considered:
-// <ul><li>overbought when above 70</li>
-// <li>oversold when below 30</li></ul>
+// <br>- overbought when above 70
+// <br>- oversold when below 30
 //$$ RSI = 100 - \frac{100}{1 + RS} $$
 // Where:
-// <ul><i>RS = AvgU/AvgD}</i> is the <i>relative strength</i></li>
-// <li><i>AvgU</i> average of last <i>N close prices</i> up moves</li>
-// <li><i>AvgD</i> average of last <i>N close prices</i> down moves</li>
-// <li><i>N</i> is the period of the RSI</li></ul>
+// <br>- RS = AvgU/AvgD</i> is the <i>relative strength
+// <br>- <i>AvgU</i> average of last <i>N close prices</i> up moves
+// <br>- <i>AvgD</i> average of last <i>N close prices</i> down moves
+// <br>- <i>N</i> is the period of the RSI
 syntax = "proto3";
 
 
@@ -41,7 +41,7 @@ package systemathics.apis.services.v1;
 // Called to request daily relative strength index data. 
 service DailyRsiService
 {
-  // // Gets daily relative strength index data
+  // Gets daily relative strength index data
   rpc DailyRsi(DailyRsiRequest) returns (DailyRsiResponse);
 }
 

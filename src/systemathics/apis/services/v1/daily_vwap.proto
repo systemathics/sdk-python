@@ -18,6 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// <i>The Volume Weighted Average price</i> is similar to a moving average, except volume is included to weight the average price over a one trading day period.
+// <br>It serves as a reference point for one trading day prices. Comparing current prices with the VWAP values enables to:
+// <br>- mesure trading efficiency by comparing individual trades to VWAP
+// <br>- highlight liquidity points as vwap reflects prices levels weighted by volume
+// <br>- determine the market trend, etc.
 syntax = "proto3";
 
 
@@ -28,37 +33,37 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The daily vwap service definition
+// Called to request daily VWAP data. 
 service DailyVwapsService
 {
-  // Gets daily historical vwap
+  // Gets daily historical VWAPs
   rpc DailyVwaps(DailyVwapsRequest) returns (DailyVwapsResponse);
 }
 
-// Represents a daily vwap request
+// The required input to request the DailyVwapsService
 message DailyVwapsRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange 
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
-// Represents a daily vwap response
+// Represents a daily VWAPs response.
 message DailyVwapsResponse
 {
-	// The data : array of vwap
+	// The daily vwaps: an array of DailyVwap objects
 	repeated DailyVwap data = 1;
 }
 
-// Represents a daily vwap : volume weighted average price of the day
+// Contains the daily vwaps data: date, vwap and volume.
 message DailyVwap 
 {
 	// Date
 	google.type.Date date = 1;
 	
-	// Last price of the day
+	// Vwap of the day
 	double price = 2;
 	
 	// Total traded volume of the day

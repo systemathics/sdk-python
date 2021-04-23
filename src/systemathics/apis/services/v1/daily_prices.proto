@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Daily prices illustrates daily price movements for an instrument over a look back period.
 syntax = "proto3";
 
 
@@ -28,31 +29,31 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The daily prices service definition
+// Called to request daily prices data. 
 service DailyPricesService
 {
   // Gets daily historical prices
   rpc DailyPrices(DailyPricesRequest) returns (DailyPricesResponse);
 }
 
-// Represents a daily prices request
+// The required input to request the DailyPricesService
 message DailyPricesRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange 
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
-// Represents a daily prices response
+// Represents a daily prices response.
 message DailyPricesResponse
 {
-	// The data : array of prices
+	// The daily prices: an array of DailyPrice objects
 	repeated DailyPrice data = 1;
 }
 
-// Represents a daily prices : last price of the day
+// Contains the daily prices data: date, price and volume.
 message DailyPrice 
 {
 	// Date
