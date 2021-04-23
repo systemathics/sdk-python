@@ -18,6 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Bollinger bands were created by John Bollinger, they are envelopes and plotted around the moving average. The width of the bands is based on the standard deviaton of the closing prices from a moving average.
+// <br>- Middle band = n-period moving average
+// <br>- Upper band = Middle band + (k * n-period standard deviation)
+// <br>- Lower band = Middle band - (k * n-period standard deviation)
+// <br> Where n is the number of periods and k is factor to apply to the standard deviation value, k=2 as default value.
 syntax = "proto3";
 
 
@@ -28,49 +33,49 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The daily bollinger bands service definition
+// Called to request daily Bollinger bands data. 
 service DailyBollingerService
 {
-  // Gets daily bollinger bands
+  // Gets daily Bollinger bands data.
   rpc DailyBollinger(DailyBollingerRequest) returns (DailyBollingerResponse);
 }
 
-// Represents a daily bollinger bands request
+// The required input to request the DailyBollingerService.
 message DailyBollingerRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange.
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period.
 	systemathics.apis.type.v1.Constraints constraints = 2;
 
-	// The simple moving average window length (period : points number)
+	// The simple moving average window length (period: data points number).
 	int32 length = 3;
 
-	// The deviation
+	// The standard deviation window length.
 	double deviation = 4;
 }
 
-// Represents a daily bollinger bands response
+// The daily bars response contains an array of Bollinger bands data points.
 message DailyBollingerResponse
 {
-	// The data : array of bollinger bands
+	// The daily Bollinger bands: an array of DailyBollingerData objects.
 	repeated DailyBollingerData data = 1;
 }
 
-// Represents a daily bollinger bands
+// Contains the daily Bollinger bands data: date, lower, middle and upper.
 message DailyBollingerData 
 {
 	// Date
 	google.type.Date date = 1;
 	
-	// The bollinger lower band value of the day
+	// Bollinger lower band value of the day
 	double lower = 2;
 
-	// The bollinger upper band value of the day
+	// Bollinger upper band value of the day
 	double upper = 3;
 
-	// The bollinger middle band value of the day
+	// Bollinger middle band value of the day
 	double middle = 4;
 }
  
