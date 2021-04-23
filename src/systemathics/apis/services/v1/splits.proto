@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Up-to-date split annoucements including effective date, old and new shares.
 syntax = "proto3";
 
 
@@ -28,40 +29,40 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The corporate action service definition : splits
+// Called to request splits data.
 service SplitsService
 {
-  // Gets the splits historical
+  // Gets splits historical data
   rpc Splits(SplitsRequest) returns (SplitsResponse);
 }
 
-// Represents a splits request
+// The required input to request the SplitsService
 message SplitsRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange 
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
-// Represents a dividend response
+// Represents a split response.
 message SplitsResponse
 {
-	// The data : array of splits
+	// The splits: an array of Split objects
 	repeated Split data = 1;
 }
 
-// Represents a split
+// Contains the splits data: date, old and new shares.
 message Split 
 {
 	// Date
 	google.type.Date date = 1;
 		
-	// The new shares
+	// New shares
 	double new_shares = 2;
 
-	// The old shares
+	// Old shares
 	double old_shares = 3;
 }
 

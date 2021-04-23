@@ -33,7 +33,7 @@ service DailyVolatilityService
   rpc DailyVolatility(DailyVolatilityRequest) returns (DailyVolatilityResponse);
 }
 
-// Represents a daily volatility request
+// The required input to request the DailyVolatilityService
 message DailyVolatilityRequest
 {
 	// The instrument identifier: a pair of ticker and exchange 

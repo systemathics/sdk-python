@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Up-to-date dividend annoucements including effective date, dividend type and amount.
 syntax = "proto3";
 
 
@@ -28,44 +29,44 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The corporate action service definition : dividends
+// Called to request dividends data.
 service DividendsService
 {
-  // Gets the dividends historical
+  // Gets dividends historical data
   rpc Dividends(DividendsRequest) returns (DividendsResponse);
 }
 
-// Represents a dividends request
+// The required input to request the DividendsService
 message DividendsRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange 
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 }
 
-// Represents a dividend response
+// Represents a dividend response.
 message DividendsResponse
 {
-	// The data : array of dividends
+	// The dividends: an array of Dividend objects
 	repeated Dividend data = 1;
 }
 
-// Represents a dividend
+// Contains the dividends data: date, type and amount.
 message Dividend 
 {
 	// Date
 	google.type.Date date = 1;
 	
-	// The dividend type
+	// Dividend type
 	DividendType type = 2;
 	
-	// The dividend amount
+	// Dividend amount
 	double amount = 3;
 }
 
-// The dividend types
+// Contains the dividend types.
 enum DividendType
 {
 	UNSPECIFIED = 0;

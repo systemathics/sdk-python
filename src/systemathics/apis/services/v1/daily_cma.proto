@@ -19,8 +19,7 @@
 // SOFTWARE.
 
 // Moving averages smooth the price movements by filtering out the "noise" caused by short-term price fluctuations. 
-// <br>They also form the building blocks for a wide range of technical indicators.
-// <br>Computing moving averages over a defined number of time periods is useful to:
+// <br>They also form the building blocks for a wide range of technical indicators. Computing moving averages over a defined number of time periods is useful to:
 // <br>- identify the trend direction
 // <br>- determine support and resistance levels
 syntax = "proto3";
