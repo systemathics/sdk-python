@@ -18,6 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// <i>The Relative Strength Index</i>, developed by J. Welles Wilder measures the speed and change of price movements.
+// <br>RSI oscillates between zero and 100. Traditionally the RSI is considered:
+// <br>overbought when above 70
+// <br>oversold when below 30
+//$$ RSI = 100 - \frac{100}{1 + RS} $$
+// Where:
+// <br><i>RS = AvgU/AvgD}</i> is the <i>relative strength</i>
+// <i>AvgU</i> average of last <i>N close prices</i> up moves
+// <i>AvgD</i> average of last <i>N close prices</i> down moves
+// <i>N</i> is the period of the RSI
 syntax = "proto3";
 
 
@@ -28,40 +38,40 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The daily relative strength index service definition
+// Called to request daily relative strength index data. 
 service DailyRsiService
 {
-  // Gets daily relative strength index
+  // // Gets daily relative strength index data
   rpc DailyRsi(DailyRsiRequest) returns (DailyRsiResponse);
 }
 
-// Represents a daily relative strength index request
+// The required input to request the DailyRsiService.
 message DailyRsiRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 
-	// The relative strength index window length (period : points number)
+	// The relative strength index window length (period: points number)
 	int32 length = 3;
 }
 
-// Represents a daily relative strength index response
+// Represents a daily relative strength index response.
 message DailyRsiResponse
 {
-	// The data : array of relative strength index
+	// The daily relative strength index: an array of DailyRsiData objects
 	repeated DailyRsiData data = 1;
 }
 
-// Represents a daily relative strength index
+// Contains the daily relative strength index data: date and value.
 message DailyRsiData 
 {
 	// Date
 	google.type.Date date = 1;
 	
-	// The relative strength index value of the day
+	// Relative strength index value of the day
 	double value = 2;
 }
  

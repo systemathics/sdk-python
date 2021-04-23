@@ -18,6 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// <i>Moving Average Convergence/Divergence Oscillator</i> was developed by Gerald Appel and represents the difference between two moving averages of different lengths.
+// <br>Commonly used MACD is the 12-day EMA less the 26-day EMA, lengths can be adapted when required. As its name implies, MACD is all about convergence and divergence of the two moving averages
+// <br> MACD oscilaltes around the zero line as follows:
+// <br>- positive values increase as the shorter moving average diverges further from the longer one
+// <br>- negative values indicate that the shorter moving average is below the longer one
+//  $$ MACD = 12day,EMA - 26day,EMA $$
 syntax = "proto3";
 
 
@@ -28,43 +34,43 @@ import "systemathics/apis/type/v1/constraints.proto";
 
 package systemathics.apis.services.v1;
 
-// The daily moving average convergence divergence service definition
+// Called to request daily moving average convergence divergence data. 
 service DailyMacdService
 {
-  // Gets daily moving average convergence divergence
+  // Gets daily moving average convergence divergence data
   rpc DailyMacd(DailyMacdRequest) returns (DailyMacdResponse);
 }
 
-// Represents a daily moving average convergence divergence request
+// The required input to request the DailyMacdService.
 message DailyMacdRequest
 {
-	// The identifier : ticker + exchange 
+	// The instrument identifier: a pair of ticker and exchange
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
-	// The time constraints
+	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 
-	// The long window length (period : points number)
+	// The long EMA window length (period : points number)
 	int32 long = 3;
 
-	// The short window length (period : points number)
+	// The short EMA window length (period : points number)
 	int32 short = 4;
 }
 
-// Represents a daily moving average convergence divergence response
+// Represents a daily moving average convergence divergence response.
 message DailyMacdResponse
 {
-	// The data : array of moving average convergence divergence
+	// The daily moving average convergence/divergence: an array of DailyMacdData objects
 	repeated DailyMacdData data = 1;
 }
 
-// Represents a daily moving average convergence divergence
+// Contains the daily moving average convergence/divergence data: date and value.
 message DailyMacdData 
 {
 	// Date
 	google.type.Date date = 1;
 	
-	// The moving average convergence divergence value of the day
+	// Moving average convergence/divergence value of the day
 	double value = 2;
 }
  
