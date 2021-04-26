@@ -20,9 +20,9 @@
 
 // Tick count can be used as an indicator to illustrate market activity by computing the technical transactions/transmissions count on a tick by tick basis.
 // <br>It represents a valuable technical indicator to monitor tick by tick data reception. Building a history of tick count can be useful to:
-// * guarantee tick by tick data good reception and completion
-// * compare trading periods and highlight high-level of activity periods
-// * combined with other indicators, it helps to optimal future rolling, etc.
+// <br>- guarantee tick by tick data good reception and completion
+// <br>- compare trading periods and highlight high-level of activity periods
+// <br>- combined with other indicators, it helps to optimal future rolling, etc.
 // <br>Correlated with of other indicators such as traded volume and count of trades, over the same look back period, it repserents a good measurement of the market quality.
 syntax = "proto3";
 

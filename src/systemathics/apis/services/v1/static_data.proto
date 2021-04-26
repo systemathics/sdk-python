@@ -22,8 +22,8 @@
 // <br>- financial instrument such as asset class, symbol, maturity, etc.
 // <br>- counterparties such as issuer information.
 // <br>- pricing such as open, high low and close prices.
-// <br>The challenge with reference data is that it tends to be sourced from multiple sources: internal, counterparties and providers.
-// <br>Reference data dedicated service is a result of various data sources and fields sourcing, validation, cross-checking and normalization.
+// <br>- The challenge with reference data is that it tends to be sourced from multiple sources: internal, counterparties and providers.
+// <br>- Reference data dedicated service is a result of various data sources and fields sourcing, validation, cross-checking and normalization.
 syntax = "proto3";
 
 
