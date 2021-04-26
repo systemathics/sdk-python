@@ -13,16 +13,16 @@ package systemathics.apis.services.v1;
 
 // The market data service definition
 // It allows to replay tick by tick data
-service MarketDataService 
+service TickDataService 
 {
     // Get Market Data 
-    rpc MarketData(MarketDataRequest) returns (stream MarketDataResponse);
+    rpc TickData(TickDataRequest) returns (stream TickDataResponse);
 }
 
 // Represents a market data request with:
 //  - One or several memos
 //  - Some associated constraints (date, time, days, ...) 
-message MarketDataRequest
+message TickDataRequest
 {
     // Represents an array of identifier
     repeated systemathics.apis.type.v1.Identifier identifiers = 1;
@@ -36,7 +36,7 @@ message MarketDataRequest
 // - an event source representing a memo in a shorter form
 // - a time stamp UTC
 // - a payload that can be a mapping (event source <=> memo), some fields update or some books update
-message MarketDataResponse 
+message TickDataResponse 
 {
     // event source (short code for memo)
     uint32 event_source = 1;

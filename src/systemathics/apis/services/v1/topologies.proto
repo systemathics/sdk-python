@@ -1,10 +1,29 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
 // Tick count can be used as an indicator to illustrate market activity by computing the technical transactions/transmissions count on a tick by tick basis.
 // <br>It represents a valuable technical indicator to monitor tick by tick data reception. Building a history of tick count can be useful to:
 // * guarantee tick by tick data good reception and completion
 // * compare trading periods and highlight high-level of activity periods
 // * combined with other indicators, it helps to optimal future rolling, etc.
 // <br>Correlated with of other indicators such as traded volume and count of trades, over the same look back period, it repserents a good measurement of the market quality.
-
 syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
