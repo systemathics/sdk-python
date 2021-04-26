@@ -34,6 +34,7 @@ message MarketBookUpdates
 {
 	// If is a snapshot, previous data must be cleared, otherwise it's incremental
     bool is_snapshot = 1;
+    
     // Represents an array of MarketBookUpdate
     repeated MarketBookUpdate updates = 2;
 }
@@ -43,12 +44,16 @@ message MarketBookUpdate
 {
     // Action of the market book update
     Action action = 1;
+    
     // Side of the market book update
     Side side = 2;
+    
     // Depth of the market book update
     uint32 depth = 3;
+    
     // Size of the market book update
     google.protobuf.Int64Value size = 4;
+    
     // Price of the market book update 
     google.protobuf.DoubleValue price = 5;
 }

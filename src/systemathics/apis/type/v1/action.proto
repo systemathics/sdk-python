@@ -23,7 +23,7 @@ syntax = "proto3";
 
 package systemathics.apis.type.v1;
 
-// Represents the action (set or clear)
+// Type of Market Data update action.
 enum Action
 {
     // The unspecfied action

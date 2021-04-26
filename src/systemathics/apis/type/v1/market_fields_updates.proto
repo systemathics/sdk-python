@@ -32,6 +32,7 @@ message MarketFieldsUpdates
 {
     // If is a snapshot, previous data must be cleared, otherwise it's incremental
     bool is_snapshot = 1;
+    
     // Represents an array of MarketFieldUpdate
     repeated MarketFieldUpdate updates = 2;
 }
@@ -41,15 +42,19 @@ message MarketFieldUpdate
 {
     // Action on market field update
     Action action = 1;
+    
     // Field of market field update
     Field field = 2;
+    
     // Value of the market field update
     oneof value 
     {
         // long value (depends of the field)
         int64 long_value = 3;
+        
         // double value (depends of the field)
         double double_value = 4;
+        
         // string value (depends of the field)
         string string_value = 5;
     }

@@ -1,3 +1,10 @@
+// Tick count can be used as an indicator to illustrate market activity by computing the technical transactions/transmissions count on a tick by tick basis.
+// <br>It represents a valuable technical indicator to monitor tick by tick data reception. Building a history of tick count can be useful to:
+// * guarantee tick by tick data good reception and completion
+// * compare trading periods and highlight high-level of activity periods
+// * combined with other indicators, it helps to optimal future rolling, etc.
+// <br>Correlated with of other indicators such as traded volume and count of trades, over the same look back period, it repserents a good measurement of the market quality.
+
 syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
@@ -7,39 +14,34 @@ import "systemathics/apis/type/v1/stream.proto";
 
 package systemathics.apis.services.v1;
 
-// The topology service definition
+// Called to request topology over a look back-period with a given time granularity.
 service TopologiesService
 {
-  // Get Topologies
+  // Gets topology per a given time granularity
   rpc Topologies(TopologiesRequest) returns (TopologiesResponse);
 }
 
-// Represents granularity of topology.
+// Contains the topology granularity
 enum TopologyGranularity
 {
-	// The unspecified granularity.
+	// Unspecified granularity.
     TOPOLOGY_GRANULARITY_UNSPECIFIED = 0;
-    // The daily granularity.
+    // Daily granularity.
     TOPOLOGY_GRANULARITY_DAILY = 1;
-    // The weekly granularity.
+    // Weekly granularity.
     TOPOLOGY_GRANULARITY_WEEKLY = 2;
-    // The monthly granularity.
+    // Monthly granularity.
     TOPOLOGY_GRANULARITY_MONTHLY = 3;
-    // The quaterly granularity.
+    // Quaterly granularity.
     TOPOLOGY_GRANULARITY_QUATERLY = 4;
-    // The yearly granularity.
+    // Yearly granularity.
     TOPOLOGY_GRANULARITY_YEARLY = 5;
 }
 
-// Represents a request for topology using :
-// - a identifier defining an asset
-// - a level defining defining Level 1 or Level 1 and 2
-// - a granularity for the topology
-// - a start value if using pagination, null otherwise.
-// - a count value if using pagination, null otherwise.
+// The required input to request the TopologiesService.
 message TopologiesRequest
 {
-    // Identifier representing an asset
+    // The instrument identifier: a pair of ticker and exchange 
     systemathics.apis.type.v1.Identifier identifier = 1;
     // Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
     systemathics.apis.type.v1.Stream level = 2;
@@ -51,22 +53,22 @@ message TopologiesRequest
     google.protobuf.Int32Value count = 5;
 }
 
-// Represents the number of ticks between 2 dates
+// Contains the number of ticks between 2 dates
 message TopologyEntry
 {
-    // begin date (included)
+    // Begin date (included)
     google.type.Date begin = 1;
-    // end date (included)
+    // End date (included)
     google.type.Date end = 2;
-    // tick count
+    // Tick count
     uint64 ticks_count = 3;
 }
 
-// Represents a response to a topology request
+// Represents a topology response.
 message TopologiesResponse
 {
-    // Represents an array of TopologyEntry
+    // The toplogoly data: an array of TopologyEntry objects
 	repeated TopologyEntry entries = 1;
-    // If using paginated version will return true until everything is returned,it's false otherwise
+    // If using paginated version will return true until everything is returned, it's false otherwise
     bool has_more = 2;
 }

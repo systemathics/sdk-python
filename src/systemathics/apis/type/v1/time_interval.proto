@@ -33,6 +33,7 @@ message TimeInterval
 {
     // Start time of the time interval. It must always be smaller than end_time.
     google.type.TimeOfDay start_time = 1;
+    
     // End time of the time interval. It must always be greater than start_time.
     google.type.TimeOfDay end_time = 2;
 }

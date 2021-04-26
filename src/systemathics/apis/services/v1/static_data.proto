@@ -37,11 +37,11 @@ package systemathics.apis.services.v1;
 // Called to request reference data.
 service StaticDataService
 {
-  // // Gets reference data
+  // Gets reference data
   rpc StaticData(StaticDataRequest) returns (StaticDataResponse);
 }
 
-// The required input to request the StaticDataService
+// The required input to request the StaticDataService.
 message StaticDataRequest
 {
     // Asset type
@@ -71,14 +71,14 @@ message StaticDataRequest
     // Mapping codes: isin, cusip, sedol, ric, figi, etc.
     google.protobuf.StringValue code = 9;
         
-    // Start index of retrived results
+    // Start at 0 when using pagination or null
     google.protobuf.Int32Value start = 10;
 
-    // Maximum number of retrieved results
+    // Define your count of element received when using pagination or null 
     google.protobuf.Int32Value count = 11;
 }
 
-// // Represents a reference data response grouped by asset type.
+// Represents a reference data response grouped by asset type.
 message StaticDataResponse
 {
 	// The reference data for futures: an array of FutureEntry objects
@@ -91,8 +91,7 @@ message StaticDataResponse
 // Contains the reference data for equities.
 message EquityEntry
 {
-    // Identifiers 
-	// --> The asset identifier
+    // Identifiers: asset identifier
 	systemathics.apis.type.v1.Identifier identifier = 1;
 	
     // General information: asset class
@@ -187,7 +186,7 @@ message FutureEntry
 	int32 year = 21;
 }
 
-// // Contains the asset type for the reference data request.
+// Contains the asset type for the reference data request.
 enum AssetType
 {
 	// Not specified ?

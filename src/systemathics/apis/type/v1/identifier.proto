@@ -33,8 +33,10 @@ message Identifier
 {
 	// Exchange market identifier code (MIC defined in ISO-20022)
 	string exchange = 1;
+	
 	// Ticker name, associated with market idenfier code defines a unique asset
 	string ticker = 2;	
+	
 	// Optional provider tick data name if several tick data providers are used.
 	google.protobuf.StringValue provider = 3;
 }
