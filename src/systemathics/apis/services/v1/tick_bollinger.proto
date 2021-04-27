@@ -1,3 +1,29 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// Bollinger bands were created by John Bollinger, they are envelopes and plotted around the moving average. 
+// <br> The width of the bands is based on the standard deviaton of the closing prices from a moving average as follows:
+// <br><i>- Middle band = n-period moving average</i>
+// <br><i>- Upper band = Middle band + (k * n-period standard deviation)</i>
+// <br><i>- Lower band = Middle band - (k * n-period standard deviation)</i>
+// <br><i> Where n is the number of periods and k is factor to apply to the standard deviation value, k=2 as default value.</i>
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -8,40 +34,43 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// The Bollinger bands service definition
-// Stream on the fly calculated Bollinger bands
-service BollingerBandsService 
+// Called to request tick Bollinger bands data. 
+service TickBollingerService 
 {
-    rpc BollingerBands(BollingerBandsRequest) returns (stream BollingerBandsResponse);
+    rpc TickBollinger(TickBollingerRequest) returns (stream TickBollingerResponse);
 }
 
-// Represents a market data request with:
-//  - Space selection: Identifier 
-//  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
-//  - Bollinger bands parameters (field, length and deviations)
-message BollingerBandsRequest 
+// The required inputs to request the tick Bollinger bands service.
+message TickBollingerRequest 
 {
-    // The identifier
+    // The instrument identifier
     systemathics.apis.type.v1.Identifier identifier = 1;
-    // The time constraints    
+    
+	// The time constraints used to define the look-back period   
     systemathics.apis.type.v1.Constraints constraints = 2;
-	// The field
+	
+	// The field used to build the Bollinger bands
     systemathics.apis.type.v1.Field field = 3;
-	// The length
+	
+	// The simple moving average window length (period: data points number)
 	int32 length = 4;
-	// The deviations
-	double deviations = 5;    
+
+	// The standard deviation window length
+	double deviation = 5; 
 }
 
-// Represents the Bollinger bands response
-message BollingerBandsResponse
+// Contains the tick Bollinger bands data: date, lower, middle and upper.
+message TickBollingerResponse
 {
 	// The time stamp
 	google.protobuf.Timestamp time_stamp = 1;
-	// The lower band
-	double lower_band = 2;
-	// The middle band
-	double middle_band = 3;
-	// The upper band
-	double upper_band = 4;
+	
+	// Bollinger lower band value of the day
+	double lower = 2;
+
+	// Bollinger upper band value of the day
+	double upper = 3;
+
+	// Bollinger middle band value of the day
+	double middle = 4;
 }

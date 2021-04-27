@@ -1,3 +1,24 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// TODO : Raw data
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -9,30 +30,26 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// The RAW service definition
-// Stream on the fly calculated average values (using RAW formula)
-service RawService 
+// Called to request raw data.
+service TickRawService 
 {
-    rpc Raw(RawRequest) returns (stream RawResponse);
+    rpc TickRaw(TickRawRequest) returns (stream TickRawResponse);
 }
 
-// Represents a market data request with:
-//  - Space selection: Identifier 
-//  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
-message RawRequest 
+// The required inputs to request the raw data service.
+message TickRawRequest 
 {
-    // The identifier
-    systemathics.apis.type.v1.Identifier identifier = 1;
-    // The time constraints
-    systemathics.apis.type.v1.Constraints constraints = 2;
+    // The instrument identifier: a ticker and exchange
+	systemathics.apis.type.v1.Identifier identifier = 1;
+
+	// The time constraints used to define the look-back period
+	systemathics.apis.type.v1.Constraints constraints = 2;
+
 	// The stream level (Level 1 or Level 1 and 2)
     systemathics.apis.type.v1.Stream level = 3;
-    // The field we calculate the moving average on
-    systemathics.apis.type.v1.Field field = 4;
-
 }
 
-message RawItem
+message TickRawItem
 {
 	// The time stamp
 	google.protobuf.Timestamp time_stamp = 1;
@@ -48,13 +65,13 @@ message RawItem
 }
 
 // Represents the RAW response (several at once)
-message RawResponse
+message TickRawResponse
 {
-	repeated RawItem raw_items = 1;
+	repeated TickRawItem raw_items = 1;
 }
 
-// Represents the RAW response (one by 1, this is not performant due to Microsoft gRPC API stupid handling of this use case)
-message RawResponse2
+// Represents the RAW response (one by 1, this is not performant due to Microsoft gRPC API handling of this use case)
+message TickRawResponse2
 {
 	// The time stamp
 	google.protobuf.Timestamp time_stamp = 1;

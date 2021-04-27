@@ -1,3 +1,28 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// <i>The Volume Weighted Average Price</i> is similar to a moving average, except volume is included to weight the average price over a one trading day period.
+// <br>It serves as a reference point for one trading day prices. Comparing current prices with the VWAP values enables to:
+// <br>- mesure trading efficiency by comparing individual trades to VWAP
+// <br>- highlight liquidity points as vwap reflects prices levels weighted by volume
+// <br>- determine the market trend, etc.
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -7,36 +32,40 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// The VWAP service definition
-// Stream on the fly calculated VWAP
-service VwapService 
+// Called to request tcik Volume Weighted Average Price. 
+service TickVwapService 
 {
-    rpc Vwap(VwapRequest) returns (stream VwapResponse);
+    rpc TickVwap(TickVwapRequest) returns (stream TickVwapResponse);
 }
 
 // Represents a market data request with:
 //  - Space selection: Identifier 
 //  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
 //  - VWAP parameters (daily)
-message VwapRequest 
+message TickVwapRequest 
 {
-    // The identifier
-    systemathics.apis.type.v1.Identifier identifier = 1;	
-    // The time constraints
-    systemathics.apis.type.v1.Constraints constraints = 2;
-    // Do we reset daily ?
+    // The instrument identifier: a ticker and exchange
+	systemathics.apis.type.v1.Identifier identifier = 1;
+
+	// The time constraints used to define the look-back period
+	systemathics.apis.type.v1.Constraints constraints = 2;
+
+    // Reset the cma every day (yes / no)
     bool daily = 3;
 }
 
-// Represents the VWAP response
-message VwapResponse
+// Contains the vwap data: time stamp, prica, volume and ticks count.
+message TickVwapResponse
 {
 	// The time stamp
 	google.protobuf.Timestamp time_stamp = 1;
-	// The price
+	
+	// The vwap
 	double price = 2;
-	// The volume
+	
+	// Total traded volume
 	int64 volume = 3;
+	
 	// The ticks count
 	int32 ticks = 4;
 }

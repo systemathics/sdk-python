@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// <i>The Volume Weighted Average price</i> is similar to a moving average, except volume is included to weight the average price over a one trading day period.
+// <i>The Volume Weighted Average Price</i> is similar to a moving average, except volume is included to weight the average price over a one trading day period.
 // <br>It serves as a reference point for one trading day prices. Comparing current prices with the VWAP values enables to:
 // <br>- mesure trading efficiency by comparing individual trades to VWAP
 // <br>- highlight liquidity points as vwap reflects prices levels weighted by volume
@@ -43,7 +43,7 @@ service DailyVwapsService
 // The required input to request the DailyVwapsService
 message DailyVwapsRequest
 {
-	// The instrument identifier: a pair of ticker and exchange 
+	// The instrument identifier: a ticker and exchange 
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
 	// The time constraints used to define the look-back period

@@ -48,7 +48,7 @@ service DailyRsiService
 // The required input to request the DailyRsiService.
 message DailyRsiRequest
 {
-	// The instrument identifier: a pair of ticker and exchange
+	// The instrument identifier: a ticker and exchange
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
 	// The time constraints used to define the look-back period
