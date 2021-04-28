@@ -37,13 +37,14 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// Called to request daily exponential moving average data.
+// Called to request tick by tick exponential moving average data.
 service TickEmaService 
 {
+    // Gets tick by tick exponential moving average data
     rpc TickEma(TickEmaRequest) returns (stream TickEmaResponse);
 }
 
-// The required inputs to request the tick ema service.
+// The required inputs to request the TickEmaService.
 message TickEmaRequest 
 {
      // The instrument identifier: a ticker and exchange
@@ -52,7 +53,7 @@ message TickEmaRequest
 	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
     
-    // The field used to calculate the cma
+    // The field used to calculate the ema
     systemathics.apis.type.v1.Field field = 3;
 
     // The exponential moving average window length (period : points number)
@@ -62,12 +63,12 @@ message TickEmaRequest
     bool daily = 5;
 }
 
-// Contains the exponentiel moving average data: time stamp and value.
+// Contains the exponential moving average data: timestamp and value.
 message TickEmaResponse
 {
-	// The time stamp
+	// The timestamp
 	google.protobuf.Timestamp time_stamp = 1;
 	
-	// Cumulative moving average value of the day
+	// Exponential moving average value of the day
 	double value = 2;
 }

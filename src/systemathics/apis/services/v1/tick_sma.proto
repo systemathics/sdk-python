@@ -35,13 +35,14 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// Called to request tick simple moving average data.
+// Called to request tick by tick simple moving average data.
 service TickSmaService 
 {
+    // Gets tick by tick simple moving average data
     rpc TickSma(TickSmaRequest) returns (stream TickSmaResponse);
 }
 
-// The required inputs to request the tick sma service.
+// The required inputs to request the TickSmaService.
 message TickSmaRequest 
 {
     // The instrument identifier: a ticker and exchange
@@ -56,16 +57,16 @@ message TickSmaRequest
     // The simple moving average window length (period : points number)
     int32 length = 4;
     
-    // Reset the cma every day (yes / no)
+    // Reset the sma every day (yes / no)
     bool daily = 5;
 }
 
-// Contains the simple moving average data: time stamp and value.
+// Contains the simple moving average data: timestamp and value.
 message TickSmaResponse
 {
-	// The time stamp
+	// The timestamp
 	google.protobuf.Timestamp time_stamp = 1;
 	
-	// Cumulative moving average value of the day
+	// Simple moving average value of the day
 	double value = 2;
 }

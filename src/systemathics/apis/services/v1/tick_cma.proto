@@ -32,13 +32,14 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// Called to request tick cumulative moving average data.
+// Called to request tick by tick cumulative moving average data.
 service TickCmaService 
 {
+	// Gets tick by tick cumulative moving average data
     rpc TickCma(TickCmaRequest) returns (stream TickCmaResponse);
 }
 
-// The required inputs to request the tick cma service.
+// The required inputs to request the TickCmaService.
 message TickCmaRequest 
 {
     // The instrument identifier: a ticker and exchange
@@ -55,10 +56,10 @@ message TickCmaRequest
 
 }
 
-// Contains the cumulative moving average data: time stamp and value.
+// Contains the cumulative moving average data: timestamp and value.
 message TickCmaResponse
 {
-	// The time stamp
+	// The timestamp
 	google.protobuf.Timestamp time_stamp = 1;
 	
 	// Cumulative moving average value of the day

@@ -35,13 +35,12 @@ package systemathics.apis.services.v1;
 // Called to request tcik Volume Weighted Average Price. 
 service TickVwapService 
 {
+	// Gets tick by tick historical VWAPs
     rpc TickVwap(TickVwapRequest) returns (stream TickVwapResponse);
 }
 
-// Represents a market data request with:
-//  - Space selection: Identifier 
-//  - Time selection: Time constraints (date intervals, intra day restriction time intervals, excluded days, excluded dates) 
-//  - VWAP parameters (daily)
+
+// The required input to request the TickVwapService.
 message TickVwapRequest 
 {
     // The instrument identifier: a ticker and exchange
@@ -54,13 +53,13 @@ message TickVwapRequest
     bool daily = 3;
 }
 
-// Contains the vwap data: time stamp, prica, volume and ticks count.
+// Contains the vwap data: timestamp, price, volume and ticks count.
 message TickVwapResponse
 {
-	// The time stamp
+	// Timestamp
 	google.protobuf.Timestamp time_stamp = 1;
 	
-	// The vwap
+	// Vwap price
 	double price = 2;
 	
 	// Total traded volume

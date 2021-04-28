@@ -1,3 +1,7 @@
+// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
+// <br>- Get specific historical dataset such as trades, top of book data...
+// <br>- Compute analytics on the top of preselected tick by tick data dataset
+// <br>- Feed best execution reports for a given watchlist over the time
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -11,20 +15,17 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// The market data service definition
-// It allows to replay tick by tick data
+// Called to request tick by tick normalized historical data.
 service TickDataService 
 {
-    // Get Market Data 
+    // Get tick by tick normalized historical Data 
     rpc TickData(TickDataRequest) returns (stream TickDataResponse);
 }
 
-// Represents a market data request with:
-//  - One or several memos
-//  - Some associated constraints (date, time, days, ...) 
+// The required inputs to request the TickDataService.
 message TickDataRequest
 {
-    // Represents an array of identifier
+    // Represents an array of instrument identifier: a ticker and exchange
     repeated systemathics.apis.type.v1.Identifier identifiers = 1;
     // Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
     systemathics.apis.type.v1.Stream level = 2;
@@ -32,24 +33,21 @@ message TickDataRequest
     systemathics.apis.type.v1.Constraints constraints = 3;
 }
 
-// Represents a market data response, it contains:
-// - an event source representing a memo in a shorter form
-// - a time stamp UTC
-// - a payload that can be a mapping (event source <=> memo), some fields update or some books update
+// Contains the tick by tick normalized historical data: event source, timestamp and payload.
 message TickDataResponse 
 {
-    // event source (short code for memo)
+    // Event source: short code for instrument identifier
     uint32 event_source = 1;
     // Timestamp from market
     google.protobuf.Timestamp time_stamp = 2;
-    // a payload
+    // Payload: that can be a mapping (event source and instrument identifier), some fields update or some books update
     oneof payload 
     {
         // Some fields update
         systemathics.apis.type.v1.MarketFieldsUpdates fields_updates = 3;
         // Some books update
         systemathics.apis.type.v1.MarketBookUpdates book_updates = 4;
-        // Event source <=> Memo mapping. It's sent once when streaming begins.
+        // Event source and instrument identifier mapping. It's sent once when streaming begins.
         systemathics.apis.type.v1.Mappings mappings = 5;
     }
 }

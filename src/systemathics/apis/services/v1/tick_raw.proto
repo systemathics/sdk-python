@@ -18,7 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// TODO : Raw data
+// Raw tick by tick data extraction in provider format for a given watchlist and a specific look-back period. This can be useful to:
+// <br>- Audit provider raw data reception and completion
+// <br>- Compare provider data formats
+// <br>- Compare raw provider format data to normalized data
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -30,13 +33,14 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// Called to request raw data.
+// Called to request tick by tick raw data.
 service TickRawService 
 {
+	// Gets tick by tick historical data
     rpc TickRaw(TickRawRequest) returns (stream TickRawResponse);
 }
 
-// The required inputs to request the raw data service.
+// The required inputs to request the TickRawService.
 message TickRawRequest 
 {
     // The instrument identifier: a ticker and exchange
@@ -49,9 +53,10 @@ message TickRawRequest
     systemathics.apis.type.v1.Stream level = 3;
 }
 
+// Contains the ticks in raw provider format.
 message TickRawItem
 {
-	// The time stamp
+	// The timestamp
 	google.protobuf.Timestamp time_stamp = 1;
 
 	// The frame type
@@ -64,16 +69,17 @@ message TickRawItem
 	bytes payload = 4;
 }
 
-// Represents the RAW response (several at once)
+// Represents a raw data response: several at once.
 message TickRawResponse
 {
+	// The raw data: an array of TickRawItem objects
 	repeated TickRawItem raw_items = 1;
 }
 
-// Represents the RAW response (one by 1, this is not performant due to Microsoft gRPC API handling of this use case)
+// Represents the RAW response: one by one, this is not performant due to Microsoft gRPC API handling of this use case.
 message TickRawResponse2
 {
-	// The time stamp
+	// The timestamp
 	google.protobuf.Timestamp time_stamp = 1;
 
 	// The frame type

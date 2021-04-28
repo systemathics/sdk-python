@@ -22,7 +22,7 @@
 // <br>As its name implies, MACD is all about convergence and divergence of the two moving averages. MACD oscilaltes around the zero line as follows:
 // <br>- positive values increase as the shorter moving average diverges further from the longer one
 // <br>- negative values indicate that the shorter moving average is below the longer one
-//  $$ MACD = short EMA - long EMA $$
+// <br>$$ MACD = short EMA - long EMA $$
 syntax = "proto3";
 
 

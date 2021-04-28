@@ -34,16 +34,17 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// Called to request tick Bollinger bands data. 
+// Called to request tick by tick Bollinger bands data. 
 service TickBollingerService 
 {
+	// Gets tick by tick Bollinger bands data
     rpc TickBollinger(TickBollingerRequest) returns (stream TickBollingerResponse);
 }
 
-// The required inputs to request the tick Bollinger bands service.
+// The required inputs to request the TickBollingerService.
 message TickBollingerRequest 
 {
-    // The instrument identifier
+    // The instrument identifier: a ticker and exchange
     systemathics.apis.type.v1.Identifier identifier = 1;
     
 	// The time constraints used to define the look-back period   
@@ -62,7 +63,7 @@ message TickBollingerRequest
 // Contains the tick Bollinger bands data: date, lower, middle and upper.
 message TickBollingerResponse
 {
-	// The time stamp
+	// The timestamp
 	google.protobuf.Timestamp time_stamp = 1;
 	
 	// Bollinger lower band value of the day
