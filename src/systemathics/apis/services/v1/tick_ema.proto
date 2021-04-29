@@ -20,7 +20,7 @@
 
 // EMA reduces the lag by applying greater weight to recent data points.
 // <br>The weighting applied to the most recent price depends on the number of points in the moving average; The smaller the point count is, the more weight is applied to the most recent price.
-// <br><i>N-points EMA data point</i> is computed using the previous' EMA value and the weighting multiplier as follows: $ EMA = (Close-EMAp)*k+EMAp $ Where:
+// <br><i>N-points EMA data point</i> is computed using the previous' EMA value and the weighting multiplier as follows: $$ EMA = (Close-EMAp)*k+EMAp $$ Where:
 // <br>- <i>Close</i> is the close price
 // <br>- <i>EMAp</i> is the previous point' EMA value; SMA is used as the EMAp in the first calculation
 // <br>- <i>N</i> is the count of points

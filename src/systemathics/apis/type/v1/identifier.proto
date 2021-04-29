@@ -18,17 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Instrument identifier is built from:
+// <br>- An exchange code: MIC
+// <br>- A ticker: instrument name given by the exchange
+// <br>- An optional provider name if several tick data providers are used
 syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 
 package systemathics.apis.type.v1;
 
-// Represents a unique identifier for a financial asset
-// It is built from
-// - A exchange code (mic)
-// - A ticker (asset name given by exchange)
-// - An optional provider name if several tick data providers are used.
+// Contains the instrument identifier.
 message Identifier
 {
 	// Exchange market identifier code (MIC defined in ISO-20022)
@@ -37,6 +37,6 @@ message Identifier
 	// Ticker name, associated with market idenfier code defines a unique asset
 	string ticker = 2;	
 	
-	// Optional provider tick data name if several tick data providers are used.
+	// Optional provider tick data name if several tick data providers are used
 	google.protobuf.StringValue provider = 3;
 }
