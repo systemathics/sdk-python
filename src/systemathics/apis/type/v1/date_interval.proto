@@ -18,8 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Represents a date interval used to delimit historical data requests in time.
-// <br>Dates are relative to the Proleptic Gregorian Calendar.
+// Represents a date interval used to delimit historical data requests in time. Dates are relative to the Proleptic Gregorian Calendar.
 syntax = "proto3";
 
 

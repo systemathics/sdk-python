@@ -25,6 +25,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/field.proto";
@@ -49,11 +50,13 @@ message TickCmaRequest
 	systemathics.apis.type.v1.Constraints constraints = 2;
     
     // The field used to calculate the cma
-    systemathics.apis.type.v1.Field field = 3;
+	CmaPrice field = 3;
     
-    // Reset the cma every day (yes / no)
-    bool daily = 4;
+	// The period of the vwap, by default the period is set to one day
+	google.protobuf.Duration Period = 4;
 
+	// The offset time when the vwap is reset, by default the offset is set to 00:00:00
+	google.protobuf.Duration Offset = 5;
 }
 
 // Contains the cumulative moving average data: timestamp and value.
@@ -64,4 +67,17 @@ message TickCmaResponse
 	
 	// Cumulative moving average value of the day
 	double value = 2;
+}
+
+// The price types used to compute the avarage
+enum CmaPrice
+{
+	// The unspecfied field
+	CMA_PRICE_UNSPECIFIED = 0;
+	// The last trade price
+	CMA_PRICE_TRADE = 1;
+	// The best bid price
+	CMA_PRICE_BID = 2;
+	// The best ask price
+	CMA_PRICE_ASK = 3;
 }
