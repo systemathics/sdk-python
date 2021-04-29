@@ -19,14 +19,12 @@
 // SOFTWARE.
 
 // <i>The Relative Strength Index</i>, developed by J. Welles Wilder measures the speed and change of price movements.
-// <br>RSI oscillates between zero and 100. Traditionally the RSI is considered:
-// <br>- overbought when above 70
-// <br>- oversold when below 30
-// >><br>$$ RSI = 100 - \frac{100}{1 + RS} $$ Where:
-// >><br>- <i>RS = AvgU/AvgD</i> is the <i>relative strength
-// >><br>- <i>AvgU</i> average of last <i>N close prices</i> up moves
-// >><br>- <i>AvgD</i> average of last <i>N close prices</i> down moves
-// >><br>- <i>N</i> is the period of the RSI
+// <br>RSI oscillates between zero and 100. Traditionally the RSI is considered <i>overbought</i> when above 70 and <i>oversold</i> when below 30.
+// <br><br>RSI is computed as follows: $ RSI = 100 - \frac{100}{1 + RS} $ Where:
+// <br>- <i>RS = AvgU/AvgD</i> is the <i>relative strength
+// <br>- <i>AvgU</i> average of last <i>N close prices</i> up moves
+// <br>- <i>AvgD</i> average of last <i>N close prices</i> down moves
+// <br>- <i>N</i> is the period of the RSI
 syntax = "proto3";
 
 
