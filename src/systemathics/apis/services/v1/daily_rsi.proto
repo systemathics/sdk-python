@@ -22,12 +22,11 @@
 // <br>RSI oscillates between zero and 100. Traditionally the RSI is considered:
 // <br>- overbought when above 70
 // <br>- oversold when below 30
-// <br>$$ RSI = 100 - \frac{100}{1 + RS} $$
-// Where:
-// <br>- <i>RS = AvgU/AvgD</i> is the <i>relative strength
-// <br>- <i>AvgU</i> average of last <i>N close prices</i> up moves
-// <br>- <i>AvgD</i> average of last <i>N close prices</i> down moves
-// <br>- <i>N</i> is the period of the RSI
+// >><br>$$ RSI = 100 - \frac{100}{1 + RS} $$ Where:
+// >><br>- <i>RS = AvgU/AvgD</i> is the <i>relative strength
+// >><br>- <i>AvgU</i> average of last <i>N close prices</i> up moves
+// >><br>- <i>AvgD</i> average of last <i>N close prices</i> down moves
+// >><br>- <i>N</i> is the period of the RSI
 syntax = "proto3";
 
 

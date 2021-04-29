@@ -21,10 +21,9 @@
 // SMA is formed by computing the average price of a security over a specific number of points. 
 // <br>As its name implies, simple moving average is an average that moves. Old data is dropped and new data becomes available, causing the average to move along the time.
 // <br><i>N-points SMA data point</i> is computed by adding up the last N period's trade prices and then dividing by N as follows:
-// <br>$$ SMA = \frac{\Sigma Close_n}{N} $$
-// <br>Where:
-// <br>- <i>Close n</i> is the close price of the <i>period n</i>
-// <br>- <i>N</i> is the count of time periods
+// >><br>$$ SMA = \frac{\Sigma Close_n}{N} $$ Where:
+// >><br>- <i>Close n</i> is the close price of the <i>period n</i>
+// >><br>- <i>N</i> is the count of time periods
 syntax = "proto3";
 
 
