@@ -18,12 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Represents the side: bid or ask.
 syntax = "proto3";
 
 
 package systemathics.apis.type.v1;
 
-// Represents side (bid or ask)
+// Contains side values.
 enum Side
 {
 	// The unspecfied side 

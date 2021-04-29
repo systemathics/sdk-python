@@ -18,20 +18,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Represents a market data stream. Two stream types are used:
+// <br>- Level1 = Trades only
+// <br>- Level1 and Level2 = Trades + Book
 syntax = "proto3";
 
 
 package systemathics.apis.type.v1;
 
-// Represents level
-// - Level 1 : Trades only
-// - Level 1 and Level 2 : Trades + Book
+// Contains the stream types
 enum Stream
 {
 	// The unspecfied side 
 	STREAM_UNSPECIFIED = 0;
-	// The level 1 : Trades only
+	// The level1 = Trades only
 	STREAM_LEVEL_1 = 1;
-	// The Level 1 and 2 : Trades + Book
+	// The Level1 and Level2 = Trades + Book
 	STREAM_LEVEL_1_LEVEL_2 = 2;
 }

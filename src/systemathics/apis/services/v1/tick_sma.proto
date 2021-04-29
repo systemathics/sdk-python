@@ -28,9 +28,9 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
-import "systemathics/apis/type/v1/field.proto";
 import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
@@ -51,14 +51,17 @@ message TickSmaRequest
 	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
     
-    // The field used to calculate the sma
-    systemathics.apis.type.v1.Field field = 3;
+    // The price used to calculate the sma
+	SmaPrice field = 3;
 
     // The simple moving average window length (period : points number)
     int32 length = 4;
     
-    // Reset the sma every day (yes / no)
-    bool daily = 5;
+	// The period of the vwap, by default the period is set to one day
+	google.protobuf.Duration Period = 5;
+
+	// The offset time when the vwap is reset, by default the offset is set to 00:00:00
+	google.protobuf.Duration Offset = 6;
 }
 
 // Contains the simple moving average data: timestamp and value.
@@ -70,3 +73,17 @@ message TickSmaResponse
 	// Simple moving average value of the day
 	double value = 2;
 }
+
+// The price types used to compute the avarage
+enum SmaPrice
+{
+	// The unspecfied field
+	SMA_PRICE_UNSPECIFIED = 0;
+	// The last trade price
+	SMA_PRICE_TRADE = 1;
+	// The best bid price
+	SMA_PRICE_BID = 2;
+	// The best ask price
+	SMA_PRICE_ASK = 3;
+}
+

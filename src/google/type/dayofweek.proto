@@ -15,6 +15,7 @@
 
 // imported from https://raw.githubusercontent.com/googleapis/api-common-protos/master/google/type/dayofweek.proto
 
+// Represents a day of week.
 syntax = "proto3";
 
 package google.type;
@@ -25,29 +26,29 @@ option java_outer_classname = "DayOfWeekProto";
 option java_package = "com.google.type";
 option objc_class_prefix = "GTP";
 
-// Represents a day of week.
+// Contains the day of week values.
 enum DayOfWeek {
-  // The unspecified day-of-week.
+  // The unspecified day-of-week
   DAY_OF_WEEK_UNSPECIFIED = 0;
 
-  // The day-of-week of Monday.
+  // The day-of-week of Monday
   MONDAY = 1;
 
-  // The day-of-week of Tuesday.
+  // The day-of-week of Tuesday
   TUESDAY = 2;
 
-  // The day-of-week of Wednesday.
+  // The day-of-week of Wednesday
   WEDNESDAY = 3;
 
-  // The day-of-week of Thursday.
+  // The day-of-week of Thursday
   THURSDAY = 4;
 
-  // The day-of-week of Friday.
+  // The day-of-week of Friday
   FRIDAY = 5;
 
-  // The day-of-week of Saturday.
+  // The day-of-week of Saturday
   SATURDAY = 6;
 
-  // The day-of-week of Sunday.
+  // The day-of-week of Sunday
   SUNDAY = 7;
 }

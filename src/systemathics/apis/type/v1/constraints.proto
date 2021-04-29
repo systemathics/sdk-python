@@ -18,6 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Represents a date and time constraint.
+// <br>Time zone is alway implied to be Universal Time Coordinated (UTC)
+// <br>Dates are relative to the Proleptic Gregorian Calendar. 
 syntax = "proto3";
 
 
@@ -31,28 +34,21 @@ import "systemathics/apis/type/v1/memo.proto";
 
 package systemathics.apis.type.v1;
 
-
-// Represents a date and time constraint.
-// Time zone is alway implied to be Universal Time Coordinated (UTC)
-// Dates are relative to the Proleptic Gregorian Calendar. 
-//
-// It allows to specify :
-// - Zero, one or many [Date intervals](#DateInterval). The union of each date interval is used.
-// - Zero, one or many [Time intervals](#TimeInterval). The union of each time interval is used.
-// - Zero, one or many [Excluded dates](#google.type.Date). The union of each excluded dates is used.
-// - Zero, one or many [Excluded days](#google.type.DayOfWeek). The union of each excluded days is used.
-//
-// Related type is [systemathics.apis.type.v1.Memo](#systemathics.apis.type.v1.Memo).
+// Contains constraints:
+// <br>- Zero, one or many [Date intervals](#DateInterval). The union of each date interval is used.
+// <br>- Zero, one or many [Time intervals](#TimeInterval). The union of each time interval is used.
+// <br>- Zero, one or many [Excluded dates](#google.type.Date). The union of each excluded dates is used.
+// <br>- Zero, one or many [Excluded days](#google.type.DayOfWeek). The union of each excluded days is used.
 message Constraints 
 {
-    // Restrics request to an union of date_intervals.
-    // Providing no date_intervals will return everything in store.
+    // Restrics request to an union of date_intervals
+    // <br>Providing no date_intervals will return all the stored data
     repeated DateInterval date_intervals = 1;
     // Restrics request to an union of time_intervals. (ie: Market hours, trading hours, ...)
-    // Note: Time intervals including midnight needs to be described as an union of time intervals (ie : [22:00-23:59] U [00:00-04:00])
+    // <br>Note: Time intervals including midnight needs to be described as an union of time intervals (ie : [22:00-23:59] U [00:00-04:00])
     repeated TimeInterval time_intervals = 2;
-    // Restrics request to an union of excluded_dates (ie: Closed Days, Holidays, ...).
+    // Restrics request to an union of excluded_dates (ie: closed Days, holidays, ...).
     repeated google.type.Date excluded_dates = 3;
-    // Restrics request to an union of excluded_days (ie: weekd end can be represented with Saturday, Sunday).
+    // Restrics request to an union of excluded_days (ie: weekd-end can be represented with Saturday, Sunday)
     repeated google.type.DayOfWeek excluded_days = 4;
 }

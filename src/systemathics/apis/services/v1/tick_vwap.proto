@@ -26,6 +26,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/identifier.proto";
@@ -49,8 +50,11 @@ message TickVwapRequest
 	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
 
-    // Reset the cma every day (yes / no)
-    bool daily = 3;
+    // The period of the vwap, by default the period is set to one day
+	google.protobuf.Duration Period = 3;
+
+	// The offset time when the vwap is reset, by default the offset is set to 00:00:00
+	google.protobuf.Duration Offset = 4;
 }
 
 // Contains the vwap data: timestamp, price, volume and ticks count.

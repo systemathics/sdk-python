@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Represents the book data.
 syntax = "proto3";
 
 
@@ -29,17 +30,17 @@ import "systemathics/apis/type/v1/side.proto";
 
 package systemathics.apis.type.v1;
 
-// Represents market book updates 
+// Contains market book updates data.
 message MarketBookUpdates
 {
 	// If is a snapshot, previous data must be cleared, otherwise it's incremental
     bool is_snapshot = 1;
     
-    // Represents an array of MarketBookUpdate
+    // The market book updates: an array of MarketBookUpdate objects
     repeated MarketBookUpdate updates = 2;
 }
 
-// Represents a market book update
+// Represents a market book update.
 message MarketBookUpdate
 {
     // Action of the market book update

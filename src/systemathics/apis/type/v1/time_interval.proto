@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Represents a time interval used to delimit historical data requests in time.
+// <br>Time is Universal Time Coordinated (UTC).
 syntax = "proto3";
 
 
@@ -27,13 +29,12 @@ import "google/type/dayofweek.proto";
 
 package systemathics.apis.type.v1;
 
-// Represent a time interval with start_time (included) and end_time (excluded)
-// Time is Universal Time Coordinated (UTC)
+// Contains time interval with start_time (included) and end_time (excluded)
 message TimeInterval 
 {
-    // Start time of the time interval. It must always be smaller than end_time.
+    // Start time of the time interval. It must always be smaller than end time
     google.type.TimeOfDay start_time = 1;
     
-    // End time of the time interval. It must always be greater than start_time.
+    // End time of the time interval. It must always be greater than start time
     google.type.TimeOfDay end_time = 2;
 }

@@ -18,12 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Enables to set or to clear market data updates. Navigate to market book updates and market fields updates to discover how action is used.
 syntax = "proto3";
 
 
 package systemathics.apis.type.v1;
 
-// Type of Market Data update action.
+// Contains the market Data update action.
 enum Action
 {
     // The unspecfied action

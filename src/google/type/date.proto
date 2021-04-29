@@ -15,6 +15,13 @@
 
 // imported from https://raw.githubusercontent.com/googleapis/api-common-protos/master/google/type/date.proto
 
+// Represents a whole or partial calendar date, e.g. a birthday. The time of day and time zone are either specified elsewhere or are not significant. 
+// <br>The date is relative to the Proleptic Gregorian Calendar. This can represent:
+// <br>- A full date, with non-zero year, month and day values
+// <br>- A month and day value, with a zero year, e.g. an anniversary
+// <br>- A year on its own, with zero month and day values
+// <br>- A year and month value, with a zero day, e.g. a credit card expiration date
+// <br>Related types are <a href ="#google/type/timeofday.proto">google.type.TimeOfDay</a> and <a href ="#google/type/dayofweek.proto">google.type.DayOfWeek</a>.
 syntax = "proto3";
 
 package google.type;
@@ -26,27 +33,14 @@ option java_outer_classname = "DateProto";
 option java_package = "com.google.type";
 option objc_class_prefix = "GTP";
 
-// Represents a whole or partial calendar date, e.g. a birthday. The time of day
-// and time zone are either specified elsewhere or are not significant. The date
-// is relative to the Proleptic Gregorian Calendar. This can represent:
-//
-// * A full date, with non-zero year, month and day values
-// * A month and day value, with a zero year, e.g. an anniversary
-// * A year on its own, with zero month and day values
-// * A year and month value, with a zero day, e.g. a credit card expiration date
-//
-// Related types are [google.type.TimeOfDay](#google.type.TimeOfDay) and [google.type.DayOfWeek](#google.type.DayOfWeek).
+// Contains the date.
 message Date {
-  // Year of date. Must be from 1 to 9999, or 0 if specifying a date without
-  // a year.
+  // Year of date. Must be from 1 to 9999, or 0 if specifying a date without a year
   int32 year = 1;
 
-  // Month of year. Must be from 1 to 12, or 0 if specifying a year without a
-  // month and day.
+  // Month of year. Must be from 1 to 12, or 0 if specifying a year without a month and day
   int32 month = 2;
 
-  // Day of month. Must be from 1 to 31 and valid for the year and month, or 0
-  // if specifying a year by itself or a year and month where the day is not
-  // significant.
+  // Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a year by itself or a year and month where the day is not significant.
   int32 day = 3;
 }

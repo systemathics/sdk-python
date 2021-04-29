@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// Represents a date interval used to delimit historical data requests in time.
+// <br>Dates are relative to the Proleptic Gregorian Calendar.
 syntax = "proto3";
 
 
@@ -27,12 +29,11 @@ import "google/type/dayofweek.proto";
 
 package systemathics.apis.type.v1;
 
-// Represent a date interval with start_date (included) and end_date (excluded)
-// Dates are relative to the Proleptic Gregorian Calendar
+// Contains date interval with start date (included) and end date (excluded).
 message DateInterval 
 {
-	// Start date of the date interval. It must always be smaller than end_date.
+	// Start date of the date interval. It must always be smaller than end date
     google.type.Date start_date = 1;
-    // End date of the date interval. It must always be greater than start_date.
+    // End date of the date interval. It must always be greater than start date
     google.type.Date end_date = 2;
 }
