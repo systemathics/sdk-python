@@ -18,11 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// <i>The Volume Weighted Average Price</i> is similar to a moving average, except volume is included to weight the average price over a one trading day period.
-// <br>It serves as a reference point for one trading day prices. Comparing current prices with the VWAP values enables to:
-// <br>- mesure trading efficiency by comparing individual trades to VWAP
-// <br>- highlight liquidity points as vwap reflects prices levels weighted by volume
-// <br>- determine the market trend, etc.
+// Tick bars are widely used to illustrate price movements for an instrument over a look back period. 
+// Commonly used in financial analysis and trading strategies as a technical indicator.
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -33,45 +30,73 @@ import "systemathics/apis/type/v1/identifier.proto";
 
 package systemathics.apis.services.v1;
 
-// Called to request tcik Volume Weighted Average Price. 
-service TickVwapService 
+// Called to request tick by tick bars data.
+service TickBarsService 
 {
-	// Gets tick by tick historical VWAPs
-    rpc TickVwap(TickVwapRequest) returns (stream TickVwapResponse);
+    // Gets tick by tick bars data
+    rpc TickBars(TickBarsRequest) returns (stream TickBarsResponse);
 }
 
-
-// The required input to request the TickVwapService.
-message TickVwapRequest 
+// The required inputs to request the TickBarService.
+message TickBarsRequest 
 {
     // The instrument identifier: a ticker and exchange
 	systemathics.apis.type.v1.Identifier identifier = 1;
 
 	// The time constraints used to define the look-back period
 	systemathics.apis.type.v1.Constraints constraints = 2;
+    
+    // The price used to calculate the bar
+	BarPrice field = 3;
 
-    // The period of the vwap, by default the period is set to one day
-	google.protobuf.Duration period = 3;
+    // The duration of the bar
+	google.protobuf.Duration sampling = 4;
+    
+	// The period of the bars, by default the period is set to one day
+	google.protobuf.Duration period = 5;
 
-	// The offset time when the vwap is reset, by default the offset is set to 00:00:00
-	google.protobuf.Duration offset = 4;
+	// The offset time when the bars is reset, by default the offset is set to 00:00:00
+	google.protobuf.Duration offset = 6;
 
 	// The corporate action adjustment, by default the value is set to false
-	bool adjustment = 5;
+	bool adjustment = 7;
 }
 
-// Contains the vwap data: timestamp, price, volume and ticks count.
-message TickVwapResponse
+// Contains the tick bar's data: time, open, high, low, close, volume and count.
+message TickBarsResponse
 {
-	// Timestamp
+	// The time stamp
 	google.protobuf.Timestamp time_stamp = 1;
 	
-	// Vwap price
-	double price = 2;
+	// Open price of the current bar
+	double open = 2;
 	
-	// Total traded volume
-	int64 volume = 3;
+	// Highest price of the current bar
+	double high = 3;
 	
-	// The ticks count
-	int32 ticks = 4;
+	// Lowest price of the current bar
+	double low = 4;
+	
+	// Close price of the current bar
+	double close = 5;
+	
+	// Total traded volume of the current bar
+	int64 volume = 6;
+
+	// Tick count of the current bar
+	int32 count = 7;
 }
+
+// The price types used to compute the bars
+enum BarPrice
+{
+	// The unspecfied field
+	BAR_PRICE_UNSPECIFIED = 0;
+	// The last trade price
+	BAR_PRICE_TRADE = 1;
+	// The best bid price
+	BAR_PRICE_BID = 2;
+	// The best ask price
+	BAR_PRICE_ASK = 3;
+}
+

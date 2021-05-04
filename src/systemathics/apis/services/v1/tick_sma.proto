@@ -57,10 +57,18 @@ message TickSmaRequest
     int32 length = 4;
     
 	// The period of the vwap, by default the period is set to one day
-	google.protobuf.Duration Period = 5;
+	google.protobuf.Duration period = 5;
 
 	// The offset time when the vwap is reset, by default the offset is set to 00:00:00
-	google.protobuf.Duration Offset = 6;
+	google.protobuf.Duration offset = 6;
+
+	// [Optional] The sampling of the tick data
+	// If not set then the tick by tick data is used
+	// If set, then the sma is built using sampled data
+	google.protobuf.Duration sampling = 7;
+
+	// The corporate action adjustment, by default the value is set to false
+	bool adjustment = 8;
 }
 
 // Contains the simple moving average data: timestamp and value.

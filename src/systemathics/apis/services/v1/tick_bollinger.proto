@@ -27,6 +27,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 import "systemathics/apis/type/v1/constraints.proto";
 import "systemathics/apis/type/v1/field.proto";
@@ -51,13 +52,27 @@ message TickBollingerRequest
     systemathics.apis.type.v1.Constraints constraints = 2;
 	
 	// The field used to build the Bollinger bands
-    systemathics.apis.type.v1.Field field = 3;
+    BollingerPrice field = 3;
 	
 	// The simple moving average window length (period: data points number)
 	int32 length = 4;
 
 	// The standard deviation window length
 	double deviation = 5; 
+
+    // The period of the vwap, by default the period is set to one day
+    google.protobuf.Duration period = 6;
+
+    // The offset time when the vwap is reset, by default the offset is set to 00:00:00
+    google.protobuf.Duration offset = 7;
+
+    // [Optional] The sampling of the tick data
+    // If not set then the tick by tick data is used
+    // If set, then the bollinger is built using sampled data
+    google.protobuf.Duration sampling = 8;
+
+    // The corporate action adjustment, by default the value is set to false
+    bool adjustment = 9;
 }
 
 // Contains the tick Bollinger bands data: date, lower, middle and upper.
@@ -74,4 +89,17 @@ message TickBollingerResponse
 
 	// Bollinger middle band value of the day
 	double middle = 4;
+}
+
+// The price types used to compute the bollinger bands
+enum BollingerPrice
+{
+	// The unspecfied field
+	BOLLINGER_PRICE_UNSPECIFIED = 0;
+	// The last trade price
+	BOLLINGER_PRICE_TRADE = 1;
+	// The best bid price
+	BOLLINGER_PRICE_BID = 2;
+	// The best ask price
+	BOLLINGER_PRICE_ASK = 3;
 }

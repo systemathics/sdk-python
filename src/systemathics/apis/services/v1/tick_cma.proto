@@ -53,10 +53,18 @@ message TickCmaRequest
 	CmaPrice field = 3;
     
 	// The period of the vwap, by default the period is set to one day
-	google.protobuf.Duration Period = 4;
+	google.protobuf.Duration period = 4;
 
 	// The offset time when the vwap is reset, by default the offset is set to 00:00:00
-	google.protobuf.Duration Offset = 5;
+	google.protobuf.Duration offset = 5;
+
+	// [Optional] The sampling of the tick data
+	// If not set then the tick by tick data is used
+	// If set, then the cma is built using sampled data
+	google.protobuf.Duration sampling = 6;
+
+	// The corporate action adjustment, by default the value is set to false
+	bool adjustment = 7;
 }
 
 // Contains the cumulative moving average data: timestamp and value.

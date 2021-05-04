@@ -18,13 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Represents market data field types for time and sales. This excludes book updates, to learn more about market book updates please refer to <a href="#systemathics/apis/type/v1/market_book_updates.proto">the dedicated section</a>.
+// Represents market data field types for time and sales. This excludes book updates, to learn more about market book updates please refer to `<a href="#systemathics/apis/type/v1/market_book_updates.proto" class="text-blue-450 hover:underline">the dedicated section</a>`.
 syntax = "proto3";
 
 
 package systemathics.apis.type.v1;
 
-// Contains the field tyoes for <a href="#systemathics/apis/type/v1/market_fields_updates.proto">a market field update</a>.
+// Contains the field tyoes for `<a href="#systemathics/apis/type/v1/market_fields_updates.proto" class="text-blue-450 hover:underline">a market field update</a>`.
 enum Field
 {
     // The unspecfied field
