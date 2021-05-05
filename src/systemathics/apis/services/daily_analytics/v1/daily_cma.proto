@@ -1,0 +1,69 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// Moving averages smooth the price movements by filtering out the "noise" caused by short-term price fluctuations. 
+// <br>They also form the building blocks for a wide range of technical indicators. Computing moving averages over a defined number of time periods is useful to:
+// <br>- identify the trend direction
+// <br>- determine support and resistance levels
+syntax = "proto3";
+
+
+import "google/type/date.proto";
+
+import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/constraints.proto";
+
+package systemathics.apis.services.v1;
+
+// Called to request daily cumulative moving average data. 
+service DailyCmaService
+{
+  // Gets daily cumulative moving average data
+  rpc DailyCma(DailyCmaRequest) returns (DailyCmaResponse);
+}
+
+// The required input to request the DailyCmaService.
+message DailyCmaRequest
+{
+	// [Mandatory] The instrument identifier: a ticker and exchange
+	systemathics.apis.type.v1.Identifier identifier = 1;
+
+	// [Optional] The time constraints used to define the look-back period
+	// If empty, then all the available data is used
+	systemathics.apis.type.v1.Constraints constraints = 2;
+}
+
+// Represents a daily cumulative moving average response.
+message DailyCmaResponse
+{
+	// The daily cumulative moving averages: an array of DailyCmaData objects
+	repeated DailyCmaData data = 1;
+}
+
+// Contains the daily cumulative moving average data: date and value.
+message DailyCmaData 
+{
+	// Date
+	google.type.Date date = 1;
+	
+	// Cumulative moving average value of the day
+	double value = 2;
+}
+ 

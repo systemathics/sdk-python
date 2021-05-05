@@ -1,0 +1,97 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// SMA is formed by computing the average price of a security over a specific number of points. 
+// <br>As its name implies, simple moving average is an average that moves. Old data is dropped and new data becomes available, causing the average to move along the time.
+// <br><i>N-points SMA data point</i> is computed by adding up the last N period's trade prices and then dividing by N as follows: $$ SMA = \frac{\Sigma Close_n}{N} $$
+// <br>Where:
+// <br>- <i>Close n</i> is the close price of the <i>period n</i>
+// <br>- <i>N</i> is the count of time periods
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/identifier.proto";
+
+package systemathics.apis.services.v1;
+
+// Called to request tick by tick simple moving average data.
+service TickSmaService 
+{
+    // Gets tick by tick simple moving average data
+    rpc TickSma(TickSmaRequest) returns (stream TickSmaResponse);
+}
+
+// The required inputs to request the TickSmaService.
+message TickSmaRequest 
+{
+    // [Mandatory] The instrument identifier: a ticker and exchange
+	systemathics.apis.type.v1.Identifier identifier = 1;
+
+	// [Optional] The time constraints used to define the look-back period
+	// If empty, then all the available data is used
+	systemathics.apis.type.v1.Constraints constraints = 2;
+    
+    // [Mandatory] The price used to calculate the sma
+	SmaPrice field = 3;
+
+    // [Mandatory] The simple moving average window length (period : points number)
+    int32 length = 4;
+    
+	// [Optional] The period of the vwap, by default the period is set to one day
+	google.protobuf.Duration period = 5;
+
+	// [Optional] The offset time when the vwap is reset, by default the offset is set to 00:00:00
+	google.protobuf.Duration offset = 6;
+
+	// [Optional] The sampling of the tick data
+	// If not set then the tick by tick data is used
+	// If set, then the sma is built using sampled data
+	google.protobuf.Duration sampling = 7;
+
+	// [Optional] The corporate action adjustment, by default the value is set to false
+	bool adjustment = 8;
+}
+
+// Contains the simple moving average data: timestamp and value.
+message TickSmaResponse
+{
+	// The timestamp
+	google.protobuf.Timestamp time_stamp = 1;
+	
+	// Simple moving average value of the day
+	double value = 2;
+}
+
+// The price types used to compute the avarage
+enum SmaPrice
+{
+	// The unspecfied field
+	SMA_PRICE_UNSPECIFIED = 0;
+	// The last trade price
+	SMA_PRICE_TRADE = 1;
+	// The best bid price
+	SMA_PRICE_BID = 2;
+	// The best ask price
+	SMA_PRICE_ASK = 3;
+}
+

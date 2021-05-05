@@ -1,0 +1,80 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
+// <br>- Get specific historical dataset such as trades, top of book data...
+// <br>- Compute analytics on the top of preselected tick by tick data dataset
+// <br>- Feed best execution reports for a given watchlist over the time
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/mappings.proto";
+import "systemathics/apis/type/shared/v1/stream.proto";
+import "systemathics/apis/type/shared/v1/market_book_updates.proto";
+import "systemathics/apis/type/shared/v1/market_fields_updates.proto";
+import "systemathics/apis/type/shared/v1/identifier.proto";
+
+package systemathics.apis.services.v1;
+
+// Called to request tick by tick normalized historical data.
+service TickDataService 
+{
+    // Get tick by tick normalized historical Data 
+    rpc TickData(TickDataRequest) returns (stream TickDataResponse);
+}
+
+// The required inputs to request the TickDataService.
+message TickDataRequest
+{
+	// [Mandatory] The instrument identifier: a ticker and exchange 
+    repeated systemathics.apis.type.v1.Identifier identifiers = 1;
+    
+    // [Mandatory] Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
+    systemathics.apis.type.v1.Stream level = 2;
+    
+    // [Optional] The time constraints used to define the look-back period
+    // If empty, then all the available data is used 
+    systemathics.apis.type.v1.Constraints constraints = 3;
+}
+
+// Contains the tick by tick normalized historical data: event source, timestamp and payload.
+message TickDataResponse 
+{
+    // Event source: short code for instrument identifier
+    uint32 event_source = 1;
+    
+    // Timestamp from the market
+    google.protobuf.Timestamp time_stamp = 2;
+    
+    // Payload: that can be a mapping (event source and instrument identifier), some fields update or some books update
+    oneof payload 
+    {
+        // Some fields update
+        systemathics.apis.type.v1.MarketFieldsUpdates fields_updates = 3;
+        
+        // Some books update
+        systemathics.apis.type.v1.MarketBookUpdates book_updates = 4;
+        
+        // Event source and instrument identifier mapping. It's sent once when streaming begins.
+        systemathics.apis.type.v1.Mappings mappings = 5;
+    }
+}
