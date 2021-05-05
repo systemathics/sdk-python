@@ -32,7 +32,7 @@ import "google/type/date.proto";
 import "systemathics/apis/type/shared/v1/memo.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
-package systemathics.apis.services.v1;
+package systemathics.apis.services.static_data.v1;
 
 // Called to request reference data.
 service StaticDataService
@@ -92,7 +92,7 @@ message StaticDataResponse
 message EquityEntry
 {
     // Identifiers: asset identifier
-	systemathics.apis.type.v1.Identifier identifier = 1;
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	
     // General information: asset class
     string type = 2;
@@ -139,7 +139,7 @@ message EquityEntry
 message FutureEntry
 {
 	// Identifiers: asset identifier
-	systemathics.apis.type.v1.Identifier identifier = 1;
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	
 	// General information: asset class
 	string type = 2;

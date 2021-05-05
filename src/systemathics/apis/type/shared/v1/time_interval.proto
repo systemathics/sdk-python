@@ -26,7 +26,7 @@ import "google/type/date.proto";
 import "google/type/timeofday.proto";
 import "google/type/dayofweek.proto";
 
-package systemathics.apis.type.v1;
+package systemathics.apis.type.shared.v1;
 
 // Contains time interval with start_time (included) and end_time (excluded)
 message TimeInterval 

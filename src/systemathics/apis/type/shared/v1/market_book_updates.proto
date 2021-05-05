@@ -28,7 +28,7 @@ import "systemathics/apis/type/shared/v1/action.proto";
 import "systemathics/apis/type/shared/v1/memo.proto";
 import "systemathics/apis/type/shared/v1/side.proto";
 
-package systemathics.apis.type.v1;
+package systemathics.apis.type.shared.v1;
 
 // Contains market book updates data.
 message MarketBookUpdates

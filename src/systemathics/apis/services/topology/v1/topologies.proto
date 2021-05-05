@@ -31,7 +31,7 @@ import "google/type/date.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/stream.proto";
 
-package systemathics.apis.services.v1;
+package systemathics.apis.services.topology.v1;
 
 // Called to request topology over a look back-period with a given time granularity.
 service TopologiesService
@@ -61,9 +61,9 @@ enum TopologyGranularity
 message TopologiesRequest
 {
     // The instrument identifier: a pair of ticker and exchange 
-    systemathics.apis.type.v1.Identifier identifier = 1;
+    systemathics.apis.type.shared.v1.Identifier identifier = 1;
     // Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
-    systemathics.apis.type.v1.Stream level = 2;
+    systemathics.apis.type.shared.v1.Stream level = 2;
     // Granularity of the request (daily, weekly, ...)
     TopologyGranularity granularity = 3;
     // Start at 0 when using pagination or null

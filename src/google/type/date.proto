@@ -21,7 +21,7 @@
 // <br>- A month and day value, with a zero year, e.g. an anniversary
 // <br>- A year on its own, with zero month and day values
 // <br>- A year and month value, with a zero day, e.g. a credit card expiration date
-// <br>Related types are `<a href ="#google/type/timeofday.proto">google.type.TimeOfDay</a>` and `<a href ="#google/type/dayofweek.proto">google.type.DayOfWeek</a>`.
+// <br>Related types are <a href ="#google/type/timeofday.proto">google.type.TimeOfDay</a> and <a href ="#google/type/dayofweek.proto">google.type.DayOfWeek</a>.
 syntax = "proto3";
 
 package google.type;

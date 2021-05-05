@@ -28,7 +28,7 @@ import "google/protobuf/duration.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
-package systemathics.apis.services.v1;
+package systemathics.apis.services.tick_analytics.v1;
 
 // Called to request tick by tick bars data.
 service TickBarsService 
@@ -41,11 +41,11 @@ service TickBarsService
 message TickBarsRequest 
 {
     // [Mandatory] The instrument identifier: a ticker and exchange
-	systemathics.apis.type.v1.Identifier identifier = 1;
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
 	// [Optional] The time constraints used to define the look-back period
 	// If empty, then all the available data is used
-	systemathics.apis.type.v1.Constraints constraints = 2;
+	systemathics.apis.type.shared.v1.Constraints constraints = 2;
     
     // [Optional] The price used to calculate the bar
 	BarPrice field = 3;

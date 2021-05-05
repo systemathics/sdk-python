@@ -22,7 +22,7 @@
 syntax = "proto3";
 
 
-package systemathics.apis.type.v1;
+package systemathics.apis.type.shared.v1;
 
 // Contains side values.
 enum Side

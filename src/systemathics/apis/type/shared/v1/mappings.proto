@@ -24,15 +24,15 @@ syntax = "proto3";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/memo.proto";
 
-package systemathics.apis.type.v1;
+package systemathics.apis.type.shared.v1;
 
 // Represents a mapping between an eventSource and a memo
 message Mapping
 {
 	// An Identifier from the market data request
-	systemathics.apis.type.v1.Identifier identifier = 1;
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	// Memo associated with Identifier
-	systemathics.apis.type.v1.Memo memo = 2;
+	systemathics.apis.type.shared.v1.Memo memo = 2;
     // Short name for a memo
     uint32 event_source = 3;
 }

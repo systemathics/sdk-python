@@ -26,7 +26,7 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 
-package systemathics.apis.type.v1;
+package systemathics.apis.type.shared.v1;
 
 // Contains the instrument identifier.
 message Identifier

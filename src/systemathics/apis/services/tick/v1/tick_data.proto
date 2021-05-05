@@ -33,7 +33,7 @@ import "systemathics/apis/type/shared/v1/market_book_updates.proto";
 import "systemathics/apis/type/shared/v1/market_fields_updates.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
-package systemathics.apis.services.v1;
+package systemathics.apis.services.tick.v1;
 
 // Called to request tick by tick normalized historical data.
 service TickDataService 
@@ -46,14 +46,14 @@ service TickDataService
 message TickDataRequest
 {
 	// [Mandatory] The instrument identifier: a ticker and exchange 
-    repeated systemathics.apis.type.v1.Identifier identifiers = 1;
+    repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
     
     // [Mandatory] Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
-    systemathics.apis.type.v1.Stream level = 2;
+    systemathics.apis.type.shared.v1.Stream level = 2;
     
     // [Optional] The time constraints used to define the look-back period
     // If empty, then all the available data is used 
-    systemathics.apis.type.v1.Constraints constraints = 3;
+    systemathics.apis.type.shared.v1.Constraints constraints = 3;
 }
 
 // Contains the tick by tick normalized historical data: event source, timestamp and payload.
@@ -69,12 +69,12 @@ message TickDataResponse
     oneof payload 
     {
         // Some fields update
-        systemathics.apis.type.v1.MarketFieldsUpdates fields_updates = 3;
+        systemathics.apis.type.shared.v1.MarketFieldsUpdates fields_updates = 3;
         
         // Some books update
-        systemathics.apis.type.v1.MarketBookUpdates book_updates = 4;
+        systemathics.apis.type.shared.v1.MarketBookUpdates book_updates = 4;
         
         // Event source and instrument identifier mapping. It's sent once when streaming begins.
-        systemathics.apis.type.v1.Mappings mappings = 5;
+        systemathics.apis.type.shared.v1.Mappings mappings = 5;
     }
 }

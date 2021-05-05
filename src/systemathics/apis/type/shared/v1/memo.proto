@@ -20,7 +20,7 @@
 
 syntax = "proto3";
 
-package systemathics.apis.type.v1;
+package systemathics.apis.type.shared.v1;
 
 // Represents a set of data for a financial asset
 // It is built from
