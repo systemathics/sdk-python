@@ -23,8 +23,6 @@ syntax = "proto3";
 
 
 import "google/type/date.proto";
-import "google/type/timeofday.proto";
-import "google/type/dayofweek.proto";
 
 package systemathics.apis.type.shared.v1;
 

@@ -24,7 +24,6 @@ syntax = "proto3";
 
 import "systemathics/apis/type/shared/v1/action.proto";
 import "systemathics/apis/type/shared/v1/field.proto";
-import "systemathics/apis/type/shared/v1/memo.proto";
 
 package systemathics.apis.type.shared.v1;
 

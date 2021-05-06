@@ -30,7 +30,6 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/field.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
 package systemathics.apis.services.tick_analytics.v1;

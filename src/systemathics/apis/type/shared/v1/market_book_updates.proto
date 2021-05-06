@@ -25,7 +25,6 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/action.proto";
-import "systemathics/apis/type/shared/v1/memo.proto";
 import "systemathics/apis/type/shared/v1/side.proto";
 
 package systemathics.apis.type.shared.v1;

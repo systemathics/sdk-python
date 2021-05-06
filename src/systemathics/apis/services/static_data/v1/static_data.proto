@@ -29,12 +29,13 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 import "google/type/date.proto";
-import "systemathics/apis/type/shared/v1/memo.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
 package systemathics.apis.services.static_data.v1;
 
-// Called to request reference data.
+// Called to request reference data. Packages required:
+// <br><i>Systemathics.Apis.Type.Shared.V1</i>
+// <br><i>Systemathics.Apis.Services.StaticData.V1</i>
 service StaticDataService
 {
   // Gets reference data
