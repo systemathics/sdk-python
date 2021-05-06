@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+
+import "google/protobuf/wrappers.proto";
+import "systemathics/apis/type/shared/v1/memo.proto";
+
+package systemathics.apis.services.private.v1;
+
+// The memos service definition
+service MemosService 
+{
+	// Get Memos
+    rpc Memos(MemosRequest) returns (MemosResponse);
+}
+
+// Represents a request to search by memos:
+// - a search string
+// - a search type (currently a substring or a regular expression)
+// - a start value if using pagination, null otherwise.
+// - a count value if using pagination, null otherwise.
+message MemosRequest 
+{
+    string search_string = 1;
+    MemosSearchType search_type = 2;
+    google.protobuf.Int32Value start = 3; // Nullable<int>
+    google.protobuf.Int32Value count = 4; // Nullable<int>
+}
+
+// Represents a search type.
+enum MemosSearchType
+{
+    // The unspecified search type
+    MEMOS_SEARCH_TYPE_UNSPECIFIED = 0;
+    // The substring search type
+    MEMOS_SEARCH_TYPE_SUB_STRING = 1;
+    // The regular expression search type 
+    MEMOS_SEARCH_TYPE_REGULAR_EXPRESSION = 2;
+}
+
+// Represents a response to a memos request
+message MemosResponse
+{
+    // Represents an array of Memos matching search criteria
+	repeated systemathics.apis.type.shared.v1.Memo memos = 1;
+	// If using paginated version will return true until everything is returned,it's false otherwise
+    bool has_more = 2;
+}
