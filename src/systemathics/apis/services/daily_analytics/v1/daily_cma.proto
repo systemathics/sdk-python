@@ -33,6 +33,9 @@ import "systemathics/apis/type/shared/v1/constraints.proto";
 package systemathics.apis.services.daily_analytics.v1;
 
 // Called to request daily cumulative moving average data. 
+// <br>Packages required:
+// <br>- <i>Systemathics.Apis.Type.Shared.V1</i>
+// <br>- <i>Systemathics.Apis.Services.DailyAnalytics.V1</i>
 service DailyCmaService
 {
   // Gets daily cumulative moving average data

@@ -33,9 +33,10 @@ import "systemathics/apis/type/shared/v1/identifier.proto";
 
 package systemathics.apis.services.static_data.v1;
 
-// Called to request reference data. Packages required:
-// <br><i>Systemathics.Apis.Type.Shared.V1</i>
-// <br><i>Systemathics.Apis.Services.StaticData.V1</i>
+// Called to request reference data.
+// <br>Packages required:
+// <br>- <i>Systemathics.Apis.Type.Shared.V1</i>
+// <br>- <i>Systemathics.Apis.Services.StaticData.V1</i>
 service StaticDataService
 {
   // Gets reference data
@@ -72,10 +73,10 @@ message StaticDataRequest
     // [Optional] Mapping codes: isin, cusip, sedol, ric, figi, etc.
     google.protobuf.StringValue code = 9;
         
-    // [Optional] Start at 0 when using pagination or null
+    // [Optional] Define the first element index to be retrieved
     google.protobuf.Int32Value start = 10;
 
-    // [Optional] Define your count of element received when using pagination or null 
+    // [Optional] Select the first elements retrieved, by default count is set to 100
     google.protobuf.Int32Value count = 11;
 }
 

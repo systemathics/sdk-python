@@ -36,6 +36,9 @@ import "systemathics/apis/type/shared/v1/identifier.proto";
 package systemathics.apis.services.tick.v1;
 
 // Called to request tick by tick normalized historical data.
+// <br>Packages required:
+// <br>- <i>Systemathics.Apis.Type.Shared.V1</i>
+// <br>- <i>Systemathics.Apis.Services.Tick.V1</i>
 service TickDataService 
 {
     // Get tick by tick normalized historical Data 
