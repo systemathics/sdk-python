@@ -51,8 +51,8 @@ message DailyEmaRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 
 	// [Mandatory] The exponential moving average window length (period : points number)
@@ -69,7 +69,7 @@ message DailyEmaResponse
 // Contains the daily exponential moving average data: date and value.
 message DailyEmaData 
 {
-	// Date
+	// Date of the EMA
 	google.type.Date date = 1;
 	
 	// Exponential moving average value of the day

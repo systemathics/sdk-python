@@ -45,8 +45,8 @@ message SplitsRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange 
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 }
 
@@ -60,7 +60,7 @@ message SplitsResponse
 // Contains the splits data: date, old and new shares.
 message Split 
 {
-	// Date
+	// Effective date
 	google.type.Date date = 1;
 		
 	// New shares

@@ -50,8 +50,8 @@ message DailySmaRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 
 	// [Mandatory] The simple moving average window length (period : points number)
@@ -68,7 +68,7 @@ message DailySmaResponse
 // Contains the daily simple moving average data: date and value.
 message DailySmaData 
 {
-	// Date
+	// Date of the SMA
 	google.type.Date date = 1;
 	
 	// Simple moving average value of the day

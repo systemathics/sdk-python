@@ -22,6 +22,7 @@
 // <br>They also form the building blocks for a wide range of technical indicators. Computing moving averages over a defined number of time periods is useful to:
 // <br>- identify the trend direction
 // <br>- determine support and resistance levels
+// <br>CMA is the average of all the data points.
 syntax = "proto3";
 
 
@@ -48,8 +49,8 @@ message DailyCmaRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 }
 
@@ -63,10 +64,11 @@ message DailyCmaResponse
 // Contains the daily cumulative moving average data: date and value.
 message DailyCmaData 
 {
-	// Date
+	// Date of the cumulative moving average
 	google.type.Date date = 1;
 	
-	// Cumulative moving average value of the day
+	// Cumulative moving average value of the day.
+	// <br><i>CMA is the average of all the data points</i>
 	double value = 2;
 }
  

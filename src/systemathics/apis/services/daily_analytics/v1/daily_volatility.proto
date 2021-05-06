@@ -18,6 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+// <br>N-points volatility is computed as follows: $$ Volatility_N = \sqrt \frac{\sum_{i=1}^N(P_a - P_i)^2}{N}$$
+// <br>Where:
+// <br>- <i>$$P_a$$</i> is the average price of the N prices
+// <br>- <i>$$P_i$$</i> is price i
 syntax = "proto3";
 
 
@@ -42,8 +46,8 @@ message DailyVolatilityRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange 
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 }
 

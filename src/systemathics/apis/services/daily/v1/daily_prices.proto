@@ -45,8 +45,8 @@ message DailyPricesRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange 
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 }
 
@@ -60,7 +60,7 @@ message DailyPricesResponse
 // Contains the daily prices data: date, price and volume.
 message DailyPrice 
 {
-	// Date
+	// Date of the price
 	google.type.Date date = 1;
 	
 	// Last price of the day

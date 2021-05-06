@@ -46,8 +46,8 @@ message DailyBarsRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 }
 
@@ -61,7 +61,7 @@ message DailyBarsResponse
 // Contains the daily bar's data: date, open, high, low, close and volume.
 message DailyBar 
 {
-	// Date
+	// Date of the bar
 	google.type.Date date = 1;
 	
 	// Open price of the day

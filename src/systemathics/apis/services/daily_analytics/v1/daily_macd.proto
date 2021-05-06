@@ -49,8 +49,8 @@ message DailyMacdRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 
 	// [Mandatory] The long EMA window length (period : points number)
@@ -70,7 +70,7 @@ message DailyMacdResponse
 // Contains the daily moving average convergence/divergence data: date and value.
 message DailyMacdData 
 {
-	// Date
+	// Date of the MACD
 	google.type.Date date = 1;
 	
 	// Moving average convergence/divergence value of the day

@@ -50,8 +50,8 @@ message DailyBollingerRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 
 	// [Mandatory] The simple moving average window length (period: data points number)
@@ -71,16 +71,19 @@ message DailyBollingerResponse
 // Contains the daily Bollinger bands data: date, lower, middle and upper.
 message DailyBollingerData 
 {
-	// Date
+	// Date of Bollinger bands
 	google.type.Date date = 1;
 	
 	// Bollinger lower band value of the day
+	// <br><i>Lower band = Middle band - (k * n-period standard deviation)</i>
 	double lower = 2;
 
 	// Bollinger upper band value of the day
+	// <br><i>Upper band = Middle band + (k * n-period standard deviation)</i>
 	double upper = 3;
 
 	// Bollinger middle band value of the day
+	// <br><i>Middle band = n-period moving average</i>
 	double middle = 4;
 }
  

@@ -51,8 +51,8 @@ message DailyRsiRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 
 	// [Mandatory] The relative strength index window length (period: points number)
@@ -69,7 +69,7 @@ message DailyRsiResponse
 // Contains the daily relative strength index data: date and value.
 message DailyRsiData 
 {
-	// Date
+	// Date of the RSI
 	google.type.Date date = 1;
 	
 	// Relative strength index value of the day
