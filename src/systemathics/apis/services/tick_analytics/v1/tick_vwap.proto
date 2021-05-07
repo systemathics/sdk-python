@@ -67,15 +67,18 @@ message TickVwapRequest
 // Contains the vwap data: timestamp, price, volume and ticks count.
 message TickVwapResponse
 {
-	// Timestamp
+	// The time stamp of the vwap
 	google.protobuf.Timestamp time_stamp = 1;
 	
-	// Vwap price
-	double price = 2;
+	// The vwap price
+	double vwap = 2;
+
+	// The trade price
+	double trade = 3;
 	
 	// Total traded volume
-	int64 volume = 3;
+	int64 volume = 4;
 	
 	// The ticks count
-	int32 ticks = 4;
+	int32 ticks = 5;
 }

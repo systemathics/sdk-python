@@ -46,8 +46,8 @@ message TickBarsRequest
     // [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period
-	// If empty, then all the available data is used
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
     
     // [Optional] The price used to calculate the bar

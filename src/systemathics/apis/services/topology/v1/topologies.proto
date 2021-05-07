@@ -29,7 +29,7 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 import "google/type/date.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
-import "systemathics/apis/type/shared/v1/stream.proto";
+import "systemathics/apis/type/shared/v1/level.proto";
 
 package systemathics.apis.services.topology.v1;
 
@@ -63,15 +63,15 @@ enum TopologyGranularity
 // The required input to request the TopologiesService.
 message TopologiesRequest
 {
-    // The instrument identifier: a pair of ticker and exchange 
+    // [Mandatory] The instrument identifier: a ticker and exchange
     systemathics.apis.type.shared.v1.Identifier identifier = 1;
-    // Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
-    systemathics.apis.type.shared.v1.Stream level = 2;
-    // Granularity of the request (daily, weekly, ...)
+    // [Mandatory] Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
+    systemathics.apis.type.shared.v1.Level level = 2;
+    // [Mandatory] Granularity of the request (daily, weekly, ...)
     TopologyGranularity granularity = 3;
-    // Start at 0 when using pagination or null
+    // [To do] Start at 0 when using pagination or null
     google.protobuf.Int32Value start = 4; 
-    // Define your count of element received when using pagination or null 
+    // [To do] Define your count of element received when using pagination or null 
     google.protobuf.Int32Value count = 5;
 }
 

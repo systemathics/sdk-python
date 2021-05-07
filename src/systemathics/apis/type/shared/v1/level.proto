@@ -26,13 +26,13 @@ syntax = "proto3";
 
 package systemathics.apis.type.shared.v1;
 
-// Contains the stream types
-enum Stream
+// Contains the level types
+enum Level
 {
-	// The unspecfied side 
-	STREAM_UNSPECIFIED = 0;
-	// The level1 = Trades only
-	STREAM_LEVEL_1 = 1;
-	// The Level1 and Level2 = Trades + Book
-	STREAM_LEVEL_1_LEVEL_2 = 2;
+	// The unspecfied level 
+	LEVEL_UNSPECIFIED = 0;
+	// The trades only
+	LEVEL_TRADES = 1;
+	// The trades and book
+	LEVEL_TRADES_AND_BOOK = 2;
 }

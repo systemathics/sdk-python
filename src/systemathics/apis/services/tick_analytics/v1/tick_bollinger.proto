@@ -31,6 +31,7 @@ import "google/protobuf/duration.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
+import "google/protobuf/wrappers.proto";
 
 package systemathics.apis.services.tick_analytics.v1;
 
@@ -50,8 +51,8 @@ message TickBollingerRequest
     // [Mandatory] The instrument identifier: a ticker and exchange
     systemathics.apis.type.shared.v1.Identifier identifier = 1;
     
-    // [Optional] The time constraints used to define the look-back period
-    // If empty, then all the available data is used   
+    // [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
     systemathics.apis.type.shared.v1.Constraints constraints = 2;
 	
 	// [Mandatory] The field used to build the Bollinger bands
@@ -63,15 +64,15 @@ message TickBollingerRequest
 	// [Mandatory] The standard deviation window length
 	double deviation = 5; 
 
-    // [Optional] The period of the vwap, by default the period is set to one day
+    // [Optional] The period of the Bollinger bands, by default the period is set to one day
     google.protobuf.Duration period = 6;
 
-    // [Optional] The offset time when the vwap is reset, by default the offset is set to 00:00:00
+    // [Optional] The offset time when the Bollinger bands is reset, by default the offset is set to 00:00:00
     google.protobuf.Duration offset = 7;
 
-    // [Optional] The sampling of the tick data
-    // If not set then the tick by tick data is used
-    // If set, then the bollinger is built using sampled data
+	// [Optional] The sampling of the tick data.
+	// If not set then the tick by tick data is used.
+	// If set, then the sma is built using sampled data.
     google.protobuf.Duration sampling = 8;
 
     // [Optional] The corporate action adjustment, by default the value is set to false
@@ -81,17 +82,23 @@ message TickBollingerRequest
 // Contains the tick Bollinger bands data: date, lower, middle and upper.
 message TickBollingerResponse
 {
-	// The timestamp
+	// The time stamp of the bollinger bands
 	google.protobuf.Timestamp time_stamp = 1;
 	
+	// The data used to calculate the Bollinger bands of the day
+	double value = 2;
+
 	// Bollinger lower band value of the day
-	double lower = 2;
+	// <br><i>Lower band = Middle band - (k * n-period standard deviation)</i>
+	google.protobuf.DoubleValue lower = 3;
 
 	// Bollinger upper band value of the day
-	double upper = 3;
+	// <br><i>Upper band = Middle band + (k * n-period standard deviation)</i>
+	google.protobuf.DoubleValue upper = 4;
 
 	// Bollinger middle band value of the day
-	double middle = 4;
+	// <br><i>Middle band = n-period moving average</i>
+	google.protobuf.DoubleValue middle = 5;
 }
 
 // The price types used to compute the bollinger bands
