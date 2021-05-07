@@ -27,6 +27,7 @@ syntax = "proto3";
 
 
 import "google/type/date.proto";
+import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
@@ -67,8 +68,10 @@ message DailyCmaData
 	// Date of the cumulative moving average
 	google.type.Date date = 1;
 	
-	// Cumulative moving average value of the day.
-	// <br><i>CMA is the average of all the data points</i>
+	// The data used to calculate the average of the day
 	double value = 2;
+
+	// The cumulative moving average value of the day for all the data points
+	double average = 3;
 }
  

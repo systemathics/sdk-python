@@ -28,6 +28,7 @@ syntax = "proto3";
 
 
 import "google/type/date.proto";
+import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
@@ -74,16 +75,19 @@ message DailyBollingerData
 	// Date of Bollinger bands
 	google.type.Date date = 1;
 	
+	// The data used to calculate the Bollinger bands of the day
+	double value = 2;
+
 	// Bollinger lower band value of the day
 	// <br><i>Lower band = Middle band - (k * n-period standard deviation)</i>
-	double lower = 2;
+	google.protobuf.DoubleValue lower = 3;
 
 	// Bollinger upper band value of the day
 	// <br><i>Upper band = Middle band + (k * n-period standard deviation)</i>
-	double upper = 3;
+	google.protobuf.DoubleValue upper = 4;
 
 	// Bollinger middle band value of the day
 	// <br><i>Middle band = n-period moving average</i>
-	double middle = 4;
+	google.protobuf.DoubleValue middle = 5;
 }
  

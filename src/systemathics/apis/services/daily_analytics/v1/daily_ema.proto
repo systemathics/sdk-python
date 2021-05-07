@@ -29,6 +29,7 @@ syntax = "proto3";
 
 
 import "google/type/date.proto";
+import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
@@ -69,10 +70,13 @@ message DailyEmaResponse
 // Contains the daily exponential moving average data: date and value.
 message DailyEmaData 
 {
-	// Date of the EMA
+	// Date of the exponential moving average
 	google.type.Date date = 1;
 	
-	// Exponential moving average value of the day
+	// The data used to calculate the average of the day
 	double value = 2;
+
+	// The exponential moving average value of the day
+	double average = 3;
 }
  

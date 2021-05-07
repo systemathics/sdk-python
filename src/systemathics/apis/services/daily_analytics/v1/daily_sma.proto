@@ -28,6 +28,7 @@ syntax = "proto3";
 
 
 import "google/type/date.proto";
+import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
@@ -68,10 +69,13 @@ message DailySmaResponse
 // Contains the daily simple moving average data: date and value.
 message DailySmaData 
 {
-	// Date of the SMA
+	// Date of the simple moving average
 	google.type.Date date = 1;
 	
-	// Simple moving average value of the day
+	// The data used to calculate the average of the day
 	double value = 2;
+
+	// The simple moving average value of the day for the last n data points (length)
+	google.protobuf.DoubleValue average = 3;
 }
  

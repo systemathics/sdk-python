@@ -69,10 +69,13 @@ message DailyRsiResponse
 // Contains the daily relative strength index data: date and value.
 message DailyRsiData 
 {
-	// Date of the RSI
+	// Date of the relative strength index
 	google.type.Date date = 1;
 	
-	// Relative strength index value of the day
+	// The data used to calculate the relative strength index of the day
 	double value = 2;
+
+	// Relative strength index value of the day
+	double rsi = 3;
 }
  

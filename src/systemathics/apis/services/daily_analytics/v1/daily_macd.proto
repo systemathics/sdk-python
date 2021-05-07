@@ -70,10 +70,19 @@ message DailyMacdResponse
 // Contains the daily moving average convergence/divergence data: date and value.
 message DailyMacdData 
 {
-	// Date of the MACD
+	// Date of the moving average convergence/divergence
 	google.type.Date date = 1;
 	
-	// Moving average convergence/divergence value of the day
+	// The data used to calculate the average convergence/divergence of the day
 	double value = 2;
+
+	// The moving average convergence/divergence value of the day
+	double macd = 3;
+
+	// The short exponential moving average value of the day
+	double short = 4;
+
+	// The long exponential moving average value of the day
+	double long = 5;
 }
  
