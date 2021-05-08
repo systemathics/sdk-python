@@ -39,14 +39,14 @@ package systemathics.apis.services.tick.v1;
 // <br>Packages required:
 // <br>- <i>Systemathics.Apis.Type.Shared.V1</i>
 // <br>- <i>Systemathics.Apis.Services.Tick.V1</i>
-service TickDataService 
+service TickUpdatesService 
 {
-    // Get tick by tick normalized historical Data 
-    rpc TickData(TickDataRequest) returns (stream TickDataResponse);
+    // Get tick by tick normalized historical Updates 
+    rpc TickUpdates(TickUpdatesRequest) returns (stream TickUpdatesResponse);
 }
 
-// The required inputs to request the TickDataService.
-message TickDataRequest
+// The required inputs to request the TickUpdatesService.
+message TickUpdatesRequest
 {
 	// [Mandatory] The instrument identifier: a ticker and exchange 
     repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
@@ -60,7 +60,7 @@ message TickDataRequest
 }
 
 // Contains the tick by tick normalized historical data: event source, timestamp and payload.
-message TickDataResponse 
+message TickUpdatesResponse 
 {
     // Event source: short code for instrument identifier
     uint32 event_source = 1;
