@@ -31,9 +31,6 @@ import "systemathics/apis/type/shared/v1/identifier.proto";
 package systemathics.apis.services.tick_analytics.v1;
 
 // Called to request tick by tick bars data.
-// <br>Packages required:
-// <br>- <i>Systemathics.Apis.Type.Shared.V1</i>
-// <br>- <i>Systemathics.Apis.Services.TickAnalytics.V1</i>
 service TickBarsService 
 {
     // Gets tick by tick bars data

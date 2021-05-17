@@ -34,9 +34,6 @@ import "systemathics/apis/type/shared/v1/level.proto";
 package systemathics.apis.services.topology.v1;
 
 // Called to request topology over a look back-period with a given time granularity.
-// <br>Packages required:
-// <br>- <i>Systemathics.Apis.Type.Shared.V1</i>
-// <br>- <i>Systemathics.Apis.Services.Topology.V1</i>
 service TopologiesService
 {
   // Gets topology per a given time granularity

@@ -30,9 +30,6 @@ import "systemathics/apis/type/shared/v1/constraints.proto";
 package systemathics.apis.services.corporate_actions.v1;
 
 // Called to request splits data.
-// <br>Packages required:
-// <br>- <i>Systemathics.Apis.Type.Shared.V1</i>
-// <br>- <i>Systemathics.Apis.Services.CoporateActions.V1</i>
 service SplitsService
 {
   // Gets splits historical data
