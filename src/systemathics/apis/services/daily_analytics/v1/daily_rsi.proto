@@ -36,6 +36,7 @@ import "systemathics/apis/type/shared/v1/constraints.proto";
 package systemathics.apis.services.daily_analytics.v1;
 
 // Called to request daily relative strength index data. 
+service DailyRsiService
 {
   // Gets daily relative strength index data
   rpc DailyRsi(DailyRsiRequest) returns (DailyRsiResponse);
