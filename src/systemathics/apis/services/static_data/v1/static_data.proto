@@ -30,6 +30,7 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 import "google/type/date.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.static_data.v1;
 
@@ -80,11 +81,15 @@ message StaticDataRequest
 // Represents a reference data response grouped by asset type.
 message StaticDataResponse
 {
+	// The response status.
+	systemathics.apis.type.shared.v1.Status status = 1;
+
 	// The reference data for futures: an array of FutureEntry objects
-	repeated FutureEntry futures  = 1;
+	repeated FutureEntry futures  = 2;
 
 	// The reference data for equities: an array of EquityEntry objects
-	repeated EquityEntry equities  = 2;
+	repeated EquityEntry equities  = 3;
+
 }
 
 // Contains the reference data for equities.
