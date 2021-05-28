@@ -28,8 +28,7 @@ jobs:
         echo "VERSION=${VERSION}" >> $GITHUB_ENV
     - name: Build and publish
       env:
-        PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        PYPI_PUBLISH_INDIRECT_KEY: ${{ secrets.PYPI_PUBLISH_INDIRECT_KEY }}
-        PYPI_REPOSITORY : ${{ secrets.PYPI_REPOSITORY }}
+        TWINE_USERNAME: "__token__"
+        TWINE_PASSWORD: ${{ secrets.PYPI_ORG_TOKEN }}
       run: |
         python ./build.py

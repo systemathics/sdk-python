@@ -122,7 +122,7 @@ def check_environement():
     if(repository == ''):
         raise Exception("missing env var PYPI_REPOSITORY")
 
-def publish_package(root_dir):
+def publish_test_package(root_dir):
     # pass_out generated with
     # > echo -n ${{PASSWORD}} > ./pass
     # > openssl aes-256-cbc -pbkdf2 -e -k "${{PYPI_PUBLISH_INDIRECT_KEY}}" < ./pass > ./pass_out
@@ -155,6 +155,13 @@ def publish_package(root_dir):
 
     os.remove(path)
     subprocess.call(cmd, cwd=root_dir, shell=True)
+
+def publish_package(root_dir):
+    # used by publish_package function
+    cmd = f"python3 -m twine upload dist/*"
+
+    subprocess.call(cmd, cwd=root_dir, shell=True)
+
 
 def main():
     # check env before doing anything
