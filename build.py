@@ -108,19 +108,32 @@ def check_environement():
         raise Exception("missing env var VERSION")
 
     # used by publish_package function
-    key = os.getenv('PYPI_PUBLISH_INDIRECT_KEY','')
-    if(key == ''):
-        raise Exception("missing env var PYPI_PUBLISH_INDIRECT_KEY")
+    username = os.getenv('TWINE_USERNAME','')
+    if(username == ''):
+        raise Exception("missing env var TWINE_USERNAME")
+    # reset username
+    username = ''
 
     # used by publish_package function
-    user = os.getenv('PYPI_USERNAME','')
-    if(user == ''):
-        raise Exception("missing env var PYPI_USERNAME")
+    password = os.getenv('TWINE_PASSWORD','')
+    if(password == ''):
+        raise Exception("missing env var TWINE_PASSWORD")
+    password = ''
 
-    # used by publish_package function
-    repository = os.getenv('PYPI_REPOSITORY','')
-    if(repository == ''):
-        raise Exception("missing env var PYPI_REPOSITORY")
+    # # used by publish_package function
+    # key = os.getenv('PYPI_PUBLISH_INDIRECT_KEY','')
+    # if(key == ''):
+    #     raise Exception("missing env var PYPI_PUBLISH_INDIRECT_KEY")
+
+    # # used by publish_package function
+    # user = os.getenv('PYPI_USERNAME','')
+    # if(user == ''):
+    #     raise Exception("missing env var PYPI_USERNAME")
+
+    # # used by publish_package function
+    # repository = os.getenv('PYPI_REPOSITORY','')
+    # if(repository == ''):
+    #     raise Exception("missing env var PYPI_REPOSITORY")
 
 def publish_test_package(root_dir):
     # pass_out generated with
