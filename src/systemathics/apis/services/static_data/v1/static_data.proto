@@ -80,12 +80,14 @@ message StaticDataRequest
 // Represents a reference data response grouped by asset type.
 message StaticDataResponse
 {
-		// The reference data for futures: an array of FutureEntry objects
+	// The reference data for futures: an array of FutureEntry objects
 	repeated FutureEntry futures  = 1;
 
 	// The reference data for equities: an array of EquityEntry objects
 	repeated EquityEntry equities  = 2;
 
+	// The reference data for etfs: an array of EtfEntry objects
+	repeated EtfEntry etfs  = 3;
 }
 
 // Contains the reference data for equities.
@@ -133,6 +135,53 @@ message EquityEntry
 	map<string, string> sectors = 18;
     // Specific values for the equity: market capitalization
     google.protobuf.DoubleValue capitalization = 19;
+}
+
+// Contains the reference data for exchange traded fund (ETF).
+message EtfEntry
+{
+	// Identifiers: asset identifier
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+	
+	// General information: asset class
+	string type = 2;
+	// General information: asset country code (ISO 3166)
+	string country = 3;
+	// General information: asset full name 
+	string name = 4;
+	// General information: asset currency code (ISO 4217)
+	string currency = 5;
+	// General information: asset primary exchange code (mic)
+	string primary = 6;
+	// General information: asset tick size rule table
+	string tick_size_rule = 7;
+	// General information: asset mapping codes
+	map<string, string> mapping = 8;
+	// General information: asset index if it belongs to an index
+	string index = 9;
+
+	// Trading hours: open time (continuous trading)
+	string open = 10;
+	// Trading hours: close time (continuous trading)
+	string close = 11;
+	// Trading hours: time zone
+	string time_zone = 12;
+
+	// Specifications: lot size (minimum quantity to trade)
+	int64 lot_size = 13;
+	// Specifications: point value
+	double point_value = 14;
+
+	// Specific values for the equity: isin code (International Securities Identifying Number)
+	string isin = 15;
+	// Specific values for the equity: cusip code : Committee on Uniform Security Identification Procedures
+	string cusip = 16;
+	// Specific values for the equity: sedol code : Stock Exchange Daily Official List
+	string sedol = 17;
+	// Specific values for the equity: sectors definitions
+	map<string, string> sectors = 18;
+	// Specific values for the equity: market capitalization
+	google.protobuf.DoubleValue capitalization = 19;
 }
 
 // Contains the reference data for futures.
@@ -200,4 +249,7 @@ enum AssetType
 
 	// Search only on futures
 	ASSET_TYPE_FUTURE = 3;
+
+	// Search only on Exchange Traded Fund
+	ASSET_TYPE_ETF = 4;
 }
