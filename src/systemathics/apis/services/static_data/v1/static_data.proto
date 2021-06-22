@@ -88,6 +88,9 @@ message StaticDataResponse
 
 	// The reference data for etfs: an array of EtfEntry objects
 	repeated EtfEntry etfs  = 3;
+
+	// The reference data for indices: an array of IndexEntry objects
+	repeated IndexEntry indices  = 4;
 }
 
 // Contains the reference data for equities.
@@ -235,6 +238,45 @@ message FutureEntry
 	int32 year = 21;
 }
 
+// Contains the reference data for indices.
+message IndexEntry
+{
+	// Identifiers: asset identifier
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+	
+	// General information: asset class
+	string type = 2;
+	// General information: asset country code (ISO 3166)
+	string country = 3;
+	// General information: asset full name 
+	string name = 4;
+	// General information: asset currency code (ISO 4217)
+	string currency = 5;
+	// General information: asset primary exchange code (mic)
+	string primary = 6;
+	// General information: asset tick size rule table
+	string tick_size_rule = 7;
+	// General information: asset mapping codes
+	map<string, string> mapping = 8;
+	// General information: asset index if it belongs to an index
+	string index = 9;
+
+	// Trading hours: open time (continuous trading)
+	string open = 10;
+	// Trading hours: close time (continuous trading)
+	string close = 11;
+	// Trading hours: time zone
+	string time_zone = 12;
+
+	// Specifications: lot size (minimum quantity to trade)
+	int64 lot_size = 13;
+	// Specifications: point value
+	double point_value = 14;
+
+	// Specific values for the index: the description of the index
+	string description = 15;
+}
+
 // Contains the asset type for the reference data request.
 enum AssetType
 {
@@ -252,4 +294,7 @@ enum AssetType
 
 	// Search only on Exchange Traded Fund
 	ASSET_TYPE_ETF = 4;
+
+	// Search only on Index
+	ASSET_TYPE_INDEX = 5;
 }
