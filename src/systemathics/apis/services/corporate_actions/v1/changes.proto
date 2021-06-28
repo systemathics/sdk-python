@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Up-to-date split annoucements including effective date, old and new shares.
+// Up-to-date symbol changes annoucements including effective date, old and new symbols.
 syntax = "proto3";
 
 
