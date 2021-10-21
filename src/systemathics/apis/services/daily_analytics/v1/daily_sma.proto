@@ -54,6 +54,10 @@ message DailySmaRequest
 
 	// [Mandatory] The simple moving average window length (period : points number)
 	int32 length = 3;
+
+	// [Optional] The corporate action adjustment (dividends).
+	// By default the value is set to false : the split is applied in all cases
+	bool adjustment = 4;
 }
 
 // Represents a daily simple moving average response.

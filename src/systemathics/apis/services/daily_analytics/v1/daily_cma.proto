@@ -50,6 +50,10 @@ message DailyCmaRequest
 	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+
+	// [Optional] The corporate action adjustment (dividends).
+	// By default the value is set to false : the split is applied in all cases
+	bool adjustment = 3;
 }
 
 // Represents a daily cumulative moving average response.

@@ -54,6 +54,10 @@ message DailyRsiRequest
 
 	// [Mandatory] The relative strength index window length (period: points number)
 	int32 length = 3;
+
+	// [Optional] The corporate action adjustment (dividends).
+	// By default the value is set to false : the split is applied in all cases
+	bool adjustment = 4;
 }
 
 // Represents a daily relative strength index response.
