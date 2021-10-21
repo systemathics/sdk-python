@@ -63,7 +63,7 @@ message TickBarsRequest
 	bool adjustment = 7;
 }
 
-// Contains the tick bar's data: time, open, high, low, close, volume and count.
+// Contains the tick bar's data: time, open, high, low, close, volume, count and vwap.
 message TickBarsResponse
 {
 	// The time stamp
@@ -86,6 +86,9 @@ message TickBarsResponse
 
 	// Tick count of the current bar
 	int32 count = 7;
+
+	// Volume weighted average price of the current bar
+	double vwap = 8;
 }
 
 // The price types used to compute the bars
