@@ -66,6 +66,12 @@ message TickCmaRequest
 
 	// [Optional] The corporate action adjustment, by default the value is set to false
 	bool adjustment = 7;
+
+	// [Optional] Accept trading / quote conditions, by default the accept is set to null : accept all
+	repeated string accept = 8;
+
+	// [Optional] Rejected trading / quote conditions, by default the reject is set to null : do not reject
+	repeated string reject = 9;
 }
 
 // Contains the cumulative moving average data: timestamp and value.

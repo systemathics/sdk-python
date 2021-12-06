@@ -74,6 +74,12 @@ message TickBollingerRequest
 
     // [Optional] The corporate action adjustment, by default the value is set to false
     bool adjustment = 9;
+
+    // [Optional] Accept trading / quote conditions, by default the accept is set to null : accept all
+    repeated string accept = 10;
+
+    // [Optional] Rejected trading / quote conditions, by default the reject is set to null : do not reject
+    repeated string reject = 11;
 }
 
 // Contains the tick Bollinger bands data: date, lower, middle and upper.
