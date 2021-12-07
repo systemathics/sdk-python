@@ -1,0 +1,76 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// Tick bars are widely used to illustrate price movements for an instrument over a look back period. 
+// Commonly used in financial analysis and trading strategies as a technical indicator.
+syntax = "proto3";
+
+import "systemathics/apis/type/shared/v1/identifier.proto";
+
+package systemathics.apis.services.tick_analytics.v1;
+
+// Called to request tick by tick trading conditions data.
+service TickConditionsService 
+{
+    // Gets tick by tick trading conditions data
+    rpc TickConditions(TickConditionsRequest) returns (TickConditionsResponse);
+}
+
+// The required inputs to request the TickConditionsService.
+message TickConditionsRequest 
+{
+	oneof value 
+	{
+		// [Optional] The instrument identifier: a ticker and exchange
+		systemathics.apis.type.shared.v1.Identifier identifier = 1;
+
+		// [Optional] The market identifier code or exchange
+		string exchange = 2;
+
+		// [Optional] The source number
+		int32 source = 3;
+	}
+}
+
+// Represents a tick conditions response.
+message TickConditionsResponse
+{
+	// The conditions: an array of Condition objects
+	repeated Condition data = 1;
+}
+
+// Contains the tick trading conditions's data: value, description, regular and auction.
+message Condition
+{
+	// The trading condition value
+	string value = 1;
+	
+	// The trading condition description
+	string description = 2;
+
+	// The trading condition comment
+	string comment = 3;
+	
+	// Is regular market condition
+	bool regular = 4;
+	
+	// Is auction market condition
+	bool auction = 5;
+}
