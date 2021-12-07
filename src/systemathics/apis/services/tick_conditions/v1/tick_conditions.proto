@@ -24,7 +24,7 @@ syntax = "proto3";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
-package systemathics.apis.services.tick_analytics.v1;
+package systemathics.apis.services.tick_conditions.v1;
 
 // Called to request tick by tick trading conditions data.
 service TickConditionsService 
