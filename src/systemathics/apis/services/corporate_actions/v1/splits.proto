@@ -65,6 +65,9 @@ message Split
 
 	// Old shares
 	double old_shares = 3;
+
+	// The data quality scoring : from 0 (bad) to 100 (good)
+	double score = 4;
 }
 
  

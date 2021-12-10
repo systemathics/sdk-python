@@ -1,0 +1,61 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// The sector and industry classification decoder.
+syntax = "proto3";
+
+package systemathics.apis.services.static_data.v1;
+
+// Called to request static sector data.
+service StaticSectorService 
+{
+    // Gets static sector data
+    rpc StaticSector(StaticSectorRequest) returns (StaticSectorResponse);
+}
+
+// The required inputs to request the StaticSectorService.
+message StaticSectorRequest 
+{
+	// [Mandatory] The classification provider or source
+	string provider = 1;
+
+	// [Mandatory] The classification code
+	string code = 2;
+}
+
+// Represents a sector classifcation response.
+message StaticSectorResponse
+{
+	// The sector classification levels: an array of Level objects
+	repeated Level data = 1;
+
+	// The classification description
+	string description = 2;
+}
+
+// Contains the sector classification level: value, description, regular and auction.
+message Level
+{
+	// The sector classification level's name
+	string Name = 1;
+
+	// The sector classification level's index
+	int32 Index = 2;
+}

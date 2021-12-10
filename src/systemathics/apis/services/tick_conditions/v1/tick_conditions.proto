@@ -18,8 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Tick bars are widely used to illustrate price movements for an instrument over a look back period. 
-// Commonly used in financial analysis and trading strategies as a technical indicator.
+// The trade condition defines the type of the orders and trades.
 syntax = "proto3";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";

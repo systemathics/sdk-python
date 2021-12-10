@@ -65,6 +65,9 @@ message Change
 
 	// Old symbol
 	string old_symbol = 3;
+
+	// The data quality scoring : from 0 (bad) to 100 (good)
+	double score = 4;
 }
 
  
