@@ -58,4 +58,10 @@ message Level
 
 	// The sector classification level's index
 	int32 Index = 2;
+
+	// The sector classification level's code
+	string Code = 3;
+
+	// The sector classification level's definition
+	string definition = 4;
 }
