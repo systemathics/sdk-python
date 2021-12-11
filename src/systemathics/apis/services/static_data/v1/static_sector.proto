@@ -19,25 +19,37 @@
 // SOFTWARE.
 
 // The sector and industry classification decoder.
+// <br>Available classifications :
+// <br>- ICB : Industry Classification Benchmark is a comprehensive and rules based, transparent classification methodology based on research and market trends designed to support investment solutions. It was launched in 2005 and enhanced in 2019 with the integration of the Russell Global Sectors (RGS) classification scheme and additional structural enhancements.
+// <br>- SIC : The Standard Industrial Classification is a system for classifying industries by a four-digit code. Established in the United States in 1937, it is used by government agencies to classify industry areas. The SIC system is also used by agencies in other countries, e.g., by the United Kingdom's Companies House.
+// <br>- TRBC : The Refinitiv Business Classification is an industry classification of global companies. It was developed by the Reuters Group under the name Reuters Business Sector Scheme (RBSS), was rebranded to Thomson Reuters Business Classification (TRBC) when the Thomson Corporation acquired the Reuters Group in 2008, forming Thomson Reuters, and was rebranded again, to The Refinitiv Business Classification (TRBC), in 2020. Since the creation of Refinitiv in October 2018, TRBC has been owned and operated by Refinitiv and is the basis for Refinitiv Indices.
+// <br>- GICS : In 1999, MSCI and S&P Dow Jones Indices developed the Global Industry Classification Standard, seeking to offer an efficient investment tool to capture the breadth, depth and evolution of industry sectors.GICS is a four-tiered, hierarchical industry classification system. Companies are classified quantitatively and qualitatively.Each company is assigned a single GICS classification at the Sub-Industry level according to its principal business activity. MSCI and S&P Dow Jones Indices use revenues as a key factor in determining a firm�s principal business activity. Earnings and market perception, however, are also recognized as important and relevant information for classification purposes, and are taken into account during the annual review process.
 syntax = "proto3";
 
 package systemathics.apis.services.static_data.v1;
 
-// Called to request static sector data.
+// Called to request static sector and industry classification data.
 service StaticSectorService 
 {
-    // Gets static sector data
+    // Gets static sector and industry data
     rpc StaticSector(StaticSectorRequest) returns (StaticSectorResponse);
 }
 
 // The required inputs to request the StaticSectorService.
 message StaticSectorRequest 
 {
-	// [Mandatory] The classification provider or source
+	// [Mandatory] The classification provider or taxonomy
+	// <br>Available classifications : ICB, SIC, TRBC and GICS
 	string provider = 1;
 
-	// [Mandatory] The classification code
-	string code = 2;
+	oneof value 
+	{
+		// [Mandatory] The classification code
+		string code = 2;
+
+		// [Mandatory] The classification level (strating from 0 : the top structure or group)
+		int32 level = 3;
+	}
 }
 
 // Represents a sector classifcation response.
@@ -48,15 +60,18 @@ message StaticSectorResponse
 
 	// The classification description
 	string description = 2;
+
+	// The classification levels count
+	int32 count = 3;
 }
 
-// Contains the sector classification level: value, description, regular and auction.
+// Contains the sector classification structure at a specified level.
 message Level
 {
 	// The sector classification level's name
 	string Name = 1;
 
-	// The sector classification level's index
+	// The sector classification level's index (order of the strcture)
 	int32 Index = 2;
 
 	// The sector classification level's code
@@ -64,4 +79,7 @@ message Level
 
 	// The sector classification level's definition
 	string definition = 4;
+
+	// The sector classification level's label
+	string label = 5;
 }
