@@ -27,6 +27,7 @@ import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.daily.v1;
 
@@ -57,6 +58,9 @@ message DailyBarsResponse
 {
 	// The daily bars: an array of DailyBar objects
 	repeated DailyBar data = 1;
+
+	// The response status
+	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the daily bar's data: date, open, high, low, close and volume.

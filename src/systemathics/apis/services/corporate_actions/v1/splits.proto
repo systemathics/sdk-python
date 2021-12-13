@@ -26,6 +26,7 @@ import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.corporate_actions.v1;
 
@@ -52,6 +53,9 @@ message SplitsResponse
 {
 	// The splits: an array of Split objects
 	repeated Split data = 1;
+
+	// The response status
+	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the splits data: date, old and new shares.

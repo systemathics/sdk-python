@@ -22,6 +22,7 @@
 syntax = "proto3";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.tick_conditions.v1;
 
@@ -53,6 +54,9 @@ message TickConditionsResponse
 {
 	// The conditions: an array of Condition objects
 	repeated Condition data = 1;
+
+	// The response status
+	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the tick trading conditions's data: value, description, regular and auction.

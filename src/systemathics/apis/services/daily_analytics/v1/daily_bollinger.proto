@@ -32,6 +32,7 @@ import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.daily_analytics.v1;
 
@@ -68,6 +69,9 @@ message DailyBollingerResponse
 {
 	// The daily Bollinger bands: an array of DailyBollingerData objects
 	repeated DailyBollingerData data = 1;
+
+	// The response status
+	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the daily Bollinger bands data: date, lower, middle and upper.

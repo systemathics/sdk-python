@@ -31,6 +31,7 @@ import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.daily_analytics.v1;
 
@@ -61,6 +62,9 @@ message DailyCmaResponse
 {
 	// The daily cumulative moving averages: an array of DailyCmaData objects
 	repeated DailyCmaData data = 1;
+	
+	// The response status
+	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the daily cumulative moving average data: date and value.

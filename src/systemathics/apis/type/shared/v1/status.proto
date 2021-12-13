@@ -18,50 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Up-to-date index components weights
+// The status describes the response state : success and message
 syntax = "proto3";
 
+package systemathics.apis.type.shared.v1;
 
-import "google/type/date.proto";
-
-import "systemathics/apis/type/shared/v1/identifier.proto";
-import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/status.proto";
-
-package systemathics.apis.services.indices.v1;
-
-// Called to request index weights data.
-service ComponentsService
+// The status contains the success value and the related reponse message
+message Status
 {
-  // Gets index components data
-  rpc Components(ComponentsRequest) returns (ComponentsResponse);
+	// The status value : true or false
+	bool sucess = 1;
+
+	// The status message.
+	string message = 2;
 }
-
-// The required input to request the ComponentsService
-message ComponentsRequest
-{
-	// [Mandatory] The index name
-	string identifier = 1;
-}
-
-// Represents a components response.
-message ComponentsResponse
-{
-	// The index components: an array of component objects
-	repeated Component components = 1;
-
-	// The response status
-	systemathics.apis.type.shared.v1.Status status = 2;
-}
-
-// Contains the weight data for one component: identifier and weight value.
-message Component 
-{	
-	// The instrument identifier: a ticker and exchange 
-	systemathics.apis.type.shared.v1.Identifier identifier = 1;
-
-	// The weight value
-	double weight = 2;
-}
-
- 

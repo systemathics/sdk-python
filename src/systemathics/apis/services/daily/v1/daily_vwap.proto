@@ -30,6 +30,7 @@ import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.daily.v1;
 
@@ -60,6 +61,9 @@ message DailyVwapsResponse
 {
 	// The daily vwaps: an array of DailyVwap objects
 	repeated DailyVwap data = 1;
+
+	// The response status
+	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the daily vwaps data: date, vwap and volume.

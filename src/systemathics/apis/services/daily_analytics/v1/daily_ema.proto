@@ -33,6 +33,7 @@ import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.daily_analytics.v1;
 
@@ -66,6 +67,9 @@ message DailyEmaResponse
 {
 	// The daily exponential moving averages: an array of DailyEmaData objects
 	repeated DailyEmaData data = 1;
+
+	// The response status
+	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the daily exponential moving average data: date and value.
