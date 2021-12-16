@@ -32,7 +32,6 @@ import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.daily_analytics.v1;
 
@@ -66,9 +65,6 @@ message DailyRsiResponse
 {
 	// The daily relative strength index: an array of DailyRsiData objects
 	repeated DailyRsiData data = 1;
-
-	// The response status
-	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the daily relative strength index data: date and value.

@@ -30,7 +30,6 @@ import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/status.proto";
 
 package systemathics.apis.services.daily_analytics.v1;
 
@@ -67,9 +66,6 @@ message DailyMacdResponse
 {
 	// The daily moving average convergence/divergence: an array of DailyMacdData objects
 	repeated DailyMacdData data = 1;
-
-	// The response status
-	systemathics.apis.type.shared.v1.Status status = 2;
 }
 
 // Contains the daily moving average convergence/divergence data: date and value.
