@@ -1,0 +1,82 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// SMA is formed by computing the average price of a security over a specific number of points. 
+// <br>As its name implies, simple moving average is an average that moves. Old data is dropped and new data becomes available, causing the average to move along the time.
+// <br><i>N-points SMA data point</i> is computed by adding up the last N period's trade prices and then dividing by N as follows: $$ SMA = \frac{\Sigma Close_n}{N} $$
+// <br>Where:
+// <br>- <i>Close n</i> is the close price of the <i>period n</i>
+// <br>- <i>N</i> is the count of time periods
+syntax = "proto3";
+
+
+import "google/type/date.proto";
+import "google/protobuf/wrappers.proto";
+
+import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/constraints.proto";
+
+package systemathics.apis.services.intraday_analytics.v1;
+
+// Called to request intraday simple moving average data. 
+service IntradaySmaService
+{
+  // Gets intraday simple moving average data
+  rpc IntradaySma(IntradaySmaRequest) returns (IntradaySmaResponse);
+}
+
+// The required input to request the IntradaySmaService.
+message IntradaySmaRequest
+{
+	// [Mandatory] The instrument identifier: a ticker and exchange
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
+	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+
+	// [Mandatory] The simple moving average window length (period : points number)
+	int32 length = 3;
+
+	// [Optional] The corporate action adjustment (dividends).
+	// By default the value is set to false : the split is applied in all cases
+	bool adjustment = 4;
+}
+
+// Represents a intraday simple moving average response.
+message IntradaySmaResponse
+{
+	// The intraday simple moving averages: an array of IntradaySmaData objects
+	repeated IntradaySmaData data = 1;
+}
+
+// Contains the intraday simple moving average data: date and value.
+message IntradaySmaData 
+{
+	// Date of the simple moving average
+	google.type.Date date = 1;
+	
+	// The data used to calculate the average of the day
+	double value = 2;
+
+	// The simple moving average value of the day for the last n data points (length)
+	google.protobuf.DoubleValue average = 3;
+}
+ 
