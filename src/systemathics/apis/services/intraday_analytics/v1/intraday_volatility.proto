@@ -27,6 +27,7 @@ syntax = "proto3";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/sampling.proto";
 
 package systemathics.apis.services.intraday_analytics.v1;
 
@@ -43,13 +44,16 @@ message IntradayVolatilityRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange 
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
+	// [Mandatory] The sampling interval
+	systemathics.apis.type.shared.v1.Sampling sampling = 2;
+
 	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+	systemathics.apis.type.shared.v1.Constraints constraints = 3;
 
 	// [Optional] The corporate action adjustment (dividends).
 	// By default the value is set to false : the split is applied in all cases
-	bool adjustment = 3;
+	bool adjustment = 4;
 }
 
 // Represents a intraday volatility response.

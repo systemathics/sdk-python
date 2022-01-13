@@ -26,10 +26,11 @@
 syntax = "proto3";
 
 
-import "google/type/date.proto";
+import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/sampling.proto";
 
 package systemathics.apis.services.intraday_analytics.v1;
 
@@ -46,19 +47,22 @@ message IntradayMacdRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
+	// [Mandatory] The sampling interval
+	systemathics.apis.type.shared.v1.Sampling sampling = 2;
+
 	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+	systemathics.apis.type.shared.v1.Constraints constraints = 3;
 
 	// [Mandatory] The long EMA window length (period : points number)
-	int32 long = 3;
+	int32 long = 4;
 
 	// [Mandatory] The short EMA window length (period : points number)
-	int32 short = 4;
+	int32 short = 5;
 
 	// [Optional] The corporate action adjustment (dividends).
 	// By default the value is set to false : the split is applied in all cases
-	bool adjustment = 5;
+	bool adjustment = 6;
 }
 
 // Represents a intraday moving average convergence divergence response.
@@ -71,8 +75,8 @@ message IntradayMacdResponse
 // Contains the intraday moving average convergence/divergence data: date and value.
 message IntradayMacdData 
 {
-	// Date of the moving average convergence/divergence
-	google.type.Date date = 1;
+	// Time stamp of the moving average convergence/divergence : open time of the sampling interval
+	google.protobuf.Timestamp time_stamp = 1;
 	
 	// The data used to calculate the average convergence/divergence of the day
 	double value = 2;

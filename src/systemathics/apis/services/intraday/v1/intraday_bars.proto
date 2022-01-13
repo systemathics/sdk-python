@@ -23,10 +23,11 @@
 syntax = "proto3";
 
 
-import "google/type/date.proto";
+import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/sampling.proto";
 
 package systemathics.apis.services.intraday.v1;
 
@@ -43,13 +44,16 @@ message IntradayBarsRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
+	// [Mandatory] The sampling interval
+	systemathics.apis.type.shared.v1.Sampling sampling = 2;
+
 	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+	systemathics.apis.type.shared.v1.Constraints constraints = 3;
 
 	// [Optional] The corporate action adjustment (dividends).
 	// By default the value is set to false : the split is applied in all cases
-	bool adjustment = 3;
+	bool adjustment = 4;
 }
 
 // The intraday bars response contains an array of intraday bars.
@@ -59,28 +63,34 @@ message IntradayBarsResponse
 	repeated IntradayBar data = 1;
 }
 
-// Contains the intraday bar's data: date, open, high, low, close and volume.
+// Contains the intraday bar's data: date, open, high, low, close, volume, count, vwap and score.
 message IntradayBar 
 {
-	// Date of the bar
-	google.type.Date date = 1;
+	// Time stamp of the intraday bar : open time of the sampling interval
+	google.protobuf.Timestamp time_stamp = 1;
 	
-	// Open price of the day
+	// Open price of the sampling period
 	double open = 2;
 	
-	// Highest price of the day
+	// Highest price of the sampling period
 	double high = 3;
 	
-	// Lowest price of the day
+	// Lowest price of the sampling period
 	double low = 4;
 	
-	// Close price of the day
+	// Close price of the sampling period
 	double close = 5;
 	
-	// Total traded volume of the day
+	// Total traded volume of the sampling period
 	int64 volume = 6;
 
+	// Tick count of the sampling period
+	int32 count = 7;
+
+	// Volume weighted average price of the sampling period
+	double vwap = 8;
+
 	// The data quality scoring : from 0 (bad) to 100 (good)
-	double score = 7;
+	double score = 9;
 }
  

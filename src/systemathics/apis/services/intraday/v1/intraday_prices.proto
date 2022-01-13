@@ -22,10 +22,11 @@
 syntax = "proto3";
 
 
-import "google/type/date.proto";
+import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/sampling.proto";
 
 package systemathics.apis.services.intraday.v1;
 
@@ -42,13 +43,16 @@ message IntradayPricesRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange 
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
+	// [Mandatory] The sampling interval
+	systemathics.apis.type.shared.v1.Sampling sampling = 2;
+
 	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+	systemathics.apis.type.shared.v1.Constraints constraints = 3;
 
 	// [Optional] The corporate action adjustment (dividends).
 	// By default the value is set to false : the split is applied in all cases
-	bool adjustment = 3;
+	bool adjustment = 4;
 }
 
 // Represents a intraday prices response.
@@ -58,16 +62,16 @@ message IntradayPricesResponse
 	repeated IntradayPrice data = 1;
 }
 
-// Contains the intraday prices data: date, price and volume.
+// Contains the intraday prices data: date, price, volume and score.
 message IntradayPrice 
 {
-	// Date of the price
-	google.type.Date date = 1;
+	// Time stamp of the intraday price : open time of the sampling interval
+	google.protobuf.Timestamp time_stamp = 1;
 	
-	// Last price of the day
+	// Last price of the sampling period
 	double price = 2;
 	
-	// Total traded volume of the day
+	// Total traded volume of the sampling period
 	int64 volume = 3;
 
 	// The data quality scoring : from 0 (bad) to 100 (good)
