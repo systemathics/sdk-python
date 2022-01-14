@@ -62,8 +62,8 @@ message IntradayBollingerRequest
 	// [Mandatory] The standard deviation window length
 	double deviation = 5;
 
-	// [Optional] The corporate action adjustment (dividends).
-	// By default the value is set to false : the split is applied in all cases
+	// [Optional] The corporate action adjustment (dividends and splits).
+	// By default the value is set to false
 	bool adjustment = 6;
 }
 
