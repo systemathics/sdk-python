@@ -3,5 +3,3 @@
 /pyvenv.cfg
 /python/dist
 /python/systemathics.apis.egg-info
-dist/
-python/
