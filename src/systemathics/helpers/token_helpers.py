@@ -5,7 +5,7 @@ This module helps to create tokens to access Systemathics authenticated APIs
 functions:
     * get_token - get token by autodecting environment variables
     * create_bearer_token - create a bearer token (used by get_token when AUTH0_TOKEN env variable is set)
-    * create_oauth_token - create oauth token (used by get_token when AUTH0_TOKEN env variable is not set and CLIENT_ID, CLIENT_SECRET, AUDIENCE and TENANT environment variables are set)
+    * create_bearer_token_using_rest - create beared token using REST API (used by get_token when AUTH0_TOKEN env variable is not set and CLIENT_ID, CLIENT_SECRET, AUDIENCE and TENANT environment variables are set)
 """
 
 import os
@@ -43,9 +43,9 @@ def get_token() -> str:
         missing.append("TENANT")
 
     if (len(missing) == 0):
-        return create_oauth_token(client_id, client_secret, audience, tenant)
-        
-    raise Exception(f"AUTH0_TOKEN environment variable is not set, therefore CLIENT_ID, CLIENT_SECRET, AUDIENCE and TENANT environment variables must be set. Missing env variables {missing}")
+        return create_bearer_token_using_rest(client_id, client_secret, audience, tenant)
+    else:    
+        raise Exception(f"AUTH0_TOKEN environment variable is not set, therefore CLIENT_ID, CLIENT_SECRET, AUDIENCE and TENANT environment variables must be set. Missing env variables {missing}")
 
 def create_bearer_token(auth0_token) -> str:
     if (auth0_token == ''):
@@ -53,7 +53,7 @@ def create_bearer_token(auth0_token) -> str:
 
     return f"Bearer {auth0_token}"
 
-def create_oauth_token(client_id, client_secret, audience, tenant) -> str:
+def create_bearer_token_using_rest(client_id, client_secret, audience, tenant) -> str:
     if (client_id == ''):
         raise Exception(f"client_id cannot be null")
     if (client_secret == ''):
@@ -63,19 +63,28 @@ def create_oauth_token(client_id, client_secret, audience, tenant) -> str:
     if (tenant == ''):
         raise Exception(f"tenant cannot be null")
 
-    # Setup connection and payload
-    conn = http.client.HTTPSConnection(tenant)
-    headers = { 'content-type': "application/json" }
-    params = {"client_id": client_id, "client_secret": client_secret, "grant_type" : "client_credentials", "audience": audience }
-    payload = json.dumps(params)
+    try:
+        # Setup connection and payload
+        conn = http.client.HTTPSConnection(tenant)
+        headers = { 'content-type': "application/json" }
+        params = {"client_id": client_id, "client_secret": client_secret, "grant_type" : "client_credentials", "audience": audience }
+        payload = json.dumps(params)
 
-    # Send Request
-    conn.request("POST", "/oauth/token", payload, headers)
-    res = conn.getresponse()
-    data = res.read()
-    json_data =  json.loads(data.decode("utf-8"))
-                        
-    # Get access token to be used to authenticate against API
-    token = f"{json_data['token_type']} {json_data['access_token']}"
+        # Send Request
+        conn.request("POST", "/oauth/token", payload, headers)
+        res = conn.getresponse()
+        data = res.read()
+        
+        json_data =  json.loads(data.decode("utf-8"))
+                            
+        # Get access token to be used to authenticate against API
+        try:
+            token = f"{json_data['token_type']} {json_data['access_token']}"
+            return token
+        except Exception as ee:
+            print(f"create_bearer_token_using_rest: Returned JSON doesn't contain 'token_type' and/or 'access_token'. Check your client_id, client_secret, audience and tenant: {json_data}")
+            return ""
 
-    return token
+    except Exception as e:
+        print(f"create_bearer_token_using_rest: Got exception {e}")
+        return ""

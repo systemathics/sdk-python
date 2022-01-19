@@ -5,8 +5,8 @@
 In order for this to work, environment must be setup accordingly
 You need to go to your dashboard in tokens section and adapt the bash snippet below
 
-export CLIENT_ID="YOUR_CLIENT_ID"
-export CLIENT_SECRET="YOUR_CLIENT_SECRET"
+export CLIENT_ID="wrFSU96w9Q1lXGaJC8zQJqNOFU16fsCl"
+export CLIENT_SECRET="5CsoEkx387Uqy9J-6PZFDYOC0ptbYp04pJGuc-luCrdXtZLleILwM_RV501M5FY4"
 export AUDIENCE="https://prod.ganymede-prod"
 export TENANT="ganymede-prod.eu.auth0.com"
 export GRPC_APIS="grpc.systemathics.cloud"
