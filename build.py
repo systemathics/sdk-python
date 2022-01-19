@@ -1,5 +1,9 @@
+#!/usr/bin/python
+
 import os
+from pickle import FALSE
 import subprocess
+import shutil
 
 def create_dir_if_needed(dir):
     if(not(os.path.isdir(dir))):
@@ -21,17 +25,21 @@ def is_grpc_file (path):
             return True
     return False
 
-def sort_proto_files(dir):
-    """Used to sort *.proto files under a directory `dir` in 2 categories :
-    - grpc files (containing a a grpc service)
-    - proto files (without a a grpc service)
+def create_files_tuples(dir):
+    """Create the lists of files from `dir` and ventilate them in 3 categories :
+    - grpc files (containing a grpc service)
+    - proto files (without a grpc service)
+    - python files
 
-    Returns a tuple with 2 lists. 
-    First list containts grpc files. 
-    Second list containt regular proto files
+    Returns a tuple with 3 lists. 
+    First list contains grpc files. 
+    Second list contains regular proto files
+    Third list contains python files
     """
     grpc_files = []
     proto_files = []
+    python_files = []
+    print(f"create_files_tuples(dir={dir})")
     for root, dirs, files in os.walk(dir, topdown=True):
         # skip google folder
         if 'google' in dirs:
@@ -40,10 +48,16 @@ def sort_proto_files(dir):
             path = os.path.join(root, file)
             if (file.endswith('.proto')) :
                 if(is_grpc_file(path)) :
+                    print(f"grpc:   {path}")
                     grpc_files.append(path)
                 else:
                     proto_files.append(path)
-    return (grpc_files,proto_files)
+                    print(f"proto:  {path}")
+            if (file.endswith('.py')) :
+                print(f"python: {path}")
+                python_files.append(path)
+
+    return (grpc_files,proto_files,python_files)
 
 def generate_grpc_file(files, scr_dir, target_dir):
     create_dir_if_needed(target_dir)
@@ -59,13 +73,24 @@ def generate_proto_file(files, scr_dir, target_dir):
     print(cmd)
     subprocess.call(cmd, cwd=scr_dir, shell=True)
 
+def copy_python_sources(files, src_dir, target_dir):
+    create_dir_if_needed(target_dir)
+    for file in files:
+        file2 = file.replace(src_dir, target_dir)
+        folder2=os.path.dirname(file2)
+        create_dir_if_needed(folder2)
+        print(f"Copying \n  {file} to \n  {file2}")
+        shutil.copy(file, file2)
+
 def generate(tuple_of_list, src_dir, target_dir):
     grpc_files = tuple_of_list[0]
     proto_files = tuple_of_list[1]
+    python_files = tuple_of_list[2]
 
+    copy_python_sources(python_files, src_dir, target_dir)
     generate_grpc_file(grpc_files, src_dir, target_dir)
     generate_proto_file(proto_files, src_dir, target_dir)
-
+    
 def add_namespace_import_to_init_py(dir):
     for root, _, _ in os.walk(dir, topdown=True):
         path = os.path.join(root,'__init__.py')
@@ -193,25 +218,28 @@ def main():
     delete_dir_if_needed(dist_dir)
 
     # get proto files (grpc and regular)
-    print("Sort proto files")
-    result = sort_proto_files(src_dir)
+    print("Get files")
+    result = create_files_tuples(src_dir)
+
     # generate new python file from proto
-    print("Generate proto files")
+    print("Generate")
     generate(result, src_dir, out_dir)
 
     # add proto import to __init__.py files
     print("Add namespace import to __init__.py files")
     add_namespace_import_to_init_py(stx_dir)
 
-    # geenrate and publish package
+    # generate package
     print("Setting version in setup.py")
     replace_version_in_setup(out_dir)
     print("Generate package")
     generate_package(out_dir)
-    print("Publish package")
-    publish_package(out_dir)
-
-
+    
+    # # publish package
+    # upload=FALSE
+    # if upload:
+    #     print("Publish package")
+    #     publish_package(out_dir)
 
 if __name__ == "__main__":
     # execute only if run as a script
