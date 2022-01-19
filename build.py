@@ -235,13 +235,10 @@ def main():
     print("Generate package")
     generate_package(out_dir)
     
-    # # publish package
-    # upload=FALSE
-    # if upload:
-    #     print("Publish package")
-    #     publish_package(out_dir)
+    # publish package
+    print("Publish package")
+    publish_package(out_dir)
 
 if __name__ == "__main__":
     # execute only if run as a script
     main()
-
