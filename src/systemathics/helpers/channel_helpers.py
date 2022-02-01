@@ -84,5 +84,3 @@ def _autodetect_ca_bundle() -> str:
             return cabundle
 
     raise Exception(f"Could not auto detect trusted root certificates file, tried {cabundles}. Please help by setting SSL_CERT_FILE environment variable")
-
-print(get_grpc_channel())
