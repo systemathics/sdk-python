@@ -14,6 +14,16 @@ DEFAULT_AUDIENCE = "https://prod.ganymede-prod"
 
 DEFAULT_TENANT = "ganymede-prod.eu.auth0.com"
 
+def get_token_as_metadata() -> []:
+    """
+    Get a JWT Authorization token suitable to call Ganymede gRPC APIs.
+    We either use 'AUTH0_TOKEN' environment variable (if present) to create a bearer token from it.
+    Or 'CLIENT_ID' and 'CLIENT_SECRET' environment variables (optionally 'AUDIENCE' can override DEFAULT_AUDIENCE, and 'TENANT' can override DEFAULT_TENANT).  
+    Returns:
+        A JWT Authorization token suitable to call Ganymede gRPC APIs in a form directly assignable to metadata= in stub call, that is [('authorization', get_token())].
+    """
+    return [('authorization', get_token())]
+
 def get_token() -> str:    
     """
     Get a JWT Authorization token suitable to call Ganymede gRPC APIs.
