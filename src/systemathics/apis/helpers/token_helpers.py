@@ -78,7 +78,7 @@ def _create_bearer_token_using_rest(client_id, client_secret, audience, tenant) 
     # Get access token to be used to authenticate against API
     try:
         token = f"{json_data['token_type']} {json_data['access_token']}"
-        os.environment['AUTH0_TOKEN'] = token # 
+        os.environ['AUTH0_TOKEN'] = json_data['access_token'] # Push to environment
         return token
     except Exception as ee:
         raise Exception(f"Returned JSON doesn't contain 'token_type' and/or 'access_token'. Check your client ID, client secret, audience and tenant: {json_data}")
