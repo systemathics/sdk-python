@@ -74,13 +74,13 @@ message Dividend
 enum DividendType
 {
 	// Unspecified
-	UNSPECIFIED = 0;
+	DIVIDEND_TYPE_UNSPECIFIED = 0;
 
 	// Cash dividend
-	CASH = 1;
+	DIVIDEND_TYPE_CASH = 1;
 
 	// Stock dividend
-	STOCK = 2;
+	DIVIDEND_TYPE_STOCK = 2;
 }
 
  

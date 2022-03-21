@@ -27,16 +27,18 @@ package systemathics.apis.type.shared.v1;
 // Contains the intraday sampling intervals.
 enum Sampling
 {
+    // The unspecifed interval
+    SAMPLING_UNSPECIFIED = 0;
     // The one minute interval
-    SAMPLING_ONE_MINUTE = 0;
+    SAMPLING_ONE_MINUTE = 1;
     // The five minutes interval
-    SAMPLING_FIVE_MINUTE = 1;
+    SAMPLING_FIVE_MINUTE = 2;
     // The ten minutes interval
-    SAMPLING_TEN_MINUTE = 2;
+    SAMPLING_TEN_MINUTE = 3;
     // The fifteen minutes interval
-    SAMPLING_FIFTEEN_MINUTE = 3;
+    SAMPLING_FIFTEEN_MINUTE = 4;
     // The thirty minutes interval
-    SAMPLING_THIRTY_MINUTE = 4;
+    SAMPLING_THIRTY_MINUTE = 5;
     // The one hour interval
-    SAMPLING_ONE_HOUR = 5;
+    SAMPLING_ONE_HOUR = 6;
 }
