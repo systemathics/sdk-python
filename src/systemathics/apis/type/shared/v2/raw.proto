@@ -18,28 +18,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market data trades
+// The market data raw content
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-import "systemathics/apis/type/shared/v1/identifier.proto";
-import "systemathics/apis/type/shared/v1/trade.proto";
-import "systemathics/apis/type/shared/v1/book.proto";
+package systemathics.apis.type.shared.v2;
 
-package systemathics.apis.type.shared.v1;
-
-message TradeAndBook
+// Contains the ticks in raw format (identical to provider's data).
+message Raw
 {
 	// The instrument mapping key: short code for instrument identifier.
 	uint32 mapping = 1;
-    
-	// The times tamp of the trade and book
+
+	// The timestamp
 	google.protobuf.Timestamp time_stamp = 2;
 
-	// The trade
-	Trade trade = 3;
-
-	// The book
-	BookLimit book = 4;
+	// The frame type
+	uint32 type = 3;
+    
+	// Payload
+	bytes payload = 4;
 }

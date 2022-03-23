@@ -18,28 +18,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market data trades
+// Represents the book market data.
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
 
-import "systemathics/apis/type/shared/v1/identifier.proto";
-import "systemathics/apis/type/shared/v1/trade.proto";
-import "systemathics/apis/type/shared/v1/book.proto";
+import "google/protobuf/wrappers.proto";
 
-package systemathics.apis.type.shared.v1;
+import "systemathics/apis/type/shared/v1/action.proto";
+import "systemathics/apis/type/shared/v1/side.proto";
 
-message TradeAndBook
+package systemathics.apis.type.shared.v2;
+
+// Contains MBO market book updates data.
+message MboMarketBookUpdates
 {
-	// The instrument mapping key: short code for instrument identifier.
-	uint32 mapping = 1;
+    // The market book updates: an array of MarketBookUpdate objects
+    repeated systemathics.apis.type.shared.v2.MboMarketBookUpdate updates = 2;
+}
+
+// Represents a MBO market book update.
+message MboMarketBookUpdate
+{
+    // Action of the market book update
+    systemathics.apis.type.shared.v1.Action action = 1;
     
-	// The times tamp of the trade and book
-	google.protobuf.Timestamp time_stamp = 2;
+    // Side of the market book update
+    systemathics.apis.type.shared.v1.Side side = 2;
+    
+    // Quote ID
+    string quote_id = 3;
+    
+    // Size of the market book update
+    google.protobuf.Int64Value size = 4;
+    
+    // Price of the market book update 
+    google.protobuf.DoubleValue price = 5;
 
-	// The trade
-	Trade trade = 3;
-
-	// The book
-	BookLimit book = 4;
+    // Condition of the market book update
+    google.protobuf.Int32Value condition = 6;
 }
