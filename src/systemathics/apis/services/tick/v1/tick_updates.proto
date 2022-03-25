@@ -75,6 +75,6 @@ message TickUpdatesResponse
         systemathics.apis.type.shared.v1.MarketBookUpdates book_updates = 4;
         
         // Event source and instrument identifier mapping. It's sent once when streaming begins.
-        systemathics.apis.type.shared.v1.Mappings mappings = 5;
+            systemathics.apis.type.shared.v1.Mappings mappings = 5;
     }
 }

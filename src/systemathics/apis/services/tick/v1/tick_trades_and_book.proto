@@ -27,10 +27,7 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/mappings.proto";
 import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/market_book_updates.proto";
-import "systemathics/apis/type/shared/v1/market_fields_updates.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
 import "systemathics/apis/type/shared/v1/book.proto";

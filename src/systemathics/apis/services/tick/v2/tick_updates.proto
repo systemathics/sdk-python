@@ -24,12 +24,10 @@
 // <br>- Feed best execution reports for a given watchlist over the time
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/mappings.proto";
+import "systemathics/apis/type/shared/v1/keys.proto";
 import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/identifierandstream.proto";
 import "systemathics/apis/type/shared/v2/market_fields_updates.proto";
 import "systemathics/apis/type/shared/v2/mbl_market_book_updates.proto";
 import "systemathics/apis/type/shared/v2/mbo_market_book_updates.proto";
@@ -46,42 +44,33 @@ service TickUpdatesService
 // The required inputs to request the TickUpdatesService.
 message TickUpdatesRequest
 {
-	// [Mandatory] The instrument identifier: a ticker and exchange 
-    repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
-    
-    // [Mandatory] Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
-    systemathics.apis.type.shared.v1.Level level = 2;
-    
+	// [Mandatory] The instrument and streams identifiers: a list of tickers and exchanges and streams
+    repeated systemathics.apis.type.shared.v1.IdentifierAndStream identifiers = 1;
+        
     // [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-    systemathics.apis.type.shared.v1.Constraints constraints = 3;
+    systemathics.apis.type.shared.v1.Constraints constraints = 2;
 
     // [Optional] The corporate action adjustment, by default the value is set to false
-    bool adjustment = 4;
+    bool adjustment = 3;
 }
 
 // Contains the tick by tick normalized historical data: event source, timestamp and payload.
 message TickUpdatesResponse 
-{
-    // Event source: short code for instrument identifier
-    uint32 event_source = 1;
-    
-    // Timestamp from the market
-    google.protobuf.Timestamp time_stamp = 2;
-    
+{    
     // Payload: that can be a mapping (event source and instrument identifier), some fields update or some books update
     oneof payload 
     {
         // Some fields update
-        systemathics.apis.type.shared.v2.MarketFieldsUpdates fields_updates = 3;
+        systemathics.apis.type.shared.v2.MarketFieldsUpdates fields_updates = 1;
         
         // Some MBL books update
-        systemathics.apis.type.shared.v2.MblMarketBookUpdates mbl_book_updates = 4;
+        systemathics.apis.type.shared.v2.MblMarketBookUpdates mbl_book_updates = 2;
         
         // Some MBO books update
-        systemathics.apis.type.shared.v2.MboMarketBookUpdates mbo_book_updates = 5;
+        systemathics.apis.type.shared.v2.MboMarketBookUpdates mbo_book_updates = 3;
 
-        // Event source and instrument identifier mapping. It's sent once when streaming begins.
-        systemathics.apis.type.shared.v1.Mappings mappings = 6;
+        // The mapping data
+        systemathics.apis.type.shared.v1.Keys mapping = 4;
     }
 }

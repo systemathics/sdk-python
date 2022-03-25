@@ -22,6 +22,7 @@
 syntax = "proto3";
 
 
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/action.proto";
@@ -32,8 +33,17 @@ package systemathics.apis.type.shared.v2;
 // Contains MBO market book updates data.
 message MboMarketBookUpdates
 {
+	// The instrument mapping key: short code for instrument identifier.
+	uint32 mapping = 1;
+
+	// Timestamp from the market
+	google.protobuf.Timestamp time_stamp = 2;
+
+	// If set, previous data must be cleared entirely, otherwise current data is an increment on top of previous data
+	bool reset = 3;
+
     // The market book updates: an array of MarketBookUpdate objects
-    repeated systemathics.apis.type.shared.v2.MboMarketBookUpdate updates = 2;
+    repeated systemathics.apis.type.shared.v2.MboMarketBookUpdate updates = 4;
 }
 
 // Represents a MBO market book update.
@@ -45,8 +55,8 @@ message MboMarketBookUpdate
     // Side of the market book update
     systemathics.apis.type.shared.v1.Side side = 2;
     
-    // Quote ID
-    string quote_id = 3;
+    // Order ID
+    string order_id = 3;
     
     // Size of the market book update
     google.protobuf.Int64Value size = 4;

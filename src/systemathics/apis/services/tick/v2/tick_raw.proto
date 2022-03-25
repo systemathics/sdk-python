@@ -24,11 +24,9 @@
 // <br>- Compare raw provider format data to normalized data
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/identifierandstream.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
 import "systemathics/apis/type/shared/v2/raw.proto";
 
@@ -44,15 +42,12 @@ service TickRawService
 // The required inputs to request the TickRawService.
 message TickRawRequest 
 {
-    // [Mandatory] The instrument identifiers: a list of tickers and exchanges 
-	repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
+    // [Mandatory] The instrument and streams identifiers: a list of tickers and exchanges and streams
+	repeated systemathics.apis.type.shared.v1.IdentifierAndStream identifiers = 1;
 
 	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
-
-	// [Mandatory] The stream level (Level 1 or Level 1 and 2)
-    systemathics.apis.type.shared.v1.Level level = 3;
 }
 
 // Represents the RAW response

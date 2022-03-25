@@ -33,13 +33,13 @@ message Mapping
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	// Memo associated with Identifier
 	systemathics.apis.type.shared.v1.Memo memo = 2;
-    // Short name for a memo
-    uint32 event_source = 3;
+	// Short name for a memo
+	uint32 event_source = 3;
 }
 
 // Represents several Mapping
 message Mappings
 {
-    // An array of Mapping
-    repeated Mapping table = 1;
+	// An array of Mapping
+	repeated Mapping table = 1;
 }
