@@ -18,30 +18,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Instrument identifier is built from:
-// <br>- An exchange code: MIC
-// <br>- A ticker: instrument name given by the exchange
-// <br>- An optional provider name if several tick data providers are used
+// Enables to set or to clear market data updates. Navigate to market book updates and market fields updates to discover how action is used.
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
-import "systemathics/apis/type/shared/v1/stream.proto";
 
 package systemathics.apis.type.shared.v1;
 
-// Contains the instrument identifier and stream.
-message IdentifierAndStream
+// Contains the market Data update action.
+enum Stream
 {
-	// [Mandatory] Exchange market identifier code (MIC defined in ISO-20022)
-	string exchange = 1;
-	
-	// [Mandatory] Ticker name, associated with market idenfier code defines a unique asset
-	string ticker = 2;	
-	
-	// [Optional] tick data provider name if several tick data providers are available
-	google.protobuf.StringValue provider = 3;
-
-	// [Mandatory] 
-	systemathics.apis.type.shared.v1.Stream stream = 4;	
+    // The unspecfied stream
+    STREAM_UNSPECIFIED = 0;
+    // The stream only containing fields updates (see field.proto).
+    STREAM_FIELDS_ONLY = 1;
+    // The stream with market book updates (see mbl_market_book_updates.proto and mbo_market_book_updates.proto) along with fields updates.
+    STREAM_MARKETBOOK_AND_FIELDS= 2;
 }
