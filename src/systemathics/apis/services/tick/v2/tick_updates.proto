@@ -27,7 +27,7 @@ syntax = "proto3";
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
 import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/identifierandstream.proto";
+import "systemathics/apis/type/shared/v1/identifierandlevel.proto";
 import "systemathics/apis/type/shared/v2/market_fields_updates.proto";
 import "systemathics/apis/type/shared/v2/mbl_market_book_updates.proto";
 import "systemathics/apis/type/shared/v2/mbo_market_book_updates.proto";
@@ -45,7 +45,7 @@ service TickUpdatesService
 message TickUpdatesRequest
 {
 	// [Mandatory] The instrument and streams identifiers: a list of tickers and exchanges and streams
-    repeated systemathics.apis.type.shared.v1.IdentifierAndStream identifiers = 1;
+    repeated systemathics.apis.type.shared.v1.IdentifierAndLevel identifiers = 1;
         
     // [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.

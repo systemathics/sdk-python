@@ -26,12 +26,12 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 
-import "systemathics/apis/type/shared/v1/stream.proto";
+import "systemathics/apis/type/shared/v1/level.proto";
 
 package systemathics.apis.type.shared.v1;
 
 // Contains the instrument identifier and stream.
-message IdentifierAndStream
+message IdentifierAndLevel
 {
 	// [Mandatory] Exchange market identifier code (MIC defined in ISO-20022)
 	string exchange = 1;
@@ -43,5 +43,5 @@ message IdentifierAndStream
 	google.protobuf.StringValue provider = 3;
 
 	// [Mandatory] 
-	systemathics.apis.type.shared.v1.Stream stream = 4;	
+	systemathics.apis.type.shared.v1.Level level = 4;	
 }

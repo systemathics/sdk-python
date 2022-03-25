@@ -26,7 +26,7 @@ syntax = "proto3";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/identifierandstream.proto";
+import "systemathics/apis/type/shared/v1/identifierandlevel.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
 import "systemathics/apis/type/shared/v2/raw.proto";
 
@@ -43,7 +43,7 @@ service TickRawService
 message TickRawRequest 
 {
     // [Mandatory] The instrument and streams identifiers: a list of tickers and exchanges and streams
-	repeated systemathics.apis.type.shared.v1.IdentifierAndStream identifiers = 1;
+	repeated systemathics.apis.type.shared.v1.IdentifierAndLevel identifiers = 1;
 
 	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
