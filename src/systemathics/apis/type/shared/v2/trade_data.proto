@@ -24,11 +24,10 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v2/trade.proto";
-import "systemathics/apis/type/shared/v2/book.proto";
 
 package systemathics.apis.type.shared.v2;
 
-message TradeAndBook
+message TradeData
 {
 	// The instrument mapping key: short code for instrument identifier.
 	uint32 mapping = 1;
@@ -36,12 +35,6 @@ message TradeAndBook
 	// The times tamp of the trade and book
 	google.protobuf.Timestamp time_stamp = 2;
 
-	oneof payload
-	{
-		// The trade
-		Trade trade = 3;
-
-		// The book
-		Book book = 4;
-	}
+	// The trade
+	Trade trade = 3;
 }
