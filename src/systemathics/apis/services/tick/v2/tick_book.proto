@@ -56,10 +56,10 @@ message TickBookRequest
     bool adjustment = 3;
 
     // [Optional] The maximum number of depth, if not set use the default (10).
-    google.protobuf.Int32Value maxDepth = 4;
+    google.protobuf.Int32Value max_depth = 4;
 
     // [Mandatory] The book update scheme (snapshots only, or, initial snapshot then incremental updates)
-    systemathics.apis.type.shared.v2.BookUpdates BookUpdates = 5;
+    systemathics.apis.type.shared.v2.BookUpdates book_updates = 5;
 }
 
 // Contains the tick by tick normalized trades data: key, time stamp, price, size, condition.
