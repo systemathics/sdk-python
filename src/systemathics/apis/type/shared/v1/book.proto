@@ -18,40 +18,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market data book
+// The market book data
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
-import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/limit.proto";
 
 package systemathics.apis.type.shared.v1;
 
-// The book limit : bid and ask
-message BookLimit
+// The book : bid and ask arrays
+message Book
 {
-	// The instrument mapping key: short code for instrument identifier.
-	uint32 mapping = 1;
-    
-	// The times tamp of the trade
-	google.protobuf.Timestamp time_stamp = 2;
+	// The bid array : buy side
+	repeated Limit bid = 1;
 
-	// The bid side
-	BookSide bid = 3;
-
-	// The ask side
-	BookSide ask = 4;
-}
-
-// The book side : bid or ask values
-message BookSide
-{
-	// The price of the side
-	double price = 1;
-
-	// The size (volume) of the side
-	int64 size = 2;
-
-	// The depth of the side
-	int32 depth = 3;
+	// The ask array : sell side
+	repeated Limit ask = 2;
 }

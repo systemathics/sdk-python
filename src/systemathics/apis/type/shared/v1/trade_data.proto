@@ -18,23 +18,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The quotes data (MBO)
+// The market data trades
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "systemathics/apis/type/shared/v2/quote.proto";
 
-package systemathics.apis.type.shared.v2;
+import "systemathics/apis/type/shared/v1/trade.proto";
 
-// Contains the normalized quotes data.
-message QuotesData
+package systemathics.apis.type.shared.v1;
+
+// Contains the trade details and the time stamp.
+message TradeData
 {
 	// The instrument mapping key: short code for instrument identifier.
 	uint32 mapping = 1;
     
-	// The time stamp of the quotes (UTC)
+	// The time stamp of the trade (UTC)
 	google.protobuf.Timestamp time_stamp = 2;
 
-	// The quotes array
-	repeated Quote quotes = 3;
+	// The trade
+	Trade trade = 3;
 }

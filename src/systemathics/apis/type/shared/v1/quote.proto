@@ -18,25 +18,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market book data
+// The quote or order for the Market By Order (MBO).
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
 
-import "systemathics/apis/type/shared/v2/trade.proto";
-import "systemathics/apis/type/shared/v2/book.proto";
+import "google/protobuf/wrappers.proto";
 
-package systemathics.apis.type.shared.v2;
+package systemathics.apis.type.shared.v1;
 
-// Contains the market book data
-message BookData
-{
-	// The instrument mapping key: short code for instrument identifier.
-	uint32 mapping = 1;
+// Contains the quote details : buy or sell order.
+message Quote
+{    
+    // The unique identifier of the quote
+    string id = 1;
     
-	// The time stamp of the book
-	google.protobuf.Timestamp time_stamp = 2;
+    // The size of the quote
+    google.protobuf.Int64Value size = 2;
+    
+    // The price of the quote 
+    google.protobuf.DoubleValue price = 3;
 
-	// The book : bids and asks
-	Book book = 4;
+    // The condition of the quote :
+    //<br> 0 : Limit Order
+    //<br> 2 : Market Order
+    //<br> 3 : Market To Limit Order
+    //<br> Note: Market orders will not have a price field, only a size. Similarly for Market To Limit orders during auction phases.
+    google.protobuf.Int32Value condition = 4;
 }

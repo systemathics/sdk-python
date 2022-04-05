@@ -77,4 +77,6 @@ enum Field
     FIELD_VARIATION = 23;
     // The percentage variation (associated value type is double)
     FIELD_VARIATION_PERCENTAGE = 24;
+    // The trade id (associated value type is string)
+    FIELD_TRADE_ID = 25;
 }

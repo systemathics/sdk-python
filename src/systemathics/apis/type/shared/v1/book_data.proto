@@ -18,49 +18,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Represents the Market Book By Limit data.
+// The market book data
 syntax = "proto3";
 
-
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
 
-import "systemathics/apis/type/shared/v1/action.proto";
-import "systemathics/apis/type/shared/v1/side.proto";
+import "systemathics/apis/type/shared/v1/trade.proto";
+import "systemathics/apis/type/shared/v1/book.proto";
 
-package systemathics.apis.type.shared.v2;
+package systemathics.apis.type.shared.v1;
 
-// Contains Market Book By Limit updates data.
-message MblMarketBookUpdates
+// Contains the market book data
+message BookData
 {
 	// The instrument mapping key: short code for instrument identifier.
 	uint32 mapping = 1;
-
-	// Time stamp from the market (UTC)
+    
+	// The time stamp of the book
 	google.protobuf.Timestamp time_stamp = 2;
 
-	// If set, previous data must be cleared entirely, otherwise current data is an increment on top of previous data
-	bool reset = 3;
-    
-    // The market book updates: an array of MarketBookUpdate objects
-    repeated systemathics.apis.type.shared.v2.MblMarketBookUpdate updates = 4;
-}
-
-// Represents a Market Book By Limit update.
-message MblMarketBookUpdate
-{
-    // Action of the market book update
-    systemathics.apis.type.shared.v1.Action action = 1;
-    
-    // Side of the market book update
-    systemathics.apis.type.shared.v1.Side side = 2;
-    
-    // Depth of the market book update
-    uint32 depth = 3;
-    
-    // Size of the market book update
-    google.protobuf.Int64Value size = 4;
-    
-    // Price of the market book update 
-    google.protobuf.DoubleValue price = 5;
+	// The book : bids and asks
+	Book book = 4;
 }

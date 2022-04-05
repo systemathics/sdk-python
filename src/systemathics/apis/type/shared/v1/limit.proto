@@ -21,7 +21,7 @@
 // The market book limit data
 syntax = "proto3";
 
-package systemathics.apis.type.shared.v2;
+package systemathics.apis.type.shared.v1;
 
 // The limit : bid or ask price and size at a given depth
 message Limit

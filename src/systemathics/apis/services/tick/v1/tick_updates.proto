@@ -18,20 +18,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
-// <br>- Get specific historical dataset such as trades, top of book data...
-// <br>- Compute analytics on the top of preselected tick by tick data dataset
-// <br>- Feed best execution reports for a given watchlist over the time
+// Normalized tick by tick data updates:
+//<br>- Fields : open, close, trade, high ...
+//<br>- MBL : Market Book by Limit (contains the depth information)
+//<br>- MBO : Market Book by Order (contains the quotes or order details)
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/mappings.proto";
+import "systemathics/apis/type/shared/v1/keys.proto";
 import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/market_book_updates.proto";
+import "systemathics/apis/type/shared/v1/identifierandlevel.proto";
 import "systemathics/apis/type/shared/v1/market_fields_updates.proto";
-import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/mbl_market_book_updates.proto";
+import "systemathics/apis/type/shared/v1/mbo_market_book_updates.proto";
 
 package systemathics.apis.services.tick.v1;
 
@@ -45,36 +44,33 @@ service TickUpdatesService
 // The required inputs to request the TickUpdatesService.
 message TickUpdatesRequest
 {
-	// [Mandatory] The instrument identifier: a ticker and exchange 
-    repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
-    
-    // [Mandatory] Level representing either Trades only(Level 1) or Trades + Book (Level 1 and Level 2)
-    systemathics.apis.type.shared.v1.Level level = 2;
-    
+	// [Mandatory] The instrument and streams identifiers: a list of tickers and exchanges and streams
+    repeated systemathics.apis.type.shared.v1.IdentifierAndLevel identifiers = 1;
+        
     // [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-    systemathics.apis.type.shared.v1.Constraints constraints = 3;
+    systemathics.apis.type.shared.v1.Constraints constraints = 2;
+
+    // [Optional] The corporate action adjustment, by default the value is set to false
+    bool adjustment = 3;
 }
 
-// Contains the tick by tick normalized historical data: event source, timestamp and payload.
+// Contains the tick by tick normalized historical data.
 message TickUpdatesResponse 
-{
-    // Event source: short code for instrument identifier
-    uint32 event_source = 1;
-    
-    // Timestamp from the market
-    google.protobuf.Timestamp time_stamp = 2;
-    
-    // Payload: that can be a mapping (event source and instrument identifier), some fields update or some books update
+{    
+    // Payload: that can be a mapping (event source and instrument identifier), the fields update or the books update
     oneof payload 
     {
-        // Some fields update
-        systemathics.apis.type.shared.v1.MarketFieldsUpdates fields_updates = 3;
+        // The fields update
+        systemathics.apis.type.shared.v1.MarketFieldsUpdates fields_updates = 1;
         
-        // Some books update
-        systemathics.apis.type.shared.v1.MarketBookUpdates book_updates = 4;
+        // The MBL books update
+        systemathics.apis.type.shared.v1.MblMarketBookUpdates mbl_book_updates = 2;
         
-        // Event source and instrument identifier mapping. It's sent once when streaming begins.
-            systemathics.apis.type.shared.v1.Mappings mappings = 5;
+        // The MBO books update
+        systemathics.apis.type.shared.v1.MboMarketBookUpdates mbo_book_updates = 3;
+
+        // The mapping data
+        systemathics.apis.type.shared.v1.Keys mapping = 4;
     }
 }

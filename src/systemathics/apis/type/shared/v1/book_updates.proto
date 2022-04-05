@@ -17,20 +17,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-
-// The market book data
 syntax = "proto3";
 
-import "systemathics/apis/type/shared/v2/limit.proto";
+package systemathics.apis.type.shared.v1;
 
-package systemathics.apis.type.shared.v2;
-
-// The book : bid and ask arrays
-message Book
+// Contains the types of updates book services are able to deliver
+enum BookUpdates
 {
-	// The bid array : buy side
-	repeated Limit bid = 1;
-
-	// The ask array : sell side
-	repeated Limit ask = 2;
+    // The unspecfied update type
+    BOOK_UPDATES_UNSPECIFIED = 0;
+    // Snapshots of the book on each update
+    BOOK_UPDATES_SNAPSHOTS_ONLY = 1;
+    // Initial Snapshot then incremental updates on each update
+    BOOK_UPDATES_INITIAL_SNAPSHOT_THEN_INCREMENTAL_UPDATES = 2;
 }

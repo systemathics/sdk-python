@@ -18,49 +18,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick trades extraction for a given watchlist and a specific look-back period. This can be useful to:
-// <br>- Get specific historical dataset such as trades, top of book data...
-// <br>- Compute analytics on the top of preselected tick by tick data dataset
-// <br>- Feed best execution reports for a given watchlist over the time
+// Normalized tick by tick Market By Order (MBO):
+// <br>-The MBO describes an order-based (or quote-based) data feed that provides the ability to view individual queue position, the full order book (all the depths) and the details of each individual order or quote at each price level.
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
-import "systemathics/apis/type/shared/v2/trade_data.proto";
+import "systemathics/apis/type/shared/v1/quotes_data.proto";
 
-package systemathics.apis.services.tick.v2;
+package systemathics.apis.services.tick.v1;
 
-// Called to request tick by tick normalized trades historical data.
-service TickTradesService 
+// Called to request tick by tick normalized quotes data (MBO).
+service TickQuotesService 
 {
-    // Get tick by tick normalized trades historical Trades 
-    rpc TickTrades(TickTradesRequest) returns (stream TickTradesResponse);
+    // Get tick by tick normalized quotes 
+    rpc TickQuotes(TickQuotesRequest) returns (stream TickQuotesResponse);
 }
 
-// The required inputs to request the TickTradesService.
-message TickTradesRequest
+// The required inputs to request the TickQuotesService.
+message TickQuotesRequest
 {
 	// [Mandatory] The instrument identifiers: a list of tickers and exchanges
-	repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
+    repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
        
-	// [Optional] The time constraints used to define the look-back period.
+    // [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+    systemathics.apis.type.shared.v1.Constraints constraints = 2;
 
-	// [Optional] The corporate action adjustment, by default the value is set to false
-	bool adjustment = 3;
+    // [Optional] The corporate action adjustment, by default the value is set to false
+    bool adjustment = 3;
 }
 
-// Contains the tick by tick normalized trades data: key, time stamp, price, size, condition.
-message TickTradesResponse 
+// Contains the tick by tick normalized quotes: key and data
+message TickQuotesResponse 
 {
 	oneof payload 
 	{
-		// The trade data
-		systemathics.apis.type.shared.v2.TradeData data = 1;
+		// The quotes data
+		systemathics.apis.type.shared.v1.QuotesData data = 1;
 		
 		// The mapping data
 		systemathics.apis.type.shared.v1.Keys mapping = 2;

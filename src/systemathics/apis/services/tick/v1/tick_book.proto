@@ -18,26 +18,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
-// <br>- Get specific historical dataset such as trades, top of book data...
-// <br>- Compute analytics on the top of preselected tick by tick data dataset
-// <br>- Feed best execution reports for a given watchlist over the time
+// Normalized tick by tick Market Book by Price (MBP) also known as Market Book by Limit (MBL), is the price-based data of the book.
+//<br> MBL restricts updates to a maximum of specified depth price levels and consolidates all the quantity (size) into a single update for each price level, which includes the total quantity (size).
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/level.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
-import "systemathics/apis/type/shared/v1/book.proto";
+import "systemathics/apis/type/shared/v1/book_updates.proto";
+import "systemathics/apis/type/shared/v1/book_data.proto";
 
 package systemathics.apis.services.tick.v1;
 
-// Called to request tick by tick normalized trades historical data.
+// Called to request tick by tick normalized book data.
 service TickBookService 
 {
-    // Get tick by tick normalized trades historical Book 
+    // Get tick by tick normalized historical book 
     rpc TickBook(TickBookRequest) returns (stream TickBookResponse);
 }
 
@@ -50,15 +49,24 @@ message TickBookRequest
     // [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
     systemathics.apis.type.shared.v1.Constraints constraints = 2;
+
+    // [Optional] The corporate action adjustment, by default the value is set to false
+    bool adjustment = 3;
+
+    // [Optional] The maximum number of depth, if not set use the default (10).
+    google.protobuf.Int32Value max_depth = 4;
+
+    // [Mandatory] The book update scheme (snapshots only, or, initial snapshot then incremental updates)
+    systemathics.apis.type.shared.v1.BookUpdates book_updates = 5;
 }
 
-// Contains the tick by tick normalized trades data: key, time stamp, price, size, condition.
+// Contains the tick by tick normalized book : data or mapping.
 message TickBookResponse 
 {
 	oneof payload 
 	{
 		// The limit data
-		systemathics.apis.type.shared.v1.BookLimit limit = 1;
+		systemathics.apis.type.shared.v1.BookData data = 1;
 		
 		// The mapping data
 		systemathics.apis.type.shared.v1.Keys mapping = 2;

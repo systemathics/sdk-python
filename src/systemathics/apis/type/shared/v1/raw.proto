@@ -17,17 +17,27 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
+// The raw data content.
 syntax = "proto3";
 
-package systemathics.apis.type.shared.v2;
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
-// Contains the types of updates book services are able to deliver
-enum BookUpdates
+package systemathics.apis.type.shared.v1;
+
+// Contains the primary data, not processed or normalized (identical to provider's data).
+message Raw
 {
-    // The unspecfied update type
-    BOOK_UPDATES_UNSPECIFIED = 0;
-    // Snapshots of the book on each update
-    BOOK_UPDATES_SNAPSHOTS_ONLY = 1;
-    // Initial Snapshot then incremental updates on each update
-    BOOK_UPDATES_INITIAL_SNAPSHOT_THEN_INCREMENTAL_UPDATES = 2;
+	// The instrument mapping key: short code for instrument identifier.
+	uint32 mapping = 1;
+
+	// The time stamp of the raw data (UTC)
+	google.protobuf.Timestamp time_stamp = 2;
+
+	// The data type.
+	uint32 type = 3;
+    
+	// The payload data.
+	bytes payload = 4;
 }
