@@ -21,7 +21,7 @@
 // Instrument identifier is built from:
 // <br>- An exchange code: MIC
 // <br>- A ticker: instrument name given by the exchange
-// <br>- An optional provider name if several tick data providers are used
+// <br>- An optional provider name if several tick data providers are available
 syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
@@ -33,15 +33,15 @@ package systemathics.apis.type.shared.v1;
 // Contains the instrument identifier and stream.
 message IdentifierAndLevel
 {
-	// [Mandatory] Exchange market identifier code (MIC defined in ISO-20022)
+	// [Mandatory] Exchange market identifier code (MIC defined in ISO-20022).
 	string exchange = 1;
 	
-	// [Mandatory] Ticker name, associated with market idenfier code defines a unique asset
+	// [Mandatory] Ticker name, associated with market idenfier code defines a unique asset.
 	string ticker = 2;	
 	
-	// [Optional] tick data provider name if several tick data providers are available
+	// [Optional] tick data provider name if several tick data providers are available.
 	google.protobuf.StringValue provider = 3;
 
-	// [Mandatory] 
+	// [Mandatory] The data level.
 	systemathics.apis.type.shared.v1.Level level = 4;	
 }

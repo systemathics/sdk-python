@@ -18,10 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
-// <br>- Get specific historical dataset such as trades, top of book data...
-// <br>- Compute analytics on the top of preselected tick by tick data dataset
-// <br>- Feed best execution reports for a given watchlist over the time
+// Normalized tick by tick Market Book by Price (MBP) also known as Market Book by Limit (MBL), is the price-based data of the book.
+//<br> MBL restricts updates to a maximum of specified depth price levels and consolidates all the quantity (size) into a single update for each price level, which includes the total quantity (size).
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -35,10 +33,10 @@ import "systemathics/apis/type/shared/v2/book_data.proto";
 
 package systemathics.apis.services.tick.v2;
 
-// Called to request tick by tick normalized trades historical data.
+// Called to request tick by tick normalized book data.
 service TickBookService 
 {
-    // Get tick by tick normalized trades historical Book 
+    // Get tick by tick normalized historical book 
     rpc TickBook(TickBookRequest) returns (stream TickBookResponse);
 }
 
@@ -62,7 +60,7 @@ message TickBookRequest
     systemathics.apis.type.shared.v2.BookUpdates book_updates = 5;
 }
 
-// Contains the tick by tick normalized trades data: key, time stamp, price, size, condition.
+// Contains the tick by tick normalized book : data or mapping.
 message TickBookResponse 
 {
 	oneof payload 

@@ -27,12 +27,13 @@ import "systemathics/apis/type/shared/v2/trade.proto";
 
 package systemathics.apis.type.shared.v2;
 
+// Contains the trade details and the time stamp.
 message TradeData
 {
 	// The instrument mapping key: short code for instrument identifier.
 	uint32 mapping = 1;
     
-	// The times tamp of the trade and book
+	// The time stamp of the trade (UTC)
 	google.protobuf.Timestamp time_stamp = 2;
 
 	// The trade

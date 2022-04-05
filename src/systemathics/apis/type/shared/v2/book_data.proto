@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market data trades
+// The market book data
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -28,14 +28,15 @@ import "systemathics/apis/type/shared/v2/book.proto";
 
 package systemathics.apis.type.shared.v2;
 
+// Contains the market book data
 message BookData
 {
 	// The instrument mapping key: short code for instrument identifier.
 	uint32 mapping = 1;
     
-	// The times tamp of the trade and book
+	// The time stamp of the book
 	google.protobuf.Timestamp time_stamp = 2;
 
-	// The book
+	// The book : bids and asks
 	Book book = 4;
 }

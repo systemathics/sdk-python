@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Represents the book market data.
+// Represents the Market Book by Order (MBO).
 syntax = "proto3";
 
 
@@ -30,7 +30,7 @@ import "systemathics/apis/type/shared/v1/side.proto";
 
 package systemathics.apis.type.shared.v2;
 
-// Contains MBO market book updates data.
+// Contains Market Book by Order updates data.
 message MboMarketBookUpdates
 {
 	// The instrument mapping key: short code for instrument identifier.
@@ -46,7 +46,7 @@ message MboMarketBookUpdates
     repeated systemathics.apis.type.shared.v2.MboMarketBookUpdate updates = 4;
 }
 
-// Represents a MBO market book update.
+// Represents a Market Book by Order update.
 message MboMarketBookUpdate
 {
     // Action of the market book update
@@ -55,7 +55,7 @@ message MboMarketBookUpdate
     // Side of the market book update
     systemathics.apis.type.shared.v1.Side side = 2;
     
-    // Order ID
+    // Order or Quote unique identifier
     string order_id = 3;
     
     // Size of the market book update

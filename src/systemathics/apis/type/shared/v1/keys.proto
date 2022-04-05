@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The mapping keys for tick trades and books
+// The mapping keys for tick by tick market data
 syntax = "proto3";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -31,7 +31,7 @@ message Key
 	// The instrument identifier
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// The instrument mapping key: short code for instrument identifier.
+	// The instrument mapping key: short code for instrument identifier
 	uint32 value = 2;
 }
 

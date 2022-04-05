@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
-// <br>- Get specific historical dataset such as trades, top of book data...
-// <br>- Compute analytics on the top of preselected tick by tick data dataset
-// <br>- Feed best execution reports for a given watchlist over the time
+// Normalized tick by tick data updates:
+//<br>- Fields : open, close, trade, high ...
+//<br>- MBL : Market Book by Limit (contains the depth information)
+//<br>- MBO : Market Book by Order (contains the quotes or order details)
 syntax = "proto3";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
@@ -55,19 +55,19 @@ message TickUpdatesRequest
     bool adjustment = 3;
 }
 
-// Contains the tick by tick normalized historical data: event source, timestamp and payload.
+// Contains the tick by tick normalized historical data.
 message TickUpdatesResponse 
 {    
-    // Payload: that can be a mapping (event source and instrument identifier), some fields update or some books update
+    // Payload: that can be a mapping (event source and instrument identifier), the fields update or the books update
     oneof payload 
     {
-        // Some fields update
+        // The fields update
         systemathics.apis.type.shared.v2.MarketFieldsUpdates fields_updates = 1;
         
-        // Some MBL books update
+        // The MBL books update
         systemathics.apis.type.shared.v2.MblMarketBookUpdates mbl_book_updates = 2;
         
-        // Some MBO books update
+        // The MBO books update
         systemathics.apis.type.shared.v2.MboMarketBookUpdates mbo_book_updates = 3;
 
         // The mapping data

@@ -23,6 +23,7 @@ syntax = "proto3";
 
 package systemathics.apis.type.shared.v2;
 
+// Contains the trade details.
 message Trade
 {
 	// The price of the trade

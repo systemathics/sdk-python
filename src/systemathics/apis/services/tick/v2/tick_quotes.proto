@@ -18,10 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
-// <br>- Get specific historical dataset such as trades, top of book data...
-// <br>- Compute analytics on the top of preselected tick by tick data dataset
-// <br>- Feed best execution reports for a given watchlist over the time
+// Normalized tick by tick Market By Order (MBO):
+// <br>-The MBO describes an order-based (or quote-based) data feed that provides the ability to view individual queue position, the full order book (all the depths) and the details of each individual order or quote at each price level.
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -34,17 +32,17 @@ import "systemathics/apis/type/shared/v2/quotes_data.proto";
 
 package systemathics.apis.services.tick.v2;
 
-// Called to request tick by tick normalized quotes data (MBO only).
+// Called to request tick by tick normalized quotes data (MBO).
 service TickQuotesService 
 {
-    // Get tick by tick normalized trades and book historical 
+    // Get tick by tick normalized quotes 
     rpc TickQuotes(TickQuotesRequest) returns (stream TickQuotesResponse);
 }
 
 // The required inputs to request the TickQuotesService.
 message TickQuotesRequest
 {
-	// [Mandatory] The instrument identifiers: a list of tickers and changes
+	// [Mandatory] The instrument identifiers: a list of tickers and exchanges
     repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
        
     // [Optional] The time constraints used to define the look-back period.
@@ -60,7 +58,7 @@ message TickQuotesResponse
 {
 	oneof payload 
 	{
-		// The trade and book data
+		// The quotes data
 		systemathics.apis.type.shared.v2.QuotesData data = 1;
 		
 		// The mapping data

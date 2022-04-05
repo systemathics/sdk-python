@@ -18,19 +18,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market data book
+// The market book data
 syntax = "proto3";
 
 import "systemathics/apis/type/shared/v2/limit.proto";
 
 package systemathics.apis.type.shared.v2;
 
-// The book : bid and ask
+// The book : bid and ask arrays
 message Book
 {
-	// The bid side
+	// The bid array : buy side
 	repeated Limit bid = 1;
 
-	// The ask side
+	// The ask array : sell side
 	repeated Limit ask = 2;
 }

@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market data raw content
+// The raw data content.
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -26,18 +26,18 @@ import "google/protobuf/wrappers.proto";
 
 package systemathics.apis.type.shared.v2;
 
-// Contains the ticks in raw format (identical to provider's data).
+// Contains the primary data, not processed or normalized (identical to provider's data).
 message Raw
 {
 	// The instrument mapping key: short code for instrument identifier.
 	uint32 mapping = 1;
 
-	// Timestamp from the market
+	// The time stamp of the raw data (UTC)
 	google.protobuf.Timestamp time_stamp = 2;
 
-	// The frame type
+	// The data type.
 	uint32 type = 3;
     
-	// Payload
+	// The payload data.
 	bytes payload = 4;
 }

@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Represents the book market data.
+// Represents the Market Book By Limit data.
 syntax = "proto3";
 
 
@@ -30,13 +30,13 @@ import "systemathics/apis/type/shared/v1/side.proto";
 
 package systemathics.apis.type.shared.v2;
 
-// Contains MBL market book updates data.
+// Contains Market Book By Limit updates data.
 message MblMarketBookUpdates
 {
 	// The instrument mapping key: short code for instrument identifier.
 	uint32 mapping = 1;
 
-	// Timestamp from the market
+	// Time stamp from the market (UTC)
 	google.protobuf.Timestamp time_stamp = 2;
 
 	// If set, previous data must be cleared entirely, otherwise current data is an increment on top of previous data
@@ -46,7 +46,7 @@ message MblMarketBookUpdates
     repeated systemathics.apis.type.shared.v2.MblMarketBookUpdate updates = 4;
 }
 
-// Represents a MBL market book update.
+// Represents a Market Book By Limit update.
 message MblMarketBookUpdate
 {
     // Action of the market book update

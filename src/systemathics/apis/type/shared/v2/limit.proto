@@ -18,20 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market data book
+// The market book limit data
 syntax = "proto3";
 
 package systemathics.apis.type.shared.v2;
 
-// The limit : bid or ask price and size at given depth
+// The limit : bid or ask price and size at a given depth
 message Limit
 {
-	// The price of the side
+	// The price of the limit
 	double price = 1;
 
-	// The size (volume) of the side
+	// The size (volume) of the limit
 	int64 size = 2;
 
-	// The depth of the side
+	// The depth of the limit
 	int32 depth = 3;
 }

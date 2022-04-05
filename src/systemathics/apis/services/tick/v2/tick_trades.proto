@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
+// Normalized tick by tick trades extraction for a given watchlist and a specific look-back period. This can be useful to:
 // <br>- Get specific historical dataset such as trades, top of book data...
 // <br>- Compute analytics on the top of preselected tick by tick data dataset
 // <br>- Feed best execution reports for a given watchlist over the time

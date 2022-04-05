@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Represents the book market data.
+// The quote or order for the Market By Order (MBO).
 syntax = "proto3";
 
 
@@ -26,18 +26,22 @@ import "google/protobuf/wrappers.proto";
 
 package systemathics.apis.type.shared.v2;
 
-// Contains a quote
+// Contains the quote details : buy or sell order.
 message Quote
 {    
-    // ID of the quote
+    // The unique identifier of the quote
     string id = 1;
     
-    // Size of the quote
+    // The size of the quote
     google.protobuf.Int64Value size = 2;
     
-    // Price of the quote 
+    // The price of the quote 
     google.protobuf.DoubleValue price = 3;
 
-    // Condition of the quote
+    // The condition of the quote :
+    //<br> 0 : Limit Order
+    //<br> 2 : Market Order
+    //<br> 3 : Market To Limit Order
+    //<br> Note: Market orders will not have a price field, only a size. Similarly for Market To Limit orders during auction phases.
     google.protobuf.Int32Value condition = 4;
 }
