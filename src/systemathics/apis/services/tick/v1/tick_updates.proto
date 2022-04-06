@@ -27,7 +27,7 @@ syntax = "proto3";
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
 import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/identifierandlevel.proto";
+import "systemathics/apis/type/shared/v1/identifier_and_level.proto";
 import "systemathics/apis/type/shared/v1/market_fields_updates.proto";
 import "systemathics/apis/type/shared/v1/mbl_market_book_updates.proto";
 import "systemathics/apis/type/shared/v1/mbo_market_book_updates.proto";
