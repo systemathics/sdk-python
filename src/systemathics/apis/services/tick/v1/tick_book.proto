@@ -46,18 +46,18 @@ message TickBookRequest
 	// [Mandatory] The instrument identifiers: a list of tickers and exchanges 
     repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
        
+    // [Mandatory] The book update scheme (snapshots only, or, initial snapshot then incremental updates)
+    systemathics.apis.type.shared.v1.BookUpdates book_updates = 2;
+
     // [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-    systemathics.apis.type.shared.v1.Constraints constraints = 2;
+    systemathics.apis.type.shared.v1.Constraints constraints = 3;
 
     // [Optional] The corporate action adjustment, by default the value is set to false
-    bool adjustment = 3;
+    bool adjustment = 4;
 
     // [Optional] The maximum number of depth, if not set use the default (10).
-    google.protobuf.Int32Value max_depth = 4;
-
-    // [Mandatory] The book update scheme (snapshots only, or, initial snapshot then incremental updates)
-    systemathics.apis.type.shared.v1.BookUpdates book_updates = 5;
+    google.protobuf.Int32Value max_depth = 5;
 }
 
 // Contains the tick by tick normalized book : data or mapping.

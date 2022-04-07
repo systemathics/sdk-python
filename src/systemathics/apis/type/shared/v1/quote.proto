@@ -23,6 +23,7 @@ syntax = "proto3";
 
 
 import "google/protobuf/wrappers.proto";
+import "systemathics/apis/type/shared/v1/side.proto";
 
 package systemathics.apis.type.shared.v1;
 
@@ -44,4 +45,7 @@ message Quote
     //<br> 3 : Market To Limit Order
     //<br> Note: Market orders will not have a price field, only a size. Similarly for Market To Limit orders during auction phases.
     google.protobuf.Int32Value condition = 4;
+
+    // The side : Buy (bid) or Sell (ask) order
+    Side side = 5;
 }
