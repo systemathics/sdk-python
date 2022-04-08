@@ -29,5 +29,5 @@ enum BookUpdates
     // Snapshots of the book on each update
     BOOK_UPDATES_SNAPSHOTS_ONLY = 1;
     // Initial Snapshot then incremental updates on each update
-    BOOK_UPDATES_INITIAL_SNAPSHOT_THEN_INCREMENTAL_UPDATES = 2;
+    BOOK_UPDATES_INCREMENTALS = 2;
 }

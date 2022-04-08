@@ -33,5 +33,5 @@ message Limit
 	int64 size = 2;
 
 	// The depth of the limit
-	int32 depth = 3;
+	uint32 depth = 3;
 }
