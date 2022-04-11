@@ -18,42 +18,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Represents the book market data.
+// The market data trades
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
 
-import "google/protobuf/wrappers.proto";
-
-import "systemathics/apis/type/shared/v1/action.proto";
-import "systemathics/apis/type/shared/v1/side.proto";
+import "systemathics/apis/type/shared/v1/trade.proto";
 
 package systemathics.apis.type.shared.v1;
 
-// Contains market book updates data.
-message MarketBookUpdates
+// Contains the trade details and the time stamp.
+message TradeData
 {
-	// If is a snapshot, previous data must be cleared, otherwise it's incremental
-    bool is_snapshot = 1;
+	// The instrument mapping key: short code for instrument identifier.
+	uint32 mapping = 1;
     
-    // The market book updates: an array of MarketBookUpdate objects
-    repeated MarketBookUpdate updates = 2;
-}
+	// The time stamp of the trade (UTC)
+	google.protobuf.Timestamp time_stamp = 2;
 
-// Represents a market book update.
-message MarketBookUpdate
-{
-    // Action of the market book update
-    Action action = 1;
-    
-    // Side of the market book update
-    Side side = 2;
-    
-    // Depth of the market book update
-    uint32 depth = 3;
-    
-    // Size of the market book update
-    google.protobuf.Int64Value size = 4;
-    
-    // Price of the market book update 
-    google.protobuf.DoubleValue price = 5;
+	// The trade
+	Trade trade = 3;
 }

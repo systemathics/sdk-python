@@ -18,23 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The market data trades
+// The market book limit data
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
+package systemathics.apis.type.shared.v1;
 
-import "systemathics/apis/type/shared/v2/trade.proto";
-
-package systemathics.apis.type.shared.v2;
-
-message TradeData
+// The limit : bid or ask price and size at a given depth
+message Limit
 {
-	// The instrument mapping key: short code for instrument identifier.
-	uint32 mapping = 1;
-    
-	// The times tamp of the trade and book
-	google.protobuf.Timestamp time_stamp = 2;
+	// The price of the limit
+	double price = 1;
 
-	// The trade
-	Trade trade = 3;
+	// The size (volume) of the limit
+	int64 size = 2;
+
+	// The depth of the limit
+	uint32 depth = 3;
 }

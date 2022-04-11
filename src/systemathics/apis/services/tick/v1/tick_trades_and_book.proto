@@ -25,13 +25,13 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/identifier_and_level.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
-import "systemathics/apis/type/shared/v1/book.proto";
-import "systemathics/apis/type/shared/v1/trade_and_book.proto";
+import "systemathics/apis/type/shared/v1/book_updates.proto";
+import "systemathics/apis/type/shared/v1/trade_and_book_data.proto";
 
 package systemathics.apis.services.tick.v1;
 
@@ -45,12 +45,21 @@ service TickTradesAndBookService
 // The required inputs to request the TickTradesAndBookService.
 message TickTradesAndBookRequest
 {
-	// [Mandatory] The instrument identifiers: a list of tickers and exchanges 
-    repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
+	// [Mandatory] The instrument and streams identifiers: a list of tickers and exchanges and streams
+    repeated systemathics.apis.type.shared.v1.IdentifierAndLevel identifiers = 1;
        
+    // [Mandatory] The book update scheme (snapshots only, or, initial snapshot then incremental updates)
+    systemathics.apis.type.shared.v1.BookUpdates book_updates = 2;
+
     // [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-    systemathics.apis.type.shared.v1.Constraints constraints = 2;
+    systemathics.apis.type.shared.v1.Constraints constraints = 3;
+
+    // [Optional] The corporate action adjustment, by default the value is set to false
+    bool adjustment = 4;
+
+	// [Optional] The maximum number of depth, if not set use the default (10).
+    google.protobuf.Int32Value max_depth = 5;
 }
 
 // Contains the tick by tick normalized trades data: key, time stamp, price, size, condition.
@@ -59,7 +68,7 @@ message TickTradesAndBookResponse
 	oneof payload 
 	{
 		// The trade and book data
-		systemathics.apis.type.shared.v1.TradeAndBook data = 1;
+		systemathics.apis.type.shared.v1.TradeAndBookData data = 1;
 		
 		// The mapping data
 		systemathics.apis.type.shared.v1.Keys mapping = 2;

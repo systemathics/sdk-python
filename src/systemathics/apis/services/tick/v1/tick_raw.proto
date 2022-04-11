@@ -18,76 +18,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Raw tick by tick data extraction in provider format for a given watchlist and a specific look-back period. This can be useful to:
+// Raw tick by tick data is the primary data delivred by a specific data provider (exchange, third party, partner, in-house ...) and has not been processed or normalized yet.
+// <br>Raw data can be useful to:
 // <br>- Audit provider raw data reception and completion
-// <br>- Compare provider data formats
-// <br>- Compare raw provider format data to normalized data
+// <br>- Compare provider's data formats
+// <br>- Compare raw provider's format data to normalized (processsed) data
 syntax = "proto3";
-
-import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/level.proto";
-import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/identifier_and_level.proto";
+import "systemathics/apis/type/shared/v1/keys.proto";
+import "systemathics/apis/type/shared/v1/raw.proto";
 
 package systemathics.apis.services.tick.v1;
 
 // Called to request tick by tick raw data.
 service TickRawService 
 {
-	// Gets tick by tick historical data
+	// Gets tick by tick raw data.
     rpc TickRaw(TickRawRequest) returns (stream TickRawResponse);
 }
 
 // The required inputs to request the TickRawService.
 message TickRawRequest 
 {
-    // [Mandatory] The instrument identifier: a ticker and exchange
-	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+    // [Mandatory] The instruments and streams identifiers: a list of tickers, exchanges and streams.
+	repeated systemathics.apis.type.shared.v1.IdentifierAndLevel identifiers = 1;
 
 	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
-
-	// [Mandatory] The stream level (Level 1 or Level 1 and 2)
-    systemathics.apis.type.shared.v1.Level level = 3;
 }
 
-// Contains the ticks in raw provider format.
-message TickRawItem
-{
-	// The timestamp
-	google.protobuf.Timestamp time_stamp = 1;
-
-	// The frame type
-	uint32 type = 2;
-
-	// The event source
-	uint32 source = 3;
-    
-	// Payload
-	bytes payload = 4;
-}
-
-// Represents a raw data response: several at once.
+// Represents the raw data response.
 message TickRawResponse
 {
-	// The raw data: an array of TickRawItem objects
-	repeated TickRawItem raw_items = 1;
-}
-
-// Represents the RAW response: one by one, this is not performant due to Microsoft gRPC API handling of this use case.
-message TickRawResponse2
-{
-	// The timestamp
-	google.protobuf.Timestamp time_stamp = 1;
-
-	// The frame type
-	uint32 type = 2;
-
-	// The event source
-	uint32 source = 3;
-    
-	// Payload
-	bytes payload = 4;
+	oneof payload 
+	{
+		// The raw data
+		systemathics.apis.type.shared.v1.Raw raw = 1;
+		
+		// The mapping data
+		systemathics.apis.type.shared.v1.Keys mapping = 2;
+	}
 }

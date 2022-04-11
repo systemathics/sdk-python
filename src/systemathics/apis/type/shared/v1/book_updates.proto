@@ -17,27 +17,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-
-// Represents the book market data.
 syntax = "proto3";
 
+package systemathics.apis.type.shared.v1;
 
-import "google/protobuf/wrappers.proto";
-
-package systemathics.apis.type.shared.v2;
-
-// Contains a quote
-message Quote
-{    
-    // ID of the quote
-    string id = 1;
-    
-    // Size of the quote
-    google.protobuf.Int64Value size = 2;
-    
-    // Price of the quote 
-    google.protobuf.DoubleValue price = 3;
-
-    // Condition of the quote
-    google.protobuf.Int32Value condition = 4;
+// Contains the types of updates book services are able to deliver
+enum BookUpdates
+{
+    // The unspecfied update type
+    BOOK_UPDATES_UNSPECIFIED = 0;
+    // Snapshots of the book on each update
+    BOOK_UPDATES_SNAPSHOTS_ONLY = 1;
+    // Initial Snapshot then incremental updates on each update
+    BOOK_UPDATES_INCREMENTALS = 2;
 }

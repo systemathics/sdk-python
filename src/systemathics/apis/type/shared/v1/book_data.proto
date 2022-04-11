@@ -17,17 +17,26 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
+// The market book data
 syntax = "proto3";
 
-package systemathics.apis.type.shared.v2;
+import "google/protobuf/timestamp.proto";
 
-// Contains the types of updates book services are able to deliver
-enum BookUpdates
+import "systemathics/apis/type/shared/v1/trade.proto";
+import "systemathics/apis/type/shared/v1/book.proto";
+
+package systemathics.apis.type.shared.v1;
+
+// Contains the market book data
+message BookData
 {
-    // The unspecfied update type
-    BOOK_UPDATES_UNSPECIFIED = 0;
-    // Snapshots on each change
-    BOOK_UPDATES_SNAPSHOTS_ONLY = 1;
-    // Initial Snapshot then incremental updates on each change
-    BOOK_UPDATES_INITIAL_SNAPSHOT_THEN_INCREMENTAL_UPDATES = 2;
+	// The instrument mapping key: short code for instrument identifier.
+	uint32 mapping = 1;
+    
+	// The time stamp of the book
+	google.protobuf.Timestamp time_stamp = 2;
+
+	// The book : bids and asks
+	Book book = 4;
 }

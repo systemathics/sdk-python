@@ -21,29 +21,20 @@
 // The market data trades
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
-import "systemathics/apis/type/shared/v1/identifier.proto";
-
 package systemathics.apis.type.shared.v1;
 
+// Contains the trade details.
 message Trade
 {
-	// The instrument mapping key: short code for instrument identifier.
-	uint32 mapping = 1;
-    
-	// The times tamp of the trade
-	google.protobuf.Timestamp time_stamp = 2;
-
 	// The price of the trade
-	double price = 3;
+	double price = 1;
 
 	// The size (volume) of the trade
-	int64 size = 4;
+	int64 size = 2;
 
 	// The trading condition of the trade
-	string condition = 5;
+	string condition = 3;
 
 	// The market unique identifier of the trade
-	string id = 6;
+	string id = 4;
 }

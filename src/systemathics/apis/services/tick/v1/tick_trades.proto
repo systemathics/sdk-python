@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
+// Normalized tick by tick trades extraction for a given watchlist and a specific look-back period. This can be useful to:
 // <br>- Get specific historical dataset such as trades, top of book data...
 // <br>- Compute analytics on the top of preselected tick by tick data dataset
 // <br>- Feed best execution reports for a given watchlist over the time
@@ -27,10 +27,9 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/level.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
-import "systemathics/apis/type/shared/v1/trade.proto";
+import "systemathics/apis/type/shared/v1/trade_data.proto";
 
 package systemathics.apis.services.tick.v1;
 
@@ -44,12 +43,15 @@ service TickTradesService
 // The required inputs to request the TickTradesService.
 message TickTradesRequest
 {
-	// [Mandatory] The instrument identifiers: a list of tickers and exchanges 
-    repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
+	// [Mandatory] The instrument identifiers: a list of tickers and exchanges
+	repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
        
-    // [Optional] The time constraints used to define the look-back period.
+	// [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-    systemathics.apis.type.shared.v1.Constraints constraints = 2;
+	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+
+	// [Optional] The corporate action adjustment, by default the value is set to false
+	bool adjustment = 3;
 }
 
 // Contains the tick by tick normalized trades data: key, time stamp, price, size, condition.
@@ -58,7 +60,7 @@ message TickTradesResponse
 	oneof payload 
 	{
 		// The trade data
-		systemathics.apis.type.shared.v1.Trade trade = 1;
+		systemathics.apis.type.shared.v1.TradeData data = 1;
 		
 		// The mapping data
 		systemathics.apis.type.shared.v1.Keys mapping = 2;

@@ -18,35 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Normalized tick by tick data extraction for a given watchlist and a specific look-back period. This can be useful to:
-// <br>- Get specific historical dataset such as trades, top of book data...
-// <br>- Compute analytics on the top of preselected tick by tick data dataset
-// <br>- Feed best execution reports for a given watchlist over the time
+// Normalized tick by tick Market By Order (MBO):
+// <br>-The MBO describes an order-based (or quote-based) data feed that provides the ability to view individual queue position, the full order book (all the depths) and the details of each individual order or quote at each price level.
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/identifierandlevel.proto";
+import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
-import "systemathics/apis/type/shared/v2/book_updates.proto";
-import "systemathics/apis/type/shared/v2/trade_and_book_data.proto";
+import "systemathics/apis/type/shared/v1/quotes_data.proto";
 
-package systemathics.apis.services.tick.v2;
+package systemathics.apis.services.tick.v1;
 
-// Called to request tick by tick normalized trades and book historical data.
-service TickTradesAndBookService 
+// Called to request tick by tick normalized quotes data (MBO).
+service TickQuotesService 
 {
-    // Get tick by tick normalized trades and book historical 
-    rpc TickTradesAndBook(TickTradesAndBookRequest) returns (stream TickTradesAndBookResponse);
+    // Get tick by tick normalized quotes 
+    rpc TickQuotes(TickQuotesRequest) returns (stream TickQuotesResponse);
 }
 
-// The required inputs to request the TickTradesAndBookService.
-message TickTradesAndBookRequest
+// The required inputs to request the TickQuotesService.
+message TickQuotesRequest
 {
-	// [Mandatory] The instrument and streams identifiers: a list of tickers and exchanges and streams
-    repeated systemathics.apis.type.shared.v1.IdentifierAndLevel identifiers = 1;
+	// [Mandatory] The instrument identifiers: a list of tickers and exchanges
+    repeated systemathics.apis.type.shared.v1.Identifier identifiers = 1;
        
     // [Optional] The time constraints used to define the look-back period.
 	// If empty, then all the available data is retrieved.
@@ -54,21 +51,15 @@ message TickTradesAndBookRequest
 
     // [Optional] The corporate action adjustment, by default the value is set to false
     bool adjustment = 3;
-
-	// [Optional] The maximum number of depth, if not set use the default (10).
-    google.protobuf.Int32Value max_depth = 4;
-
-    // [Mandatory] The book update scheme (snapshots only, or, initial snapshot then incremental updates)
-    systemathics.apis.type.shared.v2.BookUpdates book_updates = 5;
 }
 
-// Contains the tick by tick normalized trades data: key, time stamp, price, size, condition.
-message TickTradesAndBookResponse 
+// Contains the tick by tick normalized quotes: key and data
+message TickQuotesResponse 
 {
 	oneof payload 
 	{
-		// The trade and book data
-		systemathics.apis.type.shared.v2.TradeAndBookData data = 1;
+		// The quotes data
+		systemathics.apis.type.shared.v1.QuotesData data = 1;
 		
 		// The mapping data
 		systemathics.apis.type.shared.v1.Keys mapping = 2;
