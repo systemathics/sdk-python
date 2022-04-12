@@ -60,6 +60,9 @@ message TickTradesAndBookRequest
 
 	// [Optional] The maximum number of depth, if not set use the default (10).
     google.protobuf.Int32Value max_depth = 5;
+
+    // [Optional] The contributors: get the quotes foreach depth, by default the value is set to false
+    bool contributors = 6;
 }
 
 // Contains the tick by tick normalized trades data: key, time stamp, price, size, condition.
