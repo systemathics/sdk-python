@@ -53,9 +53,18 @@ message TickTradeConditionStatisticsResponse
 	// The trading condition count
 	int64 count = 2;
 
-	// The total trades count
+	// The total trades count (for all trade conditions)
 	int64 total = 3;
 
 	// The trading condition percentage : count / total
 	double percentage = 4;
+
+	// The trades volume
+	int64 volume = 5;
+
+	// The total trades volume (for all trade conditions)
+	int64 total_volume = 6;
+
+	// The volume trading condition percentage : volume / total volume
+	double volume_percentage = 7;
 }
