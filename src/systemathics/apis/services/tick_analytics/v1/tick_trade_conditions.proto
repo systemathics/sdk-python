@@ -1,0 +1,93 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// The tick condition calculates the ratios of all the trading conditions over a specified trading period.
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/identifier.proto";
+
+package systemathics.apis.services.tick_analytics.v1;
+
+// Called to request tick by tick trade condition statistics.
+service TickTradeConditionsService 
+{
+	// Gets tick by tick trade conditions
+    rpc TickTradeConditions(TickTradeConditionsRequest) returns (stream TickTradeConditionsResponse);
+}
+
+// The required inputs to request the TickTradeConditionsService.
+message TickTradeConditionsRequest 
+{
+    // [Mandatory] The instrument identifier: a ticker and exchange
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
+	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+    
+	// [Optional] The sampling period of the tick data, by default the period is set to one day
+	google.protobuf.Duration sampling = 3;
+    
+	// [Optional] The period of the conditions, by default the period is set to one day
+	google.protobuf.Duration period = 4;
+
+	// [Optional] The offset time when the conditions is reset, by default the offset is set to 00:00:00
+	google.protobuf.Duration offset = 5;
+}
+
+// Contains the tick conditions values.
+message TickTradeConditionsResponse
+{
+	// The time stamp
+	google.protobuf.Timestamp time_stamp = 1;
+	
+	// Total traded volume of the conditions
+	int64 volume = 2;
+
+	// Tick count of the conditions
+	int64 count = 3;
+
+	// The trade conditions items
+	repeated TickTradeConditionData data = 4;
+}
+
+message TickTradeConditionData
+{
+	// The trading condition value
+	string value = 1;
+	
+	// The trading condition count
+	int64 count = 2;
+
+	// The trading condition percentage : count / total
+	double percentage = 3;
+
+	// The trades volume
+	int64 volume = 4;
+
+	// The volume trading condition percentage : volume / total volume
+	double volume_percentage = 5;
+}
+
+
