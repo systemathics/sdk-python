@@ -61,20 +61,26 @@ message StaticDataRequest
     // [Optional] Future category
     google.protobuf.StringValue future_category = 6;
 
+    // [Optional] Crypto currency (base)
+    google.protobuf.StringValue crypto_currency = 7;
+
+    // [Optional] Crypto currency 2 (quote)
+    google.protobuf.StringValue crypto_currency2 = 8;
+
     // [Optional] Equity sector
-    google.protobuf.StringValue equity_sector = 7;
+    google.protobuf.StringValue equity_sector = 9;
 
     // [Optional] Index if the asset belongs to an index components
-    google.protobuf.StringValue index = 8;
+    google.protobuf.StringValue index = 10;
     
     // [Optional] Mapping codes: isin, cusip, sedol, cik, figi, figic, reuters, bloomberg, morningstar, etc.
-    google.protobuf.StringValue code = 9;
+    google.protobuf.StringValue code = 11;
         
     // [Optional] Define the first element index to be retrieved
-    google.protobuf.Int32Value start = 10;
+    google.protobuf.Int32Value start = 12;
 
     // [Optional] Select the first elements retrieved, by default count is set to 100
-    google.protobuf.Int32Value count = 11;
+    google.protobuf.Int32Value count = 13;
 }
 
 // Represents a reference data response grouped by asset type.
@@ -91,6 +97,9 @@ message StaticDataResponse
 
 	// The reference data for indices: the indices array
 	repeated IndexEntry indices  = 4;
+
+	// The reference data for crypto currencies: the cryptos array
+	repeated CryptoEntry cryptos  = 5;
 }
 
 // Contains the reference data for equities.
@@ -386,6 +395,80 @@ message IndexEntry
 	string description = 25;
 }
 
+// Contains the reference data for crypto currencies.
+message CryptoEntry
+{
+	// Identifiers: asset identifier
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+	// General information: the asset class
+	string type = 2;
+	// General information: the primary exchange code (mic)
+	string primary = 3;
+	// General information: the operating exchange code (mic)
+	string operating = 4;
+	// General information: the full name 
+	string name = 5;
+	// General information: the base currency code (ISO 4217)
+	string currency = 6;
+	// General information: the country code (ISO 3166)
+	string country = 7;
+	// General information: the tick size rule table
+	repeated TickSize tick_size_rule = 8;
+	// General information: the major index array
+	repeated string index = 9;
+
+	// Trading hours: the open time (continuous trading)
+	string open = 10;
+	// Trading hours: the close time (continuous trading)
+	string close = 11;
+	// Trading hours: the time zone
+	string time_zone = 12;
+
+	// Specifications: the lot size (minimum quantity to trade)
+	int64 lot_size = 13;
+	// Specifications: the point value
+	double point_value = 14;
+
+	// Reference data : the average price
+	google.protobuf.DoubleValue price = 15;
+	// Reference data : the average daily volume 
+	google.protobuf.Int64Value volume = 16;
+	// Reference data : the time stamp of the refernce data
+	google.type.Date time = 17;
+
+	// Mapping : the count of sources used to cross validate and complete the asset's information
+	int32 sources = 18;
+	// Mapping: the mapping codes
+	map<string, string> mapping = 19;
+	// Mapping: the bloomberg code
+	string bloomberg = 20;
+	// Mapping: the reuters code
+	string reuters = 21;
+	// Mapping: the morningstar code
+	string morningstar = 22;
+	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
+	string figi = 23;
+	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
+	string figic = 24;
+
+	// Specific values for the crypto: the quote currency code
+	string currency2 = 25;
+	// Specific values for the crypto: the consensus mechanisms (POW, POS, DPOS)
+	string consensus = 26;
+	// Specific values for the crypto: the description of the crypto
+	string description = 27;
+	// Specific values for the crypto: the issue date of the crypto
+	google.type.Date issue_date = 28;
+	// Specific values for the crypto: the market capitalization
+	google.protobuf.DoubleValue capitalization = 29;
+		// Specific values for the crypto: the number of coins that are circulating in the market and in the general public's hands
+	int32 circulating_supply = 30;
+	// Specific values for the crypto: the maximum amount of coins that will ever exist in the lifetime of the cryptocurrency
+	int32 max_supply = 31;
+	// Specific values for the crypto: the total amount of coins in existence right now (minus any coins that have been verifiably burned)
+	int32 total_supply = 32;
+}
+
 // Contains the tick size rule item : price and tick.
 message TickSize
 {
@@ -416,4 +499,7 @@ enum AssetType
 
 	// Search only on Index
 	ASSET_TYPE_INDEX = 5;
+
+	// Search only on Crypto currencies
+	ASSET_TYPE_CRYPTO = 6;
 }
