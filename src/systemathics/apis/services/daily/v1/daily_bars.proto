@@ -78,7 +78,7 @@ message DailyBar
 	double close = 5;
 	
 	// Total traded volume of the day
-	int64 volume = 6;
+	double volume = 6;
 
 	// The data quality scoring : from 0 (bad) to 100 (good)
 	double score = 7;

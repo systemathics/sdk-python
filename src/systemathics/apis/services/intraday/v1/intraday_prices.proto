@@ -72,7 +72,7 @@ message IntradayPrice
 	double price = 2;
 	
 	// Total traded volume of the sampling period
-	int64 volume = 3;
+	double volume = 3;
 
 	// The data quality scoring : from 0 (bad) to 100 (good)
 	double score = 4;

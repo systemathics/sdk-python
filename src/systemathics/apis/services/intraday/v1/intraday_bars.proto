@@ -82,7 +82,7 @@ message IntradayBar
 	double close = 5;
 	
 	// Total traded volume of the sampling period
-	int64 volume = 6;
+	double volume = 6;
 
 	// Tick count of the sampling period
 	int32 count = 7;
