@@ -29,6 +29,8 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 import "google/type/date.proto";
+import "google/protobuf/duration.proto";
+
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
 package systemathics.apis.services.static_data.v1;
@@ -61,11 +63,11 @@ message StaticDataRequest
     // [Optional] Future category
     google.protobuf.StringValue future_category = 6;
 
-    // [Optional] Crypto currency (base)
-    google.protobuf.StringValue crypto_currency = 7;
+    // [Optional] Crypto base currency
+    google.protobuf.StringValue crypto_base_currency = 7;
 
-    // [Optional] Crypto currency 2 (quote)
-    google.protobuf.StringValue crypto_currency2 = 8;
+    // [Optional] Crypto quote currency
+    google.protobuf.StringValue crypto_quote_currency = 8;
 
     // [Optional] Equity sector
     google.protobuf.StringValue equity_sector = 9;
@@ -125,9 +127,9 @@ message EquityEntry
 	repeated string index = 9;
 
 	// Trading hours: the open time (continuous trading)
-	string open = 10;
+	google.protobuf.Duration open = 10;
 	// Trading hours: the close time (continuous trading)
-	string close = 11;
+	google.protobuf.Duration close = 11;
 	// Trading hours: the time zone
 	string time_zone = 12;
 
@@ -205,9 +207,9 @@ message EtfEntry
 	repeated string index = 9;
 
 	// Trading hours: the open time (continuous trading)
-	string open = 10;
+	google.protobuf.Duration open = 10;
 	// Trading hours: the close time (continuous trading)
-	string close = 11;
+	google.protobuf.Duration close = 11;
 	// Trading hours: the time zone
 	string time_zone = 12;
 
@@ -285,9 +287,9 @@ message FutureEntry
 	repeated string index = 9;
 
 	// Trading hours: the open time (continuous trading)
-	string open = 10;
+	google.protobuf.Duration open = 10;
 	// Trading hours: the close time (continuous trading)
-	string close = 11;
+	google.protobuf.Duration close = 11;
 	// Trading hours: the time zone
 	string time_zone = 12;
 
@@ -358,9 +360,9 @@ message IndexEntry
 	repeated string index = 9;
 
 	// Trading hours: the open time (continuous trading)
-	string open = 10;
+	google.protobuf.Duration open = 10;
 	// Trading hours: the close time (continuous trading)
-	string close = 11;
+	google.protobuf.Duration close = 11;
 	// Trading hours: the time zone
 	string time_zone = 12;
 
@@ -409,7 +411,7 @@ message CryptoEntry
 	// General information: the full name 
 	string name = 5;
 	// General information: the base currency code (ISO 4217)
-	string currency = 6;
+	string base_currency = 6;
 	// General information: the country code (ISO 3166)
 	string country = 7;
 	// General information: the tick size rule table
@@ -418,9 +420,9 @@ message CryptoEntry
 	repeated string index = 9;
 
 	// Trading hours: the open time (continuous trading)
-	string open = 10;
+	google.protobuf.Duration open = 10;
 	// Trading hours: the close time (continuous trading)
-	string close = 11;
+	google.protobuf.Duration close = 11;
 	// Trading hours: the time zone
 	string time_zone = 12;
 
@@ -452,9 +454,9 @@ message CryptoEntry
 	string figic = 24;
 
 	// Specific values for the crypto: the quote currency code
-	string currency2 = 25;
-	// Specific values for the crypto: the consensus mechanisms (POW, POS, DPOS)
-	string consensus = 26;
+	string quote_currency = 25;
+	// Specific values for the crypto: the consensus mechanisms array (POW, POS, DPOS)
+	repeated string consensus = 26;
 	// Specific values for the crypto: the description of the crypto
 	string description = 27;
 	// Specific values for the crypto: the issue date of the crypto

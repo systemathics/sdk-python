@@ -26,6 +26,7 @@ import "google/protobuf/duration.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/condition.proto";
 
 package systemathics.apis.services.tick_analytics.v1;
 
@@ -68,10 +69,14 @@ message TickTradeConditionsResponse
 	// Tick count of the conditions
 	int64 count = 3;
 
+	// The trading condition description
+	repeated systemathics.apis.type.shared.v1.Condition description = 4;
+
 	// The trade conditions items
-	repeated TickTradeConditionData data = 4;
+	repeated TickTradeConditionData data = 5;
 }
 
+// The trade condition statistics for a given trading condition value
 message TickTradeConditionData
 {
 	// The trading condition value

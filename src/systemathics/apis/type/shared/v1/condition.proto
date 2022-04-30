@@ -18,40 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// The trade condition defines the type of the orders and trades.
+// The trading conditions
 syntax = "proto3";
 
-import "systemathics/apis/type/shared/v1/identifier.proto";
-import "systemathics/apis/type/shared/v1/condition.proto";
+package systemathics.apis.type.shared.v1;
 
-package systemathics.apis.services.tick_conditions.v1;
-
-// Called to request tick by tick trading conditions data.
-service TickConditionsService 
+// Contains the tick trading conditions's data: value, description, regular and auction.
+message Condition
 {
-    // Gets tick by tick trading conditions data
-    rpc TickConditions(TickConditionsRequest) returns (TickConditionsResponse);
-}
+	// The trading condition value
+	string value = 1;
+	
+	// The trading condition description
+	string description = 2;
 
-// The required inputs to request the TickConditionsService.
-message TickConditionsRequest 
-{
-	oneof value 
-	{
-		// [Optional] The instrument identifier: a ticker and exchange
-		systemathics.apis.type.shared.v1.Identifier identifier = 1;
-
-		// [Optional] The market identifier code or exchange
-		string exchange = 2;
-
-		// [Optional] The source number
-		int32 source = 3;
-	}
-}
-
-// Represents a tick conditions response.
-message TickConditionsResponse
-{
-	// The conditions: an array of Condition objects
-	repeated systemathics.apis.type.shared.v1.Condition data = 1;
+	// The trading condition comment
+	string comment = 3;
+	
+	// Is regular market condition
+	bool regular = 4;
+	
+	// Is auction market condition
+	bool auction = 5;
 }
