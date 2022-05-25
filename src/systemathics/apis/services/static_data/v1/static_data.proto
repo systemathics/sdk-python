@@ -102,6 +102,9 @@ message StaticDataResponse
 
 	// The reference data for crypto currencies: the cryptos array
 	repeated CryptoEntry cryptos  = 5;
+
+	// The reference data for forex pairs: the forex array
+	repeated ForexEntry forex  = 6;
 }
 
 // Contains the reference data for equities.
@@ -471,6 +474,66 @@ message CryptoEntry
 	int32 total_supply = 32;
 }
 
+// Contains the reference data for Forex pairs.
+message ForexEntry
+{
+	// Identifiers: asset identifier
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+	// General information: the asset class
+	string type = 2;
+	// General information: the primary exchange code (mic)
+	string primary = 3;
+	// General information: the operating exchange code (mic)
+	string operating = 4;
+	// General information: the full name 
+	string name = 5;
+	// General information: the base currency code (ISO 4217)
+	string base_currency = 6;
+	// General information: the country code (ISO 3166)
+	string country = 7;
+	// General information: the tick size rule table
+	repeated TickSize tick_size_rule = 8;
+	// General information: the major index array
+	repeated string index = 9;
+
+	// Trading hours: the open time (continuous trading)
+	google.protobuf.Duration open = 10;
+	// Trading hours: the close time (continuous trading)
+	google.protobuf.Duration close = 11;
+	// Trading hours: the time zone
+	string time_zone = 12;
+
+	// Specifications: the lot size (minimum quantity to trade)
+	int64 lot_size = 13;
+	// Specifications: the point value
+	double point_value = 14;
+
+	// Reference data : the average price
+	google.protobuf.DoubleValue price = 15;
+	// Reference data : the average daily volume 
+	google.protobuf.Int64Value volume = 16;
+	// Reference data : the time stamp of the refernce data
+	google.type.Date time = 17;
+
+	// Mapping : the count of sources used to cross validate and complete the asset's information
+	int32 sources = 18;
+	// Mapping: the mapping codes
+	map<string, string> mapping = 19;
+	// Mapping: the bloomberg code
+	string bloomberg = 20;
+	// Mapping: the reuters code
+	string reuters = 21;
+	// Mapping: the morningstar code
+	string morningstar = 22;
+	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
+	string figi = 23;
+	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
+	string figic = 24;
+
+	// Specific values for the Forex: the quote currency code
+	string quote_currency = 25;
+}
+
 // Contains the tick size rule item : price and tick.
 message TickSize
 {
@@ -504,4 +567,7 @@ enum AssetType
 
 	// Search only on Crypto currencies
 	ASSET_TYPE_CRYPTO = 6;
+
+	// Search only on Forex pairs
+	ASSET_TYPE_FOREX = 7;
 }

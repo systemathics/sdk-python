@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 // <i>PRIIPs</i> regulation EU-wide rules governing information disclosure for all Packaged Retail and Insurance-based Investment Products (PRIIPs).
-// <br>Essentially, this covers any investment product used by a retail consumer that isn�t a UCITS fund.
+// <br>Essentially, this covers any investment product used by a retail consumer that isn't a UCITS fund.
 // <br>The method used to determine implicit transaction costs is the full PRIIPs method, also known as the arrival price methodology.
 syntax = "proto3";
 
