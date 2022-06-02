@@ -1,0 +1,136 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// <i>PRIIPs</i> regulation EU-wide rules governing information disclosure for all Packaged Retail and Insurance-based Investment Products (PRIIPs).
+// <br>Essentially, this covers any investment product used by a retail consumer that isn't a UCITS fund.
+// <br>The method used to determine implicit transaction costs is the full PRIIPs method, also known as the arrival price methodology.
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+import "systemathics/apis/type/shared/v1/identifier.proto";
+
+package systemathics.apis.services.tick_analytics.v1;
+
+// Called to request TickPriipsService. 
+service TickPriipsService 
+{
+	// Gets PRIIPs transaction cost analytics
+    rpc TickPriips(TickPriipsRequest) returns (stream TickPriipsResponse);
+}
+
+// The required input to request the TickPriipsService.
+message TickPriipsRequest 
+{
+    // [Mandatory] The instrument identifier: a ticker and exchange
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+
+	// [Mandatory] The order time stamp
+	google.protobuf.Timestamp order_time = 2;
+
+	// [Mandatory] The execution time stamp
+	google.protobuf.Timestamp execution_time = 3;
+
+    // [Mandatory] The execution price
+	double execution_price = 4;
+
+	// [Optional] The price used to calculate the PRIIPs, by default the field is set to Trade
+	PriipsPrice field = 5;
+
+	// [Optional] The latency, by default the latency is set to 00:00:00 (no latency)
+	google.protobuf.Duration latency = 6;
+
+	// [Optional] Accept trading / quote conditions, by default the accept is set to null : accept all
+	repeated string accept = 7;
+
+	// [Optional] Rejected trading / quote conditions, by default the reject is set to null : do not reject
+	repeated string reject = 8;
+}
+
+// Contains the PRIIPs data: timestamp, price, volume and ticks count.
+message TickPriipsResponse
+{
+	// The arrival time stamp of the first trade when the market or the broker received the order
+	google.protobuf.Timestamp arrival_time = 1;
+	
+	// The arrival price is the mid price at the exact time the trade is sent to the market (or broker)
+	double arrival_price = 2;
+
+	// The the arrival cost is the difference between the average execution price and the arrival price, expressed as a percentage
+	//<br> Arrival Cost = (Execution Price - Arrival Price) / Arrival Price
+	double arrival_cost = 3;
+	
+	// The open time : first trade time stamp just after the order time
+	google.protobuf.Timestamp open_time = 4;
+
+	// The close time : the last time stamp just after the execution time
+	google.protobuf.Timestamp close_time = 5;
+
+	// The order time : the time stamp of te client's order
+	google.protobuf.Timestamp order_time = 6;
+
+	// The execution time : the last time stamp of the oder execution
+	google.protobuf.Timestamp execution_time = 7;
+
+	// The working period = Close Time - Arrival Time
+	google.protobuf.Duration duration = 8;
+
+	// The latency : the time interval between the cliet's order time and the market's order received time
+	google.protobuf.Duration latency = 9;
+	
+	// The execution price : the execution price is the price achieved for the whole trade, or the average price achieved where the trade has been broken down into multiple parts
+	double execution_price = 10;
+
+	// The total count of trades during the working period
+	int64 count = 11;
+
+	// The open price of the working period
+	double open_price = 12;
+
+	// The highest price of the working period
+	double high_price = 13;
+
+	// The lowest price of the working period
+	double low_price = 14;
+
+	// The close price of the working period
+	double close_price = 15;
+
+	// The volume weighted average price of the working period
+	double vwap = 16;
+
+	// The total volume of the working period
+	int64 volume = 17;
+}
+
+// The price types used to compute the Priips
+enum PriipsPrice
+{
+	// The unspecfied field
+	PRIIPS_PRICE_UNSPECIFIED = 0;
+	// The last trade price
+	PRIIPS_PRICE_TRADE = 1;
+	// The best bid price
+	PRIIPS_PRICE_BID = 2;
+	// The best ask price
+	PRIIPS_PRICE_ASK = 3;
+}
+
