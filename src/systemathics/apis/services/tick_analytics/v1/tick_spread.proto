@@ -1,0 +1,106 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// Calculate the bid ask spread analytics.
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/side.proto";
+
+package systemathics.apis.services.tick_analytics.v1;
+
+// Called to request TickSpreadService. 
+service TickSpreadService 
+{
+	// Gets the Spread analytics
+    rpc TickSpread(TickSpreadRequest) returns (stream TickSpreadResponse);
+}
+
+// The required input to request the TickSpreadService.
+message TickSpreadRequest 
+{
+    // [Mandatory] The instrument identifier: a ticker and exchange
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+
+	// [Optional] The time constraints used to define the look-back period.
+	// If empty, then all the available data is retrieved.
+	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+
+	// [Optional] Accept quote conditions, by default the accept is set to null : accept all
+	repeated string accept = 3;
+
+	// [Optional] Rejected quote conditions, by default the reject is set to null : do not reject
+	repeated string reject = 4;
+}
+
+// Contains the Spread data analytics.
+message TickSpreadResponse
+{
+	// The bid side values
+	SideData bid = 1;
+
+	// The ask side values
+	SideData ask = 2;
+	
+	// The last spread
+	double last = 3;
+
+	// The average spread
+	double average = 4;
+
+	// The min spread
+	double min = 5;
+
+	// The max spread
+	double max = 6;
+
+	// The ticks count
+	int64 count = 7;
+}
+
+// Contains the side details.
+message SideData
+{    
+	// The last price
+	double last = 1;
+
+	// The average price
+	double average = 2;
+
+	// The vwap price
+	double vwap = 3;
+
+	// The min price
+	double min = 4;
+
+	// The max price
+	double max = 5;
+
+	// The total volume
+	int64 volume = 6;
+
+	// The ticks count
+	int64 count = 7;
+}
+
