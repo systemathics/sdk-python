@@ -23,6 +23,7 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
+import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -47,11 +48,11 @@ message TickSpreadRequest
 	// If empty, then all the available data is retrieved.
 	systemathics.apis.type.shared.v1.Constraints constraints = 2;
 
-	// [Optional] The minimum accepted spread value, by default is set to min double value
-	double min_accepted = 3;
+	// [Optional] The minimum accepted spread value, by default is set to min double value : accept all
+	google.protobuf.DoubleValue min_accepted = 3;
 
-	// [Optional] The maximum accepted spread value, by default is set to max double value
-	double max_accepted = 4;
+	// [Optional] The maximum accepted spread value, by default is set to max double value : accept all
+	google.protobuf.DoubleValue max_accepted = 4;
 
 	// [Optional] Accept quote conditions, by default the accept is set to null : accept all
 	repeated string accept = 5;
