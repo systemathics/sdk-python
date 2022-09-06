@@ -8,7 +8,7 @@ supports full order book natively and allows fine grained/customizable trade and
 
 For further information, please visit [Ganymede home page](https://ganymede.cloud) 
 
-# About this projects
+# About this project
 
 This project provides up-to-date gRPC clients to access [Ganymede APIs](https://ganymede.cloud/api-documentation.html)
 
