@@ -17,6 +17,10 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
+// Market book updates can be of two different types:
+// <br>- Snapshots only: a full snapshot of the book is provided each time there is an update.
+// <br>- Incrementals: the first response will be a snapshot of the book, then subsequent responses only provide an update.
 syntax = "proto3";
 
 package systemathics.apis.type.shared.v1;
