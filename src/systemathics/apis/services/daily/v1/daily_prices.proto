@@ -25,7 +25,7 @@ syntax = "proto3";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
-import "systemathics/apis/type/shared/v1/constraints.proto";
+import "systemathics/apis/type/shared/v1/date_interval.proto";
 
 package systemathics.apis.services.daily.v1;
 
@@ -42,9 +42,9 @@ message DailyPricesRequest
 	// [Mandatory] The instrument identifier: a ticker and exchange 
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Optional] The time constraints used to define the look-back period.
+	// [Optional] The date interval used to define the look-back period.
 	// If empty, then all the available data is retrieved.
-	systemathics.apis.type.shared.v1.Constraints constraints = 2;
+	systemathics.apis.type.shared.v1.DateInterval date_interval = 2;
 
 	// [Optional] The corporate action adjustment (dividends).
 	// By default the value is set to false : the split is applied in all cases
