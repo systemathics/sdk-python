@@ -1,12 +1,10 @@
-version: v1beta1
+version: v1
 build:
   roots:
     - src
 lint:
   use:
     - DEFAULT
-  ignore:
-    - google
 breaking:
   use:
     - FILE

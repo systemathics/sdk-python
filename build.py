@@ -41,9 +41,6 @@ def create_files_tuples(dir):
     python_files = []
     print(f"create_files_tuples(dir={dir})")
     for root, dirs, files in os.walk(dir, topdown=True):
-        # skip google folder
-        if 'google' in dirs:
-            dirs.remove('google')
         for file in files:
             path = os.path.join(root, file)
             if (file.endswith('.proto')) :
