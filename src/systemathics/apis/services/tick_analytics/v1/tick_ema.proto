@@ -27,6 +27,7 @@
 // <br>- <i>k = 2 / N+1</i> is the Weighting Multiplier
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/wrappers.proto";
@@ -40,7 +41,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickEmaService 
 {
     // Gets tick by tick exponential moving average data
-    rpc TickEma(TickEmaRequest) returns (stream TickEmaResponse);
+    rpc TickEma(TickEmaRequest) returns (stream TickEmaResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/ema"
+		 };
+	}
 }
 
 // The required inputs to request the TickEmaService.

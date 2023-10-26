@@ -27,9 +27,10 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
-import "google/type/date.proto";
 import "google/protobuf/duration.proto";
+import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
@@ -39,7 +40,12 @@ package systemathics.apis.services.static_data.v1;
 service StaticDataService
 {
   // Gets reference data
-  rpc StaticData(StaticDataRequest) returns (StaticDataResponse);
+  rpc StaticData(StaticDataRequest) returns (StaticDataResponse)
+  {
+	  	option (google.api.http) = {
+			get: "/v1/staticdata"
+		};
+  }
 }
 
 // The required input to request the StaticDataService.
@@ -105,6 +111,15 @@ message StaticDataResponse
 
 	// The reference data for forex pairs: the forex array
 	repeated ForexEntry forex  = 6;
+
+	// The reference data for options: the options array
+	repeated OptionEntry options  = 7;
+
+	// The reference data for bonds: the bonds array
+	repeated BondEntry bonds  = 8;
+
+	// The reference data for cds: the credit default swaps array
+	repeated CdsEntry cds  = 9;
 }
 
 // Contains the reference data for equities.
@@ -114,77 +129,83 @@ message EquityEntry
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	// General information: the asset class
 	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
 	// General information: the primary exchange code (mic)
-	string primary = 3;
+	string primary = 4;
 	// General information: the operating exchange code (mic)
-	string operating = 4;
+	string operating = 5;
 	// General information: the full name 
-	string name = 5;
+	string name = 6;
 	// General information: the currency code (ISO 4217)
-	string currency = 6;
+	string currency = 7;
 	// General information: the country code (ISO 3166)
-	string country = 7;
+	string country = 8;
 	// General information: the tick size rule table
-	repeated TickSize tick_size_rule = 8;
+	repeated TickSize tick_size_rule = 9;
 	// General information: the major index array
-	repeated string index = 9;
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
 
 	// Trading hours: the open time (continuous trading)
-	google.protobuf.Duration open = 10;
+	google.protobuf.Duration open = 13;
 	// Trading hours: the close time (continuous trading)
-	google.protobuf.Duration close = 11;
+	google.protobuf.Duration close = 14;
 	// Trading hours: the time zone
-	string time_zone = 12;
+	string time_zone = 15;
 
 	// Specifications: the lot size (minimum quantity to trade)
-	int64 lot_size = 13;
+	int64 lot_size = 16;
 	// Specifications: the point value
-	double point_value = 14;
+	double point_value = 17;
 
 	// Reference data : the average price
-	google.protobuf.DoubleValue price = 15;
+	google.protobuf.DoubleValue price = 18;
 	// Reference data : the average daily volume 
-	google.protobuf.Int64Value volume = 16;
+	google.protobuf.Int64Value volume = 19;
 	// Reference data : the time stamp of the refernce data
-	google.type.Date time = 17;
+	google.type.Date time = 20;
 
 	// Mapping : the count of sources used to cross validate and complete the asset's information
-	int32 sources = 18;
+	int32 sources = 21;
 	// Mapping: the mapping codes
-	map<string, string> mapping = 19;
+	map<string, string> mapping = 22;
 	// Mapping: the bloomberg code
-	string bloomberg = 20;
+	string bloomberg = 23;
 	// Mapping: the reuters code
-	string reuters = 21;
+	string reuters = 24;
 	// Mapping: the morningstar code
-	string morningstar = 22;
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
 	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
-	string figi = 23;
+	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
-	string figic = 24;
+	string figic = 28;
 
 	// Specific values for the equity: isin code (International Securities Identifying Number)
-    string isin = 25;
+    string isin = 29;
 	// Specific values for the equity: cusip code : Committee on Uniform Security Identification Procedures
-	string cusip = 26;
+	string cusip = 30;
 	// Specific values for the equity: sedol code : Stock Exchange Daily Official List
-	string sedol = 27;
+	string sedol = 31;
 	// Specific values for the equity: cik (Central Index Key number). The Cik is used as a unique identifier for financial filings with the Security and Exchange Commision of the USA
-	string cik = 28;
+	string cik = 32;
     // Specific values for the equity: sectors definitions
-	map<string, string> sectors = 29;
+	map<string, string> sectors = 33;
     // Specific values for the equity: market capitalization
-    google.protobuf.DoubleValue capitalization = 30;
-	// Specific values for the equity: the description of the company
-	string description = 31;
+    google.protobuf.DoubleValue capitalization = 34;
 	// Specific values for the equity: the main address of the company
-	string address = 32;
+	string address = 35;
 	// Specific values for the equity: the main phone of the company
-	string phone = 33;
+	string phone = 36;
 	// Specific values for the equity: the main email of the company
-	string email = 34;
+	string email = 37;
 	// Specific values for the equity: the website link of the company
-	string url = 35;
+	string url = 38;
 }
 
 // Contains the reference data for exchange traded fund (ETF).
@@ -194,150 +215,169 @@ message EtfEntry
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	// General information: the asset class
 	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
 	// General information: the primary exchange code (mic)
-	string primary = 3;
+	string primary = 4;
 	// General information: the operating exchange code (mic)
-	string operating = 4;
+	string operating = 5;
 	// General information: the full name 
-	string name = 5;
+	string name = 6;
 	// General information: the currency code (ISO 4217)
-	string currency = 6;
+	string currency = 7;
 	// General information: the country code (ISO 3166)
-	string country = 7;
+	string country = 8;
 	// General information: the tick size rule table
-	repeated TickSize tick_size_rule = 8;
+	repeated TickSize tick_size_rule = 9;
 	// General information: the major index array
-	repeated string index = 9;
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
 
 	// Trading hours: the open time (continuous trading)
-	google.protobuf.Duration open = 10;
+	google.protobuf.Duration open = 13;
 	// Trading hours: the close time (continuous trading)
-	google.protobuf.Duration close = 11;
+	google.protobuf.Duration close = 14;
 	// Trading hours: the time zone
-	string time_zone = 12;
+	string time_zone = 15;
 
 	// Specifications: the lot size (minimum quantity to trade)
-	int64 lot_size = 13;
+	int64 lot_size = 16;
 	// Specifications: the point value
-	double point_value = 14;
+	double point_value = 17;
 
 	// Reference data : the average price
-	google.protobuf.DoubleValue price = 15;
+	google.protobuf.DoubleValue price = 18;
 	// Reference data : the average daily volume 
-	google.protobuf.Int64Value volume = 16;
+	google.protobuf.Int64Value volume = 19;
 	// Reference data : the time stamp of the refernce data
-	google.type.Date time = 17;
+	google.type.Date time = 20;
 
 	// Mapping : the count of sources used to cross validate and complete the asset's information
-	int32 sources = 18;
+	int32 sources = 21;
 	// Mapping: the mapping codes
-	map<string, string> mapping = 19;
+	map<string, string> mapping = 22;
 	// Mapping: the bloomberg code
-	string bloomberg = 20;
+	string bloomberg = 23;
 	// Mapping: the reuters code
-	string reuters = 21;
+	string reuters = 24;
 	// Mapping: the morningstar code
-	string morningstar = 22;
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
 	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
-	string figi = 23;
+	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
-	string figic = 24;
+	string figic = 28;
 
 	// Specific values for the etf: isin code (International Securities Identifying Number)
-    string isin = 25;
+    string isin = 29;
 	// Specific values for the etf: cusip code : Committee on Uniform Security Identification Procedures
-	string cusip = 26;
+	string cusip = 30;
 	// Specific values for the etf: sedol code : Stock Exchange Daily Official List
-	string sedol = 27;
+	string sedol = 31;
 	// Specific values for the etf: cik (Central Index Key number). The Cik is used as a unique identifier for financial filings with the Security and Exchange Commision of the USA
-	string cik = 28;
+	string cik = 32;
     // Specific values for the etf: sectors definitions
-	map<string, string> sectors = 29;
+	map<string, string> sectors = 33;
     // Specific values for the etf: market capitalization
-    google.protobuf.DoubleValue capitalization = 30;
-	// Specific values for the etf: the description of the exchange traded fund
-	string description = 31;
+    google.protobuf.DoubleValue capitalization = 34;
 	// Specific values for the etf: the main address of the exchange traded fund
-	string address = 32;
+	string address = 35;
 	// Specific values for the etf: the main phone of the exchange traded fund
-	string phone = 33;
+	string phone = 36;
 	// Specific values for the etf: the main email of the exchange traded fund
-	string email = 34;
+	string email = 37;
 	// Specific values for the etf: the website link of the exchange traded fund
-	string url = 35;
+	string url = 38;
+	// Specific values for the etf: the exchange traded fund issuer
+	string issuer = 39;
+	// Specific values for the etf: the exchange traded fund type
+	string fund_type = 40;
+	// Specific values for the etf: the exchange traded fund issue date
+	google.type.Date issue_date = 41;
 }
 
 // Contains the reference data for futures.
 message FutureEntry
-{
+{	
 	// Identifiers: asset identifier
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	// General information: the asset class
 	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
 	// General information: the primary exchange code (mic)
-	string primary = 3;
+	string primary = 4;
 	// General information: the operating exchange code (mic)
-	string operating = 4;
+	string operating = 5;
 	// General information: the full name 
-	string name = 5;
+	string name = 6;
 	// General information: the currency code (ISO 4217)
-	string currency = 6;
+	string currency = 7;
 	// General information: the country code (ISO 3166)
-	string country = 7;
+	string country = 8;
 	// General information: the tick size rule table
-	repeated TickSize tick_size_rule = 8;
+	repeated TickSize tick_size_rule = 9;
 	// General information: the major index array
-	repeated string index = 9;
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
 
 	// Trading hours: the open time (continuous trading)
-	google.protobuf.Duration open = 10;
+	google.protobuf.Duration open = 13;
 	// Trading hours: the close time (continuous trading)
-	google.protobuf.Duration close = 11;
+	google.protobuf.Duration close = 14;
 	// Trading hours: the time zone
-	string time_zone = 12;
+	string time_zone = 15;
 
 	// Specifications: the lot size (minimum quantity to trade)
-	int64 lot_size = 13;
+	int64 lot_size = 16;
 	// Specifications: the point value
-	double point_value = 14;
+	double point_value = 17;
 
 	// Reference data : the average price
-	google.protobuf.DoubleValue price = 15;
+	google.protobuf.DoubleValue price = 18;
 	// Reference data : the average daily volume 
-	google.protobuf.Int64Value volume = 16;
+	google.protobuf.Int64Value volume = 19;
 	// Reference data : the time stamp of the refernce data
-	google.type.Date time = 17;
+	google.type.Date time = 20;
 
 	// Mapping : the count of sources used to cross validate and complete the asset's information
-	int32 sources = 18;
+	int32 sources = 21;
 	// Mapping: the mapping codes
-	map<string, string> mapping = 19;
+	map<string, string> mapping = 22;
 	// Mapping: the bloomberg code
-	string bloomberg = 20;
+	string bloomberg = 23;
 	// Mapping: the reuters code
-	string reuters = 21;
+	string reuters = 24;
 	// Mapping: the morningstar code
-	string morningstar = 22;
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
 	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
-	string figi = 23;
+	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
-	string figic = 24;
-
+	string figic = 28;
 
 	// Specific values for the future: the future underlying asset code
-	string underlying = 25;
+	string underlying = 29;
 	// Specific values for the future: the future contract code
-	string contract = 26;
+	string contract = 30;
 	// Specific values for the future: the future category
-	map<string, string> category = 27;
+	map<string, string> category = 31;
 	// Specific values for the future: the future chain codes
-	string chain = 28;
+	string chain = 32;
 	// Specific values for the future: the future maturity date
-	google.type.Date maturity = 29;
+	google.type.Date maturity = 33;
 	// Specific values for the future: the future month code
-	string month = 30;
+	string month = 34;
 	// Specific values for the future: the future year
-	int32 year = 31;
+	int32 year = 35;
 }
 
 // Contains the reference data for indices.
@@ -347,57 +387,73 @@ message IndexEntry
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	// General information: the asset class
 	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
 	// General information: the primary exchange code (mic)
-	string primary = 3;
+	string primary = 4;
 	// General information: the operating exchange code (mic)
-	string operating = 4;
+	string operating = 5;
 	// General information: the full name 
-	string name = 5;
+	string name = 6;
 	// General information: the currency code (ISO 4217)
-	string currency = 6;
+	string currency = 7;
 	// General information: the country code (ISO 3166)
-	string country = 7;
+	string country = 8;
 	// General information: the tick size rule table
-	repeated TickSize tick_size_rule = 8;
+	repeated TickSize tick_size_rule = 9;
 	// General information: the major index array
-	repeated string index = 9;
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
 
 	// Trading hours: the open time (continuous trading)
-	google.protobuf.Duration open = 10;
+	google.protobuf.Duration open = 13;
 	// Trading hours: the close time (continuous trading)
-	google.protobuf.Duration close = 11;
+	google.protobuf.Duration close = 14;
 	// Trading hours: the time zone
-	string time_zone = 12;
+	string time_zone = 15;
 
 	// Specifications: the lot size (minimum quantity to trade)
-	int64 lot_size = 13;
+	int64 lot_size = 16;
 	// Specifications: the point value
-	double point_value = 14;
+	double point_value = 17;
 
 	// Reference data : the average price
-	google.protobuf.DoubleValue price = 15;
+	google.protobuf.DoubleValue price = 18;
 	// Reference data : the average daily volume 
-	google.protobuf.Int64Value volume = 16;
+	google.protobuf.Int64Value volume = 19;
 	// Reference data : the time stamp of the refernce data
-	google.type.Date time = 17;
+	google.type.Date time = 20;
 
 	// Mapping : the count of sources used to cross validate and complete the asset's information
-	int32 sources = 18;
+	int32 sources = 21;
 	// Mapping: the mapping codes
-	map<string, string> mapping = 19;
+	map<string, string> mapping = 22;
 	// Mapping: the bloomberg code
-	string bloomberg = 20;
+	string bloomberg = 23;
 	// Mapping: the reuters code
-	string reuters = 21;
+	string reuters = 24;
 	// Mapping: the morningstar code
-	string morningstar = 22;
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
 	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
-	string figi = 23;
+	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
-	string figic = 24;
+	string figic = 28;
 
-	// Specific values for the index: the description of the index
-	string description = 25;
+	// Specific values for the index: the index category
+	string category = 29;
+	// Specific values for the index: the index weighting methodology
+	string methodology = 30;
+	// Specific values for the index: the index issuer
+	string issuer = 31;
+	// Specific values for the index: the index issue date
+	google.type.Date issue_date = 32;
+	// Specific values for the index: the index rebalancing frequency
+	FrequencyType frequency = 33;
 }
 
 // Contains the reference data for crypto currencies.
@@ -407,71 +463,77 @@ message CryptoEntry
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	// General information: the asset class
 	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
 	// General information: the primary exchange code (mic)
-	string primary = 3;
+	string primary = 4;
 	// General information: the operating exchange code (mic)
-	string operating = 4;
+	string operating = 5;
 	// General information: the full name 
-	string name = 5;
-	// General information: the base currency code (ISO 4217)
-	string base_currency = 6;
+	string name = 6;
+	// General information: the currency code (ISO 4217)
+	string base_currency = 7;
 	// General information: the country code (ISO 3166)
-	string country = 7;
+	string country = 8;
 	// General information: the tick size rule table
-	repeated TickSize tick_size_rule = 8;
+	repeated TickSize tick_size_rule = 9;
 	// General information: the major index array
-	repeated string index = 9;
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
 
 	// Trading hours: the open time (continuous trading)
-	google.protobuf.Duration open = 10;
+	google.protobuf.Duration open = 13;
 	// Trading hours: the close time (continuous trading)
-	google.protobuf.Duration close = 11;
+	google.protobuf.Duration close = 14;
 	// Trading hours: the time zone
-	string time_zone = 12;
+	string time_zone = 15;
 
 	// Specifications: the lot size (minimum quantity to trade)
-	int64 lot_size = 13;
+	int64 lot_size = 16;
 	// Specifications: the point value
-	double point_value = 14;
+	double point_value = 17;
 
 	// Reference data : the average price
-	google.protobuf.DoubleValue price = 15;
+	google.protobuf.DoubleValue price = 18;
 	// Reference data : the average daily volume 
-	google.protobuf.Int64Value volume = 16;
+	google.protobuf.Int64Value volume = 19;
 	// Reference data : the time stamp of the refernce data
-	google.type.Date time = 17;
+	google.type.Date time = 20;
 
 	// Mapping : the count of sources used to cross validate and complete the asset's information
-	int32 sources = 18;
+	int32 sources = 21;
 	// Mapping: the mapping codes
-	map<string, string> mapping = 19;
+	map<string, string> mapping = 22;
 	// Mapping: the bloomberg code
-	string bloomberg = 20;
+	string bloomberg = 23;
 	// Mapping: the reuters code
-	string reuters = 21;
+	string reuters = 24;
 	// Mapping: the morningstar code
-	string morningstar = 22;
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
 	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
-	string figi = 23;
+	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
-	string figic = 24;
+	string figic = 28;
 
 	// Specific values for the crypto: the quote currency code
-	string quote_currency = 25;
+	string quote_currency = 29;
 	// Specific values for the crypto: the consensus mechanisms array (POW, POS, DPOS)
-	repeated string consensus = 26;
-	// Specific values for the crypto: the description of the crypto
-	string description = 27;
+	repeated string consensus = 30;
 	// Specific values for the crypto: the issue date of the crypto
-	google.type.Date issue_date = 28;
+	google.type.Date issue_date = 31;
 	// Specific values for the crypto: the market capitalization
-	google.protobuf.DoubleValue capitalization = 29;
+	google.protobuf.DoubleValue capitalization = 32;
 		// Specific values for the crypto: the number of coins that are circulating in the market and in the general public's hands
-	int32 circulating_supply = 30;
+	int32 circulating_supply = 33;
 	// Specific values for the crypto: the maximum amount of coins that will ever exist in the lifetime of the cryptocurrency
-	int32 max_supply = 31;
+	int32 max_supply = 34;
 	// Specific values for the crypto: the total amount of coins in existence right now (minus any coins that have been verifiably burned)
-	int32 total_supply = 32;
+	int32 total_supply = 35;
 }
 
 // Contains the reference data for Forex pairs.
@@ -481,58 +543,303 @@ message ForexEntry
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 	// General information: the asset class
 	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
 	// General information: the primary exchange code (mic)
-	string primary = 3;
+	string primary = 4;
 	// General information: the operating exchange code (mic)
-	string operating = 4;
+	string operating = 5;
 	// General information: the full name 
-	string name = 5;
-	// General information: the base currency code (ISO 4217)
-	string base_currency = 6;
+	string name = 6;
+	// General information: the currency code (ISO 4217)
+	string base_currency = 7;
 	// General information: the country code (ISO 3166)
-	string country = 7;
+	string country = 8;
 	// General information: the tick size rule table
-	repeated TickSize tick_size_rule = 8;
+	repeated TickSize tick_size_rule = 9;
 	// General information: the major index array
-	repeated string index = 9;
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
 
 	// Trading hours: the open time (continuous trading)
-	google.protobuf.Duration open = 10;
+	google.protobuf.Duration open = 13;
 	// Trading hours: the close time (continuous trading)
-	google.protobuf.Duration close = 11;
+	google.protobuf.Duration close = 14;
 	// Trading hours: the time zone
-	string time_zone = 12;
+	string time_zone = 15;
 
 	// Specifications: the lot size (minimum quantity to trade)
-	int64 lot_size = 13;
+	int64 lot_size = 16;
 	// Specifications: the point value
-	double point_value = 14;
+	double point_value = 17;
 
 	// Reference data : the average price
-	google.protobuf.DoubleValue price = 15;
+	google.protobuf.DoubleValue price = 18;
 	// Reference data : the average daily volume 
-	google.protobuf.Int64Value volume = 16;
+	google.protobuf.Int64Value volume = 19;
 	// Reference data : the time stamp of the refernce data
-	google.type.Date time = 17;
+	google.type.Date time = 20;
 
 	// Mapping : the count of sources used to cross validate and complete the asset's information
-	int32 sources = 18;
+	int32 sources = 21;
 	// Mapping: the mapping codes
-	map<string, string> mapping = 19;
+	map<string, string> mapping = 22;
 	// Mapping: the bloomberg code
-	string bloomberg = 20;
+	string bloomberg = 23;
 	// Mapping: the reuters code
-	string reuters = 21;
+	string reuters = 24;
 	// Mapping: the morningstar code
-	string morningstar = 22;
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
 	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
-	string figi = 23;
+	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
-	string figic = 24;
+	string figic = 28;
 
 	// Specific values for the Forex: the quote currency code
-	string quote_currency = 25;
+	string quote_currency = 29;
 }
+
+// Contains the reference data for options.
+message OptionEntry
+{	
+	// Identifiers: asset identifier
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+	// General information: the asset class
+	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
+	// General information: the primary exchange code (mic)
+	string primary = 4;
+	// General information: the operating exchange code (mic)
+	string operating = 5;
+	// General information: the full name 
+	string name = 6;
+	// General information: the currency code (ISO 4217)
+	string currency = 7;
+	// General information: the country code (ISO 3166)
+	string country = 8;
+	// General information: the tick size rule table
+	repeated TickSize tick_size_rule = 9;
+	// General information: the major index array
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
+
+	// Trading hours: the open time (continuous trading)
+	google.protobuf.Duration open = 13;
+	// Trading hours: the close time (continuous trading)
+	google.protobuf.Duration close = 14;
+	// Trading hours: the time zone
+	string time_zone = 15;
+
+	// Specifications: the lot size (minimum quantity to trade)
+	int64 lot_size = 16;
+	// Specifications: the point value
+	double point_value = 17;
+
+	// Reference data : the average price
+	google.protobuf.DoubleValue price = 18;
+	// Reference data : the average daily volume 
+	google.protobuf.Int64Value volume = 19;
+	// Reference data : the time stamp of the refernce data
+	google.type.Date time = 20;
+
+	// Mapping : the count of sources used to cross validate and complete the asset's information
+	int32 sources = 21;
+	// Mapping: the mapping codes
+	map<string, string> mapping = 22;
+	// Mapping: the bloomberg code
+	string bloomberg = 23;
+	// Mapping: the reuters code
+	string reuters = 24;
+	// Mapping: the morningstar code
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
+	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
+	string figi = 27;
+	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
+	string figic = 28;
+
+	// Specific values for the option: the option underlying asset code
+	string underlying = 29;
+	// Specific values for the option: the option strike. The exercise price, which is the price at which the underlying transaction will occur upon exercise.
+	double strike = 30;
+	// Specific values for the option: the option expiry date. The expiration date, or expiry, which is the last date the option can be exercised.
+	google.type.Date expiry = 31;
+	// Specific values for the option: the option type: Call or Put.
+	OptionType option_type = 32;
+	// Specific values for the option: the option exercise type. Determines when, how, and under what circumstances, the option holder may exercise it.
+	ExerciseType exercise = 33;
+}
+
+// Contains the reference data for bonds.
+message BondEntry
+{
+	// Identifiers: asset identifier
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+	// General information: the asset class
+	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
+	// General information: the primary exchange code (mic)
+	string primary = 4;
+	// General information: the operating exchange code (mic)
+	string operating = 5;
+	// General information: the full name 
+	string name = 6;
+	// General information: the currency code (ISO 4217)
+	string currency = 7;
+	// General information: the country code (ISO 3166)
+	string country = 8;
+	// General information: the tick size rule table
+	repeated TickSize tick_size_rule = 9;
+	// General information: the major index array
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
+
+	// Trading hours: the open time (continuous trading)
+	google.protobuf.Duration open = 13;
+	// Trading hours: the close time (continuous trading)
+	google.protobuf.Duration close = 14;
+	// Trading hours: the time zone
+	string time_zone = 15;
+
+	// Specifications: the lot size (minimum quantity to trade)
+	int64 lot_size = 16;
+	// Specifications: the point value
+	double point_value = 17;
+
+	// Reference data : the average price
+	google.protobuf.DoubleValue price = 18;
+	// Reference data : the average daily volume 
+	google.protobuf.Int64Value volume = 19;
+	// Reference data : the time stamp of the refernce data
+	google.type.Date time = 20;
+
+	// Mapping : the count of sources used to cross validate and complete the asset's information
+	int32 sources = 21;
+	// Mapping: the mapping codes
+	map<string, string> mapping = 22;
+	// Mapping: the bloomberg code
+	string bloomberg = 23;
+	// Mapping: the reuters code
+	string reuters = 24;
+	// Mapping: the morningstar code
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
+	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
+	string figi = 27;
+	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
+	string figic = 28;
+
+	// Specific values for the bond: isin code (International Securities Identifying Number)
+    string isin = 29;
+	// Specific values for the bond: cusip code : Committee on Uniform Security Identification Procedures
+	string cusip = 30;
+	// Specific values for the bond: sedol code : Stock Exchange Daily Official List
+	string sedol = 31;
+	// Specific values for the bond: the issuer
+	string issuer = 32;
+	// Specific values for the bond: the bond maturity date
+	google.type.Date maturity = 33;
+	// Specific values for the bond: the bond's type
+	BondType bond_type = 34;
+	// Specific values for the bond: the bond's frequency. Number of times per year interest is paid
+	FrequencyType frequency = 35;
+	// Specific values for the bond: the bond's coupon type. Type of interest to be paid to the investors
+	CouponType coupon_type = 36;
+	// Specific values for the bond: the bond's coupon rate. Current interest rate of the bond
+	double coupon_rate = 37;
+}
+
+// Contains the reference data for Credit default swap (CDS).
+message CdsEntry
+{
+	// Identifiers: asset identifier
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+	// General information: the asset class
+	string type = 2;
+	// General information: status indicating whether the asset is active
+	bool active = 3;
+	// General information: the primary exchange code (mic)
+	string primary = 4;
+	// General information: the operating exchange code (mic)
+	string operating = 5;
+	// General information: the full name 
+	string name = 6;
+	// General information: the currency code (ISO 4217)
+	string currency = 7;
+	// General information: the country code (ISO 3166)
+	string country = 8;
+	// General information: the tick size rule table
+	repeated TickSize tick_size_rule = 9;
+	// General information: the major index array
+	repeated string index = 10;
+	// General information: the calendar identifier
+	string calendar = 11;
+	// General information: the description of the asset
+	string description = 12;
+
+	// Trading hours: the open time (continuous trading)
+	google.protobuf.Duration open = 13;
+	// Trading hours: the close time (continuous trading)
+	google.protobuf.Duration close = 14;
+	// Trading hours: the time zone
+	string time_zone = 15;
+
+	// Specifications: the lot size (minimum quantity to trade)
+	int64 lot_size = 16;
+	// Specifications: the point value
+	double point_value = 17;
+
+	// Reference data : the average price
+	google.protobuf.DoubleValue price = 18;
+	// Reference data : the average daily volume 
+	google.protobuf.Int64Value volume = 19;
+	// Reference data : the time stamp of the refernce data
+	google.type.Date time = 20;
+
+	// Mapping : the count of sources used to cross validate and complete the asset's information
+	int32 sources = 21;
+	// Mapping: the mapping codes
+	map<string, string> mapping = 22;
+	// Mapping: the bloomberg code
+	string bloomberg = 23;
+	// Mapping: the reuters code
+	string reuters = 24;
+	// Mapping: the morningstar code
+	string morningstar = 25;
+	// Mapping: the markit (red code) code
+	string markit = 26;
+	// Mapping: the figi code (Financial Instrument Global Identifier, formerly Bloomberg Global Identifier)
+	string figi = 27;
+	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
+	string figic = 28;
+
+	// Specific values for the cds: the cds underlying asset code
+	string underlying = 29;
+	// Specific values for the cds: the cds maturity date
+	google.type.Date maturity = 30;
+	// Specific values for the cds: the cds's frequency.
+	FrequencyType frequency = 31;
+	// Specific values for the cds: the tenor
+	string tenor = 32;
+	// Specific values for the cds: the recovery.
+	double recovery = 33;
+}
+
 
 // Contains the tick size rule item : price and tick.
 message TickSize
@@ -541,7 +848,6 @@ message TickSize
 	double price = 1;
 	// The tick size
 	double tick = 2;
-
 }
 
 // Contains the asset type for the reference data request.
@@ -570,4 +876,102 @@ enum AssetType
 
 	// Search only on Forex pairs
 	ASSET_TYPE_FOREX = 7;
+
+	// Search only on options
+	ASSET_TYPE_OPTION = 8;
+
+	// Search only on bonds
+	ASSET_TYPE_BOND = 9;
+
+	// Search only on cds
+	ASSET_TYPE_CDS = 10;
+}
+
+// Contains the frequency types.
+enum FrequencyType
+{
+	// Not specified ?
+	FREQUENCY_TYPE_UNSPECIFIED = 0;
+	
+	// None
+    FREQUENCY_TYPE_NONE = 1;
+	
+   	// Daily
+    FREQUENCY_TYPE_DAY = 2;
+
+	// Weekly
+    FREQUENCY_TYPE_WEEK = 3;
+
+	// Monthly
+    FREQUENCY_TYPE_MONTH = 4;
+
+	// Quarterly
+    FREQUENCY_TYPE_QUARTER = 5;
+
+	// Semi-Annually
+    FREQUENCY_TYPE_SEMIANNUAL = 6;
+
+	// Annually
+    FREQUENCY_TYPE_ANNUAL = 7;
+}
+
+// Contains the option types : call or put.
+enum OptionType
+{
+	// Not specified ?
+	OPTION_TYPE_UNSPECIFIED = 0;
+	
+	// Call
+    OPTION_TYPE_CALL = 1;
+	
+   	// Put
+    OPTION_TYPE_PUT = 2;
+}
+
+// Contains the option exercise types : Determines when, how, and under what circumstances, the option holder may exercise it.
+enum ExerciseType
+{
+	// Not specified ?
+	EXERCISE_TYPE_UNSPECIFIED = 0;
+	
+	// The American-style option contracts can be exercised at any time up to the option's expiration.
+    EXERCISE_TYPE_AMERICAN = 1;
+	
+   	// The European-style option contracts may only be exercised at the option's expiration date.
+    EXERCISE_TYPE_EUROPEAN = 2;
+
+	// The Bermudan-style options contracts may only be exercised on specified dates.
+    EXERCISE_TYPE_BERMUDEAN = 3;
+}
+
+// Contains the bond types.
+enum BondType
+{
+	// Not specified ?
+	BOND_TYPE_UNSPECIFIED = 0;
+	
+	// The government.
+    BOND_TYPE_GOVERNMENT = 1;
+	
+   	// The corporate.
+    BOND_TYPE_CORPORATE = 2;
+
+	// The other.
+    BOND_TYPE_OTHER = 3;
+}
+
+// Contains the bond's coupon types.
+enum CouponType
+{
+	// Not specified ?
+	COUPON_TYPE_UNSPECIFIED = 0;
+	
+	// The none.
+    COUPON_TYPE_NONE = 1;
+	
+   	// The fixed.
+    COUPON_TYPE_FIXED = 2;
+
+	// The floating.
+    COUPON_TYPE_FLOATING = 3;
 }

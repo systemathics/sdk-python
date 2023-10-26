@@ -21,13 +21,11 @@
 // Calculate the bid ask spread analytics.
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
-import "systemathics/apis/type/shared/v1/side.proto";
 
 package systemathics.apis.services.tick_analytics.v1;
 
@@ -35,7 +33,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickSpreadService 
 {
 	// Gets the Spread analytics
-    rpc TickSpread(TickSpreadRequest) returns (stream TickSpreadResponse);
+    rpc TickSpread(TickSpreadRequest) returns (stream TickSpreadResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/spread"
+		 };
+	}
 }
 
 // The required input to request the TickSpreadService.

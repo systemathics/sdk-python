@@ -24,6 +24,7 @@
 // <br>- determine support and resistance levels
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/wrappers.proto";
@@ -37,7 +38,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickCmaService 
 {
 	// Gets tick by tick cumulative moving average data
-    rpc TickCma(TickCmaRequest) returns (stream TickCmaResponse);
+    rpc TickCma(TickCmaRequest) returns (stream TickCmaResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/cma"
+		 };
+	}
 }
 
 // The required inputs to request the TickCmaService.

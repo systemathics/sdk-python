@@ -28,8 +28,8 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
@@ -41,7 +41,12 @@ package systemathics.apis.services.intraday_analytics.v1;
 service IntradayEmaService
 {
   // Gets intraday exponential moving average data
-  rpc IntradayEma(IntradayEmaRequest) returns (IntradayEmaResponse);
+  rpc IntradayEma(IntradayEmaRequest) returns (IntradayEmaResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/intraday/ema"
+	  };
+  }
 }
 
 // The required input to request the IntradayEmaService.

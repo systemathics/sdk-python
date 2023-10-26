@@ -23,7 +23,6 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-import "systemathics/apis/type/shared/v1/trade.proto";
 import "systemathics/apis/type/shared/v1/book.proto";
 
 package systemathics.apis.type.shared.v1;

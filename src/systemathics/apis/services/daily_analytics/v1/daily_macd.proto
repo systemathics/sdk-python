@@ -26,6 +26,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -37,7 +38,12 @@ package systemathics.apis.services.daily_analytics.v1;
 service DailyMacdService
 {
   // Gets daily moving average convergence divergence data
-  rpc DailyMacd(DailyMacdRequest) returns (DailyMacdResponse);
+  rpc DailyMacd(DailyMacdRequest) returns (DailyMacdResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/daily-analytics/macd"
+	  };
+  }
 }
 
 // The required input to request the DailyMacdService.

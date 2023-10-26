@@ -28,6 +28,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -40,7 +41,12 @@ package systemathics.apis.services.intraday_analytics.v1;
 service IntradayRsiService
 {
   // Gets intraday relative strength index data
-  rpc IntradayRsi(IntradayRsiRequest) returns (IntradayRsiResponse);
+  rpc IntradayRsi(IntradayRsiRequest) returns (IntradayRsiResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/intraday/rsi"
+	  };
+  }
 }
 
 // The required input to request the IntradayRsiService.

@@ -24,9 +24,10 @@
 //<br>- MBO : Market Book by Order (contains the quotes or order details)
 syntax = "proto3";
 
+import "google/api/annotations.proto";
+
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
-import "systemathics/apis/type/shared/v1/level.proto";
 import "systemathics/apis/type/shared/v1/identifier_and_level.proto";
 import "systemathics/apis/type/shared/v1/market_fields_updates.proto";
 import "systemathics/apis/type/shared/v1/mbl_market_book_updates.proto";
@@ -38,7 +39,12 @@ package systemathics.apis.services.tick.v1;
 service TickUpdatesService 
 {
     // Get tick by tick normalized historical Updates 
-    rpc TickUpdates(TickUpdatesRequest) returns (stream TickUpdatesResponse);
+    rpc TickUpdates(TickUpdatesRequest) returns (stream TickUpdatesResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick/updates"
+		 };
+	}
 }
 
 // The required inputs to request the TickUpdatesService.

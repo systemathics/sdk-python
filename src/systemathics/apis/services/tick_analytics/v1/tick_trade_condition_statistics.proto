@@ -21,6 +21,7 @@
 // The trade condition statistics calculates the ratios of all the trading conditions over a specified trading period.
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
@@ -30,7 +31,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickTradeConditionStatisticsService 
 {
     // Gets tick by tick trade condition statistics
-    rpc TickTradeConditionStatistics(TickTradeConditionStatisticsRequest) returns (stream TickTradeConditionStatisticsResponse);
+    rpc TickTradeConditionStatistics(TickTradeConditionStatisticsRequest) returns (stream TickTradeConditionStatisticsResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/trade-condition-statistics"
+		 };
+	}
 }
 
 // The required inputs to request the TickTradeConditionStatisticsService.

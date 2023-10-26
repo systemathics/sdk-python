@@ -25,6 +25,8 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
+
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/sampling.proto";
@@ -35,7 +37,12 @@ package systemathics.apis.services.intraday_analytics.v1;
 service IntradayVolatilityService
 {
   // Gets intraday historical volatility
-  rpc IntradayVolatility(IntradayVolatilityRequest) returns (IntradayVolatilityResponse);
+  rpc IntradayVolatility(IntradayVolatilityRequest) returns (IntradayVolatilityResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/intraday/volatility"
+	  };
+  }
 }
 
 // The required input to request the IntradayVolatilityService

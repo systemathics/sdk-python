@@ -22,8 +22,7 @@
 // <br>-The MBO describes an order-based (or quote-based) data feed that provides the ability to view individual queue position, the full order book (all the depths) and the details of each individual order or quote at each price level.
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -36,7 +35,12 @@ package systemathics.apis.services.tick.v1;
 service TickQuotesService 
 {
     // Get tick by tick normalized quotes 
-    rpc TickQuotes(TickQuotesRequest) returns (stream TickQuotesResponse);
+    rpc TickQuotes(TickQuotesRequest) returns (stream TickQuotesResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick/quotes"
+		 };
+	}
 }
 
 // The required inputs to request the TickQuotesService.

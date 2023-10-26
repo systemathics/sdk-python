@@ -22,6 +22,7 @@
 // Commonly used in financial analysis and trading strategies as a technical indicator.
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
@@ -34,7 +35,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickBarsService 
 {
     // Gets tick by tick bars data
-    rpc TickBars(TickBarsRequest) returns (stream TickBarsResponse);
+    rpc TickBars(TickBarsRequest) returns (stream TickBarsResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/bars"
+		 };
+	}
 }
 
 // The required inputs to request the TickBarService.

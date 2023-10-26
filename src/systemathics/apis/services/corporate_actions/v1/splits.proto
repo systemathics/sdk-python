@@ -22,6 +22,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -33,7 +34,12 @@ package systemathics.apis.services.corporate_actions.v1;
 service SplitsService
 {
   // Gets splits historical data
-  rpc Splits(SplitsRequest) returns (SplitsResponse);
+  rpc Splits(SplitsRequest) returns (SplitsResponse)
+  {
+		option (google.api.http) = {
+			get: "/v1/corporate-actions/splits"
+		};
+  }
 }
 
 // The required input to request the SplitsService

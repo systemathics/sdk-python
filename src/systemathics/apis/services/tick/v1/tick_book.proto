@@ -22,7 +22,7 @@
 //<br> MBL restricts updates to a maximum of specified depth price levels and consolidates all the quantity (size) into a single update for each price level, which includes the total quantity (size).
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
@@ -37,7 +37,12 @@ package systemathics.apis.services.tick.v1;
 service TickBookService 
 {
     // Get tick by tick normalized historical book 
-    rpc TickBook(TickBookRequest) returns (stream TickBookResponse);
+    rpc TickBook(TickBookRequest) returns (stream TickBookResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick/book"
+		 };
+	}
 }
 
 // The required inputs to request the TickBookService.

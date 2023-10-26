@@ -23,6 +23,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -35,7 +36,12 @@ package systemathics.apis.services.intraday.v1;
 service IntradayBarsService
 {
   // Gets intraday historical data: date, open, high, low, close and volume
-  rpc IntradayBars(IntradayBarsRequest) returns (IntradayBarsResponse);
+  rpc IntradayBars(IntradayBarsRequest) returns (IntradayBarsResponse)
+  {
+	  	 option (google.api.http) = {
+			get: "/v1/intraday/bars"
+		 };
+  }
 }
 
 // The required input to request the IntradayBarsService.

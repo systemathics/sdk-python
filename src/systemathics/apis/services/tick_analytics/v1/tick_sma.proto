@@ -26,6 +26,7 @@
 // <br>- <i>N</i> is the count of time periods
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/wrappers.proto";
@@ -39,7 +40,11 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickSmaService 
 {
     // Gets tick by tick simple moving average data
-    rpc TickSma(TickSmaRequest) returns (stream TickSmaResponse);
+    rpc TickSma(TickSmaRequest) returns (stream TickSmaResponse){
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/sma"
+		 };
+	}
 }
 
 // The required inputs to request the TickSmaService.

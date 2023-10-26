@@ -27,6 +27,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -40,7 +41,12 @@ package systemathics.apis.services.intraday_analytics.v1;
 service IntradaySmaService
 {
   // Gets intraday simple moving average data
-  rpc IntradaySma(IntradaySmaRequest) returns (IntradaySmaResponse);
+  rpc IntradaySma(IntradaySmaRequest) returns (IntradaySmaResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/intraday/sma"
+	  };
+  }
 }
 
 // The required input to request the IntradaySmaService.

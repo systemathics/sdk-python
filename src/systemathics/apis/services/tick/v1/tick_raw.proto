@@ -25,8 +25,9 @@
 // <br>- Compare raw provider's format data to normalized (processsed) data
 syntax = "proto3";
 
+import "google/api/annotations.proto";
+
 import "systemathics/apis/type/shared/v1/constraints.proto";
-import "systemathics/apis/type/shared/v1/level.proto";
 import "systemathics/apis/type/shared/v1/identifier_and_level.proto";
 import "systemathics/apis/type/shared/v1/keys.proto";
 import "systemathics/apis/type/shared/v1/raw.proto";
@@ -37,7 +38,12 @@ package systemathics.apis.services.tick.v1;
 service TickRawService 
 {
 	// Gets tick by tick raw data.
-    rpc TickRaw(TickRawRequest) returns (stream TickRawResponse);
+    rpc TickRaw(TickRawRequest) returns (stream TickRawResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick/raw"
+		 };
+	}
 }
 
 // The required inputs to request the TickRawService.

@@ -22,10 +22,9 @@
 syntax = "proto3";
 
 
-import "google/type/date.proto";
+import "google/api/annotations.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
-import "systemathics/apis/type/shared/v1/constraints.proto";
 
 package systemathics.apis.services.indices.v1;
 
@@ -33,7 +32,11 @@ package systemathics.apis.services.indices.v1;
 service ComponentsService
 {
   // Gets index components data
-  rpc Components(ComponentsRequest) returns (ComponentsResponse);
+  rpc Components(ComponentsRequest) returns (ComponentsResponse){
+	  	option (google.api.http) = {
+			get: "/v1/staticdata/components"
+		};
+  }
 }
 
 // The required input to request the ComponentsService

@@ -22,6 +22,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -33,7 +34,12 @@ package systemathics.apis.services.corporate_actions.v1;
 service DividendsService
 {
   // Gets dividends historical data
-  rpc Dividends(DividendsRequest) returns (DividendsResponse);
+  rpc Dividends(DividendsRequest) returns (DividendsResponse)
+  {
+		option (google.api.http) = {
+			get: "/v1/corporate-actions/dividends"
+		};
+  }
 }
 
 // The required input to request the DividendsService

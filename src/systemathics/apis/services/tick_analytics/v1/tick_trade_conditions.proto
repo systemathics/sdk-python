@@ -21,6 +21,7 @@
 // The tick condition calculates the ratios of all the trading conditions over a specified trading period.
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
@@ -34,7 +35,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickTradeConditionsService 
 {
 	// Gets tick by tick trade conditions
-    rpc TickTradeConditions(TickTradeConditionsRequest) returns (stream TickTradeConditionsResponse);
+    rpc TickTradeConditions(TickTradeConditionsRequest) returns (stream TickTradeConditionsResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/trade-conditions"
+		 };
+	}
 }
 
 // The required inputs to request the TickTradeConditionsService.

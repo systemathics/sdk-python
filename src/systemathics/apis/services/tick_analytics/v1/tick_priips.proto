@@ -23,8 +23,12 @@
 // <br>The method used to determine implicit transaction costs is the full PRIIPs method, also known as the arrival price methodology.
 syntax = "proto3";
 
+import "google/api/annotations.proto";
+
+import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
+import "google/type/datetime.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
@@ -34,7 +38,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickPriipsService 
 {
 	// Gets PRIIPs transaction cost analytics
-    rpc TickPriips(TickPriipsRequest) returns (stream TickPriipsResponse);
+    rpc TickPriips(TickPriipsRequest) returns (TickPriipsResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/priips"
+		 };
+	}
 }
 
 // The required input to request the TickPriipsService.
@@ -43,19 +52,19 @@ message TickPriipsRequest
     // [Mandatory] The instrument identifier: a ticker and exchange
 	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 
-	// [Mandatory] The order time stamp
-	google.protobuf.Timestamp order_time = 2;
+	// [Mandatory] The order date and time and timezone (or UTC offset)
+	google.type.DateTime order_time = 2;
 
-	// [Mandatory] The execution time stamp
-	google.protobuf.Timestamp execution_time = 3;
+	// [Mandatory] The execution date and time (or UTC offset)
+	google.type.DateTime execution_time = 3;
 
     // [Mandatory] The execution price
 	double execution_price = 4;
 
-	// [Optional] The price used to calculate the PRIIPs, by default the field is set to Trade
+	// [Mandatory] The price used to calculate the PRIIPs
 	PriipsPrice field = 5;
 
-	// [Optional] The latency, by default the latency is set to 00:00:00 (no latency)
+	// [Mandatory] The latency
 	google.protobuf.Duration latency = 6;
 
 	// [Optional] Accept trading / quote conditions, by default the accept is set to null : accept all
@@ -63,6 +72,12 @@ message TickPriipsRequest
 
 	// [Optional] Rejected trading / quote conditions, by default the reject is set to null : do not reject
 	repeated string reject = 8;
+
+	// [Mandatory] The metrics enable or disable
+	bool metrics = 9;
+
+	// [Mandatory] Do we use the reverse iteration optimization (to find the first trade before the order).
+	bool use_reverse_iteration_optimization = 10;
 }
 
 // Contains the PRIIPs data: timestamp, price, volume and ticks count.
@@ -72,11 +87,11 @@ message TickPriipsResponse
 	google.protobuf.Timestamp arrival_time = 1;
 	
 	// The arrival price is the mid price at the exact time the trade is sent to the market (or broker)
-	double arrival_price = 2;
+	google.protobuf.DoubleValue arrival_price = 2;
 
 	// The the arrival cost is the difference between the average execution price and the arrival price, expressed as a percentage
 	//<br> Arrival Cost = (Execution Price - Arrival Price) / Arrival Price
-	double arrival_cost = 3;
+	google.protobuf.DoubleValue arrival_cost = 3;
 	
 	// The open time : first trade time stamp just after the order time
 	google.protobuf.Timestamp open_time = 4;
@@ -90,35 +105,83 @@ message TickPriipsResponse
 	// The execution time : the last time stamp of the oder execution
 	google.protobuf.Timestamp execution_time = 7;
 
-	// The working period = Close Time - Arrival Time
-	google.protobuf.Duration duration = 8;
-
-	// The latency : the time interval between the cliet's order time and the market's order received time
-	google.protobuf.Duration latency = 9;
+	// The latency : the time interval between the client's order time and the market's order received time
+	google.protobuf.Duration latency = 8;
 	
 	// The execution price : the execution price is the price achieved for the whole trade, or the average price achieved where the trade has been broken down into multiple parts
-	double execution_price = 10;
+	double execution_price = 9;
 
 	// The total count of trades during the working period
-	int64 count = 11;
+	google.protobuf.Int64Value count = 10;
 
 	// The open price of the working period
-	double open_price = 12;
+	google.protobuf.DoubleValue open_price = 11;
 
 	// The highest price of the working period
-	double high_price = 13;
+	google.protobuf.DoubleValue high_price = 12;
 
 	// The lowest price of the working period
-	double low_price = 14;
+	google.protobuf.DoubleValue low_price = 13;
 
 	// The close price of the working period
-	double close_price = 15;
+	google.protobuf.DoubleValue close_price = 14;
 
 	// The volume weighted average price of the working period
-	double vwap = 16;
+	google.protobuf.DoubleValue vwap = 15;
 
 	// The total volume of the working period
-	int64 volume = 17;
+	google.protobuf.Int64Value volume = 16;
+
+	// The processing message
+	string message = 17;
+
+	// The arrival period = Order Time - Arrival Time
+	google.protobuf.Duration arrival_period = 18;
+
+	// The working period = Close Time - Arrival Time
+	google.protobuf.Duration working_period = 19;
+
+	// The closing period = Close Time - Execution Time
+	google.protobuf.Duration closing_period = 20;
+
+	// The opening period = Open Time - Order Time
+	google.protobuf.Duration opening_period = 21;
+
+	// The cross time : the time stamps of the first crossing between the prices and the execution price
+	google.protobuf.Timestamp cross_time = 22;
+
+	// The volume of trades for prices higher than the execution price during the working period
+	google.protobuf.Int64Value upper_volume = 23;
+
+	// The volume of trades for prices lower than the execution price during the working period
+	google.protobuf.Int64Value lower_volume = 24;
+
+	// The volume of trades at the execution price during the working period
+	google.protobuf.Int64Value equal_volume = 25;
+
+	// The total count of trades for prices higher than the execution price during the working period 
+	google.protobuf.Int64Value upper_count = 26;
+
+	// The total count of trades for prices lower than the execution price during the working period
+	google.protobuf.Int64Value lower_count = 27;
+
+	// The total count of trades at the execution price during the working period
+	google.protobuf.Int64Value equal_count = 28;
+
+	// The trading conditions during the working period
+	repeated string conditions = 29;
+
+	// The trading conditions for prices higher than the execution price during the working period
+	repeated string upper_conditions = 30;
+
+	// The trading conditions for prices lower than the execution price during the working period
+	repeated string lower_conditions = 31;
+
+	// The trading conditions at the execution price during the working period
+	repeated string equal_conditions = 32;
+
+	// Consumed ticks count
+	int64 ticks_count = 33;
 }
 
 // The price types used to compute the Priips

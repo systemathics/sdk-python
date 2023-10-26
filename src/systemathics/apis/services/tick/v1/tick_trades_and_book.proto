@@ -24,7 +24,7 @@
 // <br>- Feed best execution reports for a given watchlist over the time
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/constraints.proto";
@@ -39,7 +39,12 @@ package systemathics.apis.services.tick.v1;
 service TickTradesAndBookService 
 {
     // Get tick by tick normalized trades and book historical 
-    rpc TickTradesAndBook(TickTradesAndBookRequest) returns (stream TickTradesAndBookResponse);
+    rpc TickTradesAndBook(TickTradesAndBookRequest) returns (stream TickTradesAndBookResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick/trades-and-book"
+		 };
+	}
 }
 
 // The required inputs to request the TickTradesAndBookService.

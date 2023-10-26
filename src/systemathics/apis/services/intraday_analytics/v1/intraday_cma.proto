@@ -27,7 +27,6 @@ syntax = "proto3";
 
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
 import "systemathics/apis/type/shared/v1/constraints.proto";

@@ -26,6 +26,7 @@
 // <br><i> Where n is the number of periods and k is factor to apply to the standard deviation value, k=2 as default value.</i>
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
@@ -39,7 +40,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickBollingerService 
 {
 	// Gets tick by tick Bollinger bands data
-    rpc TickBollinger(TickBollingerRequest) returns (stream TickBollingerResponse);
+    rpc TickBollinger(TickBollingerRequest) returns (stream TickBollingerResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/bollinger"
+		 };
+	}
 }
 
 // The required inputs to request the TickBollingerService.

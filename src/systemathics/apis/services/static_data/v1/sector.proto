@@ -26,17 +26,24 @@
 // <br>- GICS : In 1999, MSCI and S&P Dow Jones Indices developed the Global Industry Classification Standard, seeking to offer an efficient investment tool to capture the breadth, depth and evolution of industry sectors.GICS is a four-tiered, hierarchical industry classification system. Companies are classified quantitatively and qualitatively.Each company is assigned a single GICS classification at the Sub-Industry level according to its principal business activity. MSCI and S&P Dow Jones Indices use revenues as a key factor in determining a firm�s principal business activity. Earnings and market perception, however, are also recognized as important and relevant information for classification purposes, and are taken into account during the annual review process.
 syntax = "proto3";
 
+import "google/api/annotations.proto";
+
 package systemathics.apis.services.static_data.v1;
 
-// Called to request static sector and industry classification data.
-service StaticSectorService 
+// Called to request sector and industry classification data.
+service SectorService 
 {
     // Gets static sector and industry data
-    rpc StaticSector(StaticSectorRequest) returns (StaticSectorResponse);
+    rpc Sector(SectorRequest) returns (SectorResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/staticdata/sector"
+		 };
+	}
 }
 
-// The required inputs to request the StaticSectorService.
-message StaticSectorRequest 
+// The required inputs to request the SectorService.
+message SectorRequest 
 {
 	// [Mandatory] The classification provider or taxonomy
 	// <br>Available classifications : ICB, SIC, TRBC and GICS
@@ -53,10 +60,10 @@ message StaticSectorRequest
 }
 
 // Represents a sector classifcation response.
-message StaticSectorResponse
+message SectorResponse
 {
 	// The sector classification levels: an array of Level objects
-	repeated Level data = 1;
+	repeated SectorLevel data = 1;
 
 	// The classification description
 	string description = 2;
@@ -66,7 +73,7 @@ message StaticSectorResponse
 }
 
 // Contains the sector classification structure at a specified level.
-message Level
+message SectorLevel
 {
 	// The sector classification level's name
 	string name = 1;

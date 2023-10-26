@@ -25,6 +25,7 @@
 // <br>- determine the market trend, etc.
 syntax = "proto3";
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
@@ -37,7 +38,12 @@ package systemathics.apis.services.tick_analytics.v1;
 service TickVwapService 
 {
 	// Gets tick by tick historical VWAPs
-    rpc TickVwap(TickVwapRequest) returns (stream TickVwapResponse);
+    rpc TickVwap(TickVwapRequest) returns (stream TickVwapResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/tick-analytics/vwap"
+		 };
+	}
 }
 
 

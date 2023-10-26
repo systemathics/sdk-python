@@ -27,6 +27,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -40,7 +41,12 @@ package systemathics.apis.services.intraday_analytics.v1;
 service IntradayBollingerService
 {
   // Gets intraday Bollinger bands data
-  rpc IntradayBollinger(IntradayBollingerRequest) returns (IntradayBollingerResponse);
+  rpc IntradayBollinger(IntradayBollingerRequest) returns (IntradayBollingerResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/intraday/bollinger"
+	  };
+  }
 }
 
 // The required input to request the IntradayBollingerService.

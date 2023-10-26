@@ -21,6 +21,8 @@
 // The sustainability provides Environmental, Social, and Corporate Governance data.
 syntax = "proto3";
 
+import "google/api/annotations.proto";
+
 import "systemathics/apis/type/shared/v1/identifier.proto";
 
 package systemathics.apis.services.sustainability.v1;
@@ -29,7 +31,12 @@ package systemathics.apis.services.sustainability.v1;
 service SustainabilityService 
 {
     // Gets sustainability data
-    rpc Sustainability(SustainabilityRequest) returns (SustainabilityResponse);
+    rpc Sustainability(SustainabilityRequest) returns (SustainabilityResponse)
+	{
+	     option (google.api.http) = {
+			get: "/v1/sustainability"
+		 };
+	}
 }
 
 // The required inputs to request the SustainabilityService.

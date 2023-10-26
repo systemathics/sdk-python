@@ -22,6 +22,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -34,7 +35,12 @@ package systemathics.apis.services.intraday.v1;
 service IntradayPricesService
 {
   // Gets intraday historical prices
-  rpc IntradayPrices(IntradayPricesRequest) returns (IntradayPricesResponse);
+  rpc IntradayPrices(IntradayPricesRequest) returns (IntradayPricesResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/intraday/prices"
+	  };
+  }
 }
 
 // The required input to request the IntradayPricesService

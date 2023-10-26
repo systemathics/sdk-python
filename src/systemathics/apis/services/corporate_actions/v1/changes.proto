@@ -22,6 +22,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -33,7 +34,12 @@ package systemathics.apis.services.corporate_actions.v1;
 service ChangesService
 {
   // Gets symbol changes historical data
-  rpc Changes(ChangesRequest) returns (ChangesResponse);
+  rpc Changes(ChangesRequest) returns (ChangesResponse)
+  {
+		option (google.api.http) = {
+			get: "/v1/corporate-actions/changes"
+		};
+  }
 }
 
 // The required input to request the ChangesService

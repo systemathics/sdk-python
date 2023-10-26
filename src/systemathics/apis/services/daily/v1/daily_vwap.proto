@@ -26,6 +26,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -37,7 +38,12 @@ package systemathics.apis.services.daily.v1;
 service DailyVwapsService
 {
   // Gets daily historical VWAPs
-  rpc DailyVwaps(DailyVwapsRequest) returns (DailyVwapsResponse);
+  rpc DailyVwaps(DailyVwapsRequest) returns (DailyVwapsResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/daily/vwaps"
+	  };
+  }
 }
 
 // The required input to request the DailyVwapsService

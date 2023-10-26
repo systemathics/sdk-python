@@ -28,6 +28,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -39,7 +40,12 @@ package systemathics.apis.services.daily_analytics.v1;
 service DailyRsiService
 {
   // Gets daily relative strength index data
-  rpc DailyRsi(DailyRsiRequest) returns (DailyRsiResponse);
+  rpc DailyRsi(DailyRsiRequest) returns (DailyRsiResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/daily-analytics/rsi"
+	  };
+  }
 }
 
 // The required input to request the DailyRsiService.

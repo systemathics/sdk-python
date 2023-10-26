@@ -23,6 +23,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -34,7 +35,12 @@ package systemathics.apis.services.daily.v1;
 service DailyBarsService
 {
   // Gets daily historical data: date, open, high, low, close and volume
-  rpc DailyBars(DailyBarsRequest) returns (DailyBarsResponse);
+  rpc DailyBars(DailyBarsRequest) returns (DailyBarsResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/daily/bars"
+	  };
+  }
 }
 
 // The required input to request the DailyBarsService.

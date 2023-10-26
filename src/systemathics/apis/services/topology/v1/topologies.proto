@@ -26,6 +26,8 @@
 // <br>Correlated with of other indicators such as traded volume and count of trades, over the same look back period, it repserents a good measurement of the market quality.
 syntax = "proto3";
 
+import "google/api/annotations.proto";
+
 import "google/protobuf/wrappers.proto";
 import "google/type/date.proto";
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -37,7 +39,12 @@ package systemathics.apis.services.topology.v1;
 service TopologiesService
 {
   // Gets topology per a given time granularity
-  rpc Topologies(TopologiesRequest) returns (TopologiesResponse);
+  rpc Topologies(TopologiesRequest) returns (TopologiesResponse)
+  {
+	  	option (google.api.http) = {
+			get: "/v1/topologies"
+		};
+  }
 }
 
 // Contains the topology granularity

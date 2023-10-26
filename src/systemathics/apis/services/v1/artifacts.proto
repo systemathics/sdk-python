@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+package systemathics.apis.services.v1;
+
+service ArtifactsService 
+{
+	// Get artifacts
+    rpc Artifacts(ArtifactsRequest) returns (ArtifactsResponse);
+}
+
+message ArtifactsRequest 
+{
+    string search_string = 1;
+    ArtifactsSearchType search_type = 2;
+    google.protobuf.Int32Value start = 3; // Nullable<int>
+    google.protobuf.Int32Value count = 4; // Nullable<int>
+}
+
+enum ArtifactsSearchType
+{
+    ARTIFACTS_SEARCH_TYPE_UNSPECIFIED = 0;
+    ARTIFACTS_SEARCH_TYPE_SUB_STRING = 1;
+    ARTIFACTS_SEARCH_TYPE_REGULAR_EXPRESSION = 2;
+}
+
+message ArtifactsResponse 
+{
+    repeated Artifact artifacts = 1;
+    bool has_more = 2;
+}
+
+message Artifact 
+{
+    string name = 1;
+    int64 size = 2;
+    google.protobuf.Timestamp last_modified =3; // Epoch
+    google.protobuf.StringValue xxh64 = 4; // Nullable<string>
+    google.protobuf.Timestamp normalization_start = 5; // Epoch
+    google.protobuf.Timestamp normalization_end = 6; // Epoch
+}

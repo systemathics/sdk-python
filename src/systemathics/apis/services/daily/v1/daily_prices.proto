@@ -22,6 +22,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/type/date.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -33,7 +34,12 @@ package systemathics.apis.services.daily.v1;
 service DailyPricesService
 {
   // Gets daily historical prices
-  rpc DailyPrices(DailyPricesRequest) returns (DailyPricesResponse);
+  rpc DailyPrices(DailyPricesRequest) returns (DailyPricesResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/daily/prices"
+	  };
+  }
 }
 
 // The required input to request the DailyPricesService

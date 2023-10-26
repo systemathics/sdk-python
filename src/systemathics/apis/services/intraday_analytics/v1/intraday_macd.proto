@@ -26,6 +26,7 @@
 syntax = "proto3";
 
 
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 import "systemathics/apis/type/shared/v1/identifier.proto";
@@ -38,7 +39,12 @@ package systemathics.apis.services.intraday_analytics.v1;
 service IntradayMacdService
 {
   // Gets intraday moving average convergence divergence data
-  rpc IntradayMacd(IntradayMacdRequest) returns (IntradayMacdResponse);
+  rpc IntradayMacd(IntradayMacdRequest) returns (IntradayMacdResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/intraday/macd"
+	  };
+  }
 }
 
 // The required input to request the IntradayMacdService.
