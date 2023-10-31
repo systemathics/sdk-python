@@ -185,13 +185,13 @@ message EquityEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
-
-	// Specific values for the equity: isin code (International Securities Identifying Number)
+	// Mapping: isin code (International Securities Identifying Number)
     string isin = 29;
-	// Specific values for the equity: cusip code : Committee on Uniform Security Identification Procedures
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
 	string cusip = 30;
-	// Specific values for the equity: sedol code : Stock Exchange Daily Official List
+	// Mapping: sedol code : Stock Exchange Daily Official List
 	string sedol = 31;
+	
 	// Specific values for the equity: cik (Central Index Key number). The Cik is used as a unique identifier for financial filings with the Security and Exchange Commision of the USA
 	string cik = 32;
     // Specific values for the equity: sectors definitions
@@ -206,6 +206,10 @@ message EquityEntry
 	string email = 37;
 	// Specific values for the equity: the website link of the company
 	string url = 38;
+	// Specific values for the equity: the CFI (Classification of Financial Instruments) code
+	string classification = 39;
+	// Specific values for the equity: the main shareholders of the company
+	map<string, double> holders = 40;
 }
 
 // Contains the reference data for exchange traded fund (ETF).
@@ -271,13 +275,13 @@ message EtfEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
-
-	// Specific values for the etf: isin code (International Securities Identifying Number)
+	// Mapping: isin code (International Securities Identifying Number)
     string isin = 29;
-	// Specific values for the etf: cusip code : Committee on Uniform Security Identification Procedures
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
 	string cusip = 30;
-	// Specific values for the etf: sedol code : Stock Exchange Daily Official List
+	// Mapping: sedol code : Stock Exchange Daily Official List
 	string sedol = 31;
+
 	// Specific values for the etf: cik (Central Index Key number). The Cik is used as a unique identifier for financial filings with the Security and Exchange Commision of the USA
 	string cik = 32;
     // Specific values for the etf: sectors definitions
@@ -363,21 +367,27 @@ message FutureEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
+	// Mapping: isin code (International Securities Identifying Number)
+    string isin = 29;
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
+	string cusip = 30;
+	// Mapping: sedol code : Stock Exchange Daily Official List
+	string sedol = 31;
 
 	// Specific values for the future: the future underlying asset code
-	string underlying = 29;
+	string underlying = 32;
 	// Specific values for the future: the future contract code
-	string contract = 30;
+	string contract = 33;
 	// Specific values for the future: the future category
-	map<string, string> category = 31;
+	map<string, string> category = 34;
 	// Specific values for the future: the future chain codes
-	string chain = 32;
+	string chain = 35;
 	// Specific values for the future: the future maturity date
-	google.type.Date maturity = 33;
+	google.type.Date maturity = 36;
 	// Specific values for the future: the future month code
-	string month = 34;
+	string month = 37;
 	// Specific values for the future: the future year
-	int32 year = 35;
+	int32 year = 38;
 }
 
 // Contains the reference data for indices.
@@ -443,17 +453,27 @@ message IndexEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
+	// Mapping: isin code (International Securities Identifying Number)
+    string isin = 29;
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
+	string cusip = 30;
+	// Mapping: sedol code : Stock Exchange Daily Official List
+	string sedol = 31;
 
 	// Specific values for the index: the index category
-	string category = 29;
+	string category = 32;
 	// Specific values for the index: the index weighting methodology
-	string methodology = 30;
+	string methodology = 33;
 	// Specific values for the index: the index issuer
-	string issuer = 31;
+	string issuer = 34;
 	// Specific values for the index: the index issue date
-	google.type.Date issue_date = 32;
+	google.type.Date issue_date = 35;
 	// Specific values for the index: the index rebalancing frequency
-	FrequencyType frequency = 33;
+	FrequencyType frequency = 36;
+	// Specific values for the index: the index components (equal weight)
+	map<string, double> components = 37;
+	// Specific values for the index: the index components number
+	int64 count = 38;
 }
 
 // Contains the reference data for crypto currencies.
@@ -519,21 +539,27 @@ message CryptoEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
+	// Mapping: isin code (International Securities Identifying Number)
+    string isin = 29;
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
+	string cusip = 30;
+	// Mapping: sedol code : Stock Exchange Daily Official List
+	string sedol = 31;
 
 	// Specific values for the crypto: the quote currency code
-	string quote_currency = 29;
+	string quote_currency = 32;
 	// Specific values for the crypto: the consensus mechanisms array (POW, POS, DPOS)
-	repeated string consensus = 30;
+	repeated string consensus = 33;
 	// Specific values for the crypto: the issue date of the crypto
-	google.type.Date issue_date = 31;
+	google.type.Date issue_date = 34;
 	// Specific values for the crypto: the market capitalization
-	google.protobuf.DoubleValue capitalization = 32;
+	google.protobuf.DoubleValue capitalization = 35;
 		// Specific values for the crypto: the number of coins that are circulating in the market and in the general public's hands
-	int32 circulating_supply = 33;
+	int32 circulating_supply = 36;
 	// Specific values for the crypto: the maximum amount of coins that will ever exist in the lifetime of the cryptocurrency
-	int32 max_supply = 34;
+	int32 max_supply = 37;
 	// Specific values for the crypto: the total amount of coins in existence right now (minus any coins that have been verifiably burned)
-	int32 total_supply = 35;
+	int32 total_supply = 38;
 }
 
 // Contains the reference data for Forex pairs.
@@ -599,9 +625,15 @@ message ForexEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
+	// Mapping: isin code (International Securities Identifying Number)
+    string isin = 29;
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
+	string cusip = 30;
+	// Mapping: sedol code : Stock Exchange Daily Official List
+	string sedol = 31;
 
 	// Specific values for the Forex: the quote currency code
-	string quote_currency = 29;
+	string quote_currency = 32;
 }
 
 // Contains the reference data for options.
@@ -667,17 +699,23 @@ message OptionEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
+	// Mapping: isin code (International Securities Identifying Number)
+    string isin = 29;
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
+	string cusip = 30;
+	// Mapping: sedol code : Stock Exchange Daily Official List
+	string sedol = 31;
 
 	// Specific values for the option: the option underlying asset code
-	string underlying = 29;
+	string underlying = 32;
 	// Specific values for the option: the option strike. The exercise price, which is the price at which the underlying transaction will occur upon exercise.
-	double strike = 30;
+	double strike = 33;
 	// Specific values for the option: the option expiry date. The expiration date, or expiry, which is the last date the option can be exercised.
-	google.type.Date expiry = 31;
+	google.type.Date expiry = 34;
 	// Specific values for the option: the option type: Call or Put.
-	OptionType option_type = 32;
+	OptionType option_type = 35;
 	// Specific values for the option: the option exercise type. Determines when, how, and under what circumstances, the option holder may exercise it.
-	ExerciseType exercise = 33;
+	ExerciseType exercise = 36;
 }
 
 // Contains the reference data for bonds.
@@ -743,13 +781,13 @@ message BondEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
-
-	// Specific values for the bond: isin code (International Securities Identifying Number)
+	// Mapping: isin code (International Securities Identifying Number)
     string isin = 29;
-	// Specific values for the bond: cusip code : Committee on Uniform Security Identification Procedures
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
 	string cusip = 30;
-	// Specific values for the bond: sedol code : Stock Exchange Daily Official List
+	// Mapping: sedol code : Stock Exchange Daily Official List
 	string sedol = 31;
+
 	// Specific values for the bond: the issuer
 	string issuer = 32;
 	// Specific values for the bond: the bond maturity date
@@ -827,17 +865,23 @@ message CdsEntry
 	string figi = 27;
 	// Mapping: the figic code (Financial Instrument Global Identifier Composite, formerly Bloomberg Global Identifier)
 	string figic = 28;
+	// Mapping: isin code (International Securities Identifying Number)
+    string isin = 29;
+	// Mapping: cusip code : Committee on Uniform Security Identification Procedures
+	string cusip = 30;
+	// Mapping: sedol code : Stock Exchange Daily Official List
+	string sedol = 31;
 
 	// Specific values for the cds: the cds underlying asset code
-	string underlying = 29;
+	string underlying = 32;
 	// Specific values for the cds: the cds maturity date
-	google.type.Date maturity = 30;
+	google.type.Date maturity = 33;
 	// Specific values for the cds: the cds's frequency.
-	FrequencyType frequency = 31;
+	FrequencyType frequency = 34;
 	// Specific values for the cds: the tenor
-	string tenor = 32;
+	string tenor = 35;
 	// Specific values for the cds: the recovery.
-	double recovery = 33;
+	double recovery = 36;
 }
 
 
@@ -913,6 +957,9 @@ enum FrequencyType
 
 	// Annually
     FREQUENCY_TYPE_ANNUAL = 7;
+	
+	// Bi-Annually
+    FREQUENCY_TYPE_BIANNUAL = 8;
 }
 
 // Contains the option types : call or put.
