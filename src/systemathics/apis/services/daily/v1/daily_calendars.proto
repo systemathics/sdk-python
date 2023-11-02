@@ -1,0 +1,81 @@
+// Copyright (c) 2021 Systemathics
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// Daily calendars illustrates daily holidays for an instrument over a look back period.
+syntax = "proto3";
+
+
+import "google/api/annotations.proto";
+import "google/type/date.proto";
+
+import "systemathics/apis/type/shared/v1/identifier.proto";
+import "systemathics/apis/type/shared/v1/date_interval.proto";
+
+package systemathics.apis.services.daily.v1;
+
+// Called to request daily calendars data. 
+service DailyCalendarsService
+{
+  // Gets daily historical calendars
+  rpc DailyCalendars(DailyCalendarsRequest) returns (DailyCalendarsResponse)
+  {
+	  option (google.api.http) = {
+			get: "/v1/daily/calendars"
+	  };
+  }
+}
+
+// The required input to request the DailyCalendarsService
+message DailyCalendarsRequest
+{
+	// [Mandatory] The instrument identifier: a ticker and exchange 
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
+
+	// [Optional] The date interval used to define the look-back period.
+	// If empty, then all the available data is retrieved.
+	systemathics.apis.type.shared.v1.DateInterval date_interval = 2;
+}
+
+// Represents a daily calendars response.
+message DailyCalendarsResponse
+{
+	// The daily calendars: an array of DailyCalendar objects
+	repeated DailyCalendar data = 1;
+}
+
+// Contains the daily calendars data: date, name, description and isholiday.
+message DailyCalendar 
+{
+	// Date of the calendar
+	google.type.Date date = 1;
+	
+	// The calendar's name
+	string name = 2;
+	
+	// The additional information to describe the calendar
+	string description = 3;
+
+	// The value indicating whether the day is holiday (market closed)
+	bool is_holiday = 4;
+
+	// The data quality scoring : from 0 (bad) to 100 (good)
+	double score = 5;
+}
+ 
