@@ -42,8 +42,8 @@ service ComponentsService
 // The required input to request the ComponentsService
 message ComponentsRequest
 {
-	// [Mandatory] The index name
-	string identifier = 1;
+	// [Mandatory] The instrument identifier: a ticker and exchange 
+	systemathics.apis.type.shared.v1.Identifier identifier = 1;
 }
 
 // Represents a components response.
