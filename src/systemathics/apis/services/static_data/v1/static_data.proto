@@ -54,173 +54,80 @@ message StaticDataRequest
 	// [Optional] Asset Type
 	AssetType asset_type = 1;
 
-	// [Optional] Address
-	google.protobuf.StringValue address = 2;
-
-	// [Optional] Bloomberg
-	google.protobuf.StringValue bloomberg = 3;
-
-	// [Optional] BondType
-	google.protobuf.StringValue bondtype = 4;
-
-	// [Optional] Capitalization
-	google.protobuf.StringValue capitalization = 5;
-
-	// [Optional] Category
-	google.protobuf.StringValue category = 6;
-
-	// [Optional] Chain
-	google.protobuf.StringValue chain = 7;
-
-	// [Optional] Cik
-	google.protobuf.StringValue cik = 8;
-
-	// [Optional] Circulating Supply
-	google.protobuf.StringValue circulating_supply = 9;
-
-	// [Optional] Classification
-	google.protobuf.StringValue classification = 10;
-
-	// [Optional] Components
-	google.protobuf.StringValue components = 11;
-
-	// [Optional] Consensus
-	google.protobuf.StringValue consensus = 12;
-
-	// [Optional] Contract
-	google.protobuf.StringValue contract = 13;
-
-	// [Optional] Component Count
-	google.protobuf.StringValue components_count = 14;
-
-	// [Optional] Coupon Rate
-	google.protobuf.StringValue coupon_rate = 15;
-
-	// [Optional] Coupon Type
-	google.protobuf.StringValue coupon_type = 16;
-
-	// [Optional] Base Currency
-	google.protobuf.StringValue base_currency = 17;
-
-	// [Optional] Quote Currency
-	google.protobuf.StringValue quote_currency = 18;
-
-	// [Optional] Cusip
-	google.protobuf.StringValue cusip = 19;
-
-	// [Optional] Description
-	google.protobuf.StringValue description = 20;
-
-	// [Optional] Email
-	google.protobuf.StringValue email = 21;
-
-	// [Optional] Exchange
-	google.protobuf.StringValue exchange = 22;
-
-	// [Optional] Exercise
-	google.protobuf.StringValue exercise = 23;
-
-	// [Optional] Expiry
-	google.protobuf.StringValue expiry = 24;
-
-	// [Optional] Figi
-	google.protobuf.StringValue figi = 25;
-
-	// [Optional] Figic
-	google.protobuf.StringValue figic = 26;
-
-	// [Optional] Frequency
-	google.protobuf.StringValue frequency = 27;
-
-	// [Optional] Fund Type
-	google.protobuf.StringValue fund_type = 28;
-
-	// [Optional] Holders
-	google.protobuf.StringValue holders = 29;
-
-	// [Optional] Index
-	google.protobuf.StringValue index = 30;
-
-	// [Optional] Isin
-	google.protobuf.StringValue isin = 31;
-
-	// [Optional] Issue Date
-	google.protobuf.StringValue issue_date = 32;
-
-	// [Optional] Issuer
-	google.protobuf.StringValue issuer = 33;
-
-	// [Optional] Markit
-	google.protobuf.StringValue markit = 34;
-
-	// [Optional] Maturity
-	google.protobuf.StringValue maturity = 35;
-
-	// [Optional] Max Supply
-	google.protobuf.StringValue max_supply = 36;
-
-	// [Optional] Methodology
-	google.protobuf.StringValue methodology = 37;
-
-	// [Optional] Month
-	google.protobuf.StringValue month = 38;
-
-	// [Optional] Morningstar
-	google.protobuf.StringValue morningstar = 39;
-
-	// [Optional] Name
-	google.protobuf.StringValue name = 40;
-
-	// [Optional] Operating
-	google.protobuf.StringValue operating = 41;
-
-	// [Optional] Option Type
-	google.protobuf.StringValue option_type = 42;
-
-	// [Optional] Phone
-	google.protobuf.StringValue phone = 43;
-
-	// [Optional] Primary
-	google.protobuf.StringValue primary = 44;
-
-	// [Optional] Recovery
-	google.protobuf.StringValue recovery = 45;
-
-	// [Optional] Reuters
-	google.protobuf.StringValue reuters = 46;
-
-	// [Optional] Sector
-	google.protobuf.StringValue sector = 47;
-
-	// [Optional] Sedol
-	google.protobuf.StringValue sedol = 48;
-
-	// [Optional] Strike
-	google.protobuf.StringValue strike = 49;
-
-	// [Optional] Tenor
-	google.protobuf.StringValue tenor = 50;
-
-	// [Optional] Ticker
-	google.protobuf.StringValue ticker = 51;
-
-	// [Optional] Total Supply
-	google.protobuf.StringValue total_supply = 52;
-
-	// [Optional] Underlying
-	google.protobuf.StringValue underlying = 53;
-
-	// [Optional] Url
-	google.protobuf.StringValue url = 54;
-
-	// [Optional] Year
-	google.protobuf.StringValue year = 55;
-
-    // [Optional] Define the first element index to be retrieved
-    google.protobuf.Int32Value start = 56;
+	// [Optional] Define the first element index to be retrieved
+    google.protobuf.Int32Value start = 2;
 
     // [Optional] Select the first elements retrieved, by default count is set to 100
-    google.protobuf.Int32Value count = 57;
+    google.protobuf.Int32Value count = 3;
+
+	// [Optional] Bloomberg
+	google.protobuf.StringValue bloomberg = 4;
+
+	// [Optional] Cik
+	google.protobuf.StringValue cik = 5;
+
+	// [Optional] Components
+	google.protobuf.StringValue components = 6;
+
+	// [Optional] Contract
+	google.protobuf.StringValue contract = 7;
+
+	// [Optional] Base Currency
+	google.protobuf.StringValue base_currency = 8;
+
+	// [Optional] Quote Currency
+	google.protobuf.StringValue quote_currency = 9;
+
+	// [Optional] Cusip
+	google.protobuf.StringValue cusip = 10;
+
+	// [Optional] Description
+	google.protobuf.StringValue description = 11;
+
+	// [Optional] Exchange
+	google.protobuf.StringValue exchange = 12;
+
+	// [Optional] Figi
+	google.protobuf.StringValue figi = 13;
+
+	// [Optional] Figic
+	google.protobuf.StringValue figic = 14;
+
+	// [Optional] Index
+	google.protobuf.StringValue index = 15;
+
+	// [Optional] Isin
+	google.protobuf.StringValue isin = 16;
+
+	// [Optional] Markit
+	google.protobuf.StringValue markit = 17;
+
+	// [Optional] Morningstar
+	google.protobuf.StringValue morningstar = 18;
+
+	// [Optional] Name
+	google.protobuf.StringValue name = 19;
+
+	// [Optional] Operating
+	google.protobuf.StringValue operating = 20;
+
+	// [Optional] Primary
+	google.protobuf.StringValue primary = 21;
+
+	// [Optional] Reuters
+	google.protobuf.StringValue reuters = 22;
+
+	// [Optional] Sector
+	google.protobuf.StringValue sector = 23;
+
+	// [Optional] Sedol
+	google.protobuf.StringValue sedol = 24;
+
+	// [Optional] Ticker
+	google.protobuf.StringValue ticker = 25;
+
+	// [Optional] Underlying
+	google.protobuf.StringValue underlying = 26;
 }
 
 // Represents a reference data response grouped by asset type.
