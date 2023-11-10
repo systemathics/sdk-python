@@ -1,34 +1,34 @@
-name: Upload Python Package
+# name: Upload Python Package
 
-on: 
-  push:
-    tags: v*
+# on: 
+#   push:
+#     tags: v*
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade build
-        python -m pip install --upgrade twine
-    - name: Set VERSION environment variable
-      run: |
-        echo GitHub_ref: $GITHUB_REF
-        arrTag=(${GITHUB_REF//\// })
-        VERSION="${arrTag[2]}"
-        echo Version: $VERSION
-        VERSION="${VERSION//v}"
-        echo Clean Version: $VERSION
-        echo "VERSION=${VERSION}" >> $GITHUB_ENV
-    - name: Build and publish
-      env:
-        TWINE_USERNAME: "__token__"
-        TWINE_PASSWORD: ${{ secrets.PYPI_ORG_TOKEN }}
-      run: |
-        python ./build.py
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v4
+#     - name: Set up Python
+#       uses: actions/setup-python@v4
+#       with:
+#         python-version: '3.x'
+#     - name: Install dependencies
+#       run: |
+#         python -m pip install --upgrade build
+#         python -m pip install --upgrade twine
+#     - name: Set VERSION environment variable
+#       run: |
+#         echo GitHub_ref: $GITHUB_REF
+#         arrTag=(${GITHUB_REF//\// })
+#         VERSION="${arrTag[2]}"
+#         echo Version: $VERSION
+#         VERSION="${VERSION//v}"
+#         echo Clean Version: $VERSION
+#         echo "VERSION=${VERSION}" >> $GITHUB_ENV
+#     - name: Build and publish
+#       env:
+#         TWINE_USERNAME: "__token__"
+#         TWINE_PASSWORD: ${{ secrets.PYPI_ORG_TOKEN }}
+#       run: |
+#         python ./build.py
