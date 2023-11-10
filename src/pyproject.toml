@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "systemathics.apis"
+dynamic = ["version"]
+authors = [
+  { name="Systemathics", email="contact@systemathics.com" },
+]
+description = "Grpc stub for Systemathics API."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research"
+]
+license = {file = "LICENSE"}
+dependencies = [
+  'googleapis-common-protos'
+]
+
+[project.urls]
+Homepage = "https://ganymede.cloud"
+"Bug Tracker" = "https://github.com/systemathics/sdk-python/issues"
+Documentation = "https://ganymede.cloud/api-documentation.html"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["systemathics.apis*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "systemathics.apis.__version__"}

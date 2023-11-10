@@ -1,10 +1,10 @@
-"""Systemathics Ganymede APIs Token Helpers
+"""Systemathics Ganymede API Token Helpers
 
-This module helps to create channels to access Systemathics Ganymede authenticated APIs.
+This module helps to create channels to access Systemathics Ganymede authenticated API.
 
 functions:
-    * get_grpc_channel - Get a channel suitable to call Ganymede gRPC APIs.
-    * get_aio_grpc_channel - Get an aio channel suitable to call Ganymede gRPC APIs.
+    * get_grpc_channel - Get a channel suitable to call Ganymede gRPC API.
+    * get_aio_grpc_channel - Get an aio channel suitable to call Ganymede gRPC API.
 """
 
 import os
@@ -15,7 +15,7 @@ DEFAULT_ENDPOINT = "https://grpc.ganymede.cloud"
 
 def get_grpc_channel() -> grpc.Channel:
     """
-    Get a channel suitable to call Ganymede gRPC APIs.
+    Get a channel suitable to call Ganymede gRPC API.
     This uses the GRPC_APIS environment variable in the form http[s]://fdqn[:port] (if no scheme is give, we'll assume https).
     If none is detected, use DEFAULT_ENDPOINT.
     Note:
@@ -23,7 +23,7 @@ def get_grpc_channel() -> grpc.Channel:
         For windows you need to 'pip install wheel python-certifi-win32' for that to work (it exports Windows CA Store to a PEM file).
         In the event CA certificates cannot be found, or if you want to use a custom file, set the SSL_CERT_FILE environment variable.
     Returns:
-        An aio channel suitable to call Ganymede gRPC APIs.
+        An aio channel suitable to call Ganymede gRPC API.
     """
     endpoint = os.getenv('GRPC_APIS','')
     endpoint = endpoint if endpoint else DEFAULT_ENDPOINT # if no endpoint was provided, use the default one
@@ -35,7 +35,7 @@ def get_grpc_channel() -> grpc.Channel:
 
 def get_aio_grpc_channel() -> grpc.aio.Channel:
     """
-    Get an aio channel suitable to call Ganymede gRPC APIs.
+    Get an aio channel suitable to call Ganymede gRPC API.
     This uses the GRPC_APIS environment variable in the form http[s]://fdqn[:port].
     If none is detected, use DEFAULT_ENDPOINT.
     Note:
@@ -43,7 +43,7 @@ def get_aio_grpc_channel() -> grpc.aio.Channel:
         For windows you need to 'pip install wheel python-certifi-win32' for that to work (it exports Windows CA Store to a PEM file).
         In the event CA certificates cannot be found, or if you want to use a custom file, set the SSL_CERT_FILE environment variable.
     Returns:
-        An aio channel suitable to call Ganymede gRPC APIs.
+        An aio channel suitable to call Ganymede gRPC API.
     """
     endpoint = os.getenv('GRPC_APIS','')
     endpoint = endpoint if endpoint else DEFAULT_ENDPOINT # if no endpoint was provided, use the default one
