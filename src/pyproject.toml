@@ -21,7 +21,9 @@ classifiers = [
 ]
 license = {file = "LICENSE"}
 dependencies = [
-  'googleapis-common-protos'
+  'googleapis-common-protos',
+  'grpcio',
+  'protobuf'
 ]
 
 [project.urls]
