@@ -107,11 +107,7 @@ def _request_token_using_auth0_rest_api(client_id, client_secret, audience, tena
     
     if not _validate_token(json_data['access_token'], tenant, audience, "from AUTH0 REST API"):       
         raise Exception(f"Token returned by Auth0 API is invalid !")
-            
-    # Push to environment
-    os.environ['AUTH0_TOKEN'] = json_data['access_token']
-    logging.debug(f"_request_token_using_auth0_rest_api: Pushed token to env AUTH0_TOKEN")
-        
+                    
     # Push to file
     tokendir = os.path.join(str(pathlib.Path.home()), ".systemathics")
     tokenfile = os.path.join(tokendir, _cleanup(tenant) + "_" + _cleanup(audience) + ".auth0_token.txt")
