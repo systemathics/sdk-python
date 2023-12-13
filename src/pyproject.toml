@@ -23,7 +23,8 @@ license = {file = "LICENSE"}
 dependencies = [
   'googleapis-common-protos',
   'grpcio',
-  'protobuf'
+  'protobuf',
+  'pyjwt', 'cryptography' # pip install 'pyjwt[crypto]'
 ]
 
 [project.urls]

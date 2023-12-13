@@ -10,6 +10,7 @@ functions:
 import os
 import grpc
 import urllib.request
+import logging
 import pathlib
     
 DEFAULT_ENDPOINT = "https://grpc.ganymede.cloud"
@@ -65,7 +66,7 @@ def _get_channel_credentials() -> grpc.ChannelCredentials:
     ssl_cert_file = os.getenv('SSL_CERT_FILE','')
     if (ssl_cert_file !='' ):
         if (not(os.path.isfile(ssl_cert_file))):
-            print(f"warn: Found SSL_CERT_FILE={ssl_cert_file} environment variable, but file doesn't exist!")
+            logging.warn(f"_get_channel_credentials: Found SSL_CERT_FILE={ssl_cert_file} environment variable, but file doesn't exist!")
         cabundle = ssl_cert_file
     # Otherwise try autodetection
     else:
@@ -90,11 +91,13 @@ def _get_current_mozilla_cacert() -> str:
         return cafile
     
     try:
+        logging.debug(f"_get_current_mozilla_cacert: Downloading {url} to {cafile}")
         with urllib.request.urlopen(url) as input:
             with open(cafile, 'wb') as output:
                 output.write(input.read())
+                logging.debug(f"_get_current_mozilla_cacert: Downloaded {url} to {cafile}")
     except urllib.error.URLError as e:
-        print(f"Could not get {url}: {e.reason}")
+        logging.debug(f"_get_current_mozilla_cacert: Could not get {url}: {e.reason}")
            
     return cafile
 
@@ -112,10 +115,10 @@ def _autodetect_ca_bundle() -> str:
     # probe
     for cabundle in cabundles:
         if (os.path.isfile(cabundle)):
-            print(f"Using CA bundle {cabundle}")
+            logging.debug(f"_autodetect_ca_bundle: Using CA bundle {cabundle}")
             return cabundle
 
     # fallback to current mozilla trusted root CA certificate chain
     cabundle = _get_current_mozilla_cacert()
-    print(f"Using CA bundle {cabundle}")
+    logging.debug(f"_autodetect_ca_bundle: Using CA bundle {cabundle}")
     return cabundle
