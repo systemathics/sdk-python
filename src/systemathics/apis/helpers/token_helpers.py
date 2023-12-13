@@ -44,14 +44,10 @@ def get_token() -> str:
     tenant = os.getenv("TENANT","")
     tenant = tenant if tenant else DEFAULT_TENANT
     
-    # If we have a token in AUTH0_TOKEN env var, use it if valid, else unset AUTH0_TOKEN
+    # If we have a token in AUTH0_TOKEN env var, use it as is
     if (auth0_token):
-        if _validate_token(auth0_token, tenant, audience, "from env:AUTH0_TOKEN"):
-            logging.debug(f"get_token: Using token from AUTH0_TOKEN")
-            return f"Bearer {auth0_token}" # valid, use it
-        else:
-            logging.debug(f"get_token: Unsetting AUTH0_TOKEN (invalid)")
-            os.environ['AUTH0_TOKEN'] = '' # invalid, delete it
+        logging.debug(f"get_token: Using token from AUTH0_TOKEN")
+        return f"Bearer {auth0_token}" # valid, use it
 
     # If we have a persisted token
     tokendir = os.path.join(str(pathlib.Path.home()), ".systemathics")
