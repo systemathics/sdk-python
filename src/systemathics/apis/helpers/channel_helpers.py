@@ -28,6 +28,7 @@ def get_grpc_channel(endpoint = "") -> grpc.Channel:
     endpoint = endpoint if endpoint else os.getenv('GRPC_APIS','')
     endpoint = endpoint if endpoint else DEFAULT_ENDPOINT # if no endpoint was provided, use the default one
     endpoint = endpoint if endpoint.startswith("http") else f"https://{endpoint}" # if no scheme was provided, assume it's https
+    logging.debug(f"get_grpc_channel: Using endpoint {endpoint}")
     return _get_grpc_channel(endpoint)
     
 def _get_grpc_channel(endpoint: str) -> grpc.Channel:
@@ -51,6 +52,7 @@ def get_aio_grpc_channel(endpoint = "") -> grpc.aio.Channel:
     endpoint = endpoint if endpoint else os.getenv('GRPC_APIS','')
     endpoint = endpoint if endpoint else DEFAULT_ENDPOINT # if no endpoint was provided, use the default one
     endpoint = endpoint if endpoint.startswith("http") else f"https://{endpoint}" # if no scheme was provided, assume it's https
+    logging.debug(f"get_aio_grpc_channel: Using endpoint {endpoint}")
     return _get_aio_grpc_channel(endpoint)
 
 def _get_aio_grpc_channel(endpoint: str) -> grpc.aio.Channel:
