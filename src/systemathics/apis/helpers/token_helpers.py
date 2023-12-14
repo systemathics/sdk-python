@@ -14,6 +14,8 @@ import urllib.request
 import jwt
 import logging
 
+logger = logging.getLogger("token_helpers")
+
 DEFAULT_AUDIENCE = "https://ganymede-prod"
 
 DEFAULT_TENANT = "ganymede-prod.eu.auth0.com"
@@ -46,7 +48,7 @@ def get_token() -> str:
     
     # If we have a token in AUTH0_TOKEN env var, use it as is
     if (auth0_token):
-        logging.debug(f"get_token: Using token from AUTH0_TOKEN")
+        logger.debug(f"get_token: Using token from AUTH0_TOKEN")
         return f"Bearer {auth0_token}" # valid, use it
 
     # If we have a persisted token
@@ -58,10 +60,10 @@ def get_token() -> str:
 
     if (auth0_token):
         if (_validate_token(auth0_token, tenant, audience, "from file " + tokenfile)):
-            logging.debug(f"get_token: Using token from {tokenfile}")
+            logger.debug(f"get_token: Using token from {tokenfile}")
             return f"Bearer {auth0_token}" # valid, use it
         else:
-            logging.debug(f"get_token: Deleting {tokenfile} (invalid)")
+            logger.debug(f"get_token: Deleting {tokenfile} (invalid)")
             os.remove(tokenfile) # invalid, delete it
             
     # At this stage, if we don't have a valid token, ask one using Auth0 REST API (we need CLIENT_ID and CLIENT_SECRET; Optionally AUDIENCE and TENANT)
@@ -84,7 +86,7 @@ def _request_token_using_auth0_rest_api(client_id, client_secret, audience, tena
     if (tenant == ""):
         raise Exception(f"tenant cannot be null")
 
-    logging.debug(f"_request_token_using_auth0_rest_api: Calling auth0 API at {tenant} to get a token")
+    logger.debug(f"_request_token_using_auth0_rest_api: Calling auth0 API at {tenant} to get a token")
 
     # Setup connection and payload
     conn = http.client.HTTPSConnection(tenant)
@@ -117,7 +119,7 @@ def _request_token_using_auth0_rest_api(client_id, client_secret, audience, tena
         os.remove(tokenfile)
     with open(tokenfile, 'w') as output:
         output.write(json_data['access_token'])
-        logging.debug(f"_request_token_using_auth0_rest_api: Pushed token to file {tokenfile}")
+        logger.debug(f"_request_token_using_auth0_rest_api: Pushed token to file {tokenfile}")
     return token
 
 def _cleanup(input: str) -> str:
@@ -140,33 +142,36 @@ def _validate_token(token: str, tenant: str, audience: str, token_label: str) ->
     if not os.path.exists(pubkeyfile):
         try:
             url = f'https://{tenant}/.well-known/jwks.json'
-            logging.debug(f"_validate_token: Downloading public key at {url} to {pubkeyfile}")
+            logger.debug(f"_validate_token: Downloading public key at {url} to {pubkeyfile}")
             with urllib.request.urlopen(url) as input:
                 with open(pubkeyfile, 'wb') as output:
                     pubkey = input.read()
                     output.write(pubkey)
         except urllib.error.URLError as e:
-            logging.error(f"Could not get {url}: {e.reason}")
+            logger.error(f"Could not get {url}: {e.reason}")
             raise
     
     jwks_url = "file:///" + pubkeyfile    
-    logging.debug(f"_validate_token: Using public key store at {jwks_url}")
+    logger.debug(f"_validate_token: Using public key store at {jwks_url}")
     jwks_client = jwt.PyJWKClient(jwks_url)
     header = jwt.get_unverified_header(token)
     kid = header["kid"]
     alg = [header["alg"]]
     key = jwks_client.get_signing_key(kid).key
     try:
-        logging.debug(f"_validate_token: Validating token {token_label} with kid={kid} alg={alg} tenant={tenant} audience={audience}")
+        logger.debug(f"_validate_token: Validating token {token_label} with kid={kid} alg={alg} tenant={tenant} audience={audience}")
         jwt.decode(token, key, alg, audience=audience)
-        logging.debug(f"_validate_token: Validated token {token_label} with kid={kid} alg={alg} tenant={tenant} audience={audience}")
+        logger.debug(f"_validate_token: Validated token {token_label} with kid={kid} alg={alg} tenant={tenant} audience={audience}")
         return True
     except jwt.exceptions.ExpiredSignatureError as expiredError:
-        logging.error(f"_validate_token: Token is expired: {expiredError}")
+        logger.error(f"_validate_token: Token is expired: {expiredError}")
         return False 
     except jwt.exceptions.DecodeError as decodeError:
-        logging.error(f"_validate_token: Token could not be decoded: {decodeError}")
+        logger.error(f"_validate_token: Token could not be decoded: {decodeError}")
         return False 
     except Exception as ex:
-        logging.error(f"_validate_token: Token is invalid: {ex}")
+        logger.error(f"_validate_token: Token is invalid: {ex}")
         return False   
+
+logging.basicConfig(level=logging.DEBUG)
+print(get_token())

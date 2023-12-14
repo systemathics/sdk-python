@@ -12,6 +12,8 @@ import grpc
 import urllib.request
 import logging
 import pathlib
+
+logger = logging.getLogger("channel_helpers")
     
 DEFAULT_ENDPOINT = "https://grpc.ganymede.cloud"
 
@@ -28,7 +30,7 @@ def get_grpc_channel(endpoint = "") -> grpc.Channel:
     endpoint = endpoint if endpoint else os.getenv('GRPC_APIS','')
     endpoint = endpoint if endpoint else DEFAULT_ENDPOINT # if no endpoint was provided, use the default one
     endpoint = endpoint if endpoint.startswith("http") else f"https://{endpoint}" # if no scheme was provided, assume it's https
-    logging.debug(f"get_grpc_channel: Using endpoint {endpoint}")
+    logger.debug(f"get_grpc_channel: Using endpoint {endpoint}")
     return _get_grpc_channel(endpoint)
     
 def _get_grpc_channel(endpoint: str) -> grpc.Channel:
@@ -52,7 +54,7 @@ def get_aio_grpc_channel(endpoint = "") -> grpc.aio.Channel:
     endpoint = endpoint if endpoint else os.getenv('GRPC_APIS','')
     endpoint = endpoint if endpoint else DEFAULT_ENDPOINT # if no endpoint was provided, use the default one
     endpoint = endpoint if endpoint.startswith("http") else f"https://{endpoint}" # if no scheme was provided, assume it's https
-    logging.debug(f"get_aio_grpc_channel: Using endpoint {endpoint}")
+    logger.debug(f"get_aio_grpc_channel: Using endpoint {endpoint}")
     return _get_aio_grpc_channel(endpoint)
 
 def _get_aio_grpc_channel(endpoint: str) -> grpc.aio.Channel:
@@ -68,7 +70,7 @@ def _get_channel_credentials() -> grpc.ChannelCredentials:
     ssl_cert_file = os.getenv('SSL_CERT_FILE','')
     if (ssl_cert_file !='' ):
         if (not(os.path.isfile(ssl_cert_file))):
-            logging.warn(f"_get_channel_credentials: Found SSL_CERT_FILE={ssl_cert_file} environment variable, but file doesn't exist!")
+            logger.warn(f"_get_channel_credentials: Found SSL_CERT_FILE={ssl_cert_file} environment variable, but file doesn't exist!")
         cabundle = ssl_cert_file
     # Otherwise try autodetection
     else:
@@ -93,13 +95,13 @@ def _get_current_mozilla_cacert() -> str:
         return cafile
     
     try:
-        logging.debug(f"_get_current_mozilla_cacert: Downloading {url} to {cafile}")
+        logger.debug(f"_get_current_mozilla_cacert: Downloading {url} to {cafile}")
         with urllib.request.urlopen(url) as input:
             with open(cafile, 'wb') as output:
                 output.write(input.read())
-                logging.debug(f"_get_current_mozilla_cacert: Downloaded {url} to {cafile}")
+                logger.debug(f"_get_current_mozilla_cacert: Downloaded {url} to {cafile}")
     except urllib.error.URLError as e:
-        logging.debug(f"_get_current_mozilla_cacert: Could not get {url}: {e.reason}")
+        logger.debug(f"_get_current_mozilla_cacert: Could not get {url}: {e.reason}")
            
     return cafile
 
@@ -117,10 +119,10 @@ def _autodetect_ca_bundle() -> str:
     # probe
     for cabundle in cabundles:
         if (os.path.isfile(cabundle)):
-            logging.debug(f"_autodetect_ca_bundle: Using CA bundle {cabundle}")
+            logger.debug(f"_autodetect_ca_bundle: Using CA bundle {cabundle}")
             return cabundle
 
     # fallback to current mozilla trusted root CA certificate chain
     cabundle = _get_current_mozilla_cacert()
-    logging.debug(f"_autodetect_ca_bundle: Using CA bundle {cabundle}")
+    logger.debug(f"_autodetect_ca_bundle: Using CA bundle {cabundle}")
     return cabundle
