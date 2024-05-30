@@ -21,8 +21,10 @@ classifiers = [
 ]
 license = {file = "LICENSE"}
 dependencies = [
-  'googleapis-common-protos'
+    "protobuf< 5.0.0",
+    'googleapis-common-protos'
 ]
+
 
 [project.urls]
 Homepage = "https://ganymede.cloud"
