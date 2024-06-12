@@ -16,7 +16,7 @@ from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb
 from systemathics.apis.type.shared.v1 import asset_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_asset__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1systemathics/apis/type/shared/v1/identifier.proto\x12 systemathics.apis.type.shared.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\"\xc6\x01\n\nIdentifier\x12\x1a\n\x08\x65xchange\x18\x01 \x01(\tR\x08\x65xchange\x12\x16\n\x06ticker\x18\x02 \x01(\tR\x06ticker\x12\x38\n\x08provider\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueR\x08provider\x12J\n\nasset_type\x18\x04 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetTypeB\xdc\x01\n$com.systemathics.apis.type.shared.v1B\x0fIdentifierProtoP\x01\xa2\x02\x04SATS\xaa\x02 Systemathics.Apis.Type.Shared.V1\xca\x02 Systemathics\\Apis\\Type\\Shared\\V1\xe2\x02,Systemathics\\Apis\\Type\\Shared\\V1\\GPBMetadata\xea\x02$Systemathics::Apis::Type::Shared::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1systemathics/apis/type/shared/v1/identifier.proto\x12 systemathics.apis.type.shared.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\"\xaa\x01\n\nIdentifier\x12\x16\n\x06ticker\x18\x02 \x01(\tR\x06ticker\x12\x38\n\x08provider\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueR\x08provider\x12J\n\nasset_type\x18\x04 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetTypeB\xdc\x01\n$com.systemathics.apis.type.shared.v1B\x0fIdentifierProtoP\x01\xa2\x02\x04SATS\xaa\x02 Systemathics.Apis.Type.Shared.V1\xca\x02 Systemathics\\Apis\\Type\\Shared\\V1\xe2\x02,Systemathics\\Apis\\Type\\Shared\\V1\\GPBMetadata\xea\x02$Systemathics::Apis::Type::Shared::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -25,5 +25,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n$com.systemathics.apis.type.shared.v1B\017IdentifierProtoP\001\242\002\004SATS\252\002 Systemathics.Apis.Type.Shared.V1\312\002 Systemathics\\Apis\\Type\\Shared\\V1\342\002,Systemathics\\Apis\\Type\\Shared\\V1\\GPBMetadata\352\002$Systemathics::Apis::Type::Shared::V1'
   _globals['_IDENTIFIER']._serialized_start=166
-  _globals['_IDENTIFIER']._serialized_end=364
+  _globals['_IDENTIFIER']._serialized_end=336
 # @@protoc_insertion_point(module_scope)
