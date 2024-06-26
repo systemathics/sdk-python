@@ -17,7 +17,7 @@ class CalendarServiceStub(object):
         """
         self.HolidayCurrencies = channel.unary_unary(
                 '/systemathics.apis.services.calendar.v1.CalendarService/HolidayCurrencies',
-                request_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCurrenciesRequest.SerializeToString,
+                request_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCurrenciesResponse.FromString,
                 )
         self.HolidayCenter = channel.unary_unary(
@@ -32,13 +32,23 @@ class CalendarServiceStub(object):
                 )
         self.TradingHoursMic = channel.unary_unary(
                 '/systemathics.apis.services.calendar.v1.CalendarService/TradingHoursMic',
-                request_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursMicRequest.SerializeToString,
+                request_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursMicResponse.FromString,
                 )
         self.TradingHours = channel.unary_unary(
                 '/systemathics.apis.services.calendar.v1.CalendarService/TradingHours',
                 request_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursResponse.FromString,
+                )
+        self.HolidayCodeToMics = channel.unary_unary(
+                '/systemathics.apis.services.calendar.v1.CalendarService/HolidayCodeToMics',
+                request_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCodeToMicsResponse.FromString,
+                )
+        self.MicToHolidayCodes = channel.unary_unary(
+                '/systemathics.apis.services.calendar.v1.CalendarService/MicToHolidayCodes',
+                request_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.MicToHolidayCodesResponse.FromString,
                 )
 
 
@@ -81,12 +91,26 @@ class CalendarServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def HolidayCodeToMics(self, request, context):
+        """Gets mic code with trading hours information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MicToHolidayCodes(self, request, context):
+        """Gets mic code with trading hours information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_CalendarServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'HolidayCurrencies': grpc.unary_unary_rpc_method_handler(
                     servicer.HolidayCurrencies,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCurrenciesRequest.FromString,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCurrenciesResponse.SerializeToString,
             ),
             'HolidayCenter': grpc.unary_unary_rpc_method_handler(
@@ -101,13 +125,23 @@ def add_CalendarServiceServicer_to_server(servicer, server):
             ),
             'TradingHoursMic': grpc.unary_unary_rpc_method_handler(
                     servicer.TradingHoursMic,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursMicRequest.FromString,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursMicResponse.SerializeToString,
             ),
             'TradingHours': grpc.unary_unary_rpc_method_handler(
                     servicer.TradingHours,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursResponse.SerializeToString,
+            ),
+            'HolidayCodeToMics': grpc.unary_unary_rpc_method_handler(
+                    servicer.HolidayCodeToMics,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCodeToMicsResponse.SerializeToString,
+            ),
+            'MicToHolidayCodes': grpc.unary_unary_rpc_method_handler(
+                    servicer.MicToHolidayCodes,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.MicToHolidayCodesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -132,7 +166,7 @@ class CalendarService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.calendar.v1.CalendarService/HolidayCurrencies',
-            systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCurrenciesRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCurrenciesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -183,7 +217,7 @@ class CalendarService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.calendar.v1.CalendarService/TradingHoursMic',
-            systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursMicRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursMicResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -202,5 +236,39 @@ class CalendarService(object):
         return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.calendar.v1.CalendarService/TradingHours',
             systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.TradingHoursResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def HolidayCodeToMics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.calendar.v1.CalendarService/HolidayCodeToMics',
+            systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.HolidayCodeToMicsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MicToHolidayCodes(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.calendar.v1.CalendarService/MicToHolidayCodes',
+            systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.EmptyRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_calendar_dot_v1_dot_calendar__pb2.MicToHolidayCodesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

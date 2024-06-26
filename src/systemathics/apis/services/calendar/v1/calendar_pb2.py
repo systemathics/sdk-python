@@ -18,7 +18,7 @@ from google.type import date_pb2 as google_dot_type_dot_date__pb2
 from google.type import timeofday_pb2 as google_dot_type_dot_timeofday__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n5systemathics/apis/services/calendar/v1/calendar.proto\x12&systemathics.apis.services.calendar.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x16google/type/date.proto\x1a\x1bgoogle/type/timeofday.proto\"\x90\x02\n\x10TradingHoursItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x16\n\x06market\x18\x02 \x01(\tR\x06market\x12\x46\n\x04type\x18\x03 \x01(\x0e\x32\x32.systemathics.apis.services.calendar.v1.MarketTypeR\x04type\x12!\n\x0choliday_code\x18\x04 \x01(\tR\x0bholidayCode\x12R\n\x05Hours\x18\x05 \x03(\x0b\x32<.systemathics.apis.services.calendar.v1.TradingHoursActivityR\x05Hours\"\xb2\x06\n\x14TradingHoursActivity\x12\x1a\n\x08\x61\x63tivity\x18\x01 \x01(\tR\x08\x61\x63tivity\x12\x1c\n\tfunctions\x18\x02 \x03(\tR\tfunctions\x12O\n\tirregular\x18\x03 \x01(\x0e\x32\x31.systemathics.apis.services.calendar.v1.IrregularR\tirregular\x12\x1b\n\tnew_hours\x18\x04 \x01(\x08R\x08newHours\x12>\n\x0flocal_open_time\x18\x05 \x01(\x0b\x32\x16.google.type.TimeOfDayR\rlocalOpenTime\x12@\n\x10local_close_time\x18\x06 \x01(\x0b\x32\x16.google.type.TimeOfDayR\x0elocalCloseTime\x12\\\n\x1cvariable_seconds_before_open\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int32ValueR\x19variableSecondsBeforeOpen\x12Z\n\x1bvariable_seconds_after_open\x18\x08 \x01(\x0b\x32\x1b.google.protobuf.Int32ValueR\x18variableSecondsAfterOpen\x12^\n\x1dvariable_seconds_before_close\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int32ValueR\x1avariableSecondsBeforeClose\x12\\\n\x1cvariable_seconds_after_close\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int32ValueR\x19variableSecondsAfterClose\x12:\n\rutc_open_time\x18\x0b \x01(\x0b\x32\x16.google.type.TimeOfDayR\x0butcOpenTime\x12<\n\x0eutc_close_time\x18\x0c \x01(\x0b\x32\x16.google.type.TimeOfDayR\x0cutcCloseTime\"f\n\x14TradingHoursResponse\x12N\n\x05items\x18\x01 \x03(\x0b\x32\x38.systemathics.apis.services.calendar.v1.TradingHoursItemR\x05items\"\'\n\x13TradingHoursRequest\x12\x10\n\x03mic\x18\x01 \x01(\tR\x03mic\"\x18\n\x16TradingHoursMicRequest\"-\n\x17TradingHoursMicResponse\x12\x12\n\x04mics\x18\x01 \x03(\tR\x04mics\"\x1a\n\x18HolidayCurrenciesRequest\"2\n\x14HolidayCenterRequest\x12\x1a\n\x08\x63urrency\x18\x01 \x01(\tR\x08\x63urrency\"2\n\x0fHolidaysRequest\x12\x1f\n\x0b\x63\x65nter_code\x18\x01 \x01(\tR\ncenterCode\"h\n\x15HolidayCenterResponse\x12O\n\x05items\x18\x01 \x03(\x0b\x32\x39.systemathics.apis.services.calendar.v1.HolidayCenterItemR\x05items\"\x8a\x02\n\x11HolidayCenterItem\x12\x12\n\x04\x63ode\x18\x01 \x01(\tR\x04\x63ode\x12\x12\n\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n\x07\x63ountry\x18\x03 \x01(\tR\x07\x63ountry\x12\x1a\n\x08\x63urrency\x18\x04 \x01(\tR\x08\x63urrency\x12V\n\x0choliday_type\x18\x05 \x01(\x0e\x32\x33.systemathics.apis.services.calendar.v1.HolidayTypeR\x0bholidayType\x12\x1f\n\x0biso_country\x18\x06 \x01(\tR\nisoCountry\x12\x1e\n\ndefinition\x18\x07 \x01(\tR\ndefinition\";\n\x19HolidayCurrenciesResponse\x12\x1e\n\ncurrencies\x18\x01 \x03(\tR\ncurrencies\"L\n\x0bHolidayItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x16\n\x06reason\x18\x02 \x01(\tR\x06reason\"\xc4\x01\n\x10HolidaysResponse\x12Z\n\x0b\x63\x65nter_info\x18\x01 \x01(\x0b\x32\x39.systemathics.apis.services.calendar.v1.HolidayCenterItemR\ncenterInfo\x12T\n\x0b\x63losed_days\x18\x02 \x03(\x0b\x32\x33.systemathics.apis.services.calendar.v1.HolidayItemR\nclosedDays*z\n\tIrregular\x12\x19\n\x15IRREGULAR_UNSPECIFIED\x10\x00\x12\x11\n\rIRREGULAR_YES\x10\x01\x12\x10\n\x0cIRREGULAR_NO\x10\x02\x12\x16\n\x12IRREGULAR_WEEK_END\x10\x03\x12\x15\n\x11IRREGULAR_HOLIDAY\x10\x04*\xe9\x01\n\nMarketType\x12\x1b\n\x17MARKET_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n\x17MARKET_TYPE_CASH_EQUITY\x10\x01\x12 \n\x1cMARKET_TYPE_FUTURES_CONTRACT\x10\x02\x12\"\n\x1eMARKET_TYPE_OPTIONS_ON_FUTURES\x10\x03\x12%\n!MARKET_TYPE_OPTIONS_ON_SECURITIES\x10\x04\x12\x1d\n\x19MARKET_TYPE_OTHER_OPTIONS\x10\x05\x12\x15\n\x11MARKET_TYPE_OTHER\x10\x06*\xd1\x01\n\x0bHolidayType\x12\x1c\n\x18HOLIDAY_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11HOLIDAY_TYPE_BANK\x10\x01\x12 \n\x1cHOLIDAY_TYPE_FUTURES_TRADING\x10\x02\x12\x16\n\x12HOLIDAY_TYPE_OTHER\x10\x03\x12*\n&HOLIDAY_TYPE_STOCK_EXCHANGE_SETTLEMENT\x10\x04\x12\'\n#HOLIDAY_TYPE_STOCK_EXCHANGE_TRADING\x10\x05\x32\x98\x07\n\x0f\x43\x61lendarService\x12\xc2\x01\n\x11HolidayCurrencies\x12@.systemathics.apis.services.calendar.v1.HolidayCurrenciesRequest\x1a\x41.systemathics.apis.services.calendar.v1.HolidayCurrenciesResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /v1/calendar/holidays/currencies\x12\xb2\x01\n\rHolidayCenter\x12<.systemathics.apis.services.calendar.v1.HolidayCenterRequest\x1a=.systemathics.apis.services.calendar.v1.HolidayCenterResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/v1/calendar/holidays/center\x12\x9c\x01\n\x08Holidays\x12\x37.systemathics.apis.services.calendar.v1.HolidaysRequest\x1a\x38.systemathics.apis.services.calendar.v1.HolidaysResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/calendar/holidays\x12\xbb\x01\n\x0fTradingHoursMic\x12>.systemathics.apis.services.calendar.v1.TradingHoursMicRequest\x1a?.systemathics.apis.services.calendar.v1.TradingHoursMicResponse\"\'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/calendar/trading_hours/mics\x12\xad\x01\n\x0cTradingHours\x12;.systemathics.apis.services.calendar.v1.TradingHoursRequest\x1a<.systemathics.apis.services.calendar.v1.TradingHoursResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/calendar/trading_hoursB\xf8\x01\n*com.systemathics.apis.services.calendar.v1B\rCalendarProtoP\x01\xa2\x02\x04SASC\xaa\x02&Systemathics.Apis.Services.Calendar.V1\xca\x02&Systemathics\\Apis\\Services\\Calendar\\V1\xe2\x02\x32Systemathics\\Apis\\Services\\Calendar\\V1\\GPBMetadata\xea\x02*Systemathics::Apis::Services::Calendar::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n5systemathics/apis/services/calendar/v1/calendar.proto\x12&systemathics.apis.services.calendar.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x16google/type/date.proto\x1a\x1bgoogle/type/timeofday.proto\"p\n\x19HolidayCodeToMicsResponse\x12S\n\x05items\x18\x01 \x03(\x0b\x32=.systemathics.apis.services.calendar.v1.HolidayCodeToMicsItemR\x05items\"N\n\x15HolidayCodeToMicsItem\x12!\n\x0choliday_code\x18\x01 \x01(\tR\x0bholidayCode\x12\x12\n\x04mics\x18\x02 \x03(\tR\x04mics\"p\n\x19MicToHolidayCodesResponse\x12S\n\x05items\x18\x01 \x03(\x0b\x32=.systemathics.apis.services.calendar.v1.MicToHolidayCodesItemR\x05items\"N\n\x15MicToHolidayCodesItem\x12\x10\n\x03mic\x18\x01 \x01(\tR\x03mic\x12#\n\rholiday_codes\x18\x02 \x03(\tR\x0cholidayCodes\"\x90\x02\n\x10TradingHoursItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x16\n\x06market\x18\x02 \x01(\tR\x06market\x12\x46\n\x04type\x18\x03 \x01(\x0e\x32\x32.systemathics.apis.services.calendar.v1.MarketTypeR\x04type\x12!\n\x0choliday_code\x18\x04 \x01(\tR\x0bholidayCode\x12R\n\x05hours\x18\x05 \x03(\x0b\x32<.systemathics.apis.services.calendar.v1.TradingHoursActivityR\x05hours\"\xb2\x06\n\x14TradingHoursActivity\x12\x1a\n\x08\x61\x63tivity\x18\x01 \x01(\tR\x08\x61\x63tivity\x12\x1c\n\tfunctions\x18\x02 \x03(\tR\tfunctions\x12O\n\tirregular\x18\x03 \x01(\x0e\x32\x31.systemathics.apis.services.calendar.v1.IrregularR\tirregular\x12\x1b\n\tnew_hours\x18\x04 \x01(\x08R\x08newHours\x12>\n\x0flocal_open_time\x18\x05 \x01(\x0b\x32\x16.google.type.TimeOfDayR\rlocalOpenTime\x12@\n\x10local_close_time\x18\x06 \x01(\x0b\x32\x16.google.type.TimeOfDayR\x0elocalCloseTime\x12\\\n\x1cvariable_seconds_before_open\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int32ValueR\x19variableSecondsBeforeOpen\x12Z\n\x1bvariable_seconds_after_open\x18\x08 \x01(\x0b\x32\x1b.google.protobuf.Int32ValueR\x18variableSecondsAfterOpen\x12^\n\x1dvariable_seconds_before_close\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int32ValueR\x1avariableSecondsBeforeClose\x12\\\n\x1cvariable_seconds_after_close\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int32ValueR\x19variableSecondsAfterClose\x12:\n\rutc_open_time\x18\x0b \x01(\x0b\x32\x16.google.type.TimeOfDayR\x0butcOpenTime\x12<\n\x0eutc_close_time\x18\x0c \x01(\x0b\x32\x16.google.type.TimeOfDayR\x0cutcCloseTime\"f\n\x14TradingHoursResponse\x12N\n\x05items\x18\x01 \x03(\x0b\x32\x38.systemathics.apis.services.calendar.v1.TradingHoursItemR\x05items\"\'\n\x13TradingHoursRequest\x12\x10\n\x03mic\x18\x01 \x01(\tR\x03mic\"-\n\x17TradingHoursMicResponse\x12\x12\n\x04mics\x18\x01 \x03(\tR\x04mics\"\x0e\n\x0c\x45mptyRequest\"2\n\x14HolidayCenterRequest\x12\x1a\n\x08\x63urrency\x18\x01 \x01(\tR\x08\x63urrency\"2\n\x0fHolidaysRequest\x12\x1f\n\x0b\x63\x65nter_code\x18\x01 \x01(\tR\ncenterCode\"h\n\x15HolidayCenterResponse\x12O\n\x05items\x18\x01 \x03(\x0b\x32\x39.systemathics.apis.services.calendar.v1.HolidayCenterItemR\x05items\"\x9e\x02\n\x11HolidayCenterItem\x12\x12\n\x04\x63ode\x18\x01 \x01(\tR\x04\x63ode\x12\x12\n\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n\x07\x63ountry\x18\x03 \x01(\tR\x07\x63ountry\x12\x1a\n\x08\x63urrency\x18\x04 \x01(\tR\x08\x63urrency\x12V\n\x0choliday_type\x18\x05 \x01(\x0e\x32\x33.systemathics.apis.services.calendar.v1.HolidayTypeR\x0bholidayType\x12\x1f\n\x0biso_country\x18\x06 \x01(\tR\nisoCountry\x12\x1e\n\ndefinition\x18\x07 \x01(\tR\ndefinition\x12\x12\n\x04mics\x18\x08 \x03(\tR\x04mics\";\n\x19HolidayCurrenciesResponse\x12\x1e\n\ncurrencies\x18\x01 \x03(\tR\ncurrencies\"L\n\x0bHolidayItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x16\n\x06reason\x18\x02 \x01(\tR\x06reason\"\xc4\x01\n\x10HolidaysResponse\x12Z\n\x0b\x63\x65nter_info\x18\x01 \x01(\x0b\x32\x39.systemathics.apis.services.calendar.v1.HolidayCenterItemR\ncenterInfo\x12T\n\x0b\x63losed_days\x18\x02 \x03(\x0b\x32\x33.systemathics.apis.services.calendar.v1.HolidayItemR\nclosedDays*z\n\tIrregular\x12\x19\n\x15IRREGULAR_UNSPECIFIED\x10\x00\x12\x11\n\rIRREGULAR_YES\x10\x01\x12\x10\n\x0cIRREGULAR_NO\x10\x02\x12\x16\n\x12IRREGULAR_WEEK_END\x10\x03\x12\x15\n\x11IRREGULAR_HOLIDAY\x10\x04*\xe9\x01\n\nMarketType\x12\x1b\n\x17MARKET_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n\x17MARKET_TYPE_CASH_EQUITY\x10\x01\x12 \n\x1cMARKET_TYPE_FUTURES_CONTRACT\x10\x02\x12\"\n\x1eMARKET_TYPE_OPTIONS_ON_FUTURES\x10\x03\x12%\n!MARKET_TYPE_OPTIONS_ON_SECURITIES\x10\x04\x12\x1d\n\x19MARKET_TYPE_OTHER_OPTIONS\x10\x05\x12\x15\n\x11MARKET_TYPE_OTHER\x10\x06*\xd1\x01\n\x0bHolidayType\x12\x1c\n\x18HOLIDAY_TYPE_UNSPECIFIED\x10\x00\x12\x15\n\x11HOLIDAY_TYPE_BANK\x10\x01\x12 \n\x1cHOLIDAY_TYPE_FUTURES_TRADING\x10\x02\x12\x16\n\x12HOLIDAY_TYPE_OTHER\x10\x03\x12*\n&HOLIDAY_TYPE_STOCK_EXCHANGE_SETTLEMENT\x10\x04\x12\'\n#HOLIDAY_TYPE_STOCK_EXCHANGE_TRADING\x10\x05\x32\xf4\t\n\x0f\x43\x61lendarService\x12\xb6\x01\n\x11HolidayCurrencies\x12\x34.systemathics.apis.services.calendar.v1.EmptyRequest\x1a\x41.systemathics.apis.services.calendar.v1.HolidayCurrenciesResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /v1/calendar/holidays/currencies\x12\xb2\x01\n\rHolidayCenter\x12<.systemathics.apis.services.calendar.v1.HolidayCenterRequest\x1a=.systemathics.apis.services.calendar.v1.HolidayCenterResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/v1/calendar/holidays/center\x12\x9c\x01\n\x08Holidays\x12\x37.systemathics.apis.services.calendar.v1.HolidaysRequest\x1a\x38.systemathics.apis.services.calendar.v1.HolidaysResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/calendar/holidays\x12\xb1\x01\n\x0fTradingHoursMic\x12\x34.systemathics.apis.services.calendar.v1.EmptyRequest\x1a?.systemathics.apis.services.calendar.v1.TradingHoursMicResponse\"\'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/calendar/trading_hours/mics\x12\xad\x01\n\x0cTradingHours\x12;.systemathics.apis.services.calendar.v1.TradingHoursRequest\x1a<.systemathics.apis.services.calendar.v1.TradingHoursResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/calendar/trading_hours\x12\xb6\x01\n\x11HolidayCodeToMics\x12\x34.systemathics.apis.services.calendar.v1.EmptyRequest\x1a\x41.systemathics.apis.services.calendar.v1.HolidayCodeToMicsResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /v1/calendar/holiday_code_2_mics\x12\xb6\x01\n\x11MicToHolidayCodes\x12\x34.systemathics.apis.services.calendar.v1.EmptyRequest\x1a\x41.systemathics.apis.services.calendar.v1.MicToHolidayCodesResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /v1/calendar/mic_2_holiday_codesB\xf8\x01\n*com.systemathics.apis.services.calendar.v1B\rCalendarProtoP\x01\xa2\x02\x04SASC\xaa\x02&Systemathics.Apis.Services.Calendar.V1\xca\x02&Systemathics\\Apis\\Services\\Calendar\\V1\xe2\x02\x32Systemathics\\Apis\\Services\\Calendar\\V1\\GPBMetadata\xea\x02*Systemathics::Apis::Services::Calendar::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -36,40 +36,50 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_CALENDARSERVICE'].methods_by_name['TradingHoursMic']._serialized_options = b'\202\323\344\223\002!\022\037/v1/calendar/trading_hours/mics'
   _globals['_CALENDARSERVICE'].methods_by_name['TradingHours']._options = None
   _globals['_CALENDARSERVICE'].methods_by_name['TradingHours']._serialized_options = b'\202\323\344\223\002\034\022\032/v1/calendar/trading_hours'
-  _globals['_IRREGULAR']._serialized_start=2371
-  _globals['_IRREGULAR']._serialized_end=2493
-  _globals['_MARKETTYPE']._serialized_start=2496
-  _globals['_MARKETTYPE']._serialized_end=2729
-  _globals['_HOLIDAYTYPE']._serialized_start=2732
-  _globals['_HOLIDAYTYPE']._serialized_end=2941
-  _globals['_TRADINGHOURSITEM']._serialized_start=213
-  _globals['_TRADINGHOURSITEM']._serialized_end=485
-  _globals['_TRADINGHOURSACTIVITY']._serialized_start=488
-  _globals['_TRADINGHOURSACTIVITY']._serialized_end=1306
-  _globals['_TRADINGHOURSRESPONSE']._serialized_start=1308
-  _globals['_TRADINGHOURSRESPONSE']._serialized_end=1410
-  _globals['_TRADINGHOURSREQUEST']._serialized_start=1412
-  _globals['_TRADINGHOURSREQUEST']._serialized_end=1451
-  _globals['_TRADINGHOURSMICREQUEST']._serialized_start=1453
-  _globals['_TRADINGHOURSMICREQUEST']._serialized_end=1477
-  _globals['_TRADINGHOURSMICRESPONSE']._serialized_start=1479
-  _globals['_TRADINGHOURSMICRESPONSE']._serialized_end=1524
-  _globals['_HOLIDAYCURRENCIESREQUEST']._serialized_start=1526
-  _globals['_HOLIDAYCURRENCIESREQUEST']._serialized_end=1552
-  _globals['_HOLIDAYCENTERREQUEST']._serialized_start=1554
-  _globals['_HOLIDAYCENTERREQUEST']._serialized_end=1604
-  _globals['_HOLIDAYSREQUEST']._serialized_start=1606
-  _globals['_HOLIDAYSREQUEST']._serialized_end=1656
-  _globals['_HOLIDAYCENTERRESPONSE']._serialized_start=1658
-  _globals['_HOLIDAYCENTERRESPONSE']._serialized_end=1762
-  _globals['_HOLIDAYCENTERITEM']._serialized_start=1765
-  _globals['_HOLIDAYCENTERITEM']._serialized_end=2031
-  _globals['_HOLIDAYCURRENCIESRESPONSE']._serialized_start=2033
-  _globals['_HOLIDAYCURRENCIESRESPONSE']._serialized_end=2092
-  _globals['_HOLIDAYITEM']._serialized_start=2094
-  _globals['_HOLIDAYITEM']._serialized_end=2170
-  _globals['_HOLIDAYSRESPONSE']._serialized_start=2173
-  _globals['_HOLIDAYSRESPONSE']._serialized_end=2369
-  _globals['_CALENDARSERVICE']._serialized_start=2944
-  _globals['_CALENDARSERVICE']._serialized_end=3864
+  _globals['_CALENDARSERVICE'].methods_by_name['HolidayCodeToMics']._options = None
+  _globals['_CALENDARSERVICE'].methods_by_name['HolidayCodeToMics']._serialized_options = b'\202\323\344\223\002\"\022 /v1/calendar/holiday_code_2_mics'
+  _globals['_CALENDARSERVICE'].methods_by_name['MicToHolidayCodes']._options = None
+  _globals['_CALENDARSERVICE'].methods_by_name['MicToHolidayCodes']._serialized_options = b'\202\323\344\223\002\"\022 /v1/calendar/mic_2_holiday_codes'
+  _globals['_IRREGULAR']._serialized_start=2741
+  _globals['_IRREGULAR']._serialized_end=2863
+  _globals['_MARKETTYPE']._serialized_start=2866
+  _globals['_MARKETTYPE']._serialized_end=3099
+  _globals['_HOLIDAYTYPE']._serialized_start=3102
+  _globals['_HOLIDAYTYPE']._serialized_end=3311
+  _globals['_HOLIDAYCODETOMICSRESPONSE']._serialized_start=212
+  _globals['_HOLIDAYCODETOMICSRESPONSE']._serialized_end=324
+  _globals['_HOLIDAYCODETOMICSITEM']._serialized_start=326
+  _globals['_HOLIDAYCODETOMICSITEM']._serialized_end=404
+  _globals['_MICTOHOLIDAYCODESRESPONSE']._serialized_start=406
+  _globals['_MICTOHOLIDAYCODESRESPONSE']._serialized_end=518
+  _globals['_MICTOHOLIDAYCODESITEM']._serialized_start=520
+  _globals['_MICTOHOLIDAYCODESITEM']._serialized_end=598
+  _globals['_TRADINGHOURSITEM']._serialized_start=601
+  _globals['_TRADINGHOURSITEM']._serialized_end=873
+  _globals['_TRADINGHOURSACTIVITY']._serialized_start=876
+  _globals['_TRADINGHOURSACTIVITY']._serialized_end=1694
+  _globals['_TRADINGHOURSRESPONSE']._serialized_start=1696
+  _globals['_TRADINGHOURSRESPONSE']._serialized_end=1798
+  _globals['_TRADINGHOURSREQUEST']._serialized_start=1800
+  _globals['_TRADINGHOURSREQUEST']._serialized_end=1839
+  _globals['_TRADINGHOURSMICRESPONSE']._serialized_start=1841
+  _globals['_TRADINGHOURSMICRESPONSE']._serialized_end=1886
+  _globals['_EMPTYREQUEST']._serialized_start=1888
+  _globals['_EMPTYREQUEST']._serialized_end=1902
+  _globals['_HOLIDAYCENTERREQUEST']._serialized_start=1904
+  _globals['_HOLIDAYCENTERREQUEST']._serialized_end=1954
+  _globals['_HOLIDAYSREQUEST']._serialized_start=1956
+  _globals['_HOLIDAYSREQUEST']._serialized_end=2006
+  _globals['_HOLIDAYCENTERRESPONSE']._serialized_start=2008
+  _globals['_HOLIDAYCENTERRESPONSE']._serialized_end=2112
+  _globals['_HOLIDAYCENTERITEM']._serialized_start=2115
+  _globals['_HOLIDAYCENTERITEM']._serialized_end=2401
+  _globals['_HOLIDAYCURRENCIESRESPONSE']._serialized_start=2403
+  _globals['_HOLIDAYCURRENCIESRESPONSE']._serialized_end=2462
+  _globals['_HOLIDAYITEM']._serialized_start=2464
+  _globals['_HOLIDAYITEM']._serialized_end=2540
+  _globals['_HOLIDAYSRESPONSE']._serialized_start=2543
+  _globals['_HOLIDAYSRESPONSE']._serialized_end=2739
+  _globals['_CALENDARSERVICE']._serialized_start=3314
+  _globals['_CALENDARSERVICE']._serialized_end=4582
 # @@protoc_insertion_point(module_scope)
