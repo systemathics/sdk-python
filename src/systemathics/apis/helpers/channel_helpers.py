@@ -14,7 +14,7 @@ import pathlib
     
 DEFAULT_ENDPOINT = "https://grpc.ganymede.cloud"
 
-def get_grpc_channel(endpoint = "") -> grpc.Channel:
+def get_grpc_channel(endpoint : str, **kwargs) -> grpc.Channel:
     """
     Get a channel suitable to call Ganymede gRPC API.
     If no endpoint parameter is given, try to use GRPC_APIS environment variable or fallback to DEFAULT_ENDPOINT.
@@ -27,17 +27,18 @@ def get_grpc_channel(endpoint = "") -> grpc.Channel:
     endpoint = endpoint if endpoint else os.getenv('GRPC_APIS','')
     endpoint = endpoint if endpoint else DEFAULT_ENDPOINT # if no endpoint was provided, use the default one
     endpoint = endpoint if endpoint.startswith("http") else f"https://{endpoint}" # if no scheme was provided, assume it's https
-    return _get_grpc_channel(endpoint)
+    return _get_grpc_channel(endpoint, **kwargs)
     
-def _get_grpc_channel(endpoint: str) -> grpc.Channel:
+def _get_grpc_channel(endpoint: str, **kwargs) -> grpc.Channel:
     if not endpoint or not endpoint.startswith("http"):
         raise "endpoint should have scheme http or https"
+    options = [ (arg,kwargs[arg]) for arg in kwargs ]
     if (endpoint.startswith("https")):
-        return grpc.secure_channel(endpoint.replace("https://",""), _get_channel_credentials())
+        return grpc.secure_channel(endpoint.replace("https://",""), _get_channel_credentials(),  options = options)
     else:
-        return grpc.insecure_channel(endpoint.replace("http://",""))
+        return grpc.insecure_channel(endpoint.replace("http://",""), options = options)
 
-def get_aio_grpc_channel(endpoint = "") -> grpc.aio.Channel:
+def get_aio_grpc_channel(endpoint = "", **kwargs) -> grpc.aio.Channel:
     """
     Get an aio channel suitable to call Ganymede gRPC API.
     If no endpoint parameter is given, try to use GRPC_APIS environment variable or fallback to DEFAULT_ENDPOINT.
@@ -50,15 +51,16 @@ def get_aio_grpc_channel(endpoint = "") -> grpc.aio.Channel:
     endpoint = endpoint if endpoint else os.getenv('GRPC_APIS','')
     endpoint = endpoint if endpoint else DEFAULT_ENDPOINT # if no endpoint was provided, use the default one
     endpoint = endpoint if endpoint.startswith("http") else f"https://{endpoint}" # if no scheme was provided, assume it's https
-    return _get_aio_grpc_channel(endpoint)
+    return _get_aio_grpc_channel(endpoint, **kwargs)
 
-def _get_aio_grpc_channel(endpoint: str) -> grpc.aio.Channel:
+def _get_aio_grpc_channel(endpoint: str, **kwargs) -> grpc.aio.Channel:
     if not endpoint or not endpoint.startswith("http"):
         raise "endpoint should have scheme http or https"
+    options = [ (arg,kwargs[arg]) for arg in kwargs ]
     if (endpoint.startswith("https")):
-        return grpc.aio.secure_channel(endpoint.replace("https://",""), _get_channel_credentials())
+        return grpc.aio.secure_channel(endpoint.replace("https://",""), _get_channel_credentials(), options = options )
     else:
-        return grpc.aio.insecure_channel(endpoint.replace("http://",""))
+        return grpc.aio.insecure_channel(endpoint.replace("http://",""), options = options )
 
 def _get_channel_credentials() -> grpc.ChannelCredentials:
     # If we have a SSL_CERT_FILE env variable, use it
