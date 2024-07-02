@@ -14,7 +14,7 @@ import pathlib
     
 DEFAULT_ENDPOINT = "https://grpc.ganymede.cloud"
 
-def get_grpc_channel(endpoint : str, **kwargs) -> grpc.Channel:
+def get_grpc_channel(endpoint : str = "", **kwargs) -> grpc.Channel:
     """
     Get a channel suitable to call Ganymede gRPC API.
     If no endpoint parameter is given, try to use GRPC_APIS environment variable or fallback to DEFAULT_ENDPOINT.
