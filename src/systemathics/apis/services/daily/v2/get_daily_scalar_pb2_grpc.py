@@ -6,7 +6,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from systemathics.apis.services.daily.v2 import get_daily_scalar_pb2 as systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2
 
 
-class DailyTimesSeriesServiceStub(object):
+class DailyScalarServiceStub(object):
     """Called to request daily prices data. 
     """
 
@@ -17,28 +17,28 @@ class DailyTimesSeriesServiceStub(object):
             channel: A grpc.Channel.
         """
         self.DailyScalar = channel.unary_unary(
-                '/systemathics.apis.services.daily.v2.DailyTimesSeriesService/DailyScalar',
+                '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalar',
                 request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarResponse.FromString,
                 )
         self.DailyScalarStream = channel.unary_stream(
-                '/systemathics.apis.services.daily.v2.DailyTimesSeriesService/DailyScalarStream',
+                '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarStream',
                 request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarResponse.FromString,
                 )
         self.DailyScalarFields = channel.unary_unary(
-                '/systemathics.apis.services.daily.v2.DailyTimesSeriesService/DailyScalarFields',
+                '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarFields',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarFieldsResponse.FromString,
                 )
         self.DailyScalarProvider = channel.unary_unary(
-                '/systemathics.apis.services.daily.v2.DailyTimesSeriesService/DailyScalarProvider',
+                '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarProvider',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarProviderResponse.FromString,
                 )
 
 
-class DailyTimesSeriesServiceServicer(object):
+class DailyScalarServiceServicer(object):
     """Called to request daily prices data. 
     """
 
@@ -79,7 +79,7 @@ class DailyTimesSeriesServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_DailyTimesSeriesServiceServicer_to_server(servicer, server):
+def add_DailyScalarServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'DailyScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.DailyScalar,
@@ -103,12 +103,12 @@ def add_DailyTimesSeriesServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'systemathics.apis.services.daily.v2.DailyTimesSeriesService', rpc_method_handlers)
+            'systemathics.apis.services.daily.v2.DailyScalarService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class DailyTimesSeriesService(object):
+class DailyScalarService(object):
     """Called to request daily prices data. 
     """
 
@@ -123,7 +123,7 @@ class DailyTimesSeriesService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.daily.v2.DailyTimesSeriesService/DailyScalar',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalar',
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarResponse.FromString,
             options, channel_credentials,
@@ -140,7 +140,7 @@ class DailyTimesSeriesService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyTimesSeriesService/DailyScalarStream',
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarStream',
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarResponse.FromString,
             options, channel_credentials,
@@ -157,7 +157,7 @@ class DailyTimesSeriesService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.daily.v2.DailyTimesSeriesService/DailyScalarFields',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarFields',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarFieldsResponse.FromString,
             options, channel_credentials,
@@ -174,7 +174,7 @@ class DailyTimesSeriesService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.daily.v2.DailyTimesSeriesService/DailyScalarProvider',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarProvider',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarProviderResponse.FromString,
             options, channel_credentials,
