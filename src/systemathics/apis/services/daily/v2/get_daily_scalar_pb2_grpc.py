@@ -24,17 +24,17 @@ class DailyScalarServiceStub(object):
         self.DailyScalarStream = channel.unary_stream(
                 '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarStream',
                 request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarResponse.FromString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarStreamResponse.FromString,
                 )
         self.DailyScalarFields = channel.unary_unary(
                 '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarFields',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarFieldsResponse.FromString,
                 )
-        self.DailyScalarProvider = channel.unary_unary(
-                '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarProvider',
+        self.DailyScalarAssetProvider = channel.unary_unary(
+                '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarAssetProvider',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarProviderResponse.FromString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarAssetProviderResponse.FromString,
                 )
 
 
@@ -71,7 +71,7 @@ class DailyScalarServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DailyScalarProvider(self, request, context):
+    def DailyScalarAssetProvider(self, request, context):
         """Gets all available provider by asset
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -89,17 +89,17 @@ def add_DailyScalarServiceServicer_to_server(servicer, server):
             'DailyScalarStream': grpc.unary_stream_rpc_method_handler(
                     servicer.DailyScalarStream,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarResponse.SerializeToString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarStreamResponse.SerializeToString,
             ),
             'DailyScalarFields': grpc.unary_unary_rpc_method_handler(
                     servicer.DailyScalarFields,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarFieldsResponse.SerializeToString,
             ),
-            'DailyScalarProvider': grpc.unary_unary_rpc_method_handler(
-                    servicer.DailyScalarProvider,
+            'DailyScalarAssetProvider': grpc.unary_unary_rpc_method_handler(
+                    servicer.DailyScalarAssetProvider,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarProviderResponse.SerializeToString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarAssetProviderResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -142,7 +142,7 @@ class DailyScalarService(object):
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarStream',
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarResponse.FromString,
+            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -164,7 +164,7 @@ class DailyScalarService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def DailyScalarProvider(request,
+    def DailyScalarAssetProvider(request,
             target,
             options=(),
             channel_credentials=None,
@@ -174,8 +174,8 @@ class DailyScalarService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarProvider',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.daily.v2.DailyScalarService/DailyScalarAssetProvider',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarProviderResponse.FromString,
+            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__scalar__pb2.DailyScalarAssetProviderResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
