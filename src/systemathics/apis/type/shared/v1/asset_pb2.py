@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,systemathics/apis/type/shared/v1/asset.proto\x12 systemathics.apis.type.shared.v1*\xe9\x01\n\tAssetType\x12\x1a\n\x16\x41SSET_TYPE_UNSPECIFIED\x10\x00\x12\x12\n\x0e\x41SSET_TYPE_ALL\x10\x01\x12\x15\n\x11\x41SSET_TYPE_EQUITY\x10\x02\x12\x15\n\x11\x41SSET_TYPE_FUTURE\x10\x03\x12\x12\n\x0e\x41SSET_TYPE_ETF\x10\x04\x12\x14\n\x10\x41SSET_TYPE_INDEX\x10\x05\x12\x14\n\x10\x41SSET_TYPE_FOREX\x10\x07\x12\x15\n\x11\x41SSET_TYPE_OPTION\x10\x08\x12\x13\n\x0f\x41SSET_TYPE_BOND\x10\t\x12\x12\n\x0e\x41SSET_TYPE_CDS\x10\nB\xd7\x01\n$com.systemathics.apis.type.shared.v1B\nAssetProtoP\x01\xa2\x02\x04SATS\xaa\x02 Systemathics.Apis.Type.Shared.V1\xca\x02 Systemathics\\Apis\\Type\\Shared\\V1\xe2\x02,Systemathics\\Apis\\Type\\Shared\\V1\\GPBMetadata\xea\x02$Systemathics::Apis::Type::Shared::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,systemathics/apis/type/shared/v1/asset.proto\x12 systemathics.apis.type.shared.v1*\xa5\x02\n\tAssetType\x12\x1a\n\x16\x41SSET_TYPE_UNSPECIFIED\x10\x00\x12\x12\n\x0e\x41SSET_TYPE_ALL\x10\x01\x12\x15\n\x11\x41SSET_TYPE_EQUITY\x10\x02\x12\x15\n\x11\x41SSET_TYPE_FUTURE\x10\x03\x12\x12\n\x0e\x41SSET_TYPE_ETF\x10\x04\x12\x14\n\x10\x41SSET_TYPE_INDEX\x10\x05\x12\x14\n\x10\x41SSET_TYPE_FOREX\x10\x07\x12\x15\n\x11\x41SSET_TYPE_OPTION\x10\x08\x12\x13\n\x0f\x41SSET_TYPE_BOND\x10\t\x12\x12\n\x0e\x41SSET_TYPE_CDS\x10\n\x12\x18\n\x14\x41SSET_TYPE_CDS_INDEX\x10\x0b\x12 \n\x1c\x41SSET_TYPE_CDS_INDEX_TRANCHE\x10\x0c\x42\xd7\x01\n$com.systemathics.apis.type.shared.v1B\nAssetProtoP\x01\xa2\x02\x04SATS\xaa\x02 Systemathics.Apis.Type.Shared.V1\xca\x02 Systemathics\\Apis\\Type\\Shared\\V1\xe2\x02,Systemathics\\Apis\\Type\\Shared\\V1\\GPBMetadata\xea\x02$Systemathics::Apis::Type::Shared::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -23,5 +23,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n$com.systemathics.apis.type.shared.v1B\nAssetProtoP\001\242\002\004SATS\252\002 Systemathics.Apis.Type.Shared.V1\312\002 Systemathics\\Apis\\Type\\Shared\\V1\342\002,Systemathics\\Apis\\Type\\Shared\\V1\\GPBMetadata\352\002$Systemathics::Apis::Type::Shared::V1'
   _globals['_ASSETTYPE']._serialized_start=83
-  _globals['_ASSETTYPE']._serialized_end=316
+  _globals['_ASSETTYPE']._serialized_end=376
 # @@protoc_insertion_point(module_scope)
