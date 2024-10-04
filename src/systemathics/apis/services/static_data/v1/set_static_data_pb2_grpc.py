@@ -18,7 +18,27 @@ class SetStaticDataServiceStub(object):
         """
         self.CreateStaticDataOtcStreaming = channel.unary_unary(
                 '/systemathics.apis.services.static_data.v1.SetStaticDataService/CreateStaticDataOtcStreaming',
-                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingRequest.SerializeToString,
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateStaticDataOtcStreamingRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.FromString,
+                )
+        self.GetStaticDataOtcStreaming = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetStaticDataOtcStreaming',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.SingleStaticDataOtcStreamingRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.FromString,
+                )
+        self.GetAllStaticDataOtcStreaming = channel.unary_stream(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetAllStaticDataOtcStreaming',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.FromString,
+                )
+        self.UpdateStaticDataOtcStreaming = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/UpdateStaticDataOtcStreaming',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.UpdateStaticDataOtcStreamingRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.FromString,
+                )
+        self.DeleteStaticDataOtcStreaming = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/DeleteStaticDataOtcStreaming',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.SingleStaticDataOtcStreamingRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
@@ -34,12 +54,60 @@ class SetStaticDataServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetStaticDataOtcStreaming(self, request, context):
+        """Get Option Static data from OTC Streaming by Id
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAllStaticDataOtcStreaming(self, request, context):
+        """Get all Option Static data from OTC Streaming
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateStaticDataOtcStreaming(self, request, context):
+        """Update Option Static data from OTC Streaming by Id
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteStaticDataOtcStreaming(self, request, context):
+        """Get Option Static data from OTC Streaming by Id
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SetStaticDataServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateStaticDataOtcStreaming': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateStaticDataOtcStreaming,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingRequest.FromString,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateStaticDataOtcStreamingRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.SerializeToString,
+            ),
+            'GetStaticDataOtcStreaming': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetStaticDataOtcStreaming,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.SingleStaticDataOtcStreamingRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.SerializeToString,
+            ),
+            'GetAllStaticDataOtcStreaming': grpc.unary_stream_rpc_method_handler(
+                    servicer.GetAllStaticDataOtcStreaming,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.SerializeToString,
+            ),
+            'UpdateStaticDataOtcStreaming': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateStaticDataOtcStreaming,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.UpdateStaticDataOtcStreamingRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.SerializeToString,
+            ),
+            'DeleteStaticDataOtcStreaming': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteStaticDataOtcStreaming,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.SingleStaticDataOtcStreamingRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -65,7 +133,75 @@ class SetStaticDataService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/CreateStaticDataOtcStreaming',
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateStaticDataOtcStreamingRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetStaticDataOtcStreaming(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetStaticDataOtcStreaming',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.SingleStaticDataOtcStreamingRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAllStaticDataOtcStreaming(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetAllStaticDataOtcStreaming',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateStaticDataOtcStreaming(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/UpdateStaticDataOtcStreaming',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.UpdateStaticDataOtcStreamingRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.StaticDataOtcStreamingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteStaticDataOtcStreaming(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/DeleteStaticDataOtcStreaming',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.SingleStaticDataOtcStreamingRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
