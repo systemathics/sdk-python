@@ -21,9 +21,9 @@ class SetTickServiceStub(object):
                 request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickScalarRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
-        self.WriteTickMatrixRow = channel.stream_unary(
-                '/systemathics.apis.services.tick.v2.SetTickService/WriteTickMatrixRow',
-                request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickMatrixRowRequest.SerializeToString,
+        self.WriteTickVector = channel.stream_unary(
+                '/systemathics.apis.services.tick.v2.SetTickService/WriteTickVector',
+                request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickVectorRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.UpdateTickScalar = channel.stream_unary(
@@ -31,9 +31,9 @@ class SetTickServiceStub(object):
                 request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickScalarRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
-        self.UpdateTickMatrixRow = channel.stream_unary(
-                '/systemathics.apis.services.tick.v2.SetTickService/UpdateTickMatrixRow',
-                request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickMatrixRowRequest.SerializeToString,
+        self.UpdateTickVector = channel.stream_unary(
+                '/systemathics.apis.services.tick.v2.SetTickService/UpdateTickVector',
+                request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickVectorRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.DeleteTickScalar = channel.unary_unary(
@@ -41,9 +41,9 @@ class SetTickServiceStub(object):
                 request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.DeleteTickScalarRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
-        self.DeleteTickMatrixRow = channel.unary_unary(
-                '/systemathics.apis.services.tick.v2.SetTickService/DeleteTickMatrixRow',
-                request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.DeleteTickMatrixRowRequest.SerializeToString,
+        self.DeleteTickVector = channel.unary_unary(
+                '/systemathics.apis.services.tick.v2.SetTickService/DeleteTickVector',
+                request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.DeleteTickVectorRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
@@ -59,8 +59,8 @@ class SetTickServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def WriteTickMatrixRow(self, request_iterator, context):
-        """Sets tick matrix row timeseries.
+    def WriteTickVector(self, request_iterator, context):
+        """Sets tick vector timeseries.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -73,8 +73,8 @@ class SetTickServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def UpdateTickMatrixRow(self, request_iterator, context):
-        """Update tick matrix rows timeseries.
+    def UpdateTickVector(self, request_iterator, context):
+        """Update tick vectors timeseries.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -87,7 +87,7 @@ class SetTickServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DeleteTickMatrixRow(self, request, context):
+    def DeleteTickVector(self, request, context):
         """Delete tick scalar timeseries.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -102,9 +102,9 @@ def add_SetTickServiceServicer_to_server(servicer, server):
                     request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickScalarRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'WriteTickMatrixRow': grpc.stream_unary_rpc_method_handler(
-                    servicer.WriteTickMatrixRow,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickMatrixRowRequest.FromString,
+            'WriteTickVector': grpc.stream_unary_rpc_method_handler(
+                    servicer.WriteTickVector,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickVectorRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'UpdateTickScalar': grpc.stream_unary_rpc_method_handler(
@@ -112,9 +112,9 @@ def add_SetTickServiceServicer_to_server(servicer, server):
                     request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickScalarRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'UpdateTickMatrixRow': grpc.stream_unary_rpc_method_handler(
-                    servicer.UpdateTickMatrixRow,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickMatrixRowRequest.FromString,
+            'UpdateTickVector': grpc.stream_unary_rpc_method_handler(
+                    servicer.UpdateTickVector,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickVectorRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'DeleteTickScalar': grpc.unary_unary_rpc_method_handler(
@@ -122,9 +122,9 @@ def add_SetTickServiceServicer_to_server(servicer, server):
                     request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.DeleteTickScalarRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'DeleteTickMatrixRow': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteTickMatrixRow,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.DeleteTickMatrixRowRequest.FromString,
+            'DeleteTickVector': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteTickVector,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.DeleteTickVectorRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -156,7 +156,7 @@ class SetTickService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def WriteTickMatrixRow(request_iterator,
+    def WriteTickVector(request_iterator,
             target,
             options=(),
             channel_credentials=None,
@@ -166,8 +166,8 @@ class SetTickService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.tick.v2.SetTickService/WriteTickMatrixRow',
-            systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickMatrixRowRequest.SerializeToString,
+        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.tick.v2.SetTickService/WriteTickVector',
+            systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickVectorRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -190,7 +190,7 @@ class SetTickService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def UpdateTickMatrixRow(request_iterator,
+    def UpdateTickVector(request_iterator,
             target,
             options=(),
             channel_credentials=None,
@@ -200,8 +200,8 @@ class SetTickService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.tick.v2.SetTickService/UpdateTickMatrixRow',
-            systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickMatrixRowRequest.SerializeToString,
+        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.tick.v2.SetTickService/UpdateTickVector',
+            systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.SetTickVectorRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -224,7 +224,7 @@ class SetTickService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def DeleteTickMatrixRow(request,
+    def DeleteTickVector(request,
             target,
             options=(),
             channel_credentials=None,
@@ -234,8 +234,8 @@ class SetTickService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.tick.v2.SetTickService/DeleteTickMatrixRow',
-            systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.DeleteTickMatrixRowRequest.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.tick.v2.SetTickService/DeleteTickVector',
+            systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_set__tick__pb2.DeleteTickVectorRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

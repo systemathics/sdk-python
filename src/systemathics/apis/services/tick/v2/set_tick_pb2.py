@@ -22,7 +22,7 @@ from systemathics.apis.type.shared.v1 import constraints_pb2 as systemathics_dot
 from systemathics.apis.type.shared.v2 import set_data_mode_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v2_dot_set__data__mode__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1systemathics/apis/services/tick/v2/set_tick.proto\x12\"systemathics.apis.services.tick.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1agoogle/type/datetime.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\x1a\x34systemathics/apis/type/shared/v2/set_data_mode.proto\"\xb5\x01\n\x14SetTickScalarRequest\x12\x45\n\x04info\x18\x01 \x01(\x0b\x32/.systemathics.apis.services.tick.v2.SetTickInfoH\x00R\x04info\x12K\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x35.systemathics.apis.services.tick.v2.SetTickScalarDataH\x00R\x04\x64\x61taB\t\n\x07payload\"\xbb\x01\n\x17SetTickMatrixRowRequest\x12\x45\n\x04info\x18\x01 \x01(\x0b\x32/.systemathics.apis.services.tick.v2.SetTickInfoH\x00R\x04info\x12N\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x38.systemathics.apis.services.tick.v2.SetTickMatrixRowDataH\x00R\x04\x64\x61taB\t\n\x07payload\"\xac\x01\n\x17\x44\x65leteTickScalarRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12+\n\x05\x64\x61tes\x18\x03 \x03(\x0b\x32\x15.google.type.DateTimeR\x05\x64\x61tes\"\xc8\x01\n\x1a\x44\x65leteTickMatrixRowRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12\x44\n\x04keys\x18\x03 \x03(\x0b\x32\x30.systemathics.apis.services.tick.v2.MatrixRowKeyR\x04keys\"s\n\x0bSetTickInfo\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\"Z\n\x11SetTickScalarData\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"S\n\x0cMatrixRowKey\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\"o\n\x14SetTickMatrixRowData\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta2\xb8\x06\n\x0eSetTickService\x12~\n\x0fWriteTickScalar\x12\x38.systemathics.apis.services.tick.v2.SetTickScalarRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/v2/tick_scalar(\x01\x12\x88\x01\n\x12WriteTickMatrixRow\x12;.systemathics.apis.services.tick.v2.SetTickMatrixRowRequest\x1a\x16.google.protobuf.Empty\"\x1b\x82\xd3\xe4\x93\x02\x15\"\x13/v2/tick_matrix_row(\x01\x12\x7f\n\x10UpdateTickScalar\x12\x38.systemathics.apis.services.tick.v2.SetTickScalarRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11\x1a\x0f/v2/tick_scalar(\x01\x12\x89\x01\n\x13UpdateTickMatrixRow\x12;.systemathics.apis.services.tick.v2.SetTickMatrixRowRequest\x1a\x16.google.protobuf.Empty\"\x1b\x82\xd3\xe4\x93\x02\x15\x1a\x13/v2/tick_matrix_row(\x01\x12\x80\x01\n\x10\x44\x65leteTickScalar\x12;.systemathics.apis.services.tick.v2.DeleteTickScalarRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11*\x0f/v2/tick_scalar\x12\x8a\x01\n\x13\x44\x65leteTickMatrixRow\x12>.systemathics.apis.services.tick.v2.DeleteTickMatrixRowRequest\x1a\x16.google.protobuf.Empty\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/v2/tick_matrix_rowB\xe3\x01\n&com.systemathics.apis.services.tick.v2B\x0cSetTickProtoP\x01\xa2\x02\x04SAST\xaa\x02\"Systemathics.Apis.Services.Tick.V2\xca\x02\"Systemathics\\Apis\\Services\\Tick\\V2\xe2\x02.Systemathics\\Apis\\Services\\Tick\\V2\\GPBMetadata\xea\x02&Systemathics::Apis::Services::Tick::V2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1systemathics/apis/services/tick/v2/set_tick.proto\x12\"systemathics.apis.services.tick.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1agoogle/type/datetime.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\x1a\x34systemathics/apis/type/shared/v2/set_data_mode.proto\"\xb5\x01\n\x14SetTickScalarRequest\x12\x45\n\x04info\x18\x01 \x01(\x0b\x32/.systemathics.apis.services.tick.v2.SetTickInfoH\x00R\x04info\x12K\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x35.systemathics.apis.services.tick.v2.SetTickScalarDataH\x00R\x04\x64\x61taB\t\n\x07payload\"\xb5\x01\n\x14SetTickVectorRequest\x12\x45\n\x04info\x18\x01 \x01(\x0b\x32/.systemathics.apis.services.tick.v2.SetTickInfoH\x00R\x04info\x12K\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x35.systemathics.apis.services.tick.v2.SetTickVectorDataH\x00R\x04\x64\x61taB\t\n\x07payload\"\xac\x01\n\x17\x44\x65leteTickScalarRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12+\n\x05\x64\x61tes\x18\x03 \x03(\x0b\x32\x15.google.type.DateTimeR\x05\x64\x61tes\"\xc2\x01\n\x17\x44\x65leteTickVectorRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12\x41\n\x04keys\x18\x03 \x03(\x0b\x32-.systemathics.apis.services.tick.v2.VectorKeyR\x04keys\"s\n\x0bSetTickInfo\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\"Z\n\x11SetTickScalarData\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"P\n\tVectorKey\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\"l\n\x11SetTickVectorData\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta2\x98\x06\n\x0eSetTickService\x12~\n\x0fWriteTickScalar\x12\x38.systemathics.apis.services.tick.v2.SetTickScalarRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/v2/tick_scalar(\x01\x12~\n\x0fWriteTickVector\x12\x38.systemathics.apis.services.tick.v2.SetTickVectorRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/v2/tick_vector(\x01\x12\x7f\n\x10UpdateTickScalar\x12\x38.systemathics.apis.services.tick.v2.SetTickScalarRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11\x1a\x0f/v2/tick_scalar(\x01\x12\x7f\n\x10UpdateTickVector\x12\x38.systemathics.apis.services.tick.v2.SetTickVectorRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11\x1a\x0f/v2/tick_vector(\x01\x12\x80\x01\n\x10\x44\x65leteTickScalar\x12;.systemathics.apis.services.tick.v2.DeleteTickScalarRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11*\x0f/v2/tick_scalar\x12\x80\x01\n\x10\x44\x65leteTickVector\x12;.systemathics.apis.services.tick.v2.DeleteTickVectorRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11*\x0f/v2/tick_vectorB\xe3\x01\n&com.systemathics.apis.services.tick.v2B\x0cSetTickProtoP\x01\xa2\x02\x04SAST\xaa\x02\"Systemathics.Apis.Services.Tick.V2\xca\x02\"Systemathics\\Apis\\Services\\Tick\\V2\xe2\x02.Systemathics\\Apis\\Services\\Tick\\V2\\GPBMetadata\xea\x02&Systemathics::Apis::Services::Tick::V2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,32 +32,32 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._serialized_options = b'\n&com.systemathics.apis.services.tick.v2B\014SetTickProtoP\001\242\002\004SAST\252\002\"Systemathics.Apis.Services.Tick.V2\312\002\"Systemathics\\Apis\\Services\\Tick\\V2\342\002.Systemathics\\Apis\\Services\\Tick\\V2\\GPBMetadata\352\002&Systemathics::Apis::Services::Tick::V2'
   _globals['_SETTICKSERVICE'].methods_by_name['WriteTickScalar']._options = None
   _globals['_SETTICKSERVICE'].methods_by_name['WriteTickScalar']._serialized_options = b'\202\323\344\223\002\021\"\017/v2/tick_scalar'
-  _globals['_SETTICKSERVICE'].methods_by_name['WriteTickMatrixRow']._options = None
-  _globals['_SETTICKSERVICE'].methods_by_name['WriteTickMatrixRow']._serialized_options = b'\202\323\344\223\002\025\"\023/v2/tick_matrix_row'
+  _globals['_SETTICKSERVICE'].methods_by_name['WriteTickVector']._options = None
+  _globals['_SETTICKSERVICE'].methods_by_name['WriteTickVector']._serialized_options = b'\202\323\344\223\002\021\"\017/v2/tick_vector'
   _globals['_SETTICKSERVICE'].methods_by_name['UpdateTickScalar']._options = None
   _globals['_SETTICKSERVICE'].methods_by_name['UpdateTickScalar']._serialized_options = b'\202\323\344\223\002\021\032\017/v2/tick_scalar'
-  _globals['_SETTICKSERVICE'].methods_by_name['UpdateTickMatrixRow']._options = None
-  _globals['_SETTICKSERVICE'].methods_by_name['UpdateTickMatrixRow']._serialized_options = b'\202\323\344\223\002\025\032\023/v2/tick_matrix_row'
+  _globals['_SETTICKSERVICE'].methods_by_name['UpdateTickVector']._options = None
+  _globals['_SETTICKSERVICE'].methods_by_name['UpdateTickVector']._serialized_options = b'\202\323\344\223\002\021\032\017/v2/tick_vector'
   _globals['_SETTICKSERVICE'].methods_by_name['DeleteTickScalar']._options = None
   _globals['_SETTICKSERVICE'].methods_by_name['DeleteTickScalar']._serialized_options = b'\202\323\344\223\002\021*\017/v2/tick_scalar'
-  _globals['_SETTICKSERVICE'].methods_by_name['DeleteTickMatrixRow']._options = None
-  _globals['_SETTICKSERVICE'].methods_by_name['DeleteTickMatrixRow']._serialized_options = b'\202\323\344\223\002\025*\023/v2/tick_matrix_row'
+  _globals['_SETTICKSERVICE'].methods_by_name['DeleteTickVector']._options = None
+  _globals['_SETTICKSERVICE'].methods_by_name['DeleteTickVector']._serialized_options = b'\202\323\344\223\002\021*\017/v2/tick_vector'
   _globals['_SETTICKSCALARREQUEST']._serialized_start=410
   _globals['_SETTICKSCALARREQUEST']._serialized_end=591
-  _globals['_SETTICKMATRIXROWREQUEST']._serialized_start=594
-  _globals['_SETTICKMATRIXROWREQUEST']._serialized_end=781
-  _globals['_DELETETICKSCALARREQUEST']._serialized_start=784
-  _globals['_DELETETICKSCALARREQUEST']._serialized_end=956
-  _globals['_DELETETICKMATRIXROWREQUEST']._serialized_start=959
-  _globals['_DELETETICKMATRIXROWREQUEST']._serialized_end=1159
-  _globals['_SETTICKINFO']._serialized_start=1161
-  _globals['_SETTICKINFO']._serialized_end=1276
-  _globals['_SETTICKSCALARDATA']._serialized_start=1278
-  _globals['_SETTICKSCALARDATA']._serialized_end=1368
-  _globals['_MATRIXROWKEY']._serialized_start=1370
-  _globals['_MATRIXROWKEY']._serialized_end=1453
-  _globals['_SETTICKMATRIXROWDATA']._serialized_start=1455
-  _globals['_SETTICKMATRIXROWDATA']._serialized_end=1566
-  _globals['_SETTICKSERVICE']._serialized_start=1569
-  _globals['_SETTICKSERVICE']._serialized_end=2393
+  _globals['_SETTICKVECTORREQUEST']._serialized_start=594
+  _globals['_SETTICKVECTORREQUEST']._serialized_end=775
+  _globals['_DELETETICKSCALARREQUEST']._serialized_start=778
+  _globals['_DELETETICKSCALARREQUEST']._serialized_end=950
+  _globals['_DELETETICKVECTORREQUEST']._serialized_start=953
+  _globals['_DELETETICKVECTORREQUEST']._serialized_end=1147
+  _globals['_SETTICKINFO']._serialized_start=1149
+  _globals['_SETTICKINFO']._serialized_end=1264
+  _globals['_SETTICKSCALARDATA']._serialized_start=1266
+  _globals['_SETTICKSCALARDATA']._serialized_end=1356
+  _globals['_VECTORKEY']._serialized_start=1358
+  _globals['_VECTORKEY']._serialized_end=1438
+  _globals['_SETTICKVECTORDATA']._serialized_start=1440
+  _globals['_SETTICKVECTORDATA']._serialized_end=1548
+  _globals['_SETTICKSERVICE']._serialized_start=1551
+  _globals['_SETTICKSERVICE']._serialized_end=2343
 # @@protoc_insertion_point(module_scope)

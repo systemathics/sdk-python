@@ -21,10 +21,10 @@ class TickServiceStub(object):
                 request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickScalarStreamResponse.FromString,
                 )
-        self.TickMatrixRowStream = channel.unary_stream(
-                '/systemathics.apis.services.tick.v2.TickService/TickMatrixRowStream',
+        self.TickVectorStream = channel.unary_stream(
+                '/systemathics.apis.services.tick.v2.TickService/TickVectorStream',
                 request_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickMatrixRowStreamResponse.FromString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickVectorStreamResponse.FromString,
                 )
         self.TickFields = channel.unary_unary(
                 '/systemathics.apis.services.tick.v2.TickService/TickFields',
@@ -49,7 +49,7 @@ class TickServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def TickMatrixRowStream(self, request, context):
+    def TickVectorStream(self, request, context):
         """Gets tick historical data timeseries by identifier using streaming
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -78,10 +78,10 @@ def add_TickServiceServicer_to_server(servicer, server):
                     request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickScalarStreamResponse.SerializeToString,
             ),
-            'TickMatrixRowStream': grpc.unary_stream_rpc_method_handler(
-                    servicer.TickMatrixRowStream,
+            'TickVectorStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.TickVectorStream,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickMatrixRowStreamResponse.SerializeToString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickVectorStreamResponse.SerializeToString,
             ),
             'TickFields': grpc.unary_unary_rpc_method_handler(
                     servicer.TickFields,
@@ -122,7 +122,7 @@ class TickService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def TickMatrixRowStream(request,
+    def TickVectorStream(request,
             target,
             options=(),
             channel_credentials=None,
@@ -132,9 +132,9 @@ class TickService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.tick.v2.TickService/TickMatrixRowStream',
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.tick.v2.TickService/TickVectorStream',
             systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickMatrixRowStreamResponse.FromString,
+            systemathics_dot_apis_dot_services_dot_tick_dot_v2_dot_get__tick__pb2.TickVectorStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
