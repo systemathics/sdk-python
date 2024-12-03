@@ -26,6 +26,11 @@ class DailyServiceStub(object):
                 request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.FromString,
                 )
+        self.DailyVectorKeyStream = channel.unary_stream(
+                '/systemathics.apis.services.daily.v2.DailyService/DailyVectorKeyStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorKeyRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.FromString,
+                )
         self.DailyFields = channel.unary_unary(
                 '/systemathics.apis.services.daily.v2.DailyService/DailyFields',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
@@ -56,6 +61,13 @@ class DailyServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def DailyVectorKeyStream(self, request, context):
+        """Gets daily historical data timeseries by identifier and key using streaming
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def DailyFields(self, request, context):
         """Gets all available fields by asset and provider.
         """
@@ -81,6 +93,11 @@ def add_DailyServiceServicer_to_server(servicer, server):
             'DailyVectorStream': grpc.unary_stream_rpc_method_handler(
                     servicer.DailyVectorStream,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.SerializeToString,
+            ),
+            'DailyVectorKeyStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.DailyVectorKeyStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorKeyRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.SerializeToString,
             ),
             'DailyFields': grpc.unary_unary_rpc_method_handler(
@@ -134,6 +151,23 @@ class DailyService(object):
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyService/DailyVectorStream',
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DailyVectorKeyStream(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyService/DailyVectorKeyStream',
+            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorKeyRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

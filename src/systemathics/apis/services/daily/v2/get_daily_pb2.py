@@ -20,7 +20,7 @@ from systemathics.apis.type.shared.v1 import identifier_pb2 as systemathics_dot_
 from systemathics.apis.type.shared.v1 import constraints_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_constraints__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3systemathics/apis/services/daily/v2/get_daily.proto\x12#systemathics.apis.services.daily.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x16google/type/date.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\"\xc5\x01\n\x0c\x44\x61ilyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12O\n\x0b\x63onstraints\x18\x03 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xc6\x01\n\x19\x44\x61ilyScalarStreamResponse\x12L\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsH\x00R\x04info\x12P\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32:.systemathics.apis.services.daily.v2.DailyScalarStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"\xc6\x01\n\x19\x44\x61ilyVectorStreamResponse\x12L\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsH\x00R\x04info\x12P\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32:.systemathics.apis.services.daily.v2.DailyVectorStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"+\n\x11\x44\x61ilyStreamFields\x12\x16\n\x06\x66ields\x18\x01 \x03(\tR\x06\x66ields\"R\n\x15\x44\x61ilyScalarStreamItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"d\n\x15\x44\x61ilyVectorStreamItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta\"y\n\x1b\x44\x61ilyAssetProvidersResponse\x12Z\n\x06\x61ssets\x18\x01 \x03(\x0b\x32\x42.systemathics.apis.services.daily.v2.DailyAssetProviderItemReponseR\x06\x61ssets\"\x89\x01\n\x1d\x44\x61ilyAssetProviderItemReponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1c\n\tproviders\x18\x02 \x03(\tR\tproviders\"\xc5\x01\n\x13\x44\x61ilyFieldsResponse\x12V\n\x07scalars\x18\x01 \x03(\x0b\x32<.systemathics.apis.services.daily.v2.DailyFieldsItemResponseR\x07scalars\x12V\n\x07vectors\x18\x02 \x03(\x0b\x32<.systemathics.apis.services.daily.v2.DailyFieldsItemResponseR\x07vectors\"\x99\x01\n\x17\x44\x61ilyFieldsItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1a\n\x08provider\x18\x02 \x01(\tR\x08provider\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields2\xe5\x04\n\x0c\x44\x61ilyService\x12\xa3\x01\n\x11\x44\x61ilyScalarStream\x12\x31.systemathics.apis.services.daily.v2.DailyRequest\x1a>.systemathics.apis.services.daily.v2.DailyScalarStreamResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_scalar/0\x01\x12\xa3\x01\n\x11\x44\x61ilyVectorStream\x12\x31.systemathics.apis.services.daily.v2.DailyRequest\x1a>.systemathics.apis.services.daily.v2.DailyVectorStreamResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_vector/0\x01\x12z\n\x0b\x44\x61ilyFields\x12\x16.google.protobuf.Empty\x1a\x38.systemathics.apis.services.daily.v2.DailyFieldsResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_fields/\x12\x8c\x01\n\x13\x44\x61ilyAssetProviders\x12\x16.google.protobuf.Empty\x1a@.systemathics.apis.services.daily.v2.DailyAssetProvidersResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v2/daily_provider/B\xe9\x01\n\'com.systemathics.apis.services.daily.v2B\rGetDailyProtoP\x01\xa2\x02\x04SASD\xaa\x02#Systemathics.Apis.Services.Daily.V2\xca\x02#Systemathics\\Apis\\Services\\Daily\\V2\xe2\x02/Systemathics\\Apis\\Services\\Daily\\V2\\GPBMetadata\xea\x02\'Systemathics::Apis::Services::Daily::V2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3systemathics/apis/services/daily/v2/get_daily.proto\x12#systemathics.apis.services.daily.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x16google/type/date.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\"\xc5\x01\n\x0c\x44\x61ilyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12O\n\x0b\x63onstraints\x18\x03 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xe0\x01\n\x15\x44\x61ilyVectorKeyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12\x10\n\x03key\x18\x03 \x01(\tR\x03key\x12O\n\x0b\x63onstraints\x18\x04 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xc6\x01\n\x19\x44\x61ilyScalarStreamResponse\x12L\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsH\x00R\x04info\x12P\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32:.systemathics.apis.services.daily.v2.DailyScalarStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"\xc6\x01\n\x19\x44\x61ilyVectorStreamResponse\x12L\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsH\x00R\x04info\x12P\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32:.systemathics.apis.services.daily.v2.DailyVectorStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"+\n\x11\x44\x61ilyStreamFields\x12\x16\n\x06\x66ields\x18\x01 \x03(\tR\x06\x66ields\"R\n\x15\x44\x61ilyScalarStreamItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"d\n\x15\x44\x61ilyVectorStreamItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta\"y\n\x1b\x44\x61ilyAssetProvidersResponse\x12Z\n\x06\x61ssets\x18\x01 \x03(\x0b\x32\x42.systemathics.apis.services.daily.v2.DailyAssetProviderItemReponseR\x06\x61ssets\"\x89\x01\n\x1d\x44\x61ilyAssetProviderItemReponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1c\n\tproviders\x18\x02 \x03(\tR\tproviders\"\xc5\x01\n\x13\x44\x61ilyFieldsResponse\x12V\n\x07scalars\x18\x01 \x03(\x0b\x32<.systemathics.apis.services.daily.v2.DailyFieldsItemResponseR\x07scalars\x12V\n\x07vectors\x18\x02 \x03(\x0b\x32<.systemathics.apis.services.daily.v2.DailyFieldsItemResponseR\x07vectors\"\x99\x01\n\x17\x44\x61ilyFieldsItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1a\n\x08provider\x18\x02 \x01(\tR\x08provider\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields2\x9b\x06\n\x0c\x44\x61ilyService\x12\xa3\x01\n\x11\x44\x61ilyScalarStream\x12\x31.systemathics.apis.services.daily.v2.DailyRequest\x1a>.systemathics.apis.services.daily.v2.DailyScalarStreamResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_scalar/0\x01\x12\xa3\x01\n\x11\x44\x61ilyVectorStream\x12\x31.systemathics.apis.services.daily.v2.DailyRequest\x1a>.systemathics.apis.services.daily.v2.DailyVectorStreamResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_vector/0\x01\x12\xb3\x01\n\x14\x44\x61ilyVectorKeyStream\x12:.systemathics.apis.services.daily.v2.DailyVectorKeyRequest\x1a>.systemathics.apis.services.daily.v2.DailyVectorStreamResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v2/daily_vector_key/0\x01\x12z\n\x0b\x44\x61ilyFields\x12\x16.google.protobuf.Empty\x1a\x38.systemathics.apis.services.daily.v2.DailyFieldsResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_fields/\x12\x8c\x01\n\x13\x44\x61ilyAssetProviders\x12\x16.google.protobuf.Empty\x1a@.systemathics.apis.services.daily.v2.DailyAssetProvidersResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v2/daily_provider/B\xe9\x01\n\'com.systemathics.apis.services.daily.v2B\rGetDailyProtoP\x01\xa2\x02\x04SASD\xaa\x02#Systemathics.Apis.Services.Daily.V2\xca\x02#Systemathics\\Apis\\Services\\Daily\\V2\xe2\x02/Systemathics\\Apis\\Services\\Daily\\V2\\GPBMetadata\xea\x02\'Systemathics::Apis::Services::Daily::V2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,30 +32,34 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_DAILYSERVICE'].methods_by_name['DailyScalarStream']._serialized_options = b'\202\323\344\223\002\023\022\021/v2/daily_scalar/'
   _globals['_DAILYSERVICE'].methods_by_name['DailyVectorStream']._options = None
   _globals['_DAILYSERVICE'].methods_by_name['DailyVectorStream']._serialized_options = b'\202\323\344\223\002\023\022\021/v2/daily_vector/'
+  _globals['_DAILYSERVICE'].methods_by_name['DailyVectorKeyStream']._options = None
+  _globals['_DAILYSERVICE'].methods_by_name['DailyVectorKeyStream']._serialized_options = b'\202\323\344\223\002\027\022\025/v2/daily_vector_key/'
   _globals['_DAILYSERVICE'].methods_by_name['DailyFields']._options = None
   _globals['_DAILYSERVICE'].methods_by_name['DailyFields']._serialized_options = b'\202\323\344\223\002\023\022\021/v2/daily_fields/'
   _globals['_DAILYSERVICE'].methods_by_name['DailyAssetProviders']._options = None
   _globals['_DAILYSERVICE'].methods_by_name['DailyAssetProviders']._serialized_options = b'\202\323\344\223\002\025\022\023/v2/daily_provider/'
   _globals['_DAILYREQUEST']._serialized_start=325
   _globals['_DAILYREQUEST']._serialized_end=522
-  _globals['_DAILYSCALARSTREAMRESPONSE']._serialized_start=525
-  _globals['_DAILYSCALARSTREAMRESPONSE']._serialized_end=723
-  _globals['_DAILYVECTORSTREAMRESPONSE']._serialized_start=726
-  _globals['_DAILYVECTORSTREAMRESPONSE']._serialized_end=924
-  _globals['_DAILYSTREAMFIELDS']._serialized_start=926
-  _globals['_DAILYSTREAMFIELDS']._serialized_end=969
-  _globals['_DAILYSCALARSTREAMITEM']._serialized_start=971
-  _globals['_DAILYSCALARSTREAMITEM']._serialized_end=1053
-  _globals['_DAILYVECTORSTREAMITEM']._serialized_start=1055
-  _globals['_DAILYVECTORSTREAMITEM']._serialized_end=1155
-  _globals['_DAILYASSETPROVIDERSRESPONSE']._serialized_start=1157
-  _globals['_DAILYASSETPROVIDERSRESPONSE']._serialized_end=1278
-  _globals['_DAILYASSETPROVIDERITEMREPONSE']._serialized_start=1281
-  _globals['_DAILYASSETPROVIDERITEMREPONSE']._serialized_end=1418
-  _globals['_DAILYFIELDSRESPONSE']._serialized_start=1421
-  _globals['_DAILYFIELDSRESPONSE']._serialized_end=1618
-  _globals['_DAILYFIELDSITEMRESPONSE']._serialized_start=1621
-  _globals['_DAILYFIELDSITEMRESPONSE']._serialized_end=1774
-  _globals['_DAILYSERVICE']._serialized_start=1777
-  _globals['_DAILYSERVICE']._serialized_end=2390
+  _globals['_DAILYVECTORKEYREQUEST']._serialized_start=525
+  _globals['_DAILYVECTORKEYREQUEST']._serialized_end=749
+  _globals['_DAILYSCALARSTREAMRESPONSE']._serialized_start=752
+  _globals['_DAILYSCALARSTREAMRESPONSE']._serialized_end=950
+  _globals['_DAILYVECTORSTREAMRESPONSE']._serialized_start=953
+  _globals['_DAILYVECTORSTREAMRESPONSE']._serialized_end=1151
+  _globals['_DAILYSTREAMFIELDS']._serialized_start=1153
+  _globals['_DAILYSTREAMFIELDS']._serialized_end=1196
+  _globals['_DAILYSCALARSTREAMITEM']._serialized_start=1198
+  _globals['_DAILYSCALARSTREAMITEM']._serialized_end=1280
+  _globals['_DAILYVECTORSTREAMITEM']._serialized_start=1282
+  _globals['_DAILYVECTORSTREAMITEM']._serialized_end=1382
+  _globals['_DAILYASSETPROVIDERSRESPONSE']._serialized_start=1384
+  _globals['_DAILYASSETPROVIDERSRESPONSE']._serialized_end=1505
+  _globals['_DAILYASSETPROVIDERITEMREPONSE']._serialized_start=1508
+  _globals['_DAILYASSETPROVIDERITEMREPONSE']._serialized_end=1645
+  _globals['_DAILYFIELDSRESPONSE']._serialized_start=1648
+  _globals['_DAILYFIELDSRESPONSE']._serialized_end=1845
+  _globals['_DAILYFIELDSITEMRESPONSE']._serialized_start=1848
+  _globals['_DAILYFIELDSITEMRESPONSE']._serialized_end=2001
+  _globals['_DAILYSERVICE']._serialized_start=2004
+  _globals['_DAILYSERVICE']._serialized_end=2799
 # @@protoc_insertion_point(module_scope)

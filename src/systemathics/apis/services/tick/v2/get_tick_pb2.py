@@ -20,7 +20,7 @@ from systemathics.apis.type.shared.v1 import identifier_pb2 as systemathics_dot_
 from systemathics.apis.type.shared.v1 import constraints_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_constraints__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1systemathics/apis/services/tick/v2/get_tick.proto\x12\"systemathics.apis.services.tick.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1agoogle/type/datetime.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\"\xc4\x01\n\x0bTickRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12O\n\x0b\x63onstraints\x18\x03 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xc1\x01\n\x18TickScalarStreamResponse\x12J\n\x04info\x18\x01 \x01(\x0b\x32\x34.systemathics.apis.services.tick.v2.TickStreamFieldsH\x00R\x04info\x12N\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x38.systemathics.apis.services.tick.v2.TickScalarStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"\xc1\x01\n\x18TickVectorStreamResponse\x12J\n\x04info\x18\x01 \x01(\x0b\x32\x34.systemathics.apis.services.tick.v2.TickStreamFieldsH\x00R\x04info\x12N\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x38.systemathics.apis.services.tick.v2.TickVectorStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"*\n\x10TickStreamFields\x12\x16\n\x06\x66ields\x18\x01 \x03(\tR\x06\x66ields\"]\n\x14TickScalarStreamItem\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"o\n\x14TickVectorStreamItem\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta\"v\n\x1aTickAssetProvidersResponse\x12X\n\x06\x61ssets\x18\x01 \x03(\x0b\x32@.systemathics.apis.services.tick.v2.TickAssetProviderItemReponseR\x06\x61ssets\"\x88\x01\n\x1cTickAssetProviderItemReponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1c\n\tproviders\x18\x02 \x03(\tR\tproviders\"\xc0\x01\n\x12TickFieldsResponse\x12T\n\x07scalars\x18\x01 \x03(\x0b\x32:.systemathics.apis.services.tick.v2.TickFieldsItemResponseR\x07scalars\x12T\n\x07vectors\x18\x02 \x03(\x0b\x32:.systemathics.apis.services.tick.v2.TickFieldsItemResponseR\x07vectors\"\x98\x01\n\x16TickFieldsItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1a\n\x08provider\x18\x02 \x01(\tR\x08provider\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields2\xd0\x04\n\x0bTickService\x12\x9d\x01\n\x10TickScalarStream\x12/.systemathics.apis.services.tick.v2.TickRequest\x1a<.systemathics.apis.services.tick.v2.TickScalarStreamResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/tick_scalar/0\x01\x12\x9d\x01\n\x10TickVectorStream\x12/.systemathics.apis.services.tick.v2.TickRequest\x1a<.systemathics.apis.services.tick.v2.TickVectorStreamResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/tick_vector/0\x01\x12v\n\nTickFields\x12\x16.google.protobuf.Empty\x1a\x36.systemathics.apis.services.tick.v2.TickFieldsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/tick_fields/\x12\x88\x01\n\x12TickAssetProviders\x12\x16.google.protobuf.Empty\x1a>.systemathics.apis.services.tick.v2.TickAssetProvidersResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v2/tick_provider/B\xe3\x01\n&com.systemathics.apis.services.tick.v2B\x0cGetTickProtoP\x01\xa2\x02\x04SAST\xaa\x02\"Systemathics.Apis.Services.Tick.V2\xca\x02\"Systemathics\\Apis\\Services\\Tick\\V2\xe2\x02.Systemathics\\Apis\\Services\\Tick\\V2\\GPBMetadata\xea\x02&Systemathics::Apis::Services::Tick::V2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1systemathics/apis/services/tick/v2/get_tick.proto\x12\"systemathics.apis.services.tick.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1agoogle/type/datetime.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\"\xc4\x01\n\x0bTickRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12O\n\x0b\x63onstraints\x18\x03 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xdf\x01\n\x14TickVectorKeyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12\x10\n\x03key\x18\x03 \x01(\tR\x03key\x12O\n\x0b\x63onstraints\x18\x04 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xc1\x01\n\x18TickScalarStreamResponse\x12J\n\x04info\x18\x01 \x01(\x0b\x32\x34.systemathics.apis.services.tick.v2.TickStreamFieldsH\x00R\x04info\x12N\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x38.systemathics.apis.services.tick.v2.TickScalarStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"\xc1\x01\n\x18TickVectorStreamResponse\x12J\n\x04info\x18\x01 \x01(\x0b\x32\x34.systemathics.apis.services.tick.v2.TickStreamFieldsH\x00R\x04info\x12N\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x38.systemathics.apis.services.tick.v2.TickVectorStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"*\n\x10TickStreamFields\x12\x16\n\x06\x66ields\x18\x01 \x03(\tR\x06\x66ields\"]\n\x14TickScalarStreamItem\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"o\n\x14TickVectorStreamItem\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta\"v\n\x1aTickAssetProvidersResponse\x12X\n\x06\x61ssets\x18\x01 \x03(\x0b\x32@.systemathics.apis.services.tick.v2.TickAssetProviderItemReponseR\x06\x61ssets\"\x88\x01\n\x1cTickAssetProviderItemReponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1c\n\tproviders\x18\x02 \x03(\tR\tproviders\"\xc0\x01\n\x12TickFieldsResponse\x12T\n\x07scalars\x18\x01 \x03(\x0b\x32:.systemathics.apis.services.tick.v2.TickFieldsItemResponseR\x07scalars\x12T\n\x07vectors\x18\x02 \x03(\x0b\x32:.systemathics.apis.services.tick.v2.TickFieldsItemResponseR\x07vectors\"\x98\x01\n\x16TickFieldsItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1a\n\x08provider\x18\x02 \x01(\tR\x08provider\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields2\x80\x06\n\x0bTickService\x12\x9d\x01\n\x10TickScalarStream\x12/.systemathics.apis.services.tick.v2.TickRequest\x1a<.systemathics.apis.services.tick.v2.TickScalarStreamResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/tick_scalar/0\x01\x12\x9d\x01\n\x10TickVectorStream\x12/.systemathics.apis.services.tick.v2.TickRequest\x1a<.systemathics.apis.services.tick.v2.TickVectorStreamResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/tick_vector/0\x01\x12\xad\x01\n\x13TickVectorKeyStream\x12\x38.systemathics.apis.services.tick.v2.TickVectorKeyRequest\x1a<.systemathics.apis.services.tick.v2.TickVectorStreamResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v2/tick_vector_key/0\x01\x12v\n\nTickFields\x12\x16.google.protobuf.Empty\x1a\x36.systemathics.apis.services.tick.v2.TickFieldsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/tick_fields/\x12\x88\x01\n\x12TickAssetProviders\x12\x16.google.protobuf.Empty\x1a>.systemathics.apis.services.tick.v2.TickAssetProvidersResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v2/tick_provider/B\xe3\x01\n&com.systemathics.apis.services.tick.v2B\x0cGetTickProtoP\x01\xa2\x02\x04SAST\xaa\x02\"Systemathics.Apis.Services.Tick.V2\xca\x02\"Systemathics\\Apis\\Services\\Tick\\V2\xe2\x02.Systemathics\\Apis\\Services\\Tick\\V2\\GPBMetadata\xea\x02&Systemathics::Apis::Services::Tick::V2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,30 +32,34 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_TICKSERVICE'].methods_by_name['TickScalarStream']._serialized_options = b'\202\323\344\223\002\022\022\020/v2/tick_scalar/'
   _globals['_TICKSERVICE'].methods_by_name['TickVectorStream']._options = None
   _globals['_TICKSERVICE'].methods_by_name['TickVectorStream']._serialized_options = b'\202\323\344\223\002\022\022\020/v2/tick_vector/'
+  _globals['_TICKSERVICE'].methods_by_name['TickVectorKeyStream']._options = None
+  _globals['_TICKSERVICE'].methods_by_name['TickVectorKeyStream']._serialized_options = b'\202\323\344\223\002\026\022\024/v2/tick_vector_key/'
   _globals['_TICKSERVICE'].methods_by_name['TickFields']._options = None
   _globals['_TICKSERVICE'].methods_by_name['TickFields']._serialized_options = b'\202\323\344\223\002\022\022\020/v2/tick_fields/'
   _globals['_TICKSERVICE'].methods_by_name['TickAssetProviders']._options = None
   _globals['_TICKSERVICE'].methods_by_name['TickAssetProviders']._serialized_options = b'\202\323\344\223\002\024\022\022/v2/tick_provider/'
   _globals['_TICKREQUEST']._serialized_start=326
   _globals['_TICKREQUEST']._serialized_end=522
-  _globals['_TICKSCALARSTREAMRESPONSE']._serialized_start=525
-  _globals['_TICKSCALARSTREAMRESPONSE']._serialized_end=718
-  _globals['_TICKVECTORSTREAMRESPONSE']._serialized_start=721
-  _globals['_TICKVECTORSTREAMRESPONSE']._serialized_end=914
-  _globals['_TICKSTREAMFIELDS']._serialized_start=916
-  _globals['_TICKSTREAMFIELDS']._serialized_end=958
-  _globals['_TICKSCALARSTREAMITEM']._serialized_start=960
-  _globals['_TICKSCALARSTREAMITEM']._serialized_end=1053
-  _globals['_TICKVECTORSTREAMITEM']._serialized_start=1055
-  _globals['_TICKVECTORSTREAMITEM']._serialized_end=1166
-  _globals['_TICKASSETPROVIDERSRESPONSE']._serialized_start=1168
-  _globals['_TICKASSETPROVIDERSRESPONSE']._serialized_end=1286
-  _globals['_TICKASSETPROVIDERITEMREPONSE']._serialized_start=1289
-  _globals['_TICKASSETPROVIDERITEMREPONSE']._serialized_end=1425
-  _globals['_TICKFIELDSRESPONSE']._serialized_start=1428
-  _globals['_TICKFIELDSRESPONSE']._serialized_end=1620
-  _globals['_TICKFIELDSITEMRESPONSE']._serialized_start=1623
-  _globals['_TICKFIELDSITEMRESPONSE']._serialized_end=1775
-  _globals['_TICKSERVICE']._serialized_start=1778
-  _globals['_TICKSERVICE']._serialized_end=2370
+  _globals['_TICKVECTORKEYREQUEST']._serialized_start=525
+  _globals['_TICKVECTORKEYREQUEST']._serialized_end=748
+  _globals['_TICKSCALARSTREAMRESPONSE']._serialized_start=751
+  _globals['_TICKSCALARSTREAMRESPONSE']._serialized_end=944
+  _globals['_TICKVECTORSTREAMRESPONSE']._serialized_start=947
+  _globals['_TICKVECTORSTREAMRESPONSE']._serialized_end=1140
+  _globals['_TICKSTREAMFIELDS']._serialized_start=1142
+  _globals['_TICKSTREAMFIELDS']._serialized_end=1184
+  _globals['_TICKSCALARSTREAMITEM']._serialized_start=1186
+  _globals['_TICKSCALARSTREAMITEM']._serialized_end=1279
+  _globals['_TICKVECTORSTREAMITEM']._serialized_start=1281
+  _globals['_TICKVECTORSTREAMITEM']._serialized_end=1392
+  _globals['_TICKASSETPROVIDERSRESPONSE']._serialized_start=1394
+  _globals['_TICKASSETPROVIDERSRESPONSE']._serialized_end=1512
+  _globals['_TICKASSETPROVIDERITEMREPONSE']._serialized_start=1515
+  _globals['_TICKASSETPROVIDERITEMREPONSE']._serialized_end=1651
+  _globals['_TICKFIELDSRESPONSE']._serialized_start=1654
+  _globals['_TICKFIELDSRESPONSE']._serialized_end=1846
+  _globals['_TICKFIELDSITEMRESPONSE']._serialized_start=1849
+  _globals['_TICKFIELDSITEMRESPONSE']._serialized_end=2001
+  _globals['_TICKSERVICE']._serialized_start=2004
+  _globals['_TICKSERVICE']._serialized_end=2772
 # @@protoc_insertion_point(module_scope)
