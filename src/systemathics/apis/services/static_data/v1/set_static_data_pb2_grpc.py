@@ -16,29 +16,29 @@ class SetStaticDataServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.CreateCdsIndexOption = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/CreateCdsIndexOption',
-                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateCdsIndexOptionRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.FromString,
+        self.Create = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/Create',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateAssetRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
                 )
-        self.GetCdsIndexOption = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetCdsIndexOption',
-                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.FromString,
+        self.GetOne = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetOne',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
                 )
-        self.GetAllCdsIndexOption = channel.unary_stream(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetAllCdsIndexOption',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.FromString,
+        self.GetAll = channel.unary_stream(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetAll',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetTypeRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
                 )
-        self.UpdateCdsIndexOption = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/UpdateCdsIndexOption',
-                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.UpdateCdsIndexOptionRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.FromString,
+        self.Update = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/Update',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
                 )
-        self.DeleteCdsIndexOption = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/DeleteCdsIndexOption',
-                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdRequest.SerializeToString,
+        self.Delete = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.SetStaticDataService/Delete',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
@@ -47,35 +47,35 @@ class SetStaticDataServiceServicer(object):
     """Called to set static data.
     """
 
-    def CreateCdsIndexOption(self, request, context):
+    def Create(self, request, context):
         """Create Cds Index Option Static data 
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetCdsIndexOption(self, request, context):
+    def GetOne(self, request, context):
         """Get Cds Index Option Static data by Id
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAllCdsIndexOption(self, request, context):
+    def GetAll(self, request, context):
         """Get all Cds Index Option Static data
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def UpdateCdsIndexOption(self, request, context):
-        """Update Cds Index Option Static data by Id
+    def Update(self, request, context):
+        """Update an Asset by Id
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DeleteCdsIndexOption(self, request, context):
+    def Delete(self, request, context):
         """Get Option Static data from OTC Streaming by Id
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -85,29 +85,29 @@ class SetStaticDataServiceServicer(object):
 
 def add_SetStaticDataServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'CreateCdsIndexOption': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateCdsIndexOption,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateCdsIndexOptionRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.SerializeToString,
+            'Create': grpc.unary_unary_rpc_method_handler(
+                    servicer.Create,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateAssetRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
             ),
-            'GetCdsIndexOption': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetCdsIndexOption,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.SerializeToString,
+            'GetOne': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetOne,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
             ),
-            'GetAllCdsIndexOption': grpc.unary_stream_rpc_method_handler(
-                    servicer.GetAllCdsIndexOption,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.SerializeToString,
+            'GetAll': grpc.unary_stream_rpc_method_handler(
+                    servicer.GetAll,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetTypeRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
             ),
-            'UpdateCdsIndexOption': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateCdsIndexOption,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.UpdateCdsIndexOptionRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.SerializeToString,
+            'Update': grpc.unary_unary_rpc_method_handler(
+                    servicer.Update,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
             ),
-            'DeleteCdsIndexOption': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteCdsIndexOption,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdRequest.FromString,
+            'Delete': grpc.unary_unary_rpc_method_handler(
+                    servicer.Delete,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -122,7 +122,7 @@ class SetStaticDataService(object):
     """
 
     @staticmethod
-    def CreateCdsIndexOption(request,
+    def Create(request,
             target,
             options=(),
             channel_credentials=None,
@@ -132,14 +132,14 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/CreateCdsIndexOption',
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateCdsIndexOptionRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/Create',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateAssetRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetCdsIndexOption(request,
+    def GetOne(request,
             target,
             options=(),
             channel_credentials=None,
@@ -149,14 +149,14 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetCdsIndexOption',
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetOne',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAllCdsIndexOption(request,
+    def GetAll(request,
             target,
             options=(),
             channel_credentials=None,
@@ -166,14 +166,14 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetAllCdsIndexOption',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.FromString,
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetAll',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetTypeRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def UpdateCdsIndexOption(request,
+    def Update(request,
             target,
             options=(),
             channel_credentials=None,
@@ -183,14 +183,14 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/UpdateCdsIndexOption',
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.UpdateCdsIndexOptionRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/Update',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def DeleteCdsIndexOption(request,
+    def Delete(request,
             target,
             options=(),
             channel_credentials=None,
@@ -200,8 +200,8 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/DeleteCdsIndexOption',
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CdsIndexOptionIdRequest.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/Delete',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
