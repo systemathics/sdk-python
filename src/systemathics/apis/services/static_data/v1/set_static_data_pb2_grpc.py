@@ -4,6 +4,7 @@ import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from systemathics.apis.services.static_data.v1 import set_static_data_pb2 as systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2
+from systemathics.apis.type.shared.v1 import asset_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_asset__pb2
 
 
 class SetStaticDataServiceStub(object):
@@ -17,27 +18,27 @@ class SetStaticDataServiceStub(object):
             channel: A grpc.Channel.
         """
         self.Create = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/Create',
+                '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/Create',
                 request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateAssetRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
                 )
         self.GetOne = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetOne',
+                '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/GetOne',
                 request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
                 )
         self.GetAll = channel.unary_stream(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetAll',
-                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetTypeRequest.SerializeToString,
+                '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/GetAll',
+                request_serializer=systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_asset__pb2.AssetTypeRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
                 )
         self.Update = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/Update',
+                '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/Update',
                 request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
                 )
         self.Delete = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.SetStaticDataService/Delete',
+                '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/Delete',
                 request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
@@ -97,7 +98,7 @@ def add_SetStaticDataServiceServicer_to_server(servicer, server):
             ),
             'GetAll': grpc.unary_stream_rpc_method_handler(
                     servicer.GetAll,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetTypeRequest.FromString,
+                    request_deserializer=systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_asset__pb2.AssetTypeRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
             ),
             'Update': grpc.unary_unary_rpc_method_handler(
@@ -112,7 +113,7 @@ def add_SetStaticDataServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'systemathics.apis.services.static_data.v1.SetStaticDataService', rpc_method_handlers)
+            'systemathics.apis.services.set_static_data.v1.SetStaticDataService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -132,7 +133,7 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/Create',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/Create',
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.CreateAssetRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
             options, channel_credentials,
@@ -149,7 +150,7 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetOne',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/GetOne',
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
             options, channel_credentials,
@@ -166,8 +167,8 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/GetAll',
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetTypeRequest.SerializeToString,
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/GetAll',
+            systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_asset__pb2.AssetTypeRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -183,7 +184,7 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/Update',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/Update',
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.SerializeToString,
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.Asset.FromString,
             options, channel_credentials,
@@ -200,7 +201,7 @@ class SetStaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.SetStaticDataService/Delete',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.set_static_data.v1.SetStaticDataService/Delete',
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_set__static__data__pb2.AssetIdRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,

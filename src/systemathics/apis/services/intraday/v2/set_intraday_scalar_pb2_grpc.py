@@ -6,7 +6,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from systemathics.apis.services.intraday.v2 import set_intraday_scalar_pb2 as systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2
 
 
-class SetIntradayScalarServiceStub(object):
+class SetIntradayServiceStub(object):
     """Called to set intraday prices data and clear. 
     """
 
@@ -16,30 +16,125 @@ class SetIntradayScalarServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.SetIntradayScalar = channel.stream_unary(
-                '/systemathics.apis.services.intraday.v2.SetIntradayScalarService/SetIntradayScalar',
+        self.WriteIntradayScalar = channel.unary_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/WriteIntradayScalar',
                 request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
-        self.ClearIntradayScalar = channel.unary_unary(
-                '/systemathics.apis.services.intraday.v2.SetIntradayScalarService/ClearIntradayScalar',
-                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.ClearIntradayScalarRequest.SerializeToString,
+        self.WriteIntradayScalarStream = channel.stream_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/WriteIntradayScalarStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarStreamRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.WriteIntradayVector = channel.unary_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/WriteIntradayVector',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.WriteIntradayVectorStream = channel.stream_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/WriteIntradayVectorStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorStreamRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.UpdateIntradayScalar = channel.unary_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/UpdateIntradayScalar',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.UpdateIntradayScalarStream = channel.stream_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/UpdateIntradayScalarStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarStreamRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.UpdateIntradayVector = channel.unary_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/UpdateIntradayVector',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.UpdateIntradayVectorStream = channel.stream_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/UpdateIntradayVectorStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorStreamRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.DeleteIntradayScalar = channel.unary_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/DeleteIntradayScalar',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.DeleteIntradayScalarRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.DeleteIntradayVector = channel.unary_unary(
+                '/systemathics.apis.services.intraday.v2.SetIntradayService/DeleteIntradayVector',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.DeleteIntradayVectorRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
 
-class SetIntradayScalarServiceServicer(object):
+class SetIntradayServiceServicer(object):
     """Called to set intraday prices data and clear. 
     """
 
-    def SetIntradayScalar(self, request_iterator, context):
+    def WriteIntradayScalar(self, request, context):
         """Sets intraday scalar timeseries.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ClearIntradayScalar(self, request, context):
+    def WriteIntradayScalarStream(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def WriteIntradayVector(self, request, context):
+        """Sets intraday vector timeseries.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def WriteIntradayVectorStream(self, request_iterator, context):
+        """Sets intraday vector timeseries.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateIntradayScalar(self, request, context):
+        """Update intraday scalar timeseries.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateIntradayScalarStream(self, request_iterator, context):
+        """Update intraday scalar timeseries.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateIntradayVector(self, request, context):
+        """Update intraday vectors timeseries.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateIntradayVectorStream(self, request_iterator, context):
+        """Update intraday vectors timeseries.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteIntradayScalar(self, request, context):
+        """Delete intraday scalar timeseries.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteIntradayVector(self, request, context):
         """Delete intraday scalar timeseries.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -47,31 +142,71 @@ class SetIntradayScalarServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_SetIntradayScalarServiceServicer_to_server(servicer, server):
+def add_SetIntradayServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'SetIntradayScalar': grpc.stream_unary_rpc_method_handler(
-                    servicer.SetIntradayScalar,
+            'WriteIntradayScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.WriteIntradayScalar,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'ClearIntradayScalar': grpc.unary_unary_rpc_method_handler(
-                    servicer.ClearIntradayScalar,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.ClearIntradayScalarRequest.FromString,
+            'WriteIntradayScalarStream': grpc.stream_unary_rpc_method_handler(
+                    servicer.WriteIntradayScalarStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarStreamRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'WriteIntradayVector': grpc.unary_unary_rpc_method_handler(
+                    servicer.WriteIntradayVector,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'WriteIntradayVectorStream': grpc.stream_unary_rpc_method_handler(
+                    servicer.WriteIntradayVectorStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorStreamRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'UpdateIntradayScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateIntradayScalar,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'UpdateIntradayScalarStream': grpc.stream_unary_rpc_method_handler(
+                    servicer.UpdateIntradayScalarStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarStreamRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'UpdateIntradayVector': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateIntradayVector,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'UpdateIntradayVectorStream': grpc.stream_unary_rpc_method_handler(
+                    servicer.UpdateIntradayVectorStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorStreamRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'DeleteIntradayScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteIntradayScalar,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.DeleteIntradayScalarRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'DeleteIntradayVector': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteIntradayVector,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.DeleteIntradayVectorRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'systemathics.apis.services.intraday.v2.SetIntradayScalarService', rpc_method_handlers)
+            'systemathics.apis.services.intraday.v2.SetIntradayService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class SetIntradayScalarService(object):
+class SetIntradayService(object):
     """Called to set intraday prices data and clear. 
     """
 
     @staticmethod
-    def SetIntradayScalar(request_iterator,
+    def WriteIntradayScalar(request,
             target,
             options=(),
             channel_credentials=None,
@@ -81,14 +216,14 @@ class SetIntradayScalarService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.intraday.v2.SetIntradayScalarService/SetIntradayScalar',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/WriteIntradayScalar',
             systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ClearIntradayScalar(request,
+    def WriteIntradayScalarStream(request_iterator,
             target,
             options=(),
             channel_credentials=None,
@@ -98,8 +233,144 @@ class SetIntradayScalarService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.SetIntradayScalarService/ClearIntradayScalar',
-            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.ClearIntradayScalarRequest.SerializeToString,
+        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/WriteIntradayScalarStream',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarStreamRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def WriteIntradayVector(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/WriteIntradayVector',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def WriteIntradayVectorStream(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/WriteIntradayVectorStream',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorStreamRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateIntradayScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/UpdateIntradayScalar',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateIntradayScalarStream(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/UpdateIntradayScalarStream',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayScalarStreamRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateIntradayVector(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/UpdateIntradayVector',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateIntradayVectorStream(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_unary(request_iterator, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/UpdateIntradayVectorStream',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.SetIntradayVectorStreamRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteIntradayScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/DeleteIntradayScalar',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.DeleteIntradayScalarRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteIntradayVector(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.SetIntradayService/DeleteIntradayVector',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_set__intraday__scalar__pb2.DeleteIntradayVectorRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

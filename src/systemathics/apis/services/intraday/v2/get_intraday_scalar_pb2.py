@@ -20,9 +20,10 @@ from systemathics.apis.type.shared.v1 import asset_pb2 as systemathics_dot_apis_
 from systemathics.apis.type.shared.v1 import identifier_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_identifier__pb2
 from systemathics.apis.type.shared.v1 import date_interval_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_date__interval__pb2
 from systemathics.apis.type.shared.v1 import sampling_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_sampling__pb2
+from systemathics.apis.type.shared.v1 import constraints_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_constraints__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n@systemathics/apis/services/intraday/v2/get_intraday_scalar.proto\x12&systemathics.apis.services.intraday.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1agoogle/type/datetime.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x34systemathics/apis/type/shared/v1/date_interval.proto\x1a/systemathics/apis/type/shared/v1/sampling.proto\"\xba\x02\n\x15IntradayScalarRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12\x46\n\x08sampling\x18\x03 \x01(\x0e\x32*.systemathics.apis.type.shared.v1.SamplingR\x08sampling\x12S\n\rdate_interval\x18\x04 \x01(\x0b\x32..systemathics.apis.type.shared.v1.DateIntervalR\x0c\x64\x61teInterval\x12\x1e\n\nadjustment\x18\x05 \x01(\x08R\nadjustment\"\xdb\x01\n\x1cIntradayScalarStreamResponse\x12X\n\x04info\x18\x01 \x01(\x0b\x32\x42.systemathics.apis.services.intraday.v2.IntradayScalarStreamFieldsH\x00R\x04info\x12V\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32@.systemathics.apis.services.intraday.v2.IntradayScalarStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"4\n\x1aIntradayScalarStreamFields\x12\x16\n\x06\x66ields\x18\x01 \x03(\tR\x06\x66ields\"a\n\x18IntradayScalarStreamItem\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"\x8a\x01\n#IntradayScalarAssetProviderResponse\x12\x63\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32O.systemathics.apis.services.intraday.v2.IntradayScalarAssetProviderItemResponseR\x04\x64\x61ta\"\x91\x01\n\'IntradayScalarAssetProviderItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1a\n\x08provider\x18\x02 \x01(\tR\x08provider\"|\n\x1cIntradayScalarFieldsResponse\x12\\\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32H.systemathics.apis.services.intraday.v2.IntradayScalarFieldsItemResponseR\x04\x64\x61ta\"\xa2\x01\n IntradayScalarFieldsItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1a\n\x08provider\x18\x02 \x01(\tR\x08provider\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields2\xa4\x04\n\x15IntradayScalarService\x12\xc2\x01\n\x14IntradayScalarStream\x12=.systemathics.apis.services.intraday.v2.IntradayScalarRequest\x1a\x44.systemathics.apis.services.intraday.v2.IntradayScalarStreamResponse\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v2/intraday_scalar_stream/0\x01\x12\x99\x01\n\x14IntradayScalarFields\x12\x16.google.protobuf.Empty\x1a\x44.systemathics.apis.services.intraday.v2.IntradayScalarFieldsResponse\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v2/intraday_scalar_fields/\x12\xa9\x01\n\x1bIntradayScalarAssetProvider\x12\x16.google.protobuf.Empty\x1aK.systemathics.apis.services.intraday.v2.IntradayScalarAssetProviderResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v2/intraday_scalar_provider/B\x81\x02\n*com.systemathics.apis.services.intraday.v2B\x16GetIntradayScalarProtoP\x01\xa2\x02\x04SASI\xaa\x02&Systemathics.Apis.Services.Intraday.V2\xca\x02&Systemathics\\Apis\\Services\\Intraday\\V2\xe2\x02\x32Systemathics\\Apis\\Services\\Intraday\\V2\\GPBMetadata\xea\x02*Systemathics::Apis::Services::Intraday::V2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n@systemathics/apis/services/intraday/v2/get_intraday_scalar.proto\x12&systemathics.apis.services.intraday.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1agoogle/type/datetime.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x34systemathics/apis/type/shared/v1/date_interval.proto\x1a/systemathics/apis/type/shared/v1/sampling.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\"\x90\x02\n\x0fIntradayRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x46\n\x08sampling\x18\x02 \x01(\x0e\x32*.systemathics.apis.type.shared.v1.SamplingR\x08sampling\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields\x12O\n\x0b\x63onstraints\x18\x04 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xab\x02\n\x18IntradayVectorKeyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x46\n\x08sampling\x18\x02 \x01(\x0e\x32*.systemathics.apis.type.shared.v1.SamplingR\x08sampling\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields\x12\x10\n\x03key\x18\x04 \x01(\tR\x03key\x12O\n\x0b\x63onstraints\x18\x05 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xd5\x01\n\x1cIntradayScalarStreamResponse\x12R\n\x04info\x18\x01 \x01(\x0b\x32<.systemathics.apis.services.intraday.v2.IntradayStreamFieldsH\x00R\x04info\x12V\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32@.systemathics.apis.services.intraday.v2.IntradayScalarStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"\xd5\x01\n\x1cIntradayVectorStreamResponse\x12R\n\x04info\x18\x01 \x01(\x0b\x32<.systemathics.apis.services.intraday.v2.IntradayStreamFieldsH\x00R\x04info\x12V\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32@.systemathics.apis.services.intraday.v2.IntradayVectorStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\".\n\x14IntradayStreamFields\x12\x16\n\x06\x66ields\x18\x01 \x03(\tR\x06\x66ields\"a\n\x18IntradayScalarStreamItem\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"s\n\x18IntradayVectorStreamItem\x12\x31\n\x08\x64\x61tetime\x18\x01 \x01(\x0b\x32\x15.google.type.DateTimeR\x08\x64\x61tetime\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta\"\x82\x01\n\x1eIntradayAssetProvidersResponse\x12`\n\x06\x61ssets\x18\x01 \x03(\x0b\x32H.systemathics.apis.services.intraday.v2.IntradayAssetProviderItemReponseR\x06\x61ssets\"\x8c\x01\n IntradayAssetProviderItemReponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1c\n\tproviders\x18\x02 \x03(\tR\tproviders\"\xd4\x01\n\x16IntradayFieldsResponse\x12\\\n\x07scalars\x18\x01 \x03(\x0b\x32\x42.systemathics.apis.services.intraday.v2.IntradayFieldsItemResponseR\x07scalars\x12\\\n\x07vectors\x18\x02 \x03(\x0b\x32\x42.systemathics.apis.services.intraday.v2.IntradayFieldsItemResponseR\x07vectors\"\xe4\x01\n\x1aIntradayFieldsItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x46\n\x08sampling\x18\x02 \x01(\x0e\x32*.systemathics.apis.type.shared.v1.SamplingR\x08sampling\x12\x1a\n\x08provider\x18\x03 \x01(\tR\x08provider\x12\x16\n\x06\x66ields\x18\x04 \x03(\tR\x06\x66ields2\xed\x06\n\x0fIntradayService\x12\xb5\x01\n\x14IntradayScalarStream\x12\x37.systemathics.apis.services.intraday.v2.IntradayRequest\x1a\x44.systemathics.apis.services.intraday.v2.IntradayScalarStreamResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v2/intraday_scalar/0\x01\x12\xb5\x01\n\x14IntradayVectorStream\x12\x37.systemathics.apis.services.intraday.v2.IntradayRequest\x1a\x44.systemathics.apis.services.intraday.v2.IntradayVectorStreamResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v2/intraday_vector/0\x01\x12\xc5\x01\n\x17IntradayVectorKeyStream\x12@.systemathics.apis.services.intraday.v2.IntradayVectorKeyRequest\x1a\x44.systemathics.apis.services.intraday.v2.IntradayVectorStreamResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/v2/intraday_vector_key/0\x01\x12\x86\x01\n\x0eIntradayFields\x12\x16.google.protobuf.Empty\x1a>.systemathics.apis.services.intraday.v2.IntradayFieldsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/v2/intraday_fields/\x12\x98\x01\n\x16IntradayAssetProviders\x12\x16.google.protobuf.Empty\x1a\x46.systemathics.apis.services.intraday.v2.IntradayAssetProvidersResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v2/intraday_provider/B\x81\x02\n*com.systemathics.apis.services.intraday.v2B\x16GetIntradayScalarProtoP\x01\xa2\x02\x04SASI\xaa\x02&Systemathics.Apis.Services.Intraday.V2\xca\x02&Systemathics\\Apis\\Services\\Intraday\\V2\xe2\x02\x32Systemathics\\Apis\\Services\\Intraday\\V2\\GPBMetadata\xea\x02*Systemathics::Apis::Services::Intraday::V2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -30,28 +31,38 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'systemathics.apis.services.
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n*com.systemathics.apis.services.intraday.v2B\026GetIntradayScalarProtoP\001\242\002\004SASI\252\002&Systemathics.Apis.Services.Intraday.V2\312\002&Systemathics\\Apis\\Services\\Intraday\\V2\342\0022Systemathics\\Apis\\Services\\Intraday\\V2\\GPBMetadata\352\002*Systemathics::Apis::Services::Intraday::V2'
-  _globals['_INTRADAYSCALARSERVICE'].methods_by_name['IntradayScalarStream']._options = None
-  _globals['_INTRADAYSCALARSERVICE'].methods_by_name['IntradayScalarStream']._serialized_options = b'\202\323\344\223\002\035\022\033/v2/intraday_scalar_stream/'
-  _globals['_INTRADAYSCALARSERVICE'].methods_by_name['IntradayScalarFields']._options = None
-  _globals['_INTRADAYSCALARSERVICE'].methods_by_name['IntradayScalarFields']._serialized_options = b'\202\323\344\223\002\035\022\033/v2/intraday_scalar_fields/'
-  _globals['_INTRADAYSCALARSERVICE'].methods_by_name['IntradayScalarAssetProvider']._options = None
-  _globals['_INTRADAYSCALARSERVICE'].methods_by_name['IntradayScalarAssetProvider']._serialized_options = b'\202\323\344\223\002\037\022\035/v2/intraday_scalar_provider/'
-  _globals['_INTRADAYSCALARREQUEST']._serialized_start=426
-  _globals['_INTRADAYSCALARREQUEST']._serialized_end=740
-  _globals['_INTRADAYSCALARSTREAMRESPONSE']._serialized_start=743
-  _globals['_INTRADAYSCALARSTREAMRESPONSE']._serialized_end=962
-  _globals['_INTRADAYSCALARSTREAMFIELDS']._serialized_start=964
-  _globals['_INTRADAYSCALARSTREAMFIELDS']._serialized_end=1016
-  _globals['_INTRADAYSCALARSTREAMITEM']._serialized_start=1018
-  _globals['_INTRADAYSCALARSTREAMITEM']._serialized_end=1115
-  _globals['_INTRADAYSCALARASSETPROVIDERRESPONSE']._serialized_start=1118
-  _globals['_INTRADAYSCALARASSETPROVIDERRESPONSE']._serialized_end=1256
-  _globals['_INTRADAYSCALARASSETPROVIDERITEMRESPONSE']._serialized_start=1259
-  _globals['_INTRADAYSCALARASSETPROVIDERITEMRESPONSE']._serialized_end=1404
-  _globals['_INTRADAYSCALARFIELDSRESPONSE']._serialized_start=1406
-  _globals['_INTRADAYSCALARFIELDSRESPONSE']._serialized_end=1530
-  _globals['_INTRADAYSCALARFIELDSITEMRESPONSE']._serialized_start=1533
-  _globals['_INTRADAYSCALARFIELDSITEMRESPONSE']._serialized_end=1695
-  _globals['_INTRADAYSCALARSERVICE']._serialized_start=1698
-  _globals['_INTRADAYSCALARSERVICE']._serialized_end=2246
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayScalarStream']._options = None
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayScalarStream']._serialized_options = b'\202\323\344\223\002\026\022\024/v2/intraday_scalar/'
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayVectorStream']._options = None
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayVectorStream']._serialized_options = b'\202\323\344\223\002\026\022\024/v2/intraday_vector/'
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayVectorKeyStream']._options = None
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayVectorKeyStream']._serialized_options = b'\202\323\344\223\002\032\022\030/v2/intraday_vector_key/'
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayFields']._options = None
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayFields']._serialized_options = b'\202\323\344\223\002\026\022\024/v2/intraday_fields/'
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayAssetProviders']._options = None
+  _globals['_INTRADAYSERVICE'].methods_by_name['IntradayAssetProviders']._serialized_options = b'\202\323\344\223\002\030\022\026/v2/intraday_provider/'
+  _globals['_INTRADAYREQUEST']._serialized_start=478
+  _globals['_INTRADAYREQUEST']._serialized_end=750
+  _globals['_INTRADAYVECTORKEYREQUEST']._serialized_start=753
+  _globals['_INTRADAYVECTORKEYREQUEST']._serialized_end=1052
+  _globals['_INTRADAYSCALARSTREAMRESPONSE']._serialized_start=1055
+  _globals['_INTRADAYSCALARSTREAMRESPONSE']._serialized_end=1268
+  _globals['_INTRADAYVECTORSTREAMRESPONSE']._serialized_start=1271
+  _globals['_INTRADAYVECTORSTREAMRESPONSE']._serialized_end=1484
+  _globals['_INTRADAYSTREAMFIELDS']._serialized_start=1486
+  _globals['_INTRADAYSTREAMFIELDS']._serialized_end=1532
+  _globals['_INTRADAYSCALARSTREAMITEM']._serialized_start=1534
+  _globals['_INTRADAYSCALARSTREAMITEM']._serialized_end=1631
+  _globals['_INTRADAYVECTORSTREAMITEM']._serialized_start=1633
+  _globals['_INTRADAYVECTORSTREAMITEM']._serialized_end=1748
+  _globals['_INTRADAYASSETPROVIDERSRESPONSE']._serialized_start=1751
+  _globals['_INTRADAYASSETPROVIDERSRESPONSE']._serialized_end=1881
+  _globals['_INTRADAYASSETPROVIDERITEMREPONSE']._serialized_start=1884
+  _globals['_INTRADAYASSETPROVIDERITEMREPONSE']._serialized_end=2024
+  _globals['_INTRADAYFIELDSRESPONSE']._serialized_start=2027
+  _globals['_INTRADAYFIELDSRESPONSE']._serialized_end=2239
+  _globals['_INTRADAYFIELDSITEMRESPONSE']._serialized_start=2242
+  _globals['_INTRADAYFIELDSITEMRESPONSE']._serialized_end=2470
+  _globals['_INTRADAYSERVICE']._serialized_start=2473
+  _globals['_INTRADAYSERVICE']._serialized_end=3350
 # @@protoc_insertion_point(module_scope)

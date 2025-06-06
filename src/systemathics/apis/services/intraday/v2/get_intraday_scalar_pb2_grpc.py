@@ -6,7 +6,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from systemathics.apis.services.intraday.v2 import get_intraday_scalar_pb2 as systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2
 
 
-class IntradayScalarServiceStub(object):
+class IntradayServiceStub(object):
     """Called to request intraday prices data. 
     """
 
@@ -17,23 +17,33 @@ class IntradayScalarServiceStub(object):
             channel: A grpc.Channel.
         """
         self.IntradayScalarStream = channel.unary_stream(
-                '/systemathics.apis.services.intraday.v2.IntradayScalarService/IntradayScalarStream',
-                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarRequest.SerializeToString,
+                '/systemathics.apis.services.intraday.v2.IntradayService/IntradayScalarStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarStreamResponse.FromString,
                 )
-        self.IntradayScalarFields = channel.unary_unary(
-                '/systemathics.apis.services.intraday.v2.IntradayScalarService/IntradayScalarFields',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarFieldsResponse.FromString,
+        self.IntradayVectorStream = channel.unary_stream(
+                '/systemathics.apis.services.intraday.v2.IntradayService/IntradayVectorStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorStreamResponse.FromString,
                 )
-        self.IntradayScalarAssetProvider = channel.unary_unary(
-                '/systemathics.apis.services.intraday.v2.IntradayScalarService/IntradayScalarAssetProvider',
+        self.IntradayVectorKeyStream = channel.unary_stream(
+                '/systemathics.apis.services.intraday.v2.IntradayService/IntradayVectorKeyStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorKeyRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorStreamResponse.FromString,
+                )
+        self.IntradayFields = channel.unary_unary(
+                '/systemathics.apis.services.intraday.v2.IntradayService/IntradayFields',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarAssetProviderResponse.FromString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayFieldsResponse.FromString,
+                )
+        self.IntradayAssetProviders = channel.unary_unary(
+                '/systemathics.apis.services.intraday.v2.IntradayService/IntradayAssetProviders',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayAssetProvidersResponse.FromString,
                 )
 
 
-class IntradayScalarServiceServicer(object):
+class IntradayServiceServicer(object):
     """Called to request intraday prices data. 
     """
 
@@ -44,22 +54,28 @@ class IntradayScalarServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def IntradayScalarFields(self, request, context):
-        """Gets intraday historical data by date
-        rpc IntradayByDate(IntradayDateRequest) returns (stream GetIntradayByDateResponse)
-        {
-        option (google.api.http) = {
-        		get: "/v2/intraday_date/"
-        };
-        }
-
-        Gets all available fields by asset and provider.
+    def IntradayVectorStream(self, request, context):
+        """Gets intraday historical data timeseries by identifier using streaming
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def IntradayScalarAssetProvider(self, request, context):
+    def IntradayVectorKeyStream(self, request, context):
+        """Gets intraday historical data timeseries by identifier and key using streaming
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def IntradayFields(self, request, context):
+        """Gets all available fields by asset and provider.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def IntradayAssetProviders(self, request, context):
         """Gets all available provider by asset
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -67,31 +83,41 @@ class IntradayScalarServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_IntradayScalarServiceServicer_to_server(servicer, server):
+def add_IntradayServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'IntradayScalarStream': grpc.unary_stream_rpc_method_handler(
                     servicer.IntradayScalarStream,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarRequest.FromString,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarStreamResponse.SerializeToString,
             ),
-            'IntradayScalarFields': grpc.unary_unary_rpc_method_handler(
-                    servicer.IntradayScalarFields,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarFieldsResponse.SerializeToString,
+            'IntradayVectorStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.IntradayVectorStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorStreamResponse.SerializeToString,
             ),
-            'IntradayScalarAssetProvider': grpc.unary_unary_rpc_method_handler(
-                    servicer.IntradayScalarAssetProvider,
+            'IntradayVectorKeyStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.IntradayVectorKeyStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorKeyRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorStreamResponse.SerializeToString,
+            ),
+            'IntradayFields': grpc.unary_unary_rpc_method_handler(
+                    servicer.IntradayFields,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarAssetProviderResponse.SerializeToString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayFieldsResponse.SerializeToString,
+            ),
+            'IntradayAssetProviders': grpc.unary_unary_rpc_method_handler(
+                    servicer.IntradayAssetProviders,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayAssetProvidersResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'systemathics.apis.services.intraday.v2.IntradayScalarService', rpc_method_handlers)
+            'systemathics.apis.services.intraday.v2.IntradayService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class IntradayScalarService(object):
+class IntradayService(object):
     """Called to request intraday prices data. 
     """
 
@@ -106,14 +132,14 @@ class IntradayScalarService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v2.IntradayScalarService/IntradayScalarStream',
-            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarRequest.SerializeToString,
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v2.IntradayService/IntradayScalarStream',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def IntradayScalarFields(request,
+    def IntradayVectorStream(request,
             target,
             options=(),
             channel_credentials=None,
@@ -123,14 +149,14 @@ class IntradayScalarService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.IntradayScalarService/IntradayScalarFields',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarFieldsResponse.FromString,
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v2.IntradayService/IntradayVectorStream',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def IntradayScalarAssetProvider(request,
+    def IntradayVectorKeyStream(request,
             target,
             options=(),
             channel_credentials=None,
@@ -140,8 +166,42 @@ class IntradayScalarService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.IntradayScalarService/IntradayScalarAssetProvider',
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v2.IntradayService/IntradayVectorKeyStream',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorKeyRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayVectorStreamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def IntradayFields(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.IntradayService/IntradayFields',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayScalarAssetProviderResponse.FromString,
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayFieldsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def IntradayAssetProviders(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v2.IntradayService/IntradayAssetProviders',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v2_dot_get__intraday__scalar__pb2.IntradayAssetProvidersResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
