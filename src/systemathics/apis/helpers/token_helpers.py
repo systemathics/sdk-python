@@ -9,6 +9,7 @@ functions:
 import os
 import http.client
 import json
+import ssl
 
 DEFAULT_AUDIENCE = "https://prod.ganymede-prod"
 
@@ -24,11 +25,12 @@ def get_token_as_metadata() -> []:
     """
     return [('authorization', get_token())]
 
-def get_token() -> str:    
+def get_token() -> str:
     """
     Get a JWT Authorization token suitable to call Ganymede gRPC API.
     We either use 'AUTH0_TOKEN' environment variable (if present) to create a bearer token from it.
-    Or 'CLIENT_ID' and 'CLIENT_SECRET' environment variables (optionally 'AUDIENCE' can override DEFAULT_AUDIENCE, and 'TENANT' can override DEFAULT_TENANT).  
+    Or 'CLIENT_ID' and 'CLIENT_SECRET' environment variables (optionally 'AUDIENCE' can override DEFAULT_AUDIENCE, and 'TENANT' can override DEFAULT_TENANT).
+    Optionally a 'PUBLIC_CA_BUNDLE' environment variable can be provided to set a specific certificate store.
     Returns:
         A JWT Authorization token suitable to call Ganymede gRPC API.
     """
@@ -37,6 +39,7 @@ def get_token() -> str:
     client_secret = os.getenv("CLIENT_SECRET","")
     audience = os.getenv("AUDIENCE","")
     tenant = os.getenv("TENANT","")
+    public_ca_bundle = os.getenv("PUBLIC_CA_BUNDLE","")
 
     # If we have AUTH0_TOKEN, generate a bearer token
     if(auth0_token != ""):
@@ -48,11 +51,22 @@ def get_token() -> str:
             client_id, 
             client_secret, 
             audience if audience else DEFAULT_AUDIENCE, 
-            tenant if tenant else DEFAULT_TENANT)
+            tenant if tenant else DEFAULT_TENANT,
+            public_ca_bundle)
     else:    
         raise Exception(f"AUTH0_TOKEN environment variable is not set, therefore CLIENT_ID and CLIENT_SECRET (and optionally AUDIENCE and TENANT) environment variables must be set")
 
-def _create_bearer_token_using_rest(client_id, client_secret, audience, tenant) -> str:
+
+def _get_client(tenant, public_ca_bundle) -> http.client.HTTPSConnection:
+    if(public_ca_bundle == "" or not os.path.exists(public_ca_bundle)):
+        return http.client.HTTPSConnection(tenant)
+    else:
+        ssl_context = ssl.create_default_context()
+        ssl_context.load_verify_locations(public_ca_bundle)
+        return http.client.HTTPSConnection(tenant, context=ssl_context)
+
+
+def _create_bearer_token_using_rest(client_id, client_secret, audience, tenant, public_ca_bundle) -> str:
     if (client_id == ""):
         raise Exception(f"client_id cannot be null")
     if (client_secret == ""):
@@ -63,7 +77,7 @@ def _create_bearer_token_using_rest(client_id, client_secret, audience, tenant) 
         raise Exception(f"tenant cannot be null")
 
     # Setup connection and payload
-    conn = http.client.HTTPSConnection(tenant)
+    conn = _get_client(tenant, public_ca_bundle)
     headers = { "content-type": "application/json" }
     params = {"client_id": client_id, "client_secret": client_secret, "grant_type" : "client_credentials", "audience": audience }
     payload = json.dumps(params)
