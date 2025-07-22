@@ -3,7 +3,9 @@
 This module helps to create tokens to access Systemathics Ganymede authenticated API.
 
 functions:
-    get_cds_index - Get CDS Index data as a DataFrame using Ganymede gRPC API.
+    get_cds_index_daily - Get CDS Index daily data as a DataFrame using Ganymede gRPC API.
+    get_cds_index_intraday - Get CDS Index intraday data as a DataFrame using Ganymede gRPC API.
+    get_future_daily - Get future daily data as a DataFrame using Ganymede gRPC API.
 """
 
 
@@ -18,6 +20,8 @@ from systemathics.apis.type.shared.v1 import constraints_pb2 as constraints
 from systemathics.apis.type.shared.v1 import date_interval_pb2 as date_interval
 import systemathics.apis.type.shared.v1.sampling_pb2 as sampling
 import systemathics.apis.type.shared.v1.identifier_pb2 as identifier
+import systemathics.apis.services.daily.v1.daily_bars_pb2 as daily_bars
+import systemathics.apis.services.daily.v1.daily_bars_pb2_grpc as daily_bars_service
 import systemathics.apis.services.daily.v2.get_daily_pb2 as get_daily
 import systemathics.apis.services.daily.v2.get_daily_pb2_grpc as get_daily_service
 import systemathics.apis.services.intraday.v2.get_intraday_pb2 as get_intraday
@@ -189,8 +193,6 @@ def get_cds_index_daily(ticker, start_date=None, end_date=None, batch=None, sele
         print(f"Error: {str(e)}")
         return pd.DataFrame()
     
-
-
 def get_cds_index_intraday(ticker, start_date=None, end_date=None, sampling=sampling.SAMPLING_ONE_MINUTE, selected_fields=None, provider="Markit"):
     """
     Fetch CDS Index intraday data from gRPC API for a given ticker and date range.    
@@ -303,6 +305,106 @@ def get_cds_index_intraday(ticker, start_date=None, end_date=None, sampling=samp
         df = df.sort_index()
         return df
     
+    except grpc.RpcError as e:
+        print(f"gRPC Error: {e.code().name}")
+        print(f"Details: {e.details()}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return pd.DataFrame()
+
+def get_future_daily(ticker, start_date=None, end_date=None, provider="FirstRateData"):
+    """
+    Fetch Future daily data from gRPC API for a given ticker and optionally filter by date range.
+    
+    Parameters:
+    ticker (str): The ticker symbol
+    start_date (datetime.date or str, optional): Start date for data retrieval (format: '2025-05-28'). 
+                                                 If None, no start limit is applied
+    end_date (datetime.date or str, optional): End date for data retrieval (format: '2025-05-28').
+                                               If None, no end limit is applied
+    provider (str): Data provider, default is "FirstRateData"
+
+    # Example usage:
+    # df = get_future_daily('CL1 Comdty')  # Get all available data
+    # df = get_future_daily('CL1 Comdty', start_date='2024-01-01')  # From Jan 1, 2024 onwards  
+    # df = get_future_daily('CL1 Comdty', end_date='2024-12-31')    # Up to Dec 31, 2024
+    # df = get_future_daily('CL1 Comdty', start_date='2024-01-01', end_date='2024-12-31')  # Full year 2024
+    
+    Returns:
+    pd.DataFrame: DataFrame with Date as index and all available fields as columns
+    """
+    
+    def _parse_date_for_filtering(date_input):
+        """Parse date input for DataFrame filtering (returns date object, not Google date)"""
+        if date_input is None:
+            return None
+        if isinstance(date_input, date):
+            return date_input
+        if isinstance(date_input, datetime):
+            return date_input.date()
+        if isinstance(date_input, str):
+            return datetime.strptime(date_input, '%Y-%m-%d').date()
+        raise ValueError(f"Invalid date type: {type(date_input)}")
+    
+    id = identifier.Identifier(
+        ticker=ticker, 
+        asset_type=asset.AssetType.ASSET_TYPE_FUTURE
+    )
+    id.provider.value = provider
+    
+    request = daily_bars.DailyBarsRequest(identifier=id)
+
+    try:
+        # Open gRPC channel
+        with channel_helpers.get_grpc_channel() as channel:
+            # Send request and receive response
+            token = token_helpers.get_token()
+
+            # Create service stub
+            service = daily_bars_service.DailyBarsServiceStub(channel)
+            response = service.DailyBars(request=request, metadata=[('authorization', token)])
+
+        # Process the response
+        if not response or not response.data:
+            print("No data received")
+            return pd.DataFrame()
+        
+        dates = [datetime(b.date.year, b.date.month, b.date.day) for b in response.data]
+        opens = [b.open for b in response.data]
+        highs = [b.high for b in response.data]
+        lows = [b.low for b in response.data]
+        closes = [b.close for b in response.data]
+        volumes = [b.volume for b in response.data]
+
+        data_dict = {'Date': dates, 'Open': opens, 'High': highs, 'Low': lows, 'Close': closes, 'Volume': volumes}
+        df = pd.DataFrame(data=data_dict)
+        df = df.set_index('Date')
+        
+        # Sort by date for better readability
+        df = df.sort_index()
+        
+        # Apply date filtering if specified
+        if start_date is not None or end_date is not None:
+            # Parse date inputs
+            if start_date is not None:
+                start_date_parsed = _parse_date_for_filtering(start_date)
+                start_datetime = datetime.combine(start_date_parsed, datetime.min.time())
+            
+            if end_date is not None:
+                end_date_parsed = _parse_date_for_filtering(end_date)
+                end_datetime = datetime.combine(end_date_parsed, datetime.max.time())
+            
+            # Filter the DataFrame
+            if start_date is not None and end_date is not None:
+                df = df[(df.index >= start_datetime) & (df.index <= end_datetime)]
+            elif start_date is not None:
+                df = df[df.index >= start_datetime]
+            elif end_date is not None:
+                df = df[df.index <= end_datetime]
+        
+        return df
+        
     except grpc.RpcError as e:
         print(f"gRPC Error: {e.code().name}")
         print(f"Details: {e.details()}")
