@@ -16,10 +16,10 @@ class IntradayVwapsServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.IntradayVwaps = channel.unary_unary(
+        self.IntradayVwaps = channel.unary_stream(
                 '/systemathics.apis.services.intraday.v1.IntradayVwapsService/IntradayVwaps',
                 request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwapsRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwapsResponse.FromString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwap.FromString,
                 )
 
 
@@ -38,10 +38,10 @@ class IntradayVwapsServiceServicer(object):
 
 def add_IntradayVwapsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'IntradayVwaps': grpc.unary_unary_rpc_method_handler(
+            'IntradayVwaps': grpc.unary_stream_rpc_method_handler(
                     servicer.IntradayVwaps,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwapsRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwapsResponse.SerializeToString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwap.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -66,8 +66,8 @@ class IntradayVwapsService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v1.IntradayVwapsService/IntradayVwaps',
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v1.IntradayVwapsService/IntradayVwaps',
             systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwapsRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwapsResponse.FromString,
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__vwap__pb2.IntradayVwap.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

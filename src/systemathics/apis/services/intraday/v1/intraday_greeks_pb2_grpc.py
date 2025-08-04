@@ -15,10 +15,10 @@ class IntradayGreeksServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.IntradayGreeks = channel.unary_unary(
+        self.IntradayGreeks = channel.unary_stream(
                 '/systemathics.apis.services.intraday.v1.IntradayGreeksService/IntradayGreeks',
                 request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreeksRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreeksResponse.FromString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreek.FromString,
                 )
 
 
@@ -36,10 +36,10 @@ class IntradayGreeksServiceServicer(object):
 
 def add_IntradayGreeksServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'IntradayGreeks': grpc.unary_unary_rpc_method_handler(
+            'IntradayGreeks': grpc.unary_stream_rpc_method_handler(
                     servicer.IntradayGreeks,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreeksRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreeksResponse.SerializeToString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreek.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -63,8 +63,8 @@ class IntradayGreeksService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v1.IntradayGreeksService/IntradayGreeks',
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v1.IntradayGreeksService/IntradayGreeks',
             systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreeksRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreeksResponse.FromString,
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__greeks__pb2.IntradayGreek.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
