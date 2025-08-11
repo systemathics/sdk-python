@@ -15,10 +15,10 @@ class IntradayPricesServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.IntradayPrices = channel.unary_stream(
+        self.IntradayPrices = channel.unary_unary(
                 '/systemathics.apis.services.intraday.v1.IntradayPricesService/IntradayPrices',
                 request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPricesRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPrice.FromString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPricesResponse.FromString,
                 )
 
 
@@ -36,10 +36,10 @@ class IntradayPricesServiceServicer(object):
 
 def add_IntradayPricesServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'IntradayPrices': grpc.unary_stream_rpc_method_handler(
+            'IntradayPrices': grpc.unary_unary_rpc_method_handler(
                     servicer.IntradayPrices,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPricesRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPrice.SerializeToString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPricesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -63,8 +63,8 @@ class IntradayPricesService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v1.IntradayPricesService/IntradayPrices',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v1.IntradayPricesService/IntradayPrices',
             systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPricesRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPrice.FromString,
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__prices__pb2.IntradayPricesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -15,8 +15,13 @@ class IntradayBarsServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.IntradayBars = channel.unary_stream(
+        self.IntradayBars = channel.unary_unary(
                 '/systemathics.apis.services.intraday.v1.IntradayBarsService/IntradayBars',
+                request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsResponse.FromString,
+                )
+        self.IntradayBarsStream = channel.unary_stream(
+                '/systemathics.apis.services.intraday.v1.IntradayBarsService/IntradayBarsStream',
                 request_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBar.FromString,
                 )
@@ -33,11 +38,22 @@ class IntradayBarsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def IntradayBarsStream(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_IntradayBarsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'IntradayBars': grpc.unary_stream_rpc_method_handler(
+            'IntradayBars': grpc.unary_unary_rpc_method_handler(
                     servicer.IntradayBars,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsResponse.SerializeToString,
+            ),
+            'IntradayBarsStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.IntradayBarsStream,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBar.SerializeToString,
             ),
@@ -63,7 +79,24 @@ class IntradayBarsService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v1.IntradayBarsService/IntradayBars',
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.intraday.v1.IntradayBarsService/IntradayBars',
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def IntradayBarsStream(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.intraday.v1.IntradayBarsService/IntradayBarsStream',
             systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBarsRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_intraday_dot_v1_dot_intraday__bars__pb2.IntradayBar.FromString,
             options, channel_credentials,

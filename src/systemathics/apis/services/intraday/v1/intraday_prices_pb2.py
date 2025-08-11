@@ -19,7 +19,7 @@ from systemathics.apis.type.shared.v1 import date_interval_pb2 as systemathics_d
 from systemathics.apis.type.shared.v1 import sampling_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_sampling__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n<systemathics/apis/services/intraday/v1/intraday_prices.proto\x12&systemathics.apis.services.intraday.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x34systemathics/apis/type/shared/v1/date_interval.proto\x1a/systemathics/apis/type/shared/v1/sampling.proto\"\xa2\x02\n\x15IntradayPricesRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x46\n\x08sampling\x18\x02 \x01(\x0e\x32*.systemathics.apis.type.shared.v1.SamplingR\x08sampling\x12S\n\rdate_interval\x18\x03 \x01(\x0b\x32..systemathics.apis.type.shared.v1.DateIntervalR\x0c\x64\x61teInterval\x12\x1e\n\nadjustment\x18\x04 \x01(\x08R\nadjustment\"\x8e\x01\n\rIntradayPrice\x12\x39\n\ntime_stamp\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\ttimeStamp\x12\x14\n\x05price\x18\x02 \x01(\x01R\x05price\x12\x16\n\x06volume\x18\x03 \x01(\x01R\x06volume\x12\x14\n\x05score\x18\x04 \x01(\x01R\x05score2\xbf\x01\n\x15IntradayPricesService\x12\xa5\x01\n\x0eIntradayPrices\x12=.systemathics.apis.services.intraday.v1.IntradayPricesRequest\x1a\x35.systemathics.apis.services.intraday.v1.IntradayPrice\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v1/intraday/prices0\x01\x42\xfe\x01\n*com.systemathics.apis.services.intraday.v1B\x13IntradayPricesProtoP\x01\xa2\x02\x04SASI\xaa\x02&Systemathics.Apis.Services.Intraday.V1\xca\x02&Systemathics\\Apis\\Services\\Intraday\\V1\xe2\x02\x32Systemathics\\Apis\\Services\\Intraday\\V1\\GPBMetadata\xea\x02*Systemathics::Apis::Services::Intraday::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n<systemathics/apis/services/intraday/v1/intraday_prices.proto\x12&systemathics.apis.services.intraday.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x34systemathics/apis/type/shared/v1/date_interval.proto\x1a/systemathics/apis/type/shared/v1/sampling.proto\"\xa2\x02\n\x15IntradayPricesRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x46\n\x08sampling\x18\x02 \x01(\x0e\x32*.systemathics.apis.type.shared.v1.SamplingR\x08sampling\x12S\n\rdate_interval\x18\x03 \x01(\x0b\x32..systemathics.apis.type.shared.v1.DateIntervalR\x0c\x64\x61teInterval\x12\x1e\n\nadjustment\x18\x04 \x01(\x08R\nadjustment\"c\n\x16IntradayPricesResponse\x12I\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x35.systemathics.apis.services.intraday.v1.IntradayPriceR\x04\x64\x61ta\"\x8e\x01\n\rIntradayPrice\x12\x39\n\ntime_stamp\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\ttimeStamp\x12\x14\n\x05price\x18\x02 \x01(\x01R\x05price\x12\x16\n\x06volume\x18\x03 \x01(\x01R\x06volume\x12\x14\n\x05score\x18\x04 \x01(\x01R\x05score2\xc6\x01\n\x15IntradayPricesService\x12\xac\x01\n\x0eIntradayPrices\x12=.systemathics.apis.services.intraday.v1.IntradayPricesRequest\x1a>.systemathics.apis.services.intraday.v1.IntradayPricesResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v1/intraday/pricesB\xfe\x01\n*com.systemathics.apis.services.intraday.v1B\x13IntradayPricesProtoP\x01\xa2\x02\x04SASI\xaa\x02&Systemathics.Apis.Services.Intraday.V1\xca\x02&Systemathics\\Apis\\Services\\Intraday\\V1\xe2\x02\x32Systemathics\\Apis\\Services\\Intraday\\V1\\GPBMetadata\xea\x02*Systemathics::Apis::Services::Intraday::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -31,8 +31,10 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_INTRADAYPRICESSERVICE'].methods_by_name['IntradayPrices']._serialized_options = b'\202\323\344\223\002\025\022\023/v1/intraday/prices'
   _globals['_INTRADAYPRICESREQUEST']._serialized_start=322
   _globals['_INTRADAYPRICESREQUEST']._serialized_end=612
-  _globals['_INTRADAYPRICE']._serialized_start=615
-  _globals['_INTRADAYPRICE']._serialized_end=757
-  _globals['_INTRADAYPRICESSERVICE']._serialized_start=760
-  _globals['_INTRADAYPRICESSERVICE']._serialized_end=951
+  _globals['_INTRADAYPRICESRESPONSE']._serialized_start=614
+  _globals['_INTRADAYPRICESRESPONSE']._serialized_end=713
+  _globals['_INTRADAYPRICE']._serialized_start=716
+  _globals['_INTRADAYPRICE']._serialized_end=858
+  _globals['_INTRADAYPRICESSERVICE']._serialized_start=861
+  _globals['_INTRADAYPRICESSERVICE']._serialized_end=1059
 # @@protoc_insertion_point(module_scope)
