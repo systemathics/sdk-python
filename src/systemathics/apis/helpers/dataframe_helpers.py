@@ -415,8 +415,9 @@ def get_cds_index_intraday(ticker, start_date=None, end_date=None, sampling=samp
             date_interval_kwargs['start_date'] = _parse_date_input(start_date)
         if end_date is not None:
             date_interval_kwargs['end_date'] = _parse_date_input(end_date)
-            constraints_obj = constraints.Constraints(
-                date_intervals=[date_interval.DateInterval(**date_interval_kwargs)]
+
+        constraints_obj = constraints.Constraints(
+            date_intervals=[date_interval.DateInterval(**date_interval_kwargs)]
         )
 
     # Create request with or without constraints
@@ -538,8 +539,9 @@ def get_cds_intraday(ticker, start_date=None, end_date=None, sampling=sampling.S
             date_interval_kwargs['start_date'] = _parse_date_input(start_date)
         if end_date is not None:
             date_interval_kwargs['end_date'] = _parse_date_input(end_date)
-            constraints_obj = constraints.Constraints(
-                date_intervals=[date_interval.DateInterval(**date_interval_kwargs)]
+            
+        constraints_obj = constraints.Constraints(
+            date_intervals=[date_interval.DateInterval(**date_interval_kwargs)]
         )
 
     # Create request with or without constraints
