@@ -7,6 +7,7 @@ functions:
     get_cds_index_intraday - Get CDS Index intraday data as a DataFrame using Ganymede gRPC API.
     get_cds_daily - Get CDS daily data as a DataFrame using Ganymede gRPC API.
     get_cds_intraday - Get CDS intraday data as a DataFrame using Ganymede gRPC API.
+    get_index_tick - Get Index tick data as a DataFrame using Ganymede gRPC API.
     get_future_daily - Get future daily data as a DataFrame using Ganymede gRPC API.
     get_equity_daily - Get equity daily data as a DataFrame using Ganymede gRPC API.
 """
@@ -17,6 +18,8 @@ import pandas as pd
 from datetime import date,datetime
 from google.type import date_pb2
 from google.type import datetime_pb2
+from google.type import timeofday_pb2
+
 
 from systemathics.apis.type.shared.v1 import asset_pb2 as asset
 from systemathics.apis.type.shared.v1 import constraints_pb2 as constraints
@@ -29,6 +32,9 @@ import systemathics.apis.services.daily.v2.get_daily_pb2 as get_daily
 import systemathics.apis.services.daily.v2.get_daily_pb2_grpc as get_daily_service
 import systemathics.apis.services.intraday.v2.get_intraday_pb2 as get_intraday
 import systemathics.apis.services.intraday.v2.get_intraday_pb2_grpc as get_intraday_service
+import systemathics.apis.services.tick.v2.get_tick_pb2 as get_tick
+import systemathics.apis.services.tick.v2.get_tick_pb2_grpc as get_tick_service
+from systemathics.apis.type.shared.v1 import time_interval_pb2 as time_interval
 
 import systemathics.apis.helpers.token_helpers as token_helpers
 import systemathics.apis.helpers.channel_helpers as channel_helpers
@@ -362,6 +368,192 @@ def get_cds_daily(ticker, start_date=None, end_date=None, batch=None, selected_f
         print(f"Error: {str(e)}")
         return pd.DataFrame()
 
+def get_index_tick(ticker, start_date=None, end_date=None, start_time=None, end_time=None, selected_fields=None, provider="GoldmanSachs"):
+    """
+    Fetch Index tick data from gRPC API for a given ticker and date range with optional client-side time filtering.    
+    
+    Parameters:
+    ticker (str): The ticker symbol
+    start_date (datetime.date or str, optional): Start date for data retrieval.
+                                                 If None, set no limits
+    end_date (datetime.date or str, optional): End date for data retrieval.
+                                               If None, set no limits
+    start_time (str, optional): Start time in 'HH:MM' format (e.g., '09:30') or 'HH:MM:ss' format (e.g., '09:30:05') or for client-side filtering.
+                                If None, no time restriction
+    end_time (str, optional): End time in 'HH:MM' format (e.g., '16:00') or 'HH:MM:ss' format (e.g., '16:25:45')for client-side filtering.
+                              If None, no time restriction
+    selected_fields (list, optional): List of specific fields to retrieve.
+                                      If None, gets all fields.
+    provider (str): Data provider, default is "GoldmanSachs"
+    
+    Returns:
+    pd.DataFrame: DataFrame with Datetime as index and all available fields as columns
+    """
+
+    # All available fields for Index tick data
+    all_fields = [
+        "AskBenchmarkSpread",
+        "AskCleanPrice", 
+        "AskDirtyPrice",
+        "AskGSpread",
+        "AskModifiedDuration",
+        "AskYield",
+        "AskZSpread",
+        "BidBenchmarkSpread",
+        "BidCleanPrice",
+        "BidDirtyPrice", 
+        "BidGSpread",
+        "BidModifiedDuration",
+        "BidYield",
+        "BidZSpread",
+        "MidBenchmarkSpread",
+        "MidCleanPrice",
+        "MidDirtyPrice",
+        "MidGSpread", 
+        "MidModifiedDuration",
+        "MidYield",
+        "MidZSpread",
+        "OfficialBenchmarkSpread",
+        "OfficialCleanPrice",
+        "OfficialDirtyPrice",
+        "OfficialGSpread",
+        "OfficialModifiedDuration", 
+        "OfficialYield",
+        "OfficialZSpread"
+    ]    
+    
+    # Use all fields if none specified, otherwise validate selected fields
+    if selected_fields is None:
+        fields = all_fields
+    else:
+        fields = [f for f in selected_fields if f in all_fields]
+        if not fields:
+            raise ValueError("No valid fields selected")
+    
+    # Create identifier for Index
+    id = identifier.Identifier(
+        asset_type=asset.AssetType.ASSET_TYPE_INDEX,
+        ticker=ticker
+    )
+    id.provider.value = provider
+    
+    # Build constraints only if we have at least one date (no time intervals due to server limitation)
+    constraints_obj = None
+    if start_date is not None or end_date is not None:
+        # Create DateInterval with only the dates that are provided
+        date_interval_kwargs = {}
+        if start_date is not None:
+            date_interval_kwargs['start_date'] = _parse_date_input(start_date)
+        if end_date is not None:
+            date_interval_kwargs['end_date'] = _parse_date_input(end_date)
+            
+        constraints_obj = constraints.Constraints(
+            date_intervals=[date_interval.DateInterval(**date_interval_kwargs)]
+        )
+
+    # Create request with or without constraints
+    request_kwargs = {
+        'identifier': id,
+        'fields': fields
+    }
+
+    if constraints_obj is not None:
+        request_kwargs['constraints'] = constraints_obj
+        
+    try:
+        # Open gRPC channel
+        with channel_helpers.get_grpc_channel() as channel:
+            # Send request and receive response
+            token = token_helpers.get_token()
+            first = True
+            response = []
+            info = None
+            # Create service stub for Tick service
+            service = get_tick_service.TickServiceStub(channel)
+            scalar_request = get_tick.TickRequest(**request_kwargs)
+            
+            for data in service.TickScalarStream(request=scalar_request, metadata=[('authorization', token)]):
+                if first:
+                    info = data
+                    first = False
+                else:
+                    response.append(data.data)
+
+        # Process the response
+        if not response or info is None:
+            print("No data received")
+            return pd.DataFrame()
+
+        # Get field indices
+        available_fields = [f for f in info.info.fields]
+        field_indices = {field: available_fields.index(field)
+                        for field in fields if field in available_fields}
+
+        # Extract timestamps with full precision (including microseconds if available)
+        dates = []
+        for d in response:
+            dt = datetime(d.datetime.year, d.datetime.month, d.datetime.day, 
+                         d.datetime.hours, d.datetime.minutes, d.datetime.seconds)
+            # Add microseconds if available in the protobuf message
+            if hasattr(d.datetime, 'nanos'):
+                # Convert nanoseconds to microseconds (Python datetime only supports microseconds)
+                microseconds = d.datetime.nanos // 1000
+                dt = dt.replace(microsecond=microseconds)
+            elif hasattr(d.datetime, 'micros'):
+                dt = dt.replace(microsecond=d.datetime.micros)
+            dates.append(dt)
+
+        # Create dictionary for DataFrame
+        data_dict = {}
+        
+        # Extract data for each field
+        for field_name, field_index in field_indices.items():
+            data_dict[field_name] = [b.data[field_index] for b in response]
+
+        # Create DataFrame
+        df = pd.DataFrame(data_dict, index=dates)
+        df.index.name = 'Datetime'
+
+        # Sort by date for better readability
+        df = df.sort_index()
+        
+        # Apply client-side time filtering if needed
+        if not df.empty and (start_time is not None or end_time is not None):
+            
+            # Convert string times to time objects if needed
+            if isinstance(start_time, str):
+                time_parts = start_time.split(':')
+                hour = int(time_parts[0])
+                minute = int(time_parts[1]) if len(time_parts) > 1 else 0
+                start_time_obj = datetime.min.time().replace(hour=hour, minute=minute)
+            else:
+                start_time_obj = start_time
+            
+            if isinstance(end_time, str):
+                time_parts = end_time.split(':')
+                hour = int(time_parts[0])
+                minute = int(time_parts[1]) if len(time_parts) > 1 else 0
+                end_time_obj = datetime.min.time().replace(hour=hour, minute=minute)
+            else:
+                end_time_obj = end_time
+            
+            # Apply time filtering
+            if start_time_obj is not None and end_time_obj is not None:
+                df = df.between_time(start_time_obj, end_time_obj)
+            elif start_time_obj is not None:
+                df = df[df.index.time >= start_time_obj]
+            elif end_time_obj is not None:
+                df = df[df.index.time <= end_time_obj]
+
+        return df
+    
+    except grpc.RpcError as e:
+        print(f"gRPC Error: {e.code().name}")
+        print(f"Details: {e.details()}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return pd.DataFrame()
 
 def get_cds_index_intraday(ticker, start_date=None, end_date=None, sampling=sampling.SAMPLING_ONE_MINUTE, selected_fields=None, provider="Markit"):
     """
