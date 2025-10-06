@@ -18,7 +18,7 @@ from systemathics.apis.type.shared.v1 import identifier_pb2 as systemathics_dot_
 from systemathics.apis.type.shared.v1 import date_interval_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_date__interval__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n=systemathics/apis/services/corporate_actions/v1/changes.proto\x12/systemathics.apis.services.corporate_actions.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x16google/type/date.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x34systemathics/apis/type/shared/v1/date_interval.proto\"\xb3\x01\n\x0e\x43hangesRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12S\n\rdate_interval\x18\x02 \x01(\x0b\x32..systemathics.apis.type.shared.v1.DateIntervalR\x0c\x64\x61teInterval\"^\n\x0f\x43hangesResponse\x12K\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x37.systemathics.apis.services.corporate_actions.v1.ChangeR\x04\x64\x61ta\"\x83\x01\n\x06\x43hange\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x1d\n\nnew_symbol\x18\x02 \x01(\tR\tnewSymbol\x12\x1d\n\nold_symbol\x18\x03 \x01(\tR\toldSymbol\x12\x14\n\x05score\x18\x04 \x01(\x01R\x05score2\xc6\x01\n\x0e\x43hangesService\x12\xb3\x01\n\x07\x43hanges\x12?.systemathics.apis.services.corporate_actions.v1.ChangesRequest\x1a@.systemathics.apis.services.corporate_actions.v1.ChangesResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v1/corporate-actions/changesb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n=systemathics/apis/services/corporate_actions/v1/changes.proto\x12/systemathics.apis.services.corporate_actions.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x16google/type/date.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x34systemathics/apis/type/shared/v1/date_interval.proto\"\xb3\x01\n\x0e\x43hangesRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12S\n\rdate_interval\x18\x02 \x01(\x0b\x32..systemathics.apis.type.shared.v1.DateIntervalR\x0c\x64\x61teInterval\"^\n\x0f\x43hangesResponse\x12K\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x37.systemathics.apis.services.corporate_actions.v1.ChangeR\x04\x64\x61ta\"m\n\x06\x43hange\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x1d\n\nnew_symbol\x18\x02 \x01(\tR\tnewSymbol\x12\x1d\n\nold_symbol\x18\x03 \x01(\tR\toldSymbol2\xc6\x01\n\x0e\x43hangesService\x12\xb3\x01\n\x07\x43hanges\x12?.systemathics.apis.services.corporate_actions.v1.ChangesRequest\x1a@.systemathics.apis.services.corporate_actions.v1.ChangesResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v1/corporate-actions/changesb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -31,8 +31,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_CHANGESREQUEST']._serialized_end=453
   _globals['_CHANGESRESPONSE']._serialized_start=455
   _globals['_CHANGESRESPONSE']._serialized_end=549
-  _globals['_CHANGE']._serialized_start=552
-  _globals['_CHANGE']._serialized_end=683
-  _globals['_CHANGESSERVICE']._serialized_start=686
-  _globals['_CHANGESSERVICE']._serialized_end=884
+  _globals['_CHANGE']._serialized_start=551
+  _globals['_CHANGE']._serialized_end=660
+  _globals['_CHANGESSERVICE']._serialized_start=663
+  _globals['_CHANGESSERVICE']._serialized_end=861
 # @@protoc_insertion_point(module_scope)

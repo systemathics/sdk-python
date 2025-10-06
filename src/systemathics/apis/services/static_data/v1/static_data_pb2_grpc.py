@@ -15,9 +15,14 @@ class StaticDataServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.StaticData = channel.unary_unary(
-                '/systemathics.apis.services.static_data.v1.StaticDataService/StaticData',
-                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataRequest.SerializeToString,
+        self.Search = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.StaticDataService/Search',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataSearchRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataResponse.FromString,
+                )
+        self.GetByIdentifiers = channel.unary_unary(
+                '/systemathics.apis.services.static_data.v1.StaticDataService/GetByIdentifiers',
+                request_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataIdentifiers.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataResponse.FromString,
                 )
 
@@ -26,8 +31,15 @@ class StaticDataServiceServicer(object):
     """Called to request reference data.
     """
 
-    def StaticData(self, request, context):
+    def Search(self, request, context):
         """Gets reference data
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetByIdentifiers(self, request, context):
+        """Get a Static data asset by Identifiers
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -36,9 +48,14 @@ class StaticDataServiceServicer(object):
 
 def add_StaticDataServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'StaticData': grpc.unary_unary_rpc_method_handler(
-                    servicer.StaticData,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataRequest.FromString,
+            'Search': grpc.unary_unary_rpc_method_handler(
+                    servicer.Search,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataSearchRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataResponse.SerializeToString,
+            ),
+            'GetByIdentifiers': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetByIdentifiers,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataIdentifiers.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataResponse.SerializeToString,
             ),
     }
@@ -53,7 +70,7 @@ class StaticDataService(object):
     """
 
     @staticmethod
-    def StaticData(request,
+    def Search(request,
             target,
             options=(),
             channel_credentials=None,
@@ -63,8 +80,25 @@ class StaticDataService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.StaticDataService/StaticData',
-            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataRequest.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.StaticDataService/Search',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataSearchRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetByIdentifiers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/systemathics.apis.services.static_data.v1.StaticDataService/GetByIdentifiers',
+            systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataIdentifiers.SerializeToString,
             systemathics_dot_apis_dot_services_dot_static__data_dot_v1_dot_static__data__pb2.StaticDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

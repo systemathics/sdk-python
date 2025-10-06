@@ -6,7 +6,8 @@ from systemathics.apis.services.intraday.v1 import intraday_vwap_pb2 as systemat
 
 
 class IntradayVwapsServiceStub(object):
-    """Called to request intraday VWAP data. 
+    """This service provides access to an intraday VWAP (Volume-Weighted Average Price) market data,
+    allowing users to retrieve historical VWAP data for various financial instruments.
     """
 
     def __init__(self, channel):
@@ -23,7 +24,8 @@ class IntradayVwapsServiceStub(object):
 
 
 class IntradayVwapsServiceServicer(object):
-    """Called to request intraday VWAP data. 
+    """This service provides access to an intraday VWAP (Volume-Weighted Average Price) market data,
+    allowing users to retrieve historical VWAP data for various financial instruments.
     """
 
     def IntradayVwaps(self, request, context):
@@ -49,7 +51,8 @@ def add_IntradayVwapsServiceServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class IntradayVwapsService(object):
-    """Called to request intraday VWAP data. 
+    """This service provides access to an intraday VWAP (Volume-Weighted Average Price) market data,
+    allowing users to retrieve historical VWAP data for various financial instruments.
     """
 
     @staticmethod
