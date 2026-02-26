@@ -31,6 +31,11 @@ class DailyServiceStub(object):
                 request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorKeyRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.FromString,
                 )
+        self.DailyOptionUnderlierStream = channel.unary_stream(
+                '/systemathics.apis.services.daily.v2.DailyService/DailyOptionUnderlierStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionStream.FromString,
+                )
         self.DailyFields = channel.unary_unary(
                 '/systemathics.apis.services.daily.v2.DailyService/DailyFields',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
@@ -68,6 +73,12 @@ class DailyServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def DailyOptionUnderlierStream(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def DailyFields(self, request, context):
         """Gets all available fields by asset and provider.
         """
@@ -99,6 +110,11 @@ def add_DailyServiceServicer_to_server(servicer, server):
                     servicer.DailyVectorKeyStream,
                     request_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorKeyRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.SerializeToString,
+            ),
+            'DailyOptionUnderlierStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.DailyOptionUnderlierStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionStream.SerializeToString,
             ),
             'DailyFields': grpc.unary_unary_rpc_method_handler(
                     servicer.DailyFields,
@@ -169,6 +185,23 @@ class DailyService(object):
         return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyService/DailyVectorKeyStream',
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorKeyRequest.SerializeToString,
             systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DailyOptionUnderlierStream(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyService/DailyOptionUnderlierStream',
+            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionStream.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

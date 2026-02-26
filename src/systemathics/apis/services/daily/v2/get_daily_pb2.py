@@ -14,13 +14,18 @@ _sym_db = _symbol_database.Default()
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.type import date_pb2 as google_dot_type_dot_date__pb2
 from systemathics.apis.type.shared.v1 import asset_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_asset__pb2
 from systemathics.apis.type.shared.v1 import identifier_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_identifier__pb2
 from systemathics.apis.type.shared.v1 import constraints_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_constraints__pb2
+from systemathics.apis.type.shared.v1 import date_interval_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_date__interval__pb2
+from systemathics.apis.type.shared.v1 import filter_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_filter__pb2
+from systemathics.apis.type.shared.v1 import option_type_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_option__type__pb2
+from systemathics.apis.type.shared.v1 import strike_type_pb2 as systemathics_dot_apis_dot_type_dot_shared_dot_v1_dot_strike__type__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3systemathics/apis/services/daily/v2/get_daily.proto\x12#systemathics.apis.services.daily.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x16google/type/date.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\"\xc5\x01\n\x0c\x44\x61ilyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12O\n\x0b\x63onstraints\x18\x03 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xe0\x01\n\x15\x44\x61ilyVectorKeyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12\x10\n\x03key\x18\x03 \x01(\tR\x03key\x12O\n\x0b\x63onstraints\x18\x04 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xc6\x01\n\x19\x44\x61ilyScalarStreamResponse\x12L\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsH\x00R\x04info\x12P\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32:.systemathics.apis.services.daily.v2.DailyScalarStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"\xc6\x01\n\x19\x44\x61ilyVectorStreamResponse\x12L\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsH\x00R\x04info\x12P\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32:.systemathics.apis.services.daily.v2.DailyVectorStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"+\n\x11\x44\x61ilyStreamFields\x12\x16\n\x06\x66ields\x18\x01 \x03(\tR\x06\x66ields\"R\n\x15\x44\x61ilyScalarStreamItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"d\n\x15\x44\x61ilyVectorStreamItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta\"y\n\x1b\x44\x61ilyAssetProvidersResponse\x12Z\n\x06\x61ssets\x18\x01 \x03(\x0b\x32\x42.systemathics.apis.services.daily.v2.DailyAssetProviderItemReponseR\x06\x61ssets\"\x89\x01\n\x1d\x44\x61ilyAssetProviderItemReponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1c\n\tproviders\x18\x02 \x03(\tR\tproviders\"\xc5\x01\n\x13\x44\x61ilyFieldsResponse\x12V\n\x07scalars\x18\x01 \x03(\x0b\x32<.systemathics.apis.services.daily.v2.DailyFieldsItemResponseR\x07scalars\x12V\n\x07vectors\x18\x02 \x03(\x0b\x32<.systemathics.apis.services.daily.v2.DailyFieldsItemResponseR\x07vectors\"\x99\x01\n\x17\x44\x61ilyFieldsItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1a\n\x08provider\x18\x02 \x01(\tR\x08provider\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields2\x9b\x06\n\x0c\x44\x61ilyService\x12\xa3\x01\n\x11\x44\x61ilyScalarStream\x12\x31.systemathics.apis.services.daily.v2.DailyRequest\x1a>.systemathics.apis.services.daily.v2.DailyScalarStreamResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_scalar/0\x01\x12\xa3\x01\n\x11\x44\x61ilyVectorStream\x12\x31.systemathics.apis.services.daily.v2.DailyRequest\x1a>.systemathics.apis.services.daily.v2.DailyVectorStreamResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_vector/0\x01\x12\xb3\x01\n\x14\x44\x61ilyVectorKeyStream\x12:.systemathics.apis.services.daily.v2.DailyVectorKeyRequest\x1a>.systemathics.apis.services.daily.v2.DailyVectorStreamResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v2/daily_vector_key/0\x01\x12z\n\x0b\x44\x61ilyFields\x12\x16.google.protobuf.Empty\x1a\x38.systemathics.apis.services.daily.v2.DailyFieldsResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_fields/\x12\x8c\x01\n\x13\x44\x61ilyAssetProviders\x12\x16.google.protobuf.Empty\x1a@.systemathics.apis.services.daily.v2.DailyAssetProvidersResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v2/daily_provider/B\xe9\x01\n\'com.systemathics.apis.services.daily.v2B\rGetDailyProtoP\x01\xa2\x02\x04SASD\xaa\x02#Systemathics.Apis.Services.Daily.V2\xca\x02#Systemathics\\Apis\\Services\\Daily\\V2\xe2\x02/Systemathics\\Apis\\Services\\Daily\\V2\\GPBMetadata\xea\x02\'Systemathics::Apis::Services::Daily::V2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n3systemathics/apis/services/daily/v2/get_daily.proto\x12#systemathics.apis.services.daily.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x16google/type/date.proto\x1a,systemathics/apis/type/shared/v1/asset.proto\x1a\x31systemathics/apis/type/shared/v1/identifier.proto\x1a\x32systemathics/apis/type/shared/v1/constraints.proto\x1a\x34systemathics/apis/type/shared/v1/date_interval.proto\x1a-systemathics/apis/type/shared/v1/filter.proto\x1a\x32systemathics/apis/type/shared/v1/option_type.proto\x1a\x32systemathics/apis/type/shared/v1/strike_type.proto\"\xc5\x01\n\x0c\x44\x61ilyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12O\n\x0b\x63onstraints\x18\x03 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xe0\x01\n\x15\x44\x61ilyVectorKeyRequest\x12L\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\x12\x16\n\x06\x66ields\x18\x02 \x03(\tR\x06\x66ields\x12\x10\n\x03key\x18\x03 \x01(\tR\x03key\x12O\n\x0b\x63onstraints\x18\x04 \x01(\x0b\x32-.systemathics.apis.type.shared.v1.ConstraintsR\x0b\x63onstraints\"\xc6\x01\n\x19\x44\x61ilyScalarStreamResponse\x12L\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsH\x00R\x04info\x12P\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32:.systemathics.apis.services.daily.v2.DailyScalarStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"\xc6\x01\n\x19\x44\x61ilyVectorStreamResponse\x12L\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsH\x00R\x04info\x12P\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32:.systemathics.apis.services.daily.v2.DailyVectorStreamItemH\x00R\x04\x64\x61taB\t\n\x07payload\"y\n\x11\x44\x61ilyStreamFields\x12\x16\n\x06\x66ields\x18\x01 \x03(\tR\x06\x66ields\x12L\n\nidentifier\x18\x02 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierR\nidentifier\"R\n\x15\x44\x61ilyScalarStreamItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x12\n\x04\x64\x61ta\x18\x02 \x03(\x01R\x04\x64\x61ta\"d\n\x15\x44\x61ilyVectorStreamItem\x12%\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateR\x04\x64\x61te\x12\x10\n\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n\x04\x64\x61ta\x18\x03 \x03(\x01R\x04\x64\x61ta\"y\n\x1b\x44\x61ilyAssetProvidersResponse\x12Z\n\x06\x61ssets\x18\x01 \x03(\x0b\x32\x42.systemathics.apis.services.daily.v2.DailyAssetProviderItemReponseR\x06\x61ssets\"\x89\x01\n\x1d\x44\x61ilyAssetProviderItemReponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1c\n\tproviders\x18\x02 \x03(\tR\tproviders\"\xc5\x01\n\x13\x44\x61ilyFieldsResponse\x12V\n\x07scalars\x18\x01 \x03(\x0b\x32<.systemathics.apis.services.daily.v2.DailyFieldsItemResponseR\x07scalars\x12V\n\x07vectors\x18\x02 \x03(\x0b\x32<.systemathics.apis.services.daily.v2.DailyFieldsItemResponseR\x07vectors\"\x99\x01\n\x17\x44\x61ilyFieldsItemResponse\x12J\n\nasset_type\x18\x01 \x01(\x0e\x32+.systemathics.apis.type.shared.v1.AssetTypeR\tassetType\x12\x1a\n\x08provider\x18\x02 \x01(\tR\x08provider\x12\x16\n\x06\x66ields\x18\x03 \x03(\tR\x06\x66ields\"\xd9\x04\n\x1b\x44\x61ilyOptionUnderlierRequest\x12R\n\nidentifier\x18\x01 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.IdentifierB\x04\xe2\x41\x01\x02R\nidentifier\x12Y\n\rdate_interval\x18\x02 \x01(\x0b\x32..systemathics.apis.type.shared.v1.DateIntervalB\x04\xe2\x41\x01\x02R\x0c\x64\x61teInterval\x12W\n\rmaturity_date\x18\x03 \x01(\x0b\x32,.systemathics.apis.type.shared.v1.DateFilterB\x04\xe2\x41\x01\x01R\x0cmaturityDate\x12]\n\x0fstrike_interval\x18\x04 \x01(\x0b\x32..systemathics.apis.type.shared.v1.DoubleFilterB\x04\xe2\x41\x01\x01R\x0estrikeInterval\x12S\n\x0boption_type\x18\x05 \x01(\x0e\x32,.systemathics.apis.type.shared.v1.OptionTypeB\x04\xe2\x41\x01\x01R\noptionType\x12S\n\x0bstrike_type\x18\x06 \x01(\x0e\x32,.systemathics.apis.type.shared.v1.StrikeTypeB\x04\xe2\x41\x01\x01R\nstrikeType\x12)\n\rdouble_fields\x18\x07 \x03(\tB\x04\xe2\x41\x01\x02R\x0c\x64oubleFields\"\xe9\x01\n\x1a\x44\x61ilyUnderlierOptionStream\x12R\n\x04info\x18\x01 \x01(\x0b\x32\x36.systemathics.apis.services.daily.v2.DailyStreamFieldsB\x04\xe2\x41\x01\x01H\x00R\x04info\x12l\n\x0b\x64ouble_data\x18\x02 \x01(\x0b\x32\x43.systemathics.apis.services.daily.v2.DailyUnderlierOptionStreamItemB\x04\xe2\x41\x01\x01H\x00R\ndoubleDataB\t\n\x07payload\"\xed\x02\n\x1e\x44\x61ilyUnderlierOptionStreamItem\x12+\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x11.google.type.DateB\x04\xe2\x41\x01\x02R\x04\x64\x61te\x12<\n\rmaturity_date\x18\x02 \x01(\x0b\x32\x11.google.type.DateB\x04\xe2\x41\x01\x02R\x0cmaturityDate\x12\x1c\n\x06strike\x18\x03 \x01(\x01\x42\x04\xe2\x41\x01\x02R\x06strike\x12S\n\x0boption_type\x18\x04 \x01(\x0e\x32,.systemathics.apis.type.shared.v1.OptionTypeB\x04\xe2\x41\x01\x02R\noptionType\x12S\n\x0bstrike_type\x18\x05 \x01(\x0e\x32,.systemathics.apis.type.shared.v1.StrikeTypeB\x04\xe2\x41\x01\x02R\nstrikeType\x12\x18\n\x04\x64\x61ta\x18\x06 \x03(\x01\x42\x04\xe2\x41\x01\x01R\x04\x64\x61ta2\xe4\x07\n\x0c\x44\x61ilyService\x12\xa3\x01\n\x11\x44\x61ilyScalarStream\x12\x31.systemathics.apis.services.daily.v2.DailyRequest\x1a>.systemathics.apis.services.daily.v2.DailyScalarStreamResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_scalar/0\x01\x12\xa3\x01\n\x11\x44\x61ilyVectorStream\x12\x31.systemathics.apis.services.daily.v2.DailyRequest\x1a>.systemathics.apis.services.daily.v2.DailyVectorStreamResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_vector/0\x01\x12\xb3\x01\n\x14\x44\x61ilyVectorKeyStream\x12:.systemathics.apis.services.daily.v2.DailyVectorKeyRequest\x1a>.systemathics.apis.services.daily.v2.DailyVectorStreamResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v2/daily_vector_key/0\x01\x12\xc6\x01\n\x1a\x44\x61ilyOptionUnderlierStream\x12@.systemathics.apis.services.daily.v2.DailyOptionUnderlierRequest\x1a?.systemathics.apis.services.daily.v2.DailyUnderlierOptionStream\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v2/daily_option_underlier/0\x01\x12z\n\x0b\x44\x61ilyFields\x12\x16.google.protobuf.Empty\x1a\x38.systemathics.apis.services.daily.v2.DailyFieldsResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/daily_fields/\x12\x8c\x01\n\x13\x44\x61ilyAssetProviders\x12\x16.google.protobuf.Empty\x1a@.systemathics.apis.services.daily.v2.DailyAssetProvidersResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v2/daily_provider/B\xe9\x01\n\'com.systemathics.apis.services.daily.v2B\rGetDailyProtoP\x01\xa2\x02\x04SASD\xaa\x02#Systemathics.Apis.Services.Daily.V2\xca\x02#Systemathics\\Apis\\Services\\Daily\\V2\xe2\x02/Systemathics\\Apis\\Services\\Daily\\V2\\GPBMetadata\xea\x02\'Systemathics::Apis::Services::Daily::V2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -28,38 +33,76 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'systemathics.apis.services.
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n\'com.systemathics.apis.services.daily.v2B\rGetDailyProtoP\001\242\002\004SASD\252\002#Systemathics.Apis.Services.Daily.V2\312\002#Systemathics\\Apis\\Services\\Daily\\V2\342\002/Systemathics\\Apis\\Services\\Daily\\V2\\GPBMetadata\352\002\'Systemathics::Apis::Services::Daily::V2'
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['identifier']._options = None
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['identifier']._serialized_options = b'\342A\001\002'
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['date_interval']._options = None
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['date_interval']._serialized_options = b'\342A\001\002'
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['maturity_date']._options = None
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['maturity_date']._serialized_options = b'\342A\001\001'
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['strike_interval']._options = None
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['strike_interval']._serialized_options = b'\342A\001\001'
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['option_type']._options = None
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['option_type']._serialized_options = b'\342A\001\001'
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['strike_type']._options = None
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['strike_type']._serialized_options = b'\342A\001\001'
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['double_fields']._options = None
+  _globals['_DAILYOPTIONUNDERLIERREQUEST'].fields_by_name['double_fields']._serialized_options = b'\342A\001\002'
+  _globals['_DAILYUNDERLIEROPTIONSTREAM'].fields_by_name['info']._options = None
+  _globals['_DAILYUNDERLIEROPTIONSTREAM'].fields_by_name['info']._serialized_options = b'\342A\001\001'
+  _globals['_DAILYUNDERLIEROPTIONSTREAM'].fields_by_name['double_data']._options = None
+  _globals['_DAILYUNDERLIEROPTIONSTREAM'].fields_by_name['double_data']._serialized_options = b'\342A\001\001'
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['date']._options = None
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['date']._serialized_options = b'\342A\001\002'
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['maturity_date']._options = None
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['maturity_date']._serialized_options = b'\342A\001\002'
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['strike']._options = None
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['strike']._serialized_options = b'\342A\001\002'
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['option_type']._options = None
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['option_type']._serialized_options = b'\342A\001\002'
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['strike_type']._options = None
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['strike_type']._serialized_options = b'\342A\001\002'
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['data']._options = None
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM'].fields_by_name['data']._serialized_options = b'\342A\001\001'
   _globals['_DAILYSERVICE'].methods_by_name['DailyScalarStream']._options = None
   _globals['_DAILYSERVICE'].methods_by_name['DailyScalarStream']._serialized_options = b'\202\323\344\223\002\023\022\021/v2/daily_scalar/'
   _globals['_DAILYSERVICE'].methods_by_name['DailyVectorStream']._options = None
   _globals['_DAILYSERVICE'].methods_by_name['DailyVectorStream']._serialized_options = b'\202\323\344\223\002\023\022\021/v2/daily_vector/'
   _globals['_DAILYSERVICE'].methods_by_name['DailyVectorKeyStream']._options = None
   _globals['_DAILYSERVICE'].methods_by_name['DailyVectorKeyStream']._serialized_options = b'\202\323\344\223\002\027\022\025/v2/daily_vector_key/'
+  _globals['_DAILYSERVICE'].methods_by_name['DailyOptionUnderlierStream']._options = None
+  _globals['_DAILYSERVICE'].methods_by_name['DailyOptionUnderlierStream']._serialized_options = b'\202\323\344\223\002\035\022\033/v2/daily_option_underlier/'
   _globals['_DAILYSERVICE'].methods_by_name['DailyFields']._options = None
   _globals['_DAILYSERVICE'].methods_by_name['DailyFields']._serialized_options = b'\202\323\344\223\002\023\022\021/v2/daily_fields/'
   _globals['_DAILYSERVICE'].methods_by_name['DailyAssetProviders']._options = None
   _globals['_DAILYSERVICE'].methods_by_name['DailyAssetProviders']._serialized_options = b'\202\323\344\223\002\025\022\023/v2/daily_provider/'
-  _globals['_DAILYREQUEST']._serialized_start=325
-  _globals['_DAILYREQUEST']._serialized_end=522
-  _globals['_DAILYVECTORKEYREQUEST']._serialized_start=525
-  _globals['_DAILYVECTORKEYREQUEST']._serialized_end=749
-  _globals['_DAILYSCALARSTREAMRESPONSE']._serialized_start=752
-  _globals['_DAILYSCALARSTREAMRESPONSE']._serialized_end=950
-  _globals['_DAILYVECTORSTREAMRESPONSE']._serialized_start=953
-  _globals['_DAILYVECTORSTREAMRESPONSE']._serialized_end=1151
-  _globals['_DAILYSTREAMFIELDS']._serialized_start=1153
-  _globals['_DAILYSTREAMFIELDS']._serialized_end=1196
-  _globals['_DAILYSCALARSTREAMITEM']._serialized_start=1198
-  _globals['_DAILYSCALARSTREAMITEM']._serialized_end=1280
-  _globals['_DAILYVECTORSTREAMITEM']._serialized_start=1282
-  _globals['_DAILYVECTORSTREAMITEM']._serialized_end=1382
-  _globals['_DAILYASSETPROVIDERSRESPONSE']._serialized_start=1384
-  _globals['_DAILYASSETPROVIDERSRESPONSE']._serialized_end=1505
-  _globals['_DAILYASSETPROVIDERITEMREPONSE']._serialized_start=1508
-  _globals['_DAILYASSETPROVIDERITEMREPONSE']._serialized_end=1645
-  _globals['_DAILYFIELDSRESPONSE']._serialized_start=1648
-  _globals['_DAILYFIELDSRESPONSE']._serialized_end=1845
-  _globals['_DAILYFIELDSITEMRESPONSE']._serialized_start=1848
-  _globals['_DAILYFIELDSITEMRESPONSE']._serialized_end=2001
-  _globals['_DAILYSERVICE']._serialized_start=2004
-  _globals['_DAILYSERVICE']._serialized_end=2799
+  _globals['_DAILYREQUEST']._serialized_start=563
+  _globals['_DAILYREQUEST']._serialized_end=760
+  _globals['_DAILYVECTORKEYREQUEST']._serialized_start=763
+  _globals['_DAILYVECTORKEYREQUEST']._serialized_end=987
+  _globals['_DAILYSCALARSTREAMRESPONSE']._serialized_start=990
+  _globals['_DAILYSCALARSTREAMRESPONSE']._serialized_end=1188
+  _globals['_DAILYVECTORSTREAMRESPONSE']._serialized_start=1191
+  _globals['_DAILYVECTORSTREAMRESPONSE']._serialized_end=1389
+  _globals['_DAILYSTREAMFIELDS']._serialized_start=1391
+  _globals['_DAILYSTREAMFIELDS']._serialized_end=1512
+  _globals['_DAILYSCALARSTREAMITEM']._serialized_start=1514
+  _globals['_DAILYSCALARSTREAMITEM']._serialized_end=1596
+  _globals['_DAILYVECTORSTREAMITEM']._serialized_start=1598
+  _globals['_DAILYVECTORSTREAMITEM']._serialized_end=1698
+  _globals['_DAILYASSETPROVIDERSRESPONSE']._serialized_start=1700
+  _globals['_DAILYASSETPROVIDERSRESPONSE']._serialized_end=1821
+  _globals['_DAILYASSETPROVIDERITEMREPONSE']._serialized_start=1824
+  _globals['_DAILYASSETPROVIDERITEMREPONSE']._serialized_end=1961
+  _globals['_DAILYFIELDSRESPONSE']._serialized_start=1964
+  _globals['_DAILYFIELDSRESPONSE']._serialized_end=2161
+  _globals['_DAILYFIELDSITEMRESPONSE']._serialized_start=2164
+  _globals['_DAILYFIELDSITEMRESPONSE']._serialized_end=2317
+  _globals['_DAILYOPTIONUNDERLIERREQUEST']._serialized_start=2320
+  _globals['_DAILYOPTIONUNDERLIERREQUEST']._serialized_end=2921
+  _globals['_DAILYUNDERLIEROPTIONSTREAM']._serialized_start=2924
+  _globals['_DAILYUNDERLIEROPTIONSTREAM']._serialized_end=3157
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM']._serialized_start=3160
+  _globals['_DAILYUNDERLIEROPTIONSTREAMITEM']._serialized_end=3525
+  _globals['_DAILYSERVICE']._serialized_start=3528
+  _globals['_DAILYSERVICE']._serialized_end=4524
 # @@protoc_insertion_point(module_scope)
