@@ -31,10 +31,10 @@ class DailyServiceStub(object):
                 request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorKeyRequest.SerializeToString,
                 response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.FromString,
                 )
-        self.DailyOptionUnderlierStream = channel.unary_stream(
-                '/systemathics.apis.services.daily.v2.DailyService/DailyOptionUnderlierStream',
-                request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierRequest.SerializeToString,
-                response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionStream.FromString,
+        self.DailyOptionUnderlierWithStrikeTypeStream = channel.unary_stream(
+                '/systemathics.apis.services.daily.v2.DailyService/DailyOptionUnderlierWithStrikeTypeStream',
+                request_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierWithStrikeTypeRequest.SerializeToString,
+                response_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionWithStrikeTypeStream.FromString,
                 )
         self.DailyFields = channel.unary_unary(
                 '/systemathics.apis.services.daily.v2.DailyService/DailyFields',
@@ -73,7 +73,7 @@ class DailyServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DailyOptionUnderlierStream(self, request, context):
+    def DailyOptionUnderlierWithStrikeTypeStream(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -111,10 +111,10 @@ def add_DailyServiceServicer_to_server(servicer, server):
                     request_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorKeyRequest.FromString,
                     response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyVectorStreamResponse.SerializeToString,
             ),
-            'DailyOptionUnderlierStream': grpc.unary_stream_rpc_method_handler(
-                    servicer.DailyOptionUnderlierStream,
-                    request_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierRequest.FromString,
-                    response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionStream.SerializeToString,
+            'DailyOptionUnderlierWithStrikeTypeStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.DailyOptionUnderlierWithStrikeTypeStream,
+                    request_deserializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierWithStrikeTypeRequest.FromString,
+                    response_serializer=systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionWithStrikeTypeStream.SerializeToString,
             ),
             'DailyFields': grpc.unary_unary_rpc_method_handler(
                     servicer.DailyFields,
@@ -189,7 +189,7 @@ class DailyService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def DailyOptionUnderlierStream(request,
+    def DailyOptionUnderlierWithStrikeTypeStream(request,
             target,
             options=(),
             channel_credentials=None,
@@ -199,9 +199,9 @@ class DailyService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyService/DailyOptionUnderlierStream',
-            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierRequest.SerializeToString,
-            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionStream.FromString,
+        return grpc.experimental.unary_stream(request, target, '/systemathics.apis.services.daily.v2.DailyService/DailyOptionUnderlierWithStrikeTypeStream',
+            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyOptionUnderlierWithStrikeTypeRequest.SerializeToString,
+            systemathics_dot_apis_dot_services_dot_daily_dot_v2_dot_get__daily__pb2.DailyUnderlierOptionWithStrikeTypeStream.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
