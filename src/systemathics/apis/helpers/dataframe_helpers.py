@@ -1225,7 +1225,8 @@ def get_equity_daily(ticker, start_date=None, end_date=None, provider="FirstRate
     except Exception as e:
         print(f"Error: {str(e)}")
         return pd.DataFrame()
-    
+
+
 # Helpers functions
 
 def _python_date_to_google_date(py_date):
@@ -1253,34 +1254,29 @@ def _build_strike_filter(strike) -> "filter.DoubleFilter":
 
     Examples
     --------
-    _build_strike_filter(100.0)            # exact: lower == upper == 100.0
-    _build_strike_filter((80.0, 120.0))    # range [80, 120]
-    _build_strike_filter((None, 120.0))    # open lower bound, upper == 120
-    _build_strike_filter((80.0, None))     # lower == 80, open upper bound
+    _build_strike_filter(100.0)            # exact
+    _build_strike_filter((80.0, 120.0))    # range [80, 120)
+    _build_strike_filter((None, 120.0))    # open lower bound, less_than 120
+    _build_strike_filter((80.0, None))     # greater_or_equal_than 80, open upper bound
     """
     if isinstance(strike, (int, float)):
-        # Exact match: set both bounds to the same value
-        return filter.DoubleFilter(
-            lower_bound=wrappers_pb2.DoubleValue(value=float(strike)),
-            upper_bound=wrappers_pb2.DoubleValue(value=float(strike)),
-        )
+        return filter.DoubleFilter(exact=float(strike))
 
     if isinstance(strike, tuple) and len(strike) == 2:
         lo, hi = strike
-        kwargs = {}
+        range_kwargs = {}
         if lo is not None:
-            kwargs["lower_bound"] = wrappers_pb2.DoubleValue(value=float(lo))
+            range_kwargs["greater_or_equal_than"] = wrappers_pb2.DoubleValue(value=float(lo))
         if hi is not None:
-            kwargs["upper_bound"] = wrappers_pb2.DoubleValue(value=float(hi))
-        if not kwargs:
+            range_kwargs["less_than"] = wrappers_pb2.DoubleValue(value=float(hi))
+        if not range_kwargs:
             raise ValueError("strike_interval tuple must have at least one non-None bound.")
-        return filter.DoubleFilter(**kwargs)
+        return filter.DoubleFilter(range=filter.DoubleFilterRange(**range_kwargs))
 
     raise TypeError(
         "strike_interval must be a float (exact) or a (min, max) tuple "
         f"with at least one non-None bound. Got: {strike!r}"
     )
-
 
 def _build_maturity_filter(maturity) -> "filter.DateFilter":
     """
@@ -1294,28 +1290,30 @@ def _build_maturity_filter(maturity) -> "filter.DateFilter":
     _build_maturity_filter((None, "2025-12-31"))                 # open lower bound
     _build_maturity_filter(("2025-03-01", None))                 # open upper bound
     """
-
+        
     # Exact match
-    if isinstance(maturity, (datetime.date, str)):
+    if isinstance(maturity, (date, str)):
         proto_d = _parse_date_input(maturity)
-        return filter.DateFilter(start_date=proto_d, end_date=proto_d)
+        return filter.DateFilter(exact=proto_d)
 
     # Range
     if isinstance(maturity, tuple) and len(maturity) == 2:
         start, end = maturity
-        kwargs = {}
+        range_kwargs = {}
         if start is not None:
-            kwargs["start_date"] = _parse_date_input(start)
+            range_kwargs["greater_or_equal_than"] = _parse_date_input(start)
         if end is not None:
-            kwargs["end_date"] = _parse_date_input(end)
-        if not kwargs:
+            range_kwargs["less_than"] = _parse_date_input(end)
+        if not range_kwargs:
             raise ValueError("maturity_date tuple must have at least one non-None bound.")
-        return filter.DateFilter(**kwargs)
+        return filter.DateFilter(range=filter.DateFilterRange(**range_kwargs))
 
     raise TypeError(
         "maturity_date must be a date/str (exact) or a (start, end) tuple "
         f"with at least one non-None bound. Got: {maturity!r}"
     )
+
+
 
 
 def _proto_enum_parse(proto_enum_cls, prefix, value):
@@ -1389,5 +1387,3 @@ def _format_option_type(int_value) -> str:
 
 def _format_strike_type(int_value) -> str:
     return _proto_enum_name(StrikeType.StrikeType, "STRIKE_TYPE_", int_value)
-
-
