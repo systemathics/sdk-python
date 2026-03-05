@@ -10,6 +10,8 @@ functions:
     get_index_tick - Get Index tick data as a DataFrame using Ganymede gRPC API.
     get_future_daily - Get future daily data as a DataFrame using Ganymede gRPC API.
     get_equity_daily - Get equity daily data as a DataFrame using Ganymede gRPC API.
+    get_cds_index_option_daily - Get CDS Index option daily data as a DataFrame using Ganymede gRPC API.
+    get_cds_index_option_by_underlier - Get CDS Index option data filtered by underlier as a DataFrame using Ganymede gRPC API.
 """
 
 
@@ -17,8 +19,7 @@ import grpc
 import pandas as pd
 from datetime import date,datetime
 from google.type import date_pb2
-from google.type import datetime_pb2
-from google.type import timeofday_pb2
+import google.protobuf.wrappers_pb2 as wrappers_pb2
 
 
 from systemathics.apis.type.shared.v1 import asset_pb2 as asset
@@ -34,10 +35,297 @@ import systemathics.apis.services.intraday.v2.get_intraday_pb2 as get_intraday
 import systemathics.apis.services.intraday.v2.get_intraday_pb2_grpc as get_intraday_service
 import systemathics.apis.services.tick.v2.get_tick_pb2 as get_tick
 import systemathics.apis.services.tick.v2.get_tick_pb2_grpc as get_tick_service
-from systemathics.apis.type.shared.v1 import time_interval_pb2 as time_interval
+import systemathics.apis.type.shared.v1.option_type_pb2 as OptionType
+import systemathics.apis.type.shared.v1.strike_type_pb2 as StrikeType
+import systemathics.apis.type.shared.v1.filter_pb2 as filter
+
 
 import systemathics.apis.helpers.token_helpers as token_helpers
 import systemathics.apis.helpers.channel_helpers as channel_helpers
+
+
+from typing import Union, Tuple, Optional
+
+# Type aliases for readability
+StrikeInput   = Union[float, Tuple[Optional[float], Optional[float]]]
+MaturityInput = Union[datetime.date, str, Tuple[Optional[Union[datetime.date, str]], Optional[Union[datetime.date, str]]]]
+
+# ---------------------------------------------------------------------------
+
+def get_cds_index_option_by_underlier(
+    ticker: str,
+    start_date=None,
+    end_date=None,
+    selected_fields=None,
+    provider: str = "JPMorgan",
+    maturity_date: Optional[MaturityInput] = None,
+    strike_interval: Optional[StrikeInput] = None,
+    option_type=None,
+    strike_type=None,
+):
+    """
+    Fetch CDS Index Option daily data from gRPC API for a given underlier ticker.
+
+    Parameters
+    ----------
+    ticker : str
+        The underlier ticker symbol, e.g. "ITXEB544".
+    start_date : date | str | None
+        Start of the observation date range (inclusive). No lower bound if None.
+    end_date : date | str | None
+        End of the observation date range (exclusive). No upper bound if None.
+    selected_fields : list[str] | None
+        Subset of double fields to retrieve. Retrieves all fields when None.
+    provider : str
+        Data provider name. Default is "JPMorgan".
+    maturity_date : date | str | (start, end) tuple | None
+        Filter on option maturity date.
+        - Single value  → exact match,  e.g. "2025-06-20"
+        - 2-tuple       → date range,   e.g. ("2025-03-01", "2025-12-31")
+          Either element may be None for an open-ended bound.
+    strike_interval : float | (min, max) tuple | None
+        Filter on strike value.
+        - Single float  → exact match,  e.g. 100.0
+        - 2-tuple       → range,        e.g. (80.0, 120.0)
+          Either element may be None for an open-ended bound.
+    option_type : OptionType | None
+        Optional filter: OPTION_TYPE_CALL, OPTION_TYPE_PUT, etc.
+    strike_type : StrikeType | None
+        Optional filter: STRIKE_TYPE_FIXED, STRIKE_TYPE_FLOATING_DELTA, etc.
+
+    Returns
+    -------
+    pd.DataFrame
+        Multi-indexed DataFrame (Date, MaturityDate, Strike, OptionType, StrikeType)
+        with the requested double fields as columns. Empty DataFrame on error.
+    """
+
+    ALL_FIELDS = [
+        "ImpliedVol", "Premium", "Delta", "Gamma", "Theta", "Vega",
+        "StrikePrice", "StrikeDuration", "AtTheMoneyForwardSpread",
+        "AtTheMoneyForwardPrice", "AtTheMoneyForwardDuration",
+        "RefIndexSpread", "RefIndexPrice",
+    ]
+
+    if selected_fields is None:
+        fields = ALL_FIELDS
+    else:
+        fields = [f for f in selected_fields if f in ALL_FIELDS]
+        if not fields:
+            raise ValueError(f"No valid fields. Available: {ALL_FIELDS}")
+
+    # Identifier
+    id_ = identifier.Identifier(
+        asset_type=asset.AssetType.ASSET_TYPE_CDS_INDEX,
+        ticker=ticker,
+    )
+    id_.provider.value = provider
+
+    # Observation date interval (required by proto)
+    di_kwargs = {}
+    if start_date is not None:
+        di_kwargs["start_date"] = _parse_date_input(start_date)
+    if end_date is not None:
+        di_kwargs["end_date"] = _parse_date_input(end_date)
+    di = date_interval.DateInterval(**di_kwargs)
+
+    # Build request
+    request_kwargs = {
+        "identifier":    id_,
+        "date_interval": di,
+        "double_fields": fields,
+    }
+
+    if maturity_date is not None:
+        request_kwargs["maturity_date"] = _build_maturity_filter(maturity_date)
+    if strike_interval is not None:
+        request_kwargs["strike_interval"] = _build_strike_filter(strike_interval)
+    if option_type is not None:
+        request_kwargs["option_type"] = _parse_option_type(option_type)
+    if strike_type is not None:
+        request_kwargs["strike_type"] = _parse_strike_type(strike_type)
+
+    request = get_daily.DailyOptionUnderlierWithStrikeTypeRequest(**request_kwargs)
+
+    # Stream & parse
+    try:
+        with channel_helpers.get_grpc_channel() as channel:
+            token = token_helpers.get_token()
+            service = get_daily_service.DailyServiceStub(channel)
+
+            field_names = []
+            rows = []
+
+            for msg in service.DailyOptionUnderlierWithStrikeTypeStream(
+                request=request,
+                metadata=[("authorization", token)],
+            ):
+                payload = msg.WhichOneof("payload")
+
+                if payload == "info":
+                    field_names = list(msg.info.fields)
+
+                elif payload == "double_data":
+                    item = msg.double_data
+                    row = {
+                        "Date": pd.Timestamp(
+                            year=item.date.year,
+                            month=item.date.month,
+                            day=item.date.day,
+                        ),
+                        "MaturityDate": pd.Timestamp(
+                            year=item.maturity_date.year,
+                            month=item.maturity_date.month,
+                            day=item.maturity_date.day,
+                        ),
+                        "Strike":     item.strike,
+                        "OptionType": _format_option_type(item.option_type),
+                        "StrikeType": _format_strike_type(item.strike_type),
+                    }
+                    for field, value in zip(field_names, item.data):
+                        row[field] = value
+                    rows.append(row)
+
+        if not rows:
+            print("No data received.")
+            return pd.DataFrame()
+
+        return (
+            pd.DataFrame(rows)
+            .set_index(["Date", "MaturityDate", "Strike", "OptionType", "StrikeType"])
+            .sort_index()
+        )
+
+    except grpc.RpcError as e:
+        print(f"gRPC Error [{e.code().name}]: {e.details()}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"Error: {e}")
+        return pd.DataFrame()
+
+
+
+def get_cds_index_option_daily(ticker, start_date=None, end_date=None, selected_fields=None, provider="JPMorgan"):
+    """
+    Fetch CDS Index Option daily data from gRPC API for a given ticker and date range.
+    
+    Parameters:
+    ticker (str): The ticker symbol, ex: ITXEB544-202606-100-Pay
+    start_date (datetime.date or str, optional): Start date for data retrieval. 
+                                                 If None, set not limits
+    end_date (datetime.date or str, optional): End date for data retrieval.
+                                               If None, uses today's date
+    selected_fields (list, optional): List of specific fields to retrieve. If None, gets all fields.
+    provider (str): Data provider, default is "JPMorgan"
+    
+    Returns:
+    pd.DataFrame: DataFrame with Date as index and all available fields as columns
+    """
+    
+
+    
+    # All available fields
+    all_fields = [
+                    "ImpliedVol",
+                    "Premium",
+                    "Delta",
+                    "Gamma",
+                    "Theta",
+                    "Vega",
+                    "StrikePrice",
+                    "StrikeDuration",
+                    "AtTheMoneyForwardSpread",
+                    "AtTheMoneyForwardPrice",
+                    "AtTheMoneyForwardDuration",
+                    "RefIndexSpread",
+                    "RefIndexPrice"
+    ]
+    
+    # Use all fields if none specified, otherwise validate selected fields
+    if selected_fields is None:
+        fields = all_fields
+    else:
+        fields = [f for f in selected_fields if f in all_fields]
+        if not fields:
+            raise ValueError("No valid fields selected")
+        
+    # Create identifier
+    id = identifier.Identifier(
+        asset_type=asset.AssetType.ASSET_TYPE_CDS_INDEX_OPTION,
+        ticker=ticker
+    )
+    id.provider.value = provider
+    
+    # Build constraints only if we have at least one date
+    constraints_obj = None
+    if start_date is not None or end_date is not None:
+        # Create DateInterval with only the dates that are provided
+        date_interval_kwargs = {}
+        if start_date is not None:
+            date_interval_kwargs['start_date'] = _parse_date_input(start_date)
+        if end_date is not None:
+            date_interval_kwargs['end_date'] = _parse_date_input(end_date)
+        
+        constraints_obj = constraints.Constraints(
+            date_intervals=[date_interval.DateInterval(**date_interval_kwargs)]
+        )
+
+    try:
+        # Open gRPC channel
+        with channel_helpers.get_grpc_channel() as channel:
+            # Send request and receive response
+            token = token_helpers.get_token()
+            first = True
+            rows = []
+            field_names = []
+            # Create service stub
+            service = get_daily_service.DailyServiceStub(channel)
+            
+
+            
+            # Create request with or without constraints
+            request_kwargs = {
+                'identifier': id,
+                'fields': fields
+            }
+            if constraints_obj is not None:
+                request_kwargs['constraints'] = constraints_obj
+            
+            request = get_daily.DailyRequest(**request_kwargs)
+            
+            for data in service.DailyScalarStream(
+                request=request, 
+                metadata=[('authorization', token)] 
+            ):
+                if first:
+                    field_names = list(data.info.fields)
+                    first = False
+                else:
+                    row = {'Date': pd.Timestamp(year=data.data.date.year, month=data.data.date.month, day=data.data.date.day)}
+                    for field, value in zip(field_names, data.data.data):
+                        row[field] = value
+                    rows.append(row)
+
+    
+        # Process the response
+        if not rows or not field_names:
+            print("No data received")
+            return pd.DataFrame()
+
+        # Sort by date for better readability
+        df = pd.DataFrame(rows).set_index('Date').sort_index()
+
+        return df
+        
+    except grpc.RpcError as e:
+        print(f"gRPC Error: {e.code().name}")
+        print(f"Details: {e.details()}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return pd.DataFrame()
+
+
 
 def get_cds_index_daily(ticker, start_date=None, end_date=None, batch=None, selected_fields=None, provider="Markit"):
     """
@@ -112,8 +400,8 @@ def get_cds_index_daily(ticker, start_date=None, end_date=None, batch=None, sele
             # Send request and receive response
             token = token_helpers.get_token()
             first = True
-            response = []
-            info = None
+            rows = []
+            field_names = []
             # Create service stub
             service = get_daily_service.DailyServiceStub(channel)
             
@@ -134,10 +422,13 @@ def get_cds_index_daily(ticker, start_date=None, end_date=None, batch=None, sele
                     metadata=[('authorization', token)] 
                 ):
                     if first:
-                        info = data
+                        field_names = list(data.info.fields)
                         first = False
                     else:
-                        response.append(data.data)
+                        row = {'Date': pd.Timestamp(year=data.data.date.year, month=data.data.date.month, day=data.data.date.day)}
+                        for field, value in zip(field_names, data.data.data):
+                            row[field] = value
+                        rows.append(row)
             
             else:
                 
@@ -156,42 +447,22 @@ def get_cds_index_daily(ticker, start_date=None, end_date=None, batch=None, sele
                     metadata=[('authorization', token)]
                 ):
                     if first:
-                        info = data 
+                        field_names = list(data.info.fields)
                         first = False
                     else:
-                        response.append(data.data)
-
+                        row = {'Date': pd.Timestamp(year=data.data.date.year, month=data.data.date.month, day=data.data.date.day)}
+                        for field, value in zip(field_names, data.data.data):
+                            row[field] = value
+                        rows.append(row)
+    
         # Process the response
-        if not response or info is None:
+        if not rows or not field_names:
             print("No data received")
             return pd.DataFrame()
-        
-        # Get field indices
-        available_fields = [f for f in info.info.fields]
-        field_indices = {field: available_fields.index(field) 
-                        for field in fields if field in available_fields}
-        
-        # Extract dates
-        dates = [date(d.date.year, d.date.month, d.date.day) for d in response]
-        
-        # Extract keys
-        keys = [b.key for b in response]
-        
-        # Create dictionary for DataFrame
-        data_dict = {'Key': keys}
-        
-        # Extract data for each field
-        for field_name, field_index in field_indices.items():
-            data_dict[field_name] = [b.data[field_index] for b in response]
-        
-        # Create DataFrame
-        df = pd.DataFrame(data_dict, index=dates)
-        df.index.name = 'Date'
-        
+
         # Sort by date for better readability
-        df = df.sort_index()
-    
-        
+        df = pd.DataFrame(rows).set_index('Date').sort_index()
+
         return df
         
     except grpc.RpcError as e:
@@ -278,8 +549,8 @@ def get_cds_daily(ticker, start_date=None, end_date=None, batch=None, selected_f
             # Send request and receive response
             token = token_helpers.get_token()
             first = True
-            response = []
-            info = None
+            rows = []
+            field_names = []
             # Create service stub
             service = get_daily_service.DailyServiceStub(channel)
             
@@ -300,13 +571,14 @@ def get_cds_daily(ticker, start_date=None, end_date=None, batch=None, selected_f
                     metadata=[('authorization', token)] 
                 ):
                     if first:
-                        info = data
+                        field_names = list(data.info.fields)
                         first = False
                     else:
-                        response.append(data.data)
-            
+                        row = {'Date': pd.Timestamp(year=data.data.date.year, month=data.data.date.month, day=data.data.date.day)}
+                        for field, value in zip(field_names, data.data.data):
+                            row[field] = value
+                        rows.append(row)
             else:
-                
                 request_kwargs = {
                     'identifier': id,
                     'fields': fields,
@@ -322,42 +594,22 @@ def get_cds_daily(ticker, start_date=None, end_date=None, batch=None, selected_f
                     metadata=[('authorization', token)]
                 ):
                     if first:
-                        info = data 
+                        field_names = list(data.info.fields)
                         first = False
                     else:
-                        response.append(data.data)
+                        row = {'Date': pd.Timestamp(year=data.data.date.year, month=data.data.date.month, day=data.data.date.day)}
+                        for field, value in zip(field_names, data.data.data):
+                            row[field] = value
+                        rows.append(row)
 
         # Process the response
-        if not response or info is None:
+        if not rows or not field_names:
             print("No data received")
             return pd.DataFrame()
-        
-        # Get field indices
-        available_fields = [f for f in info.info.fields]
-        field_indices = {field: available_fields.index(field) 
-                        for field in fields if field in available_fields}
-        
-        # Extract dates
-        dates = [date(d.date.year, d.date.month, d.date.day) for d in response]
-        
-        # Extract keys
-        keys = [b.key for b in response]
-        
-        # Create dictionary for DataFrame
-        data_dict = {'Key': keys}
-        
-        # Extract data for each field
-        for field_name, field_index in field_indices.items():
-            data_dict[field_name] = [b.data[field_index] for b in response]
-        
-        # Create DataFrame
-        df = pd.DataFrame(data_dict, index=dates)
-        df.index.name = 'Date'
-        
+
         # Sort by date for better readability
-        df = df.sort_index()
-    
-        
+        df = pd.DataFrame(rows).set_index('Date').sort_index()
+
         return df
         
     except grpc.RpcError as e:
@@ -466,56 +718,30 @@ def get_index_tick(ticker, start_date=None, end_date=None, start_time=None, end_
             # Send request and receive response
             token = token_helpers.get_token()
             first = True
-            response = []
-            info = None
+            rows = []
+            field_names = []
             # Create service stub for Tick service
             service = get_tick_service.TickServiceStub(channel)
             scalar_request = get_tick.TickRequest(**request_kwargs)
             
             for data in service.TickScalarStream(request=scalar_request, metadata=[('authorization', token)]):
                 if first:
-                    info = data
+                    field_names = list(data.info.fields)
                     first = False
                 else:
-                    response.append(data.data)
+                    row = {'Datetime': pd.Timestamp(year=data.data.date.year, month=data.data.date.month, day=data.data.date.day, hour=data.data.time.hours, minute=data.data.time.minutes, second=data.data.time.seconds)}
+                    for field, value in zip(field_names, data.data.data):
+                        row[field] = value
+                    rows.append(row)
 
         # Process the response
-        if not response or info is None:
+        if not rows or not field_names:
             print("No data received")
             return pd.DataFrame()
 
-        # Get field indices
-        available_fields = [f for f in info.info.fields]
-        field_indices = {field: available_fields.index(field)
-                        for field in fields if field in available_fields}
-
-        # Extract timestamps with full precision (including microseconds if available)
-        dates = []
-        for d in response:
-            dt = datetime(d.datetime.year, d.datetime.month, d.datetime.day, 
-                         d.datetime.hours, d.datetime.minutes, d.datetime.seconds)
-            # Add microseconds if available in the protobuf message
-            if hasattr(d.datetime, 'nanos'):
-                # Convert nanoseconds to microseconds (Python datetime only supports microseconds)
-                microseconds = d.datetime.nanos // 1000
-                dt = dt.replace(microsecond=microseconds)
-            elif hasattr(d.datetime, 'micros'):
-                dt = dt.replace(microsecond=d.datetime.micros)
-            dates.append(dt)
-
-        # Create dictionary for DataFrame
-        data_dict = {}
-        
-        # Extract data for each field
-        for field_name, field_index in field_indices.items():
-            data_dict[field_name] = [b.data[field_index] for b in response]
 
         # Create DataFrame
-        df = pd.DataFrame(data_dict, index=dates)
-        df.index.name = 'Datetime'
-
-        # Sort by date for better readability
-        df = df.sort_index()
+        df = pd.DataFrame(rows).set_index('Datetime').sort_index()
         
         # Apply client-side time filtering if needed
         if not df.empty and (start_time is not None or end_time is not None):
@@ -800,7 +1026,6 @@ def get_cds_intraday(ticker, start_date=None, end_date=None, sampling=sampling.S
         print(f"Error: {str(e)}")
         return pd.DataFrame()
 
-
 def get_future_daily(ticker, start_date=None, end_date=None, provider="FirstRateData"):
     """
     Fetch Future daily data from gRPC API for a given ticker and optionally filter by date range.
@@ -1000,21 +1225,169 @@ def get_equity_daily(ticker, start_date=None, end_date=None, provider="FirstRate
     except Exception as e:
         print(f"Error: {str(e)}")
         return pd.DataFrame()
+    
+# Helpers functions
 
 def _python_date_to_google_date(py_date):
     """Convert Python date to Google Date protobuf message"""
     return date_pb2.Date(year=py_date.year, month=py_date.month, day=py_date.day)
 
-# Helper function to parse date strings
+
 def _parse_date_input(date_input):
     """Convert string dates to date objects if needed."""
     if date_input is None:
         return None
+    if isinstance(date_input, str):
+        d = datetime.strptime(date_input, '%Y-%m-%d').date()
+        return _python_date_to_google_date(d)
     if isinstance(date_input, date):
         return _python_date_to_google_date(date_input)
     if isinstance(date_input, datetime):
         return _python_date_to_google_date(date_input.date())
-    if isinstance(date_input, str):
-        d = datetime.strptime(date_input, '%Y-%m-%d').date()
-        return _python_date_to_google_date(d)
+
     raise ValueError(f"Invalid date type: {type(date_input)}")
+
+def _build_strike_filter(strike) -> "filter.DoubleFilter":
+    """
+    Build a DoubleFilter proto from a Python value.
+
+    Examples
+    --------
+    _build_strike_filter(100.0)            # exact: lower == upper == 100.0
+    _build_strike_filter((80.0, 120.0))    # range [80, 120]
+    _build_strike_filter((None, 120.0))    # open lower bound, upper == 120
+    _build_strike_filter((80.0, None))     # lower == 80, open upper bound
+    """
+    if isinstance(strike, (int, float)):
+        # Exact match: set both bounds to the same value
+        return filter.DoubleFilter(
+            lower_bound=wrappers_pb2.DoubleValue(value=float(strike)),
+            upper_bound=wrappers_pb2.DoubleValue(value=float(strike)),
+        )
+
+    if isinstance(strike, tuple) and len(strike) == 2:
+        lo, hi = strike
+        kwargs = {}
+        if lo is not None:
+            kwargs["lower_bound"] = wrappers_pb2.DoubleValue(value=float(lo))
+        if hi is not None:
+            kwargs["upper_bound"] = wrappers_pb2.DoubleValue(value=float(hi))
+        if not kwargs:
+            raise ValueError("strike_interval tuple must have at least one non-None bound.")
+        return filter.DoubleFilter(**kwargs)
+
+    raise TypeError(
+        "strike_interval must be a float (exact) or a (min, max) tuple "
+        f"with at least one non-None bound. Got: {strike!r}"
+    )
+
+
+def _build_maturity_filter(maturity) -> "filter.DateFilter":
+    """
+    Build a DateFilter proto from a Python value.
+
+    Examples
+    --------
+    _build_maturity_filter("2025-06-20")                         # exact date
+    _build_maturity_filter(datetime.date(2025, 6, 20))           # exact date
+    _build_maturity_filter(("2025-03-01", "2025-12-31"))         # date range
+    _build_maturity_filter((None, "2025-12-31"))                 # open lower bound
+    _build_maturity_filter(("2025-03-01", None))                 # open upper bound
+    """
+
+    # Exact match
+    if isinstance(maturity, (datetime.date, str)):
+        proto_d = _parse_date_input(maturity)
+        return filter.DateFilter(start_date=proto_d, end_date=proto_d)
+
+    # Range
+    if isinstance(maturity, tuple) and len(maturity) == 2:
+        start, end = maturity
+        kwargs = {}
+        if start is not None:
+            kwargs["start_date"] = _parse_date_input(start)
+        if end is not None:
+            kwargs["end_date"] = _parse_date_input(end)
+        if not kwargs:
+            raise ValueError("maturity_date tuple must have at least one non-None bound.")
+        return filter.DateFilter(**kwargs)
+
+    raise TypeError(
+        "maturity_date must be a date/str (exact) or a (start, end) tuple "
+        f"with at least one non-None bound. Got: {maturity!r}"
+    )
+
+
+def _proto_enum_parse(proto_enum_cls, prefix, value):
+    """
+    Convert a user-supplied string or int to a proto enum int value.
+
+    Accepts:
+    - int / existing proto int         → returned as-is
+    - full proto name  e.g. "OPTION_TYPE_CALL"
+    - short name       e.g. "Call", "CALL", "call"
+    - underscore-free  e.g. "FloatingDelta", "floatingdelta"
+
+    Parameters
+    ----------
+    proto_enum_cls : proto enum descriptor  (e.g. OptionType)
+    prefix         : proto name prefix to strip  (e.g. "OPTION_TYPE_")
+    value          : user input
+    """
+    if isinstance(value, int):
+        return value
+
+    if isinstance(value, str):
+        # Try full proto name first (e.g. "OPTION_TYPE_CALL")
+        try:
+            return proto_enum_cls.Value(value.upper())
+        except ValueError:
+            pass
+
+        # Try with prefix prepended (e.g. "call" → "OPTION_TYPE_CALL")
+        try:
+            return proto_enum_cls.Value(prefix + value.upper())
+        except ValueError:
+            pass
+
+        # Fuzzy: strip prefix from all known names, normalise underscores,
+        # then compare case-insensitively
+        normalised = value.strip().lower().replace("_", "")
+        for name in proto_enum_cls.keys():
+            short = name.replace(prefix, "").lower().replace("_", "")
+            if short == normalised:
+                return proto_enum_cls.Value(name)
+
+    valid = [n.replace(prefix, "") for n in proto_enum_cls.keys()]
+    raise ValueError(
+        f"Unknown value {value!r} for {proto_enum_cls.DESCRIPTOR.name}. "
+        f"Valid values: {valid}"
+    )
+
+
+def _proto_enum_name(proto_enum_cls, prefix, int_value):
+    """
+    Convert a proto enum int back to a short human-readable string.
+
+    e.g. 1 → "OPTION_TYPE_CALL" → "Call"
+    """
+    full_name = proto_enum_cls.Name(int_value)          # e.g. "OPTION_TYPE_CALL"
+    short     = full_name.replace(prefix, "").title()   # e.g. "Call"
+    return short.replace("_", "")                        # e.g. "FloatingDelta"
+
+
+# Convenience wrappers for the two enums used here
+
+def _parse_option_type(value) -> int:
+    return _proto_enum_parse(OptionType.OptionType, "OPTION_TYPE_", value)
+
+def _parse_strike_type(value) -> int:
+    return _proto_enum_parse(StrikeType.StrikeType, "STRIKE_TYPE_", value)
+
+def _format_option_type(int_value) -> str:
+    return _proto_enum_name(OptionType.OptionType, "OPTION_TYPE_", int_value)
+
+def _format_strike_type(int_value) -> str:
+    return _proto_enum_name(StrikeType.StrikeType, "STRIKE_TYPE_", int_value)
+
+
