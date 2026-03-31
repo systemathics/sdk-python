@@ -876,24 +876,32 @@ def get_cds_index_intraday(ticker, start_date=None, end_date=None, sampling=samp
         field_indices = {field: available_fields.index(field)
                         for field in fields if field in available_fields}
 
-        # Extract dates
-        dates = [datetime(d.datetime.year, d.datetime.month, d.datetime.day, d.datetime.hours, d.datetime.minutes, d.datetime.seconds) for d in response]
+        rows = []
+        for d in response:
+            row = {
+                "Datetime": pd.Timestamp(
+                    year=d.datetime.year,
+                    month=d.datetime.month,
+                    day=d.datetime.day,
+                    hour=d.datetime.hours,
+                    minute=d.datetime.minutes,
+                    second=d.datetime.seconds,
+                ),
+            }
+            for field_name, field_index in field_indices.items():
+                row[field_name] = d.data[field_index]
+            rows.append(row)
 
-        # Create dictionary for DataFrame
-        data_dict = {}
-        
-        # Extract data for each field
-        for field_name, field_index in field_indices.items():
-            data_dict[field_name] = [b.data[field_index] for b in response]
+        if not rows:
+            print("No data received.")
+            return pd.DataFrame()
 
-        # Create DataFrame
-        df = pd.DataFrame(data_dict, index=dates)
-        df.index.name = 'Datetime'
+        return (
+            pd.DataFrame(rows)
+            .set_index("Datetime")
+            .sort_index()
+        )
 
-        # Sort by date for better readability
-        df = df.sort_index()
-        return df
-    
     except grpc.RpcError as e:
         print(f"gRPC Error: {e.code().name}")
         print(f"Details: {e.details()}")
@@ -1000,24 +1008,32 @@ def get_cds_intraday(ticker, start_date=None, end_date=None, sampling=sampling.S
         field_indices = {field: available_fields.index(field)
                         for field in fields if field in available_fields}
 
-        # Extract dates
-        dates = [datetime(d.datetime.year, d.datetime.month, d.datetime.day, d.datetime.hours, d.datetime.minutes, d.datetime.seconds) for d in response]
+        rows = []
+        for d in response:
+            row = {
+                "Datetime": pd.Timestamp(
+                    year=d.datetime.year,
+                    month=d.datetime.month,
+                    day=d.datetime.day,
+                    hour=d.datetime.hours,
+                    minute=d.datetime.minutes,
+                    second=d.datetime.seconds,
+                ),
+            }
+            for field_name, field_index in field_indices.items():
+                row[field_name] = d.data[field_index]
+            rows.append(row)
 
-        # Create dictionary for DataFrame
-        data_dict = {}
-        
-        # Extract data for each field
-        for field_name, field_index in field_indices.items():
-            data_dict[field_name] = [b.data[field_index] for b in response]
+        if not rows:
+            print("No data received.")
+            return pd.DataFrame()
 
-        # Create DataFrame
-        df = pd.DataFrame(data_dict, index=dates)
-        df.index.name = 'Datetime'
+        return (
+            pd.DataFrame(rows)
+            .set_index("Datetime")
+            .sort_index()
+        )
 
-        # Sort by date for better readability
-        df = df.sort_index()
-        return df
-    
     except grpc.RpcError as e:
         print(f"gRPC Error: {e.code().name}")
         print(f"Details: {e.details()}")
@@ -1083,31 +1099,43 @@ def get_future_daily(ticker, start_date=None, end_date=None, provider="FirstRate
             print("No data received")
             return pd.DataFrame()
         
-        dates = [datetime(b.date.year, b.date.month, b.date.day) for b in response.data]
-        opens = [b.open for b in response.data]
-        highs = [b.high for b in response.data]
-        lows = [b.low for b in response.data]
-        closes = [b.close for b in response.data]
-        volumes = [b.volume for b in response.data]
+        rows = []
+        for b in response.data:
+            row = {
+                "Date": pd.Timestamp(
+                    year=b.date.year,
+                    month=b.date.month,
+                    day=b.date.day,
+                ),
+                "Open":   b.open,
+                "High":   b.high,
+                "Low":    b.low,
+                "Close":  b.close,
+                "Volume": b.volume,
+            }
+            rows.append(row)
 
-        data_dict = {'Date': dates, 'Open': opens, 'High': highs, 'Low': lows, 'Close': closes, 'Volume': volumes}
-        df = pd.DataFrame(data=data_dict)
-        df = df.set_index('Date')
-        
-        # Sort by date for better readability
-        df = df.sort_index()
-        
+        if not rows:
+            print("No data received.")
+            return pd.DataFrame()
+
+        df = (
+            pd.DataFrame(rows)
+            .set_index("Date")
+            .sort_index()
+        )
+
         # Apply date filtering if specified
         if start_date is not None or end_date is not None:
             # Parse date inputs
             if start_date is not None:
                 start_date_parsed = _parse_date_for_filtering(start_date)
                 start_datetime = datetime.combine(start_date_parsed, datetime.min.time())
-            
+
             if end_date is not None:
                 end_date_parsed = _parse_date_for_filtering(end_date)
                 end_datetime = datetime.combine(end_date_parsed, datetime.max.time())
-            
+
             # Filter the DataFrame
             if start_date is not None and end_date is not None:
                 df = df[(df.index >= start_datetime) & (df.index <= end_datetime)]
@@ -1115,9 +1143,9 @@ def get_future_daily(ticker, start_date=None, end_date=None, provider="FirstRate
                 df = df[df.index >= start_datetime]
             elif end_date is not None:
                 df = df[df.index <= end_datetime]
-        
+
         return df
-        
+
     except grpc.RpcError as e:
         print(f"gRPC Error: {e.code().name}")
         print(f"Details: {e.details()}")
@@ -1129,10 +1157,10 @@ def get_future_daily(ticker, start_date=None, end_date=None, provider="FirstRate
 def get_equity_daily(ticker, start_date=None, end_date=None, provider="FirstRateData"):
     """
     Fetch Equity daily data from gRPC API for a given ticker and optionally filter by date range.
-    
+
     Parameters:
     ticker (str): The ticker symbol
-    start_date (datetime.date or str, optional): Start date for data retrieval (format: '2025-05-28'). 
+    start_date (datetime.date or str, optional): Start date for data retrieval (format: '2025-05-28').
                                                  If None, no start limit is applied
     end_date (datetime.date or str, optional): End date for data retrieval (format: '2025-05-28').
                                                If None, no end limit is applied
@@ -1140,14 +1168,14 @@ def get_equity_daily(ticker, start_date=None, end_date=None, provider="FirstRate
 
     # Example usage:
     # df = get_equity_daily('AAPL US Equity')  # Get all available data
-    # df = get_equity_daily('AAPL US Equity', start_date='2024-01-01')  # From Jan 1, 2024 onwards  
+    # df = get_equity_daily('AAPL US Equity', start_date='2024-01-01')  # From Jan 1, 2024 onwards
     # df = get_equity_daily('AAPL US Equity', end_date='2024-12-31')    # Up to Dec 31, 2024
     # df = get_equity_daily('AAPL US Equity', start_date='2024-01-01', end_date='2024-12-31')  # Full year 2024
-    
+
     Returns:
     pd.DataFrame: DataFrame with Date as index and all available fields as columns
     """
-    
+
     def _parse_date_for_filtering(date_input):
         """Parse date input for DataFrame filtering (returns date object, not Google date)"""
         if date_input is None:
@@ -1159,13 +1187,13 @@ def get_equity_daily(ticker, start_date=None, end_date=None, provider="FirstRate
         if isinstance(date_input, str):
             return datetime.strptime(date_input, '%Y-%m-%d').date()
         raise ValueError(f"Invalid date type: {type(date_input)}")
-    
+
     id = identifier.Identifier(
-        ticker=ticker, 
+        ticker=ticker,
         asset_type=asset.AssetType.ASSET_TYPE_EQUITY
     )
     id.provider.value = provider
-    
+
     request = daily_bars.DailyBarsRequest(identifier=id)
 
     try:
@@ -1182,32 +1210,44 @@ def get_equity_daily(ticker, start_date=None, end_date=None, provider="FirstRate
         if not response or not response.data:
             print("No data received")
             return pd.DataFrame()
-        
-        dates = [datetime(b.date.year, b.date.month, b.date.day) for b in response.data]
-        opens = [b.open for b in response.data]
-        highs = [b.high for b in response.data]
-        lows = [b.low for b in response.data]
-        closes = [b.close for b in response.data]
-        volumes = [b.volume for b in response.data]
 
-        data_dict = {'Date': dates, 'Open': opens, 'High': highs, 'Low': lows, 'Close': closes, 'Volume': volumes}
-        df = pd.DataFrame(data=data_dict)
-        df = df.set_index('Date')
-        
-        # Sort by date for better readability
-        df = df.sort_index()
-        
+        rows = []
+        for b in response.data:
+            row = {
+                "Date": pd.Timestamp(
+                    year=b.date.year,
+                    month=b.date.month,
+                    day=b.date.day,
+                ),
+                "Open":   b.open,
+                "High":   b.high,
+                "Low":    b.low,
+                "Close":  b.close,
+                "Volume": b.volume,
+            }
+            rows.append(row)
+
+        if not rows:
+            print("No data received.")
+            return pd.DataFrame()
+
+        df = (
+            pd.DataFrame(rows)
+            .set_index("Date")
+            .sort_index()
+        )
+
         # Apply date filtering if specified
         if start_date is not None or end_date is not None:
             # Parse date inputs
             if start_date is not None:
                 start_date_parsed = _parse_date_for_filtering(start_date)
                 start_datetime = datetime.combine(start_date_parsed, datetime.min.time())
-            
+
             if end_date is not None:
                 end_date_parsed = _parse_date_for_filtering(end_date)
                 end_datetime = datetime.combine(end_date_parsed, datetime.max.time())
-            
+
             # Filter the DataFrame
             if start_date is not None and end_date is not None:
                 df = df[(df.index >= start_datetime) & (df.index <= end_datetime)]
@@ -1215,9 +1255,9 @@ def get_equity_daily(ticker, start_date=None, end_date=None, provider="FirstRate
                 df = df[df.index >= start_datetime]
             elif end_date is not None:
                 df = df[df.index <= end_datetime]
-        
+
         return df
-        
+
     except grpc.RpcError as e:
         print(f"gRPC Error: {e.code().name}")
         print(f"Details: {e.details()}")
