@@ -10,6 +10,8 @@ functions:
     get_index_tick - Get Index tick data as a DataFrame using Ganymede gRPC API.
     get_future_daily - Get future daily data as a DataFrame using Ganymede gRPC API.
     get_equity_daily - Get equity daily data as a DataFrame using Ganymede gRPC API.
+    get_equity_intraday - Get equity intraday data as a DataFrame using Ganymede gRPC API.
+    get_future_intraday - Get future intraday data as a DataFrame using Ganymede gRPC API.
     get_cds_index_option_daily - Get CDS Index option daily data as a DataFrame using Ganymede gRPC API.
     get_cds_index_option_by_underlier - Get CDS Index option data filtered by underlier as a DataFrame using Ganymede gRPC API.
 """
@@ -25,9 +27,13 @@ import google.protobuf.wrappers_pb2 as wrappers_pb2
 from systemathics.apis.type.shared.v1 import asset_pb2 as asset
 from systemathics.apis.type.shared.v1 import constraints_pb2 as constraints
 from systemathics.apis.type.shared.v1 import date_interval_pb2 as date_interval
+from systemathics.apis.type.shared.v1 import time_interval_pb2 as time_interval
+from google.type import timeofday_pb2 as timeofday
 import systemathics.apis.type.shared.v1.sampling_pb2 as sampling
 import systemathics.apis.type.shared.v1.identifier_pb2 as identifier
 import systemathics.apis.services.daily.v1.daily_bars_pb2 as daily_bars
+import systemathics.apis.services.intraday.v1.intraday_bars_pb2 as intraday_bars
+import systemathics.apis.services.intraday.v1.intraday_bars_pb2_grpc as intraday_bars_service
 import systemathics.apis.services.daily.v1.daily_bars_pb2_grpc as daily_bars_service
 import systemathics.apis.services.daily.v2.get_daily_pb2 as get_daily
 import systemathics.apis.services.daily.v2.get_daily_pb2_grpc as get_daily_service
@@ -1266,6 +1272,216 @@ def get_equity_daily(ticker, start_date=None, end_date=None, provider="FirstRate
         print(f"Error: {str(e)}")
         return pd.DataFrame()
 
+def get_equity_intraday(ticker, start_date=None, end_date=None, start_time=None, end_time=None, sampling=sampling.SAMPLING_ONE_MINUTE, provider="FirstRateData"):
+    """
+    Fetch Equity intraday data from gRPC API for a given ticker and optionally filter by date/time range.
+
+    Parameters:
+    ticker (str): The ticker symbol
+    start_date (datetime.date or str, optional): Start date for data retrieval (format: '2025-05-28').
+                                                 If None, no start limit is applied
+    end_date (datetime.date or str, optional): End date for data retrieval (format: '2025-05-28').
+                                               If None, no end limit is applied
+    start_time (datetime.time or str, optional): Start time filter (format: 'HH:MM' or 'HH:MM:SS').
+                                                 If None, no start time limit is applied
+    end_time (datetime.time or str, optional): End time filter (format: 'HH:MM' or 'HH:MM:SS').
+                                               If None, no end time limit is applied
+    sampling (sampling, optional): Sampling period for intraday. Default to one minute.
+    provider (str): Data provider, default is "FirstRateData"
+
+    # Example usage:
+    # df = get_equity_intraday('AAPL US Equity')  # Get all available data
+    # df = get_equity_intraday('AAPL US Equity', start_date='2024-01-01')  # From Jan 1, 2024 onwards
+    # df = get_equity_intraday('AAPL US Equity', start_date='2024-01-01', end_date='2024-12-31')  # Full year 2024
+    # df = get_equity_intraday('AAPL US Equity', start_date='2024-01-01', start_time='09:30', end_time='16:00')  # With time filter
+
+    Returns:
+    pd.DataFrame: DataFrame with Datetime as index and OHLCV + count/vwap as columns
+    """
+
+    id = identifier.Identifier(
+        ticker=ticker,
+        asset_type=asset.AssetType.ASSET_TYPE_EQUITY
+    )
+    id.provider.value = provider
+
+    # Build date interval if dates are provided
+    date_interval_obj = None
+    if start_date is not None or end_date is not None:
+        date_interval_kwargs = {}
+        if start_date is not None:
+            date_interval_kwargs['start_date'] = _parse_date_input(start_date)
+        if end_date is not None:
+            date_interval_kwargs['end_date'] = _parse_date_input(end_date)
+        date_interval_obj = date_interval.DateInterval(**date_interval_kwargs)
+
+    # Build time interval if times are provided
+    time_interval_obj = None
+    if start_time is not None or end_time is not None:
+        time_interval_kwargs = {}
+        if start_time is not None:
+            time_interval_kwargs['start_time'] = _parse_time_input(start_time)
+        if end_time is not None:
+            time_interval_kwargs['end_time'] = _parse_time_input(end_time)
+        time_interval_obj = time_interval.TimeInterval(**time_interval_kwargs)
+
+    request_kwargs = {
+        'identifier': id,
+        'sampling': sampling,
+    }
+    if date_interval_obj is not None:
+        request_kwargs['date_interval'] = date_interval_obj
+    if time_interval_obj is not None:
+        request_kwargs['time_interval'] = time_interval_obj
+
+    request = intraday_bars.IntradayBarsRequest(**request_kwargs)
+
+    try:
+        with channel_helpers.get_grpc_channel() as channel:
+            token = token_helpers.get_token()
+            service = intraday_bars_service.IntradayBarsServiceStub(channel)
+            response = service.IntradayBars(request=request, metadata=[('authorization', token)])
+
+        if not response or not response.data:
+            print("No data received")
+            return pd.DataFrame()
+
+        rows = []
+        for b in response.data:
+            row = {
+                "Datetime": pd.Timestamp(b.time_stamp.seconds, unit='s'),
+                "Open":     b.open,
+                "High":     b.high,
+                "Low":      b.low,
+                "Close":    b.close,
+                "Volume":   b.volume,
+                "Count":    b.count,
+                "Vwap":     b.vwap,
+            }
+            rows.append(row)
+
+        if not rows:
+            print("No data received.")
+            return pd.DataFrame()
+
+        return (
+            pd.DataFrame(rows)
+            .set_index("Datetime")
+            .sort_index()
+        )
+
+    except grpc.RpcError as e:
+        print(f"gRPC Error [{e.code().name}]: {e.details()}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"Error: {e}")
+        return pd.DataFrame()
+
+def get_future_intraday(ticker, start_date=None, end_date=None, start_time=None, end_time=None, sampling=sampling.SAMPLING_ONE_MINUTE, provider="FirstRateData"):
+    """
+    Fetch Future intraday data from gRPC API for a given ticker and optionally filter by date/time range.
+
+    Parameters:
+    ticker (str): The ticker symbol
+    start_date (datetime.date or str, optional): Start date for data retrieval (format: '2025-05-28').
+                                                 If None, no start limit is applied
+    end_date (datetime.date or str, optional): End date for data retrieval (format: '2025-05-28').
+                                               If None, no end limit is applied
+    start_time (datetime.time or str, optional): Start time filter (format: 'HH:MM' or 'HH:MM:SS').
+                                                 If None, no start time limit is applied
+    end_time (datetime.time or str, optional): End time filter (format: 'HH:MM' or 'HH:MM:SS').
+                                               If None, no end time limit is applied
+    sampling (sampling, optional): Sampling period for intraday. Default to one minute.
+    provider (str): Data provider, default is "FirstRateData"
+
+    # Example usage:
+    # df = get_future_intraday('CL1 Comdty')  # Get all available data
+    # df = get_future_intraday('CL1 Comdty', start_date='2024-01-01')  # From Jan 1, 2024 onwards
+    # df = get_future_intraday('CL1 Comdty', start_date='2024-01-01', end_date='2024-12-31')  # Full year 2024
+    # df = get_future_intraday('CL1 Comdty', start_date='2024-01-01', start_time='09:30', end_time='16:00')  # With time filter
+
+    Returns:
+    pd.DataFrame: DataFrame with Datetime as index and OHLCV + count/vwap as columns
+    """
+
+    id = identifier.Identifier(
+        ticker=ticker,
+        asset_type=asset.AssetType.ASSET_TYPE_FUTURE
+    )
+    id.provider.value = provider
+
+    # Build date interval if dates are provided
+    date_interval_obj = None
+    if start_date is not None or end_date is not None:
+        date_interval_kwargs = {}
+        if start_date is not None:
+            date_interval_kwargs['start_date'] = _parse_date_input(start_date)
+        if end_date is not None:
+            date_interval_kwargs['end_date'] = _parse_date_input(end_date)
+        date_interval_obj = date_interval.DateInterval(**date_interval_kwargs)
+
+    # Build time interval if times are provided
+    time_interval_obj = None
+    if start_time is not None or end_time is not None:
+        time_interval_kwargs = {}
+        if start_time is not None:
+            time_interval_kwargs['start_time'] = _parse_time_input(start_time)
+        if end_time is not None:
+            time_interval_kwargs['end_time'] = _parse_time_input(end_time)
+        time_interval_obj = time_interval.TimeInterval(**time_interval_kwargs)
+
+    request_kwargs = {
+        'identifier': id,
+        'sampling': sampling,
+    }
+    if date_interval_obj is not None:
+        request_kwargs['date_interval'] = date_interval_obj
+    if time_interval_obj is not None:
+        request_kwargs['time_interval'] = time_interval_obj
+
+    request = intraday_bars.IntradayBarsRequest(**request_kwargs)
+
+    try:
+        with channel_helpers.get_grpc_channel() as channel:
+            token = token_helpers.get_token()
+            service = intraday_bars_service.IntradayBarsServiceStub(channel)
+            response = service.IntradayBars(request=request, metadata=[('authorization', token)])
+
+        if not response or not response.data:
+            print("No data received")
+            return pd.DataFrame()
+
+        rows = []
+        for b in response.data:
+            row = {
+                "Datetime": pd.Timestamp(b.time_stamp.seconds, unit='s'),
+                "Open":     b.open,
+                "High":     b.high,
+                "Low":      b.low,
+                "Close":    b.close,
+                "Volume":   b.volume,
+                "Count":    b.count,
+                "Vwap":     b.vwap,
+            }
+            rows.append(row)
+
+        if not rows:
+            print("No data received.")
+            return pd.DataFrame()
+
+        return (
+            pd.DataFrame(rows)
+            .set_index("Datetime")
+            .sort_index()
+        )
+
+    except grpc.RpcError as e:
+        print(f"gRPC Error [{e.code().name}]: {e.details()}")
+        return pd.DataFrame()
+    except Exception as e:
+        print(f"Error: {e}")
+        return pd.DataFrame()
+
 
 # Helpers functions
 
@@ -1287,6 +1503,31 @@ def _parse_date_input(date_input):
         return _python_date_to_google_date(date_input.date())
 
     raise ValueError(f"Invalid date type: {type(date_input)}")
+
+
+def _parse_time_input(time_input):
+    """Convert string or datetime.time to Google TimeOfDay protobuf message.
+
+    Accepts:
+        - datetime.time object
+        - str in 'HH:MM' or 'HH:MM:SS' format
+    """
+    if time_input is None:
+        return None
+    if isinstance(time_input, datetime):
+        t = time_input.time()
+        return timeofday.TimeOfDay(hours=t.hour, minutes=t.minute, seconds=t.second)
+    from datetime import time as time_type
+    if isinstance(time_input, time_type):
+        return timeofday.TimeOfDay(hours=time_input.hour, minutes=time_input.minute, seconds=time_input.second)
+    if isinstance(time_input, str):
+        parts = time_input.split(':')
+        h = int(parts[0])
+        m = int(parts[1]) if len(parts) > 1 else 0
+        s = int(parts[2]) if len(parts) > 2 else 0
+        return timeofday.TimeOfDay(hours=h, minutes=m, seconds=s)
+    raise ValueError(f"Invalid time type: {type(time_input)}")
+
 
 def _build_strike_filter(strike) -> "filter.DoubleFilter":
     """
