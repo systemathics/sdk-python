@@ -1350,8 +1350,6 @@ def get_equity_intraday(ticker, start_date=None, end_date=None, start_time=None,
                     "Low":      b.low,
                     "Close":    b.close,
                     "Volume":   b.volume,
-                    "Count":    b.count,
-                    "Vwap":     b.vwap,
                 }
                 rows.append(row)
 
@@ -1450,8 +1448,6 @@ def get_future_intraday(ticker, start_date=None, end_date=None, start_time=None,
                     "Low":      b.low,
                     "Close":    b.close,
                     "Volume":   b.volume,
-                    "Count":    b.count,
-                    "Vwap":     b.vwap,
                 }
                 rows.append(row)
 
