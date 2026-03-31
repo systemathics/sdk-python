@@ -1340,25 +1340,20 @@ def get_equity_intraday(ticker, start_date=None, end_date=None, start_time=None,
         with channel_helpers.get_grpc_channel() as channel:
             token = token_helpers.get_token()
             service = intraday_bars_service.IntradayBarsServiceStub(channel)
-            response = service.IntradayBars(request=request, metadata=[('authorization', token)])
 
-        if not response or not response.data:
-            print("No data received")
-            return pd.DataFrame()
-
-        rows = []
-        for b in response.data:
-            row = {
-                "Datetime": pd.Timestamp(b.time_stamp.seconds, unit='s'),
-                "Open":     b.open,
-                "High":     b.high,
-                "Low":      b.low,
-                "Close":    b.close,
-                "Volume":   b.volume,
-                "Count":    b.count,
-                "Vwap":     b.vwap,
-            }
-            rows.append(row)
+            rows = []
+            for b in service.IntradayBarsStream(request=request, metadata=[('authorization', token)]):
+                row = {
+                    "Datetime": pd.Timestamp(b.time_stamp.seconds, unit='s'),
+                    "Open":     b.open,
+                    "High":     b.high,
+                    "Low":      b.low,
+                    "Close":    b.close,
+                    "Volume":   b.volume,
+                    "Count":    b.count,
+                    "Vwap":     b.vwap,
+                }
+                rows.append(row)
 
         if not rows:
             print("No data received.")
@@ -1445,25 +1440,20 @@ def get_future_intraday(ticker, start_date=None, end_date=None, start_time=None,
         with channel_helpers.get_grpc_channel() as channel:
             token = token_helpers.get_token()
             service = intraday_bars_service.IntradayBarsServiceStub(channel)
-            response = service.IntradayBars(request=request, metadata=[('authorization', token)])
 
-        if not response or not response.data:
-            print("No data received")
-            return pd.DataFrame()
-
-        rows = []
-        for b in response.data:
-            row = {
-                "Datetime": pd.Timestamp(b.time_stamp.seconds, unit='s'),
-                "Open":     b.open,
-                "High":     b.high,
-                "Low":      b.low,
-                "Close":    b.close,
-                "Volume":   b.volume,
-                "Count":    b.count,
-                "Vwap":     b.vwap,
-            }
-            rows.append(row)
+            rows = []
+            for b in service.IntradayBarsStream(request=request, metadata=[('authorization', token)]):
+                row = {
+                    "Datetime": pd.Timestamp(b.time_stamp.seconds, unit='s'),
+                    "Open":     b.open,
+                    "High":     b.high,
+                    "Low":      b.low,
+                    "Close":    b.close,
+                    "Volume":   b.volume,
+                    "Count":    b.count,
+                    "Vwap":     b.vwap,
+                }
+                rows.append(row)
 
         if not rows:
             print("No data received.")
